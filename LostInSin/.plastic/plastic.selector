@@ -1,0 +1,4 @@
+repository "LostInSin@canafarci@cloud"
+  path "/"
+    br "/main"
+    co "/main"
