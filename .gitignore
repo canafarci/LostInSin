@@ -9,6 +9,8 @@
 /LostInSin/[Bb]uilds/
 /LostInSin/[Ll]ogs/
 /LostInSin/[Uu]ser[Ss]ettings/
+/LostInSin/.plastic/
+/LostInSin/Assets/_AssetPacks
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
