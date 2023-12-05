@@ -9,6 +9,8 @@ namespace LostInSin.Movement
         [Inject] private readonly Transform _transform;
         private readonly Settings _settings;
         private Vector3 _target;
+        private bool _movementStarted = false;
+        public bool MovementStarted { set { _movementStarted = value; } }
 
         private Mover(Settings settings)
         {
@@ -17,11 +19,14 @@ namespace LostInSin.Movement
 
         public void InitializeMovement(Vector3 target)
         {
+            _movementStarted = true;
             _target = target;
         }
 
         public void Move()
         {
+            if (!_movementStarted) return;
+
             Vector3 normalizedDirection = CalculateNormalizedDirection();
             Vector3 movementStep = _settings.MoveSpeed * Time.deltaTime * normalizedDirection;
             _transform.position += movementStep;
@@ -36,7 +41,7 @@ namespace LostInSin.Movement
 
         public bool HasReachedDestination()
         {
-            return Vector3.SqrMagnitude(_transform.position - _target) < Mathf.Pow(0.1f, 2);
+            return _movementStarted && Vector3.SqrMagnitude(_transform.position - _target) < Mathf.Pow(0.1f, 2);
         }
 
         [Serializable]

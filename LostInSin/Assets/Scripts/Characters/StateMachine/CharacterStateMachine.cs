@@ -10,7 +10,8 @@ namespace LostInSin.Characters.StateMachine
         private SignalBus _signalBus;
         readonly private CompositeDisposable _disposables = new();
 
-        private CharacterStateMachine(SignalBus signalBus, [Inject(Id = CharacterState.WaitState)] IState waitState)
+        private CharacterStateMachine(SignalBus signalBus,
+                                      [Inject(Id = CharacterState.WaitState)] IState waitState)
         {
             _currentState = waitState;
             _signalBus = signalBus;

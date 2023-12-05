@@ -1,30 +1,55 @@
+using LostInSin.Input;
 using LostInSin.Movement;
 using UnityEngine;
 using Zenject;
+using UniRx;
+using LostInSin.Raycast;
 
 namespace LostInSin.Characters.StateMachine
 {
-    public class MoveState : IState
+    public class MoveState : IState, IInitializable
     {
         [Inject(Id = CharacterState.WaitState)] private readonly IState _waitState;
         private readonly SignalBus _signalBus;
         private readonly IMover _mover;
+        private readonly GameInput _gameInput;
+        private readonly IPositionRaycaster _positionRaycaster;
 
-        private MoveState(SignalBus signalBus, IMover mover)
+        private MoveState(SignalBus signalBus,
+                          IMover mover,
+                          GameInput gameInput,
+                          IPositionRaycaster positionRaycaster)
         {
             _signalBus = signalBus;
             _mover = mover;
+            _gameInput = gameInput;
+            _positionRaycaster = positionRaycaster;
+        }
+
+        public void Initialize()
+        {
+            _gameInput.ClickStream.Subscribe(ctx =>
+            {
+                GetMovePosition();
+            });
+        }
+
+        private void GetMovePosition()
+        {
+            if (_positionRaycaster.GetWorldPosition(out Vector3 position))
+            {
+                _mover.InitializeMovement(position);
+            }
         }
 
         public void Enter()
         {
-            Vector2 randomPos = Random.insideUnitCircle * 5f;
-            _mover.InitializeMovement(new Vector3(randomPos.x, 0f, randomPos.y));
+
         }
 
         public void Exit()
         {
-
+            _mover.MovementStarted = false;
         }
 
         public void Tick()

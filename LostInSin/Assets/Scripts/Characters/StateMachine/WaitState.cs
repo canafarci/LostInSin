@@ -16,7 +16,7 @@ namespace LostInSin.Characters.StateMachine
 
         public void Enter()
         {
-            _waitDuration = Random.Range(1f, 3f);
+            _waitDuration = Random.Range(0f, 0.1f);
         }
 
         public void Exit()
