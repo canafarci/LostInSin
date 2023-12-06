@@ -1,6 +1,6 @@
-namespace LostInSin.Characters.StateMachine
+namespace LostInSin.Characters.StateMachine.Signals
 {
-    public class StateChangeSignal
+    public class StateChangeSignal : IStateChangeSignal
     {
         public StateChangeSignal(IState targetState)
         {

@@ -1,4 +1,6 @@
 using System;
+using LostInSin.Characters.StateMachine.Signals;
+using LostInSin.Identifiers;
 using UniRx;
 using Zenject;
 
@@ -11,7 +13,7 @@ namespace LostInSin.Characters.StateMachine
         readonly private CompositeDisposable _disposables = new();
 
         private CharacterStateMachine(SignalBus signalBus,
-                                      [Inject(Id = CharacterState.WaitState)] IState waitState)
+                                      [Inject(Id = CharacterStates.WaitState)] IState waitState)
         {
             _currentState = waitState;
             _signalBus = signalBus;
@@ -19,7 +21,7 @@ namespace LostInSin.Characters.StateMachine
 
         public void Initialize()
         {
-            _signalBus.GetStream<StateChangeSignal>()
+            _signalBus.GetStream<IStateChangeSignal>()
                       .Subscribe(x => TransitionState(x.TargetState))
                       .AddTo(_disposables);
         }
@@ -40,11 +42,5 @@ namespace LostInSin.Characters.StateMachine
         {
             _disposables.Dispose();
         }
-    }
-
-    public enum CharacterState
-    {
-        MoveState,
-        WaitState
     }
 }

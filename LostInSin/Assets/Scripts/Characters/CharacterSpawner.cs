@@ -15,9 +15,6 @@ namespace LostInSin.Characters
         public void Initialize()
         {
             _characterFactory.Create(Vector3.zero);
-            _characterFactory.Create(Vector3.zero);
-            _characterFactory.Create(Vector3.zero);
-            _characterFactory.Create(Vector3.zero);
         }
     }
 }

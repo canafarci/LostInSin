@@ -1,5 +1,6 @@
 {
     "name": "Zenject-IntegrationTests",
+    "rootNamespace": "",
     "references": [
         "Zenject-TestFramework",
         "Zenject",
@@ -12,7 +13,9 @@
     "overrideReferences": true,
     "precompiledReferences": [
         "nunit.framework.dll",
-        "Zenject-usage.dll"
+        "Zenject-usage.dll",
+        "Sirenix.Serialization.dll",
+        "Sirenix.Serialization.Config.dll"
     ],
     "autoReferenced": false,
     "defineConstraints": [

@@ -69,3 +69,6 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /LostInSin/[Aa]ssets/[Ss]treamingAssets/aa.meta
 /LostInSin/[Aa]ssets/[Ss]treamingAssets/aa/*
+
+#Odin
+LostInSin/Assets/Plugins/Sirenix/

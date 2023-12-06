@@ -10,7 +10,8 @@ namespace LostInSin.Movement
         private readonly Settings _settings;
         private Vector3 _target;
         private bool _movementStarted = false;
-        public bool MovementStarted { set { _movementStarted = value; } }
+
+        public bool MovementStarted { set { _movementStarted = value; } get { return _movementStarted; } }
 
         private Mover(Settings settings)
         {
@@ -28,6 +29,23 @@ namespace LostInSin.Movement
             if (!_movementStarted) return;
 
             Vector3 normalizedDirection = CalculateNormalizedDirection();
+
+            TurnTowards(normalizedDirection);
+            MoveTowards(normalizedDirection);
+        }
+
+        private void TurnTowards(Vector3 normalizedDirection)
+        {
+            if (normalizedDirection != Vector3.zero)
+            {
+                Quaternion toRotation = Quaternion.LookRotation(normalizedDirection, Vector3.up);
+                float interpolationFactor = _settings.TurnSpeed * Time.deltaTime;
+                _transform.rotation = Quaternion.Slerp(_transform.rotation, toRotation, interpolationFactor);
+            }
+        }
+
+        private void MoveTowards(Vector3 normalizedDirection)
+        {
             Vector3 movementStep = _settings.MoveSpeed * Time.deltaTime * normalizedDirection;
             _transform.position += movementStep;
         }
@@ -48,6 +66,7 @@ namespace LostInSin.Movement
         public struct Settings
         {
             public float MoveSpeed;
+            public float TurnSpeed;
         }
     }
 }

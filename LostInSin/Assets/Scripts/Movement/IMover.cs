@@ -9,6 +9,6 @@ namespace LostInSin.Movement
         public void InitializeMovement(Vector3 target);
         public void Move();
         public bool HasReachedDestination();
-        public bool MovementStarted { set; }
+        public bool MovementStarted { get; set; }
     }
 }

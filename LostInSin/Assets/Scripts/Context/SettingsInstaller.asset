@@ -12,5 +12,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46055d3002c007c4282b1ece4ee9ac50, type: 3}
   m_Name: SettingsInstaller
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: AnimationData
+      Entry: 7
+      Data: 0|LostInSin.Animation.AnimationHashes+Data, LostInSin.Animation.Data
+    - Name: AnimationKeyIDPairs
+      Entry: 7
+      Data: 1|UnityEngine.Rendering.SerializedDictionary`2[[LostInSin.Identifiers.AnimationIdentifier,
+        LostInSin.Identifiers],[System.String, mscorlib]], Unity.RenderPipelines.Core.Runtime
+    - Name: comparer
+      Entry: 7
+      Data: 2|System.Collections.Generic.EnumEqualityComparer`1[[LostInSin.Identifiers.AnimationIdentifier,
+        LostInSin.Identifiers]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 0
+    - Name: $v
+      Entry: 1
+      Data: IsRunning
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   Mover:
-    MoveSpeed: 20
+    MoveSpeed: 7
+    TurnSpeed: 5

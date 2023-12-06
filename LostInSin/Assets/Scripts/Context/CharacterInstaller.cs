@@ -1,5 +1,8 @@
+using LostInSin.Animation;
 using LostInSin.Characters;
 using LostInSin.Characters.StateMachine;
+using LostInSin.Characters.StateMachine.Signals;
+using LostInSin.Identifiers;
 using LostInSin.Movement;
 using LostInSin.Raycast;
 using UnityEngine;
@@ -17,15 +20,25 @@ namespace LostInSin.Context
 
             Container.Bind<Transform>().FromComponentsOnRoot();
             Container.Bind<Vector3>().FromInstance(_startPosition);
+            Container.Bind<Animator>().FromComponentInHierarchy().AsSingle();
 
-            Container.DeclareSignal<StateChangeSignal>();
+
+            DeclareSignals();
 
             Container.Bind<IMover>().To<Mover>().AsSingle();
             Container.Bind<IPositionRaycaster>().To<MousePositionRaycaster>().AsSingle();
+            Container.BindInterfacesAndSelfTo<AnimationStateChanger>().AsSingle().NonLazy();
 
             BindStates();
 
             InitializeStates();
+        }
+
+        private void DeclareSignals()
+        {
+            Container.DeclareSignalWithInterfaces<StateChangeSignal>();
+            Container.DeclareSignalWithInterfaces<AnimationChangeSignal>();
+            Container.DeclareSignalWithInterfaces<StateAndAnimationChangeSignal>();
         }
 
         private void BindStates()
@@ -35,19 +48,19 @@ namespace LostInSin.Context
                 .NonLazy();
 
             Container.Bind<IState>()
-                .WithId(CharacterState.WaitState)
+                .WithId(CharacterStates.WaitState)
                 .To<WaitState>()
                 .AsSingle();
 
             Container.Bind<IState>()
-                .WithId(CharacterState.MoveState)
+                .WithId(CharacterStates.MoveState)
                 .To<MoveState>()
                 .AsSingle();
         }
 
         private void InitializeStates()
         {
-            MoveState moveState = Container.ResolveId<IState>(CharacterState.MoveState) as MoveState;
+            MoveState moveState = Container.ResolveId<IState>(CharacterStates.MoveState) as MoveState;
             moveState.Initialize();
         }
     }

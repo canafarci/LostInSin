@@ -1,3 +1,4 @@
+using LostInSin.Animation;
 using LostInSin.Characters;
 using LostInSin.Input;
 using UnityEngine;
@@ -20,6 +21,8 @@ namespace LostInSin.Context
 
             Container.BindInterfacesAndSelfTo<CharacterSpawner>()
                 .AsSingle();
+
+            Container.Bind<AnimationHashes>().AsSingle();
         }
     }
 }
