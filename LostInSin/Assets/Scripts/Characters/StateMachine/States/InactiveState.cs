@@ -1,14 +1,13 @@
 using LostInSin.Animation.Data;
 using LostInSin.Characters.StateMachine.Signals;
 using LostInSin.Identifiers;
-using UnityEngine;
 using Zenject;
 
 namespace LostInSin.Characters.StateMachine
 {
     public class InactiveState : IState
     {
-        [Inject(Id = CharacterStates.MoveState)] private IState _moveState;
+        [Inject(Id = CharacterStates.InitialSelectionState)] private IState _initialSelectionState;
         private SignalBus _signalBus;
 
         private InactiveState(SignalBus signalBus)
@@ -18,7 +17,7 @@ namespace LostInSin.Characters.StateMachine
 
         public void Enter()
         {
-            FireRunningAnimationChangeSignal(false);
+            FireInactiveVisualSignals();
         }
 
         public void Exit()
@@ -27,7 +26,14 @@ namespace LostInSin.Characters.StateMachine
 
         public void Tick()
         {
-            _signalBus.AbstractFire(new StateChangeSignal(_moveState));
+            _signalBus.AbstractFire(new StateChangeSignal(_initialSelectionState));
+        }
+
+        private void FireInactiveVisualSignals()
+        {
+            _signalBus.AbstractFire(new SelectionChangeSignal(false));
+
+            FireRunningAnimationChangeSignal(false);
         }
 
         private void FireRunningAnimationChangeSignal(bool value)

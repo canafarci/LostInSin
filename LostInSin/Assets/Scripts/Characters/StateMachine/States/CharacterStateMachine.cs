@@ -1,5 +1,4 @@
 using System;
-using LostInSin.Characters.StateMachine.Signals;
 using LostInSin.Identifiers;
 using UniRx;
 using Zenject;

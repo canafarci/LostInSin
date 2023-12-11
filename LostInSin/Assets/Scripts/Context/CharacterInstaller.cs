@@ -5,6 +5,7 @@ using LostInSin.Characters.StateMachine.Signals;
 using LostInSin.Identifiers;
 using LostInSin.Movement;
 using LostInSin.Raycast;
+using LostInSin.Visuals;
 using UnityEngine;
 using Zenject;
 
@@ -17,15 +18,17 @@ namespace LostInSin.Context
         public override void InstallBindings()
         {
             Container.Bind<Character>().FromNewComponentOnRoot().AsSingle();
-
-            Container.Bind<Transform>().FromComponentsOnRoot();
             Container.Bind<Vector3>().FromInstance(_startPosition);
+
+            Container.Bind<Transform>().FromComponentsOnRoot().AsSingle();
             Container.Bind<Animator>().FromComponentInHierarchy().AsSingle();
+            Container.Bind<CharacterVisualsVO>().FromComponentsOnRoot().AsSingle();
 
             DeclareSignals();
 
             Container.Bind<IMover>().To<Mover>().AsSingle();
             Container.BindInterfacesAndSelfTo<AnimationStateChanger>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<CharacterVisualChanger>().AsSingle().NonLazy();
             Container.Bind<CharacterStateRuntimeData>().AsSingle();
 
             BindStates();
@@ -37,6 +40,7 @@ namespace LostInSin.Context
             Container.DeclareSignalWithInterfaces<StateChangeSignal>();
             Container.DeclareSignalWithInterfaces<AnimationChangeSignal>();
             Container.DeclareSignalWithInterfaces<StateAndAnimationChangeSignal>();
+            Container.DeclareSignalWithInterfaces<SelectionChangeSignal>();
         }
 
         private void BindStates()
@@ -53,6 +57,16 @@ namespace LostInSin.Context
             Container.Bind<IState>()
                 .WithId(CharacterStates.MoveState)
                 .To<MoveState>()
+                .AsSingle();
+
+            Container.Bind<IState>()
+                .WithId(CharacterStates.IdleState)
+                .To<IdleState>()
+                .AsSingle();
+
+            Container.Bind<IState>()
+                .WithId(CharacterStates.InitialSelectionState)
+                .To<InitialSelectionState>()
                 .AsSingle();
         }
 

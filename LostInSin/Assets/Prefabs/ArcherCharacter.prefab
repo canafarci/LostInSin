@@ -8,6 +8,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 50890300540772203, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 50890300540772203, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 50890300540772203, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 50890300540772203, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 50890300540772203, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.274
+      objectReference: {fileID: 0}
+    - target: {fileID: 50890300540772203, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 50890300540772203, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3199217059877935360, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+      propertyPath: m_Name
+      value: CharacterSelectedDecal
+      objectReference: {fileID: 0}
     - target: {fileID: 7209445461687903701, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.039687634
@@ -52,8 +84,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArcherCharacter
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedComponents:
+    - {fileID: 7921794386757203553, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 3199217059877935360, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7209445461687903701, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
       insertIndex: -1

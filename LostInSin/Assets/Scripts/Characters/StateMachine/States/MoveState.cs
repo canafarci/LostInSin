@@ -14,7 +14,7 @@ namespace LostInSin.Characters.StateMachine
 {
     public class MoveState : IState, IInitializable
     {
-        [Inject(Id = CharacterStates.InactiveState)] private readonly IState _waitState;
+        [Inject(Id = CharacterStates.IdleState)] private readonly IState _idleState;
         [Inject] private CharacterStateRuntimeData _runtimeData;
         private readonly SignalBus _signalBus;
         private readonly IMover _mover;
@@ -86,7 +86,7 @@ namespace LostInSin.Characters.StateMachine
             if (_mover.HasReachedDestination())
             {
                 _runtimeData.CanExitTicking = true;
-                _signalBus.AbstractFire(new StateChangeSignal(_waitState));
+                _signalBus.AbstractFire(new StateChangeSignal(_idleState));
             }
         }
 
