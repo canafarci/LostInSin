@@ -7,7 +7,7 @@ namespace LostInSin.Identifiers
     public enum CharacterStates
     {
         MoveState,
-        WaitState
+        InactiveState
     }
 }
 

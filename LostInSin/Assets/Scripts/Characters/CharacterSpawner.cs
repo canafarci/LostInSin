@@ -14,7 +14,17 @@ namespace LostInSin.Characters
 
         public void Initialize()
         {
-            _characterFactory.Create(Vector3.zero);
+            Spawn();
+        }
+
+        private void Spawn()
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                Vector2 randPos = Random.insideUnitCircle * 5f;
+                Vector3 pos = new(randPos.x, 0f, randPos.y);
+                _characterFactory.Create(pos);
+            }
         }
     }
 }

@@ -6,16 +6,18 @@ using Zenject;
 
 namespace LostInSin.Characters.StateMachine
 {
-    public class CharacterStateMachine : ITickable, IInitializable, IDisposable
+    public class CharacterStateMachine : IStateTicker, IInitializable, IDisposable
     {
         private IState _currentState;
+        private IState _inactiveState;
         private SignalBus _signalBus;
         readonly private CompositeDisposable _disposables = new();
 
         private CharacterStateMachine(SignalBus signalBus,
-                                      [Inject(Id = CharacterStates.WaitState)] IState waitState)
+                                      [Inject(Id = CharacterStates.InactiveState)] IState inactiveState)
         {
-            _currentState = waitState;
+            _inactiveState = inactiveState;
+            _currentState = _inactiveState;
             _signalBus = signalBus;
         }
 
@@ -41,6 +43,13 @@ namespace LostInSin.Characters.StateMachine
         public void Dispose()
         {
             _disposables.Dispose();
+        }
+
+        public void SwitchToInactiveState()
+        {
+            _currentState.Exit();
+            _currentState = _inactiveState;
+            _currentState.Enter();
         }
     }
 }

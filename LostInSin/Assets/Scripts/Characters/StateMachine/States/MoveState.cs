@@ -7,16 +7,20 @@ using LostInSin.Raycast;
 using LostInSin.Characters.StateMachine.Signals;
 using LostInSin.Identifiers;
 using LostInSin.Animation.Data;
+using Cysharp.Threading.Tasks;
+using System.Threading.Tasks;
 
 namespace LostInSin.Characters.StateMachine
 {
     public class MoveState : IState, IInitializable
     {
-        [Inject(Id = CharacterStates.WaitState)] private readonly IState _waitState;
+        [Inject(Id = CharacterStates.InactiveState)] private readonly IState _waitState;
+        [Inject] private CharacterStateRuntimeData _runtimeData;
         private readonly SignalBus _signalBus;
         private readonly IMover _mover;
         private readonly GameInput _gameInput;
         private readonly IPositionRaycaster _positionRaycaster;
+        private bool _stateIsActive = false;
 
         private MoveState(SignalBus signalBus,
                           IMover mover,
@@ -33,26 +37,40 @@ namespace LostInSin.Characters.StateMachine
         {
             _gameInput.ClickStream.Subscribe(ctx =>
             {
+                if (!_stateIsActive) return;
                 GetMovePosition();
             });
         }
 
-        private void GetMovePosition()
+        private async void GetMovePosition()
         {
-            if (!_mover.MovementStarted && _positionRaycaster.GetWorldPosition(out Vector3 position))
+            if (await CheckCanMoveAsync())
             {
-                _mover.InitializeMovement(position);
-                FireRunningAnimationChangeSignal(true);
+                if (_positionRaycaster.GetWorldPosition(out Vector3 position))
+                {
+                    _runtimeData.CanExitTicking = false;
+                    _mover.InitializeMovement(position);
+
+                    FireRunningAnimationChangeSignal(true);
+                }
             }
+        }
+
+        private async Task<bool> CheckCanMoveAsync()
+        {
+            await UniTask.NextFrame(); //wait one frame for state ticker to check other characters for switching
+            return _runtimeData.IsTicking && !_mover.MovementStarted;
         }
 
         public void Enter()
         {
+            _stateIsActive = true;
             FireRunningAnimationChangeSignal(false);
         }
 
         public void Exit()
         {
+            _stateIsActive = false;
             _mover.MovementStarted = false;
         }
 
@@ -67,6 +85,7 @@ namespace LostInSin.Characters.StateMachine
         {
             if (_mover.HasReachedDestination())
             {
+                _runtimeData.CanExitTicking = true;
                 _signalBus.AbstractFire(new StateChangeSignal(_waitState));
             }
         }

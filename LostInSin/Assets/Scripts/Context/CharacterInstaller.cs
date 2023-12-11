@@ -16,21 +16,19 @@ namespace LostInSin.Context
 
         public override void InstallBindings()
         {
-            Container.Bind<Character>().AsSingle();
+            Container.Bind<Character>().FromNewComponentOnRoot().AsSingle();
 
             Container.Bind<Transform>().FromComponentsOnRoot();
             Container.Bind<Vector3>().FromInstance(_startPosition);
             Container.Bind<Animator>().FromComponentInHierarchy().AsSingle();
 
-
             DeclareSignals();
 
             Container.Bind<IMover>().To<Mover>().AsSingle();
-            Container.Bind<IPositionRaycaster>().To<MousePositionRaycaster>().AsSingle();
             Container.BindInterfacesAndSelfTo<AnimationStateChanger>().AsSingle().NonLazy();
+            Container.Bind<CharacterStateRuntimeData>().AsSingle();
 
             BindStates();
-
             InitializeStates();
         }
 
@@ -48,8 +46,8 @@ namespace LostInSin.Context
                 .NonLazy();
 
             Container.Bind<IState>()
-                .WithId(CharacterStates.WaitState)
-                .To<WaitState>()
+                .WithId(CharacterStates.InactiveState)
+                .To<InactiveState>()
                 .AsSingle();
 
             Container.Bind<IState>()

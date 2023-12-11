@@ -1,21 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using Zenject;
 
 namespace LostInSin.Raycast
 {
     public class MousePositionRaycaster : IPositionRaycaster
     {
+        [Inject] private MousePositionRayDrawer _mousePositionRayDrawer;
+        private const int _groundLayer = 1 << 3;
+
         public bool GetWorldPosition(out Vector3 position)
         {
             position = default;
-            Vector2 screenPosition = GetScreenPosition();
+
+            Ray ray = _mousePositionRayDrawer.DrawRay();
 
             bool raycastSuccessful = false;
-            Ray ray = Camera.main.ScreenPointToRay(screenPosition);
 
-            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
+            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _groundLayer))
             {
                 position = hit.point;
                 raycastSuccessful = true;
@@ -24,13 +25,6 @@ namespace LostInSin.Raycast
             return raycastSuccessful;
         }
 
-        private static Vector2 GetScreenPosition()
-        {
-            Vector2 mousePosition = Mouse.current.position.ReadValue();
-            Vector2 screenPosition = Camera.main.ScreenToViewportPoint(mousePosition);
-            screenPosition.x *= Screen.width;
-            screenPosition.y *= Screen.height;
-            return screenPosition;
-        }
+
     }
 }
