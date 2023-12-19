@@ -19,11 +19,8 @@ namespace LostInSin.Grid
             _posY = posY;
             _posZ = posZ;
             _isVoid = isVoid;
-
-#if UNITY_EDITOR //visualize grid
-            Vector3 debugPoint = new Vector3(posX, posY, posZ);
-            Debug.DrawLine(debugPoint, debugPoint + Vector3.up, Color.red, Mathf.Infinity);
-#endif
         }
+
+        public Vector3 ToVector3() => new Vector3(_posX, _posY, _posZ);
     }
 }
