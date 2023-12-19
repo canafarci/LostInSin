@@ -5,14 +5,14 @@ namespace LostInSin.Raycast
 {
     public class MousePositionRaycaster : IPositionRaycaster
     {
-        [Inject] private MousePositionRayDrawer _mousePositionRayDrawer;
+        [Inject] private IRayDrawer _rayDrawer;
         private const int _groundLayer = 1 << 3;
 
         public bool GetWorldPosition(out Vector3 position)
         {
             position = default;
 
-            Ray ray = _mousePositionRayDrawer.DrawRay();
+            Ray ray = _rayDrawer.DrawRay();
 
             bool raycastSuccessful = false;
 
@@ -24,7 +24,5 @@ namespace LostInSin.Raycast
 
             return raycastSuccessful;
         }
-
-
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 namespace LostInSin.Raycast
 {
-    public class MousePositionRayDrawer
+    public class MousePositionRayDrawer : IRayDrawer
     {
         public Ray DrawRay()
         {

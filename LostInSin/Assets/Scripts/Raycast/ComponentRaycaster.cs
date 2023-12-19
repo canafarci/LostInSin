@@ -2,24 +2,24 @@ using System;
 using UnityEngine;
 using Zenject;
 
-
 namespace LostInSin.Raycast
 {
     public class ComponentRaycaster<T> : IComponentRaycaster<T> where T : Component
     {
-        [Inject] private MousePositionRayDrawer _mousePositionRayDrawer;
+        [Inject] private IRayDrawer _rayDrawer;
 
-        public bool RaycastCharacter(out T component, int layerMask)
+        public bool RaycastComponent(out T component, int layerMask)
         {
             component = default;
 
-            Ray ray = _mousePositionRayDrawer.DrawRay();
+            Ray ray = _rayDrawer.DrawRay();
 
             bool raycastSuccessful = false;
 
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layerMask))
             {
                 Transform transform = hit.transform;
+
                 component = transform.GetComponent<T>();
 
                 if (component != null)
@@ -28,7 +28,7 @@ namespace LostInSin.Raycast
                 }
                 else
                 {
-                    throw new Exception($"No component found of type {typeof(T)} found on GameObject {transform.gameObject}!");
+                    throw new Exception($"No component of type {typeof(T)} found on GameObject {transform.gameObject}!");
                 }
             }
 

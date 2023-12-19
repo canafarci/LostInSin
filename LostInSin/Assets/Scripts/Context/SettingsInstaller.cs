@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using LostInSin.Animation;
+using LostInSin.Grid;
 using LostInSin.Identifiers;
 using LostInSin.Movement;
 using UnityEngine;
@@ -12,9 +13,10 @@ namespace LostInSin.Context
     {
         public Mover.Settings Mover;
         public AnimationHashes.Data AnimationData;
+        public GridGenerator.Data GridGenerationData;
         public override void InstallBindings()
         {
-            Container.BindInstances(Mover, AnimationData);
+            Container.BindInstances(Mover, AnimationData, GridGenerationData);
         }
     }
 }

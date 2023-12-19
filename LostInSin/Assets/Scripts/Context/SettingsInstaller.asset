@@ -15,7 +15,8 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 2b915f3e1d102814fb5023bd8bcc559f, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -62,6 +63,15 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: GridGenerationData
+      Entry: 7
+      Data: 3|LostInSin.Grid.GridGenerator+Data, LostInSin.Grid
+    - Name: GridData
+      Entry: 10
+      Data: 0
     - Name: 
       Entry: 8
       Data: 

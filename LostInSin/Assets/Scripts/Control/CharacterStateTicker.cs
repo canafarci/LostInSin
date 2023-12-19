@@ -30,7 +30,7 @@ namespace LostInSin.Control
 
         private void TryRaycastCharacter()
         {
-            if (_characterRaycaster.RaycastCharacter(out Character character, _characterLayerMask))
+            if (_characterRaycaster.RaycastComponent(out Character character, _characterLayerMask))
             {
                 TryChangeCharacter(character);
             }

@@ -1,0 +1,38 @@
+{
+    "name": "Tests",
+    "rootNamespace": "LostInSin.Tests",
+    "references": [
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner",
+        "Zenject",
+        "Zenject-TestFramework",
+        "LostInSin.Animation",
+        "LostInSin.Animation.Data",
+        "LostInSin.Characters",
+        "LostInSin.Characters.StateMachine",
+        "LostInSin.Control",
+        "LostInSin.Identifiers",
+        "LostInSin.Input",
+        "LostInSin.Movement",
+        "LostInSin.Raycast",
+        "LostInSin.Visuals"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll",
+        "Zenject-usage.dll",
+        "Moq.dll",
+        "Castle.Core.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
