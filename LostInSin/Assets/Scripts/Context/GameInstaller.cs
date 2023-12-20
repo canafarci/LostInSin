@@ -36,6 +36,7 @@ namespace LostInSin.Context
 
             //bind grid
             Container.Bind<GridModel>().AsSingle();
+            Container.Bind<GridPositionConverter>().AsSingle();
             Container.BindInterfacesAndSelfTo<GridGenerator>().AsSingle().NonLazy();
         }
     }

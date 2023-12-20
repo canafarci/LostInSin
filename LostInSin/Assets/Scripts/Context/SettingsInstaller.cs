@@ -13,7 +13,7 @@ namespace LostInSin.Context
     {
         public Mover.Settings Mover;
         public AnimationHashes.Data AnimationData;
-        public GridGenerator.Data GridGenerationData;
+        public GridModel.Data GridGenerationData;
         public override void InstallBindings()
         {
             Container.BindInstances(Mover, AnimationData, GridGenerationData);

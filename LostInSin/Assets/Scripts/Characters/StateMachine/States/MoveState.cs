@@ -9,6 +9,7 @@ using LostInSin.Identifiers;
 using LostInSin.Animation.Data;
 using Cysharp.Threading.Tasks;
 using System.Threading.Tasks;
+using LostInSin.Grid;
 
 namespace LostInSin.Characters.StateMachine
 {
@@ -20,17 +21,20 @@ namespace LostInSin.Characters.StateMachine
         private readonly IMover _mover;
         private readonly GameInput _gameInput;
         private readonly IPositionRaycaster _positionRaycaster;
+        private readonly GridPositionConverter _gridPositionConverter;
         private bool _stateIsActive = false;
 
         private MoveState(SignalBus signalBus,
                           IMover mover,
                           GameInput gameInput,
-                          IPositionRaycaster positionRaycaster)
+                          IPositionRaycaster positionRaycaster,
+                          GridPositionConverter gridPositionConverter)
         {
             _signalBus = signalBus;
             _mover = mover;
             _gameInput = gameInput;
             _positionRaycaster = positionRaycaster;
+            _gridPositionConverter = gridPositionConverter;
         }
 
         public void Initialize()
@@ -46,11 +50,11 @@ namespace LostInSin.Characters.StateMachine
         {
             if (await CheckCanMoveAsync())
             {
-                if (_positionRaycaster.GetWorldPosition(out Vector3 position))
+                if (_positionRaycaster.GetWorldPosition(out Vector3 position) &&
+                    _gridPositionConverter.GetCellCenterPoint(position, out Vector3 cellPosition))
                 {
                     _runtimeData.CanExitTicking = false;
-                    _mover.InitializeMovement(position);
-
+                    _mover.InitializeMovement(cellPosition);
                     FireRunningAnimationChangeSignal(true);
                 }
             }

@@ -8,7 +8,7 @@ namespace LostInSin.Grid
     {
         public int GridXSize;
         public int GridYSize;
-        public int GridWidth;
-        public int GridHeight;
+        public int GridRowCount;
+        public int GridColumnCount;
     }
 }

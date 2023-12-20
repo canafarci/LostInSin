@@ -10,13 +10,11 @@ namespace LostInSin.Grid
     public class GridGenerator : IInitializable
     {
         private const float _rayOriginHeight = 10f;
-        private readonly Data _data;
         private readonly GridModel _gridModel;
         private int _groundLayerMask;
 
-        public GridGenerator(Data data, GridModel gridModel)
+        private GridGenerator(GridModel gridModel)
         {
-            _data = data;
             _gridModel = gridModel;
             _groundLayerMask = LayerMask.GetMask("Ground");
         }
@@ -27,21 +25,19 @@ namespace LostInSin.Grid
             NativeArray<GridPoint> gridPoints = GenerateGridPoints(hitResults);
             GridCell[,] gridCells = GenerateGridCells(gridPoints);
 
-            int width = _data.GridData.GridWidth - 1;
-            int height = _data.GridData.GridHeight - 1;
-            _gridModel.SetGridCells(gridCells, width, height);
+            _gridModel.SetGridCells(gridCells);
         }
 
         private NativeArray<RaycastHit> PerformRaycasting()
         {
-            int gridWidth = _data.GridData.GridWidth;
-            int gridHeight = _data.GridData.GridHeight;
-            int gridSize = gridWidth * gridHeight;
+            int gridRowCount = _gridModel.GridRowCount;
+            int gridColumnCount = _gridModel.GridColumnCount;
+            int gridSize = gridRowCount * gridColumnCount;
 
             NativeArray<RaycastHit> hitResults = new NativeArray<RaycastHit>(gridSize, Allocator.TempJob);
             NativeArray<RaycastCommand> raycastCommands = new NativeArray<RaycastCommand>(gridSize, Allocator.TempJob);
 
-            PrepareRaycastCommands(gridWidth, gridHeight, raycastCommands);
+            PrepareRaycastCommands(gridRowCount, gridColumnCount, raycastCommands);
 
             JobHandle raycastHandle = RaycastCommand.ScheduleBatch(raycastCommands, hitResults, 1);
             raycastHandle.Complete();
@@ -53,6 +49,7 @@ namespace LostInSin.Grid
         private NativeArray<GridPoint> GenerateGridPoints(NativeArray<RaycastHit> hitResults)
         {
             NativeArray<GridPoint> gridPoints = new NativeArray<GridPoint>(hitResults.Length, Allocator.TempJob);
+
             CreateGridArrayJob createGridArrayJob = new CreateGridArrayJob()
             {
                 HitResults = hitResults,
@@ -68,18 +65,16 @@ namespace LostInSin.Grid
 
         private GridCell[,] GenerateGridCells(NativeArray<GridPoint> gridPoints)
         {
-            int gridWidth = _data.GridData.GridWidth;
-            int gridHeight = _data.GridData.GridHeight;
+            int numCellsRow = _gridModel.GridRowCount - 1;
+            int numCellsColumn = _gridModel.GridColumnCount - 1;
 
-            int numCellsWide = gridWidth - 1;
-            int numCellsHigh = gridHeight - 1;
-            GridCell[,] gridCells = new GridCell[numCellsWide, numCellsHigh];
+            GridCell[,] gridCells = new GridCell[numCellsRow, numCellsColumn];
 
-            for (int x = 0; x < numCellsWide; x++)
+            for (int x = 0; x < numCellsRow; x++)
             {
-                for (int y = 0; y < numCellsHigh; y++)
+                for (int y = 0; y < numCellsColumn; y++)
                 {
-                    ProcessCell(gridPoints, gridCells, x, y, gridWidth);
+                    ProcessCell(gridPoints, gridCells, x, y);
                 }
             }
 
@@ -87,11 +82,11 @@ namespace LostInSin.Grid
             return gridCells;
         }
 
-        private void ProcessCell(NativeArray<GridPoint> gridPoints, GridCell[,] gridCells, int x, int y, int gridWidth)
+        private void ProcessCell(NativeArray<GridPoint> gridPoints, GridCell[,] gridCells, int x, int y)
         {
-            int topLeftIndex = x + y * gridWidth;
+            int topLeftIndex = x + y * _gridModel.GridRowCount;
             int topRightIndex = topLeftIndex + 1;
-            int bottomLeftIndex = topLeftIndex + gridWidth;
+            int bottomLeftIndex = topLeftIndex + _gridModel.GridRowCount;
             int bottomRightIndex = bottomLeftIndex + 1;
 
             if (IsCellValid(gridPoints, topLeftIndex, topRightIndex, bottomLeftIndex, bottomRightIndex))
@@ -131,29 +126,31 @@ namespace LostInSin.Grid
             }
         }
 
-        private void PrepareRaycastCommands(int gridWidth, int gridHeight, NativeArray<RaycastCommand> commands)
+        private void PrepareRaycastCommands(int rowCount, int columnCount, NativeArray<RaycastCommand> commands)
         {
-            for (int x = 0; x < gridWidth; x++)
+            for (int row = 0; row < rowCount; row++)
             {
-                for (int y = 0; y < gridHeight; y++)
+                for (int column = 0; column < columnCount; column++)
                 {
-                    int index = x + y * gridWidth;
-                    Vector3 gridRaycastOrigin = CreateGridRaycastOrigin(x, y, gridWidth, gridHeight);
+                    int index = row + column * rowCount;
+                    Vector3 gridRaycastOrigin = CreateGridRaycastOrigin(row, column);
                     QueryParameters queryParameters = new QueryParameters(_groundLayerMask, false, QueryTriggerInteraction.Ignore);
                     commands[index] = new RaycastCommand(gridRaycastOrigin, Vector3.down, queryParameters);
                 }
             }
         }
 
-        private Vector3 CreateGridRaycastOrigin(int x, int y, int gridWidth, int gridHeight)
+        private Vector3 CreateGridRaycastOrigin(int row, int column)
         {
-            float gridXSize = _data.GridData.GridXSize;
-            float gridYSize = _data.GridData.GridYSize;
+            float cellWidth = _gridModel.GridCellWidth;
+            float cellHeight = _gridModel.GridCellHeight;
 
-            float gridWidthOffset = gridXSize * gridWidth / 2f;
-            float gridHeightOffset = gridYSize * gridHeight / 2f;
+            float gridRowOffset = _gridModel.GridRowOffset;
+            float gridColumnOffset = _gridModel.GridColumnOffset;
 
-            return new Vector3(gridXSize * x - gridWidthOffset, _rayOriginHeight, gridYSize * y - gridHeightOffset);
+            return new Vector3(cellWidth * row - gridRowOffset,
+                                _rayOriginHeight,
+                                cellHeight * column - gridColumnOffset);
         }
 
         private struct CreateGridArrayJob : IJobFor
@@ -168,9 +165,6 @@ namespace LostInSin.Grid
             }
         }
 
-        public class Data
-        {
-            public GridGenerationSO GridData;
-        }
+
     }
 }
