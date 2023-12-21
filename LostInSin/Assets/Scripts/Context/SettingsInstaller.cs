@@ -14,9 +14,13 @@ namespace LostInSin.Context
         public Mover.Settings Mover;
         public AnimationHashes.Data AnimationData;
         public GridModel.Data GridGenerationData;
+        public GridMeshDisplayService.Data GridVisualData;
         public override void InstallBindings()
         {
-            Container.BindInstances(Mover, AnimationData, GridGenerationData);
+            Container.BindInstances(Mover,
+                                    AnimationData,
+                                    GridGenerationData,
+                                    GridVisualData);
         }
     }
 }

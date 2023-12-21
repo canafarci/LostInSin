@@ -6,16 +6,16 @@ namespace LostInSin.Movement
 {
     public class Mover : IMover
     {
-        [Inject] private readonly Transform _transform;
+        private readonly Transform _transform;
         private readonly Settings _settings;
         private Vector3 _target;
         private bool _movementStarted = false;
-
         public bool MovementStarted { set { _movementStarted = value; } get { return _movementStarted; } }
 
-        private Mover(Settings settings)
+        private Mover(Transform transform, Settings settings)
         {
             _settings = settings;
+            _transform = transform;
         }
 
         public void InitializeMovement(Vector3 target)
@@ -59,7 +59,7 @@ namespace LostInSin.Movement
 
         public bool HasReachedDestination()
         {
-            return _movementStarted && Vector3.SqrMagnitude(_transform.position - _target) < Mathf.Pow(0.1f, 2);
+            return _movementStarted && Vector3.SqrMagnitude(_transform.position - _target) < Mathf.Pow(0.02f, 2);
         }
 
         [Serializable]

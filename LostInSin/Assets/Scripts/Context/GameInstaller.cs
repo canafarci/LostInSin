@@ -15,6 +15,8 @@ namespace LostInSin.Context
 
         public override void InstallBindings()
         {
+            InitExecutionOrder();
+
             Container.BindInterfacesAndSelfTo<GameInput>()
                 .AsSingle().NonLazy();
 
@@ -34,10 +36,22 @@ namespace LostInSin.Context
             Container.Bind<IRayDrawer>().To<MousePositionRayDrawer>().AsSingle();
             Container.Bind<IPositionRaycaster>().To<MousePositionRaycaster>().AsSingle();
 
-            //bind grid
+            BindGrid();
+        }
+
+        private void BindGrid()
+        {
             Container.Bind<GridModel>().AsSingle();
             Container.Bind<GridPositionConverter>().AsSingle();
             Container.BindInterfacesAndSelfTo<GridGenerator>().AsSingle().NonLazy();
+            //bind visuals
+            Container.Bind<GridMeshGenerator>().AsSingle();
+            Container.BindInterfacesAndSelfTo<GridMeshDisplayService>().AsSingle().NonLazy();
+        }
+
+        void InitExecutionOrder()
+        {
+            Container.BindExecutionOrder<GridMeshDisplayService>(2000);
         }
     }
 }

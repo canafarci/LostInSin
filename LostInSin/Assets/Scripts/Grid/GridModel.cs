@@ -1,7 +1,4 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.Collections;
 using UnityEngine;
 
 namespace LostInSin.Grid
@@ -10,6 +7,7 @@ namespace LostInSin.Grid
     {
         private GridCell[,] _gridCells;
         private readonly Data _data;
+        public GridCell[,] GridCells { get { return _gridCells; } }
         public int GridCellWidth { get { return _data.GridData.GridXSize; } }
         public int GridCellHeight { get { return _data.GridData.GridYSize; } }
         public int GridRowCount { get { return _data.GridData.GridRowCount; } }
@@ -25,31 +23,11 @@ namespace LostInSin.Grid
         public void SetGridCells(GridCell[,] cells)
         {
             _gridCells = cells;
-
-            DrawDebug(_gridCells);
         }
+
         public GridCell GetGridCell(int row, int column)
         {
             return _gridCells[row, column];
-        }
-
-        private void DrawDebug(GridCell[,] cells)
-        {
-            for (int x = 0; x < GridRowCount - 1; x++)
-            {
-                for (int y = 0; y < GridColumnCount - 1; y++)
-                {
-                    GridCell cell = cells[x, y];
-#if UNITY_EDITOR
-                    if (cell.IsInvalid) continue;
-                    Debug.DrawLine(cell.TopLeft.ToVector3(), cell.TopRight.ToVector3(), Color.blue, Mathf.Infinity);
-                    Debug.DrawLine(cell.TopRight.ToVector3(), cell.BottomRight.ToVector3(), Color.blue, Mathf.Infinity);
-                    Debug.DrawLine(cell.BottomRight.ToVector3(), cell.BottomLeft.ToVector3(), Color.blue, Mathf.Infinity);
-                    Debug.DrawLine(cell.BottomLeft.ToVector3(), cell.TopLeft.ToVector3(), Color.blue, Mathf.Infinity);
-                    Debug.DrawLine(cell.BottomLeft.ToVector3(), cell.TopRight.ToVector3(), Color.blue, Mathf.Infinity);
-#endif
-                }
-            }
         }
 
         public class Data

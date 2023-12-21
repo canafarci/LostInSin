@@ -21,6 +21,6 @@ namespace LostInSin.Grid
             _isVoid = isVoid;
         }
 
-        public Vector3 ToVector3() => new Vector3(_posX, _posY, _posZ);
+        public readonly Vector3 ToVector3() => new Vector3(_posX, _posY, _posZ);
     }
 }
