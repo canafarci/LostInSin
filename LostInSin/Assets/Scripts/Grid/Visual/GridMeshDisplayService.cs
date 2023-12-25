@@ -31,6 +31,8 @@ namespace LostInSin.Grid
             filter.mesh = gridMesh;
 
             Material mat = new Material(_data.GridShader);
+            mat.SetFloat("_GridSize", _gridModel.GridColumnCount);
+
             renderer.material = mat;
 
             gridObject.transform.position = Vector3.up / 30f;

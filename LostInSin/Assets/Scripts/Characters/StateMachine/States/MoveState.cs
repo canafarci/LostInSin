@@ -51,10 +51,13 @@ namespace LostInSin.Characters.StateMachine
             if (await CheckCanMoveAsync())
             {
                 if (_positionRaycaster.GetWorldPosition(out Vector3 position) &&
-                    _gridPositionConverter.GetCellCenterPoint(position, out Vector3 cellPosition))
+                    _gridPositionConverter.GetCell(position, out GridCellData gridCell) &&
+                    !gridCell.IsOccupied)
                 {
                     _runtimeData.CanExitTicking = false;
-                    _mover.InitializeMovement(cellPosition);
+                    _runtimeData.ChangeOccupiedCell(gridCell);
+
+                    _mover.InitializeMovement(gridCell.CenterPosition);
                     FireRunningAnimationChangeSignal(true);
                 }
             }

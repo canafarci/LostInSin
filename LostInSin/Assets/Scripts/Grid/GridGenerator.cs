@@ -23,15 +23,16 @@ namespace LostInSin.Grid
         {
             NativeArray<RaycastHit> hitResults = PerformRaycasting();
             NativeArray<GridPoint> gridPoints = GenerateGridPoints(hitResults);
-            GridCell[,] gridCells = GenerateGridCells(gridPoints);
+            (GridCell[,], GridCellData[,]) gridCells = GenerateGridCells(gridPoints);
 
-            _gridModel.SetGridCells(gridCells);
+            _gridModel.SetGridCells(gridCells.Item1, gridCells.Item2);
         }
 
         private NativeArray<RaycastHit> PerformRaycasting()
         {
-            int gridRowCount = _gridModel.GridRowCount;
-            int gridColumnCount = _gridModel.GridColumnCount;
+            // add one to side length value, as grid cells count is  1 less than each side count
+            int gridRowCount = _gridModel.GridRowCount + 1;
+            int gridColumnCount = _gridModel.GridColumnCount + 1;
             int gridSize = gridRowCount * gridColumnCount;
 
             NativeArray<RaycastHit> hitResults = new NativeArray<RaycastHit>(gridSize, Allocator.TempJob);
@@ -63,30 +64,31 @@ namespace LostInSin.Grid
             return gridPoints;
         }
 
-        private GridCell[,] GenerateGridCells(NativeArray<GridPoint> gridPoints)
+        private (GridCell[,], GridCellData[,]) GenerateGridCells(NativeArray<GridPoint> gridPoints)
         {
-            int numCellsRow = _gridModel.GridRowCount - 1;
-            int numCellsColumn = _gridModel.GridColumnCount - 1;
+            int numCellsRow = _gridModel.GridRowCount;
+            int numCellsColumn = _gridModel.GridColumnCount;
 
             GridCell[,] gridCells = new GridCell[numCellsRow, numCellsColumn];
+            GridCellData[,] gridCellsData = new GridCellData[numCellsRow, numCellsColumn];
 
             for (int x = 0; x < numCellsRow; x++)
             {
                 for (int y = 0; y < numCellsColumn; y++)
                 {
-                    ProcessCell(gridPoints, gridCells, x, y);
+                    ProcessCell(gridPoints, gridCells, gridCellsData, x, y);
                 }
             }
 
             gridPoints.Dispose();
-            return gridCells;
+            return (gridCells, gridCellsData);
         }
 
-        private void ProcessCell(NativeArray<GridPoint> gridPoints, GridCell[,] gridCells, int x, int y)
+        private void ProcessCell(NativeArray<GridPoint> gridPoints, GridCell[,] gridCells, GridCellData[,] gridCellsData, int x, int y)
         {
-            int topLeftIndex = x + y * _gridModel.GridRowCount;
+            int topLeftIndex = x + y * (_gridModel.GridRowCount + 1); // add one to side length value, as grid cells count is  1 less than each side count
             int topRightIndex = topLeftIndex + 1;
-            int bottomLeftIndex = topLeftIndex + _gridModel.GridRowCount;
+            int bottomLeftIndex = topLeftIndex + _gridModel.GridRowCount + 1; // add one to side length value, as grid cells count is  1 less than each side count
             int bottomRightIndex = bottomLeftIndex + 1;
 
             if (IsCellValid(gridPoints, topLeftIndex, topRightIndex, bottomLeftIndex, bottomRightIndex))
@@ -101,6 +103,7 @@ namespace LostInSin.Grid
 
                 AdjustCellBasedOnRaycast(ref cell);
                 gridCells[x, y] = cell;
+                gridCellsData[x, y] = new GridCellData();
             }
         }
 

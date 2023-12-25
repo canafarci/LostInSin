@@ -8,15 +8,19 @@ namespace LostInSin.Grid
         public Mesh CreateGridMesh(GridCell[,] gridCells)
         {
             List<Vector3> vertices = new List<Vector3>();
+            List<Vector2> uvs = new List<Vector2>(); // List for UVs
             List<int> triangles = new List<int>();
 
-            for (int x = 0; x < gridCells.GetLength(0); x++)
+            int width = gridCells.GetLength(0);
+            int height = gridCells.GetLength(1);
+
+            for (int x = 0; x < width; x++)
             {
-                for (int y = 0; y < gridCells.GetLength(1); y++)
+                for (int y = 0; y < height; y++)
                 {
                     if (!gridCells[x, y].IsInvalid)
                     {
-                        AddCellToMesh(gridCells[x, y], vertices, triangles);
+                        AddCellToMesh(gridCells[x, y], vertices, uvs, triangles, x, y, width, height);
                     }
                 }
             }
@@ -24,12 +28,20 @@ namespace LostInSin.Grid
             Mesh mesh = new Mesh();
             mesh.vertices = vertices.ToArray();
             mesh.triangles = triangles.ToArray();
+            mesh.uv = uvs.ToArray(); // Assign UVs to the mesh
             mesh.RecalculateNormals();
 
             return mesh;
         }
 
-        private void AddCellToMesh(GridCell cell, List<Vector3> vertices, List<int> triangles)
+        private void AddCellToMesh(GridCell cell,
+                                   List<Vector3> vertices,
+                                   List<Vector2> uvs,
+                                   List<int> triangles,
+                                   int x,
+                                   int y,
+                                   int gridWidth,
+                                   int gridHeight)
         {
             int vertexIndex = vertices.Count;
 
@@ -37,6 +49,20 @@ namespace LostInSin.Grid
             vertices.Add(cell.TopRight.ToVector3());
             vertices.Add(cell.BottomLeft.ToVector3());
             vertices.Add(cell.BottomRight.ToVector3());
+
+            // Calculate UVs based on the cell's position within the grid
+            float uvWidth = 1f / gridWidth;
+            float uvHeight = 1f / gridHeight;
+            Vector2 uvTopLeft = new Vector2(x * uvWidth, y * uvHeight);
+            Vector2 uvTopRight = new Vector2((x + 1) * uvWidth, y * uvHeight);
+            Vector2 uvBottomLeft = new Vector2(x * uvWidth, (y + 1) * uvHeight);
+            Vector2 uvBottomRight = new Vector2((x + 1) * uvWidth, (y + 1) * uvHeight);
+
+            // Assign UVs for each vertex
+            uvs.Add(uvTopLeft);
+            uvs.Add(uvTopRight);
+            uvs.Add(uvBottomLeft);
+            uvs.Add(uvBottomRight);
 
             // Add triangles (two triangles forming a quad)
             // top-left triangle
@@ -48,7 +74,8 @@ namespace LostInSin.Grid
             triangles.Add(vertexIndex + 2); //bottom left 
             triangles.Add(vertexIndex + 3); //bottom right
             triangles.Add(vertexIndex + 1); //top right
-
         }
+
     }
+
 }

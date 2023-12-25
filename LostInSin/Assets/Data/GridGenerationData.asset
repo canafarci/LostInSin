@@ -23,5 +23,5 @@ MonoBehaviour:
     SerializationNodes: []
   GridXSize: 1
   GridYSize: 1
-  GridRowCount: 10
-  GridColumnCount: 10
+  GridRowCount: 29
+  GridColumnCount: 29
