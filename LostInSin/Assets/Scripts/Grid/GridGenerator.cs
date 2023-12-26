@@ -1,5 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using LostInSin.Raycast;
+using Raycast.Data;
 using Unity.Collections;
 using Unity.Jobs;
 using UnityEngine;
@@ -9,165 +9,46 @@ namespace LostInSin.Grid
 {
     public class GridGenerator : IInitializable
     {
-        private const float _rayOriginHeight = 10f;
+        private readonly IGridRaycaster _raycaster;
+        private readonly IGridPointsGenerator _pointsGenerator;
+        private readonly IGridCellGenerator _cellGenerator;
         private readonly GridModel _gridModel;
-        private int _groundLayerMask;
+        private readonly int _groundLayerMask;
 
-        private GridGenerator(GridModel gridModel)
+        private GridGenerator(GridModel gridModel,
+                              IGridRaycaster raycaster,
+                              IGridPointsGenerator pointsGenerator,
+                              IGridCellGenerator cellGenerator)
         {
             _gridModel = gridModel;
+            _raycaster = raycaster;
+            _pointsGenerator = pointsGenerator;
+            _cellGenerator = cellGenerator;
             _groundLayerMask = LayerMask.GetMask("Ground");
         }
 
         public void Initialize()
         {
-            NativeArray<RaycastHit> hitResults = PerformRaycasting();
-            NativeArray<GridPoint> gridPoints = GenerateGridPoints(hitResults);
-            (GridCell[,], GridCellData[,]) gridCells = GenerateGridCells(gridPoints);
+            GridRaycastData raycastData = CreateRaycastData();
+
+            NativeArray<RaycastHit> raycastResults = _raycaster.PerformRaycasting(raycastData);
+            NativeArray<GridPoint> gridPoints = _pointsGenerator.GenerateGridPoints(raycastResults);
+            (GridCell[,], GridCellData[,]) gridCells = _cellGenerator.GenerateGridCells(gridPoints);
 
             _gridModel.SetGridCells(gridCells.Item1, gridCells.Item2);
         }
 
-        private NativeArray<RaycastHit> PerformRaycasting()
+        private GridRaycastData CreateRaycastData()
         {
-            // add one to side length value, as grid cells count is  1 less than each side count
-            int gridRowCount = _gridModel.GridRowCount + 1;
-            int gridColumnCount = _gridModel.GridColumnCount + 1;
-            int gridSize = gridRowCount * gridColumnCount;
-
-            NativeArray<RaycastHit> hitResults = new NativeArray<RaycastHit>(gridSize, Allocator.TempJob);
-            NativeArray<RaycastCommand> raycastCommands = new NativeArray<RaycastCommand>(gridSize, Allocator.TempJob);
-
-            PrepareRaycastCommands(gridRowCount, gridColumnCount, raycastCommands);
-
-            JobHandle raycastHandle = RaycastCommand.ScheduleBatch(raycastCommands, hitResults, 1);
-            raycastHandle.Complete();
-
-            raycastCommands.Dispose();
-            return hitResults;
-        }
-
-        private NativeArray<GridPoint> GenerateGridPoints(NativeArray<RaycastHit> hitResults)
-        {
-            NativeArray<GridPoint> gridPoints = new NativeArray<GridPoint>(hitResults.Length, Allocator.TempJob);
-
-            CreateGridArrayJob createGridArrayJob = new CreateGridArrayJob()
+            return new()
             {
-                HitResults = hitResults,
-                GridPoints = gridPoints
+                GridRowCount = _gridModel.GridRowCount,
+                GridCellWidth = _gridModel.GridCellWidth,
+                GridCellHeight = _gridModel.GridCellHeight,
+                GridRowOffset = _gridModel.GridRowOffset,
+                GridColumnOffset = _gridModel.GridColumnOffset,
+                GridColumnCount = _gridModel.GridColumnCount,
             };
-
-            JobHandle gridPointCreationHandle = createGridArrayJob.Schedule(hitResults.Length, default);
-            gridPointCreationHandle.Complete();
-
-            hitResults.Dispose();
-            return gridPoints;
         }
-
-        private (GridCell[,], GridCellData[,]) GenerateGridCells(NativeArray<GridPoint> gridPoints)
-        {
-            int numCellsRow = _gridModel.GridRowCount;
-            int numCellsColumn = _gridModel.GridColumnCount;
-
-            GridCell[,] gridCells = new GridCell[numCellsRow, numCellsColumn];
-            GridCellData[,] gridCellsData = new GridCellData[numCellsRow, numCellsColumn];
-
-            for (int x = 0; x < numCellsRow; x++)
-            {
-                for (int y = 0; y < numCellsColumn; y++)
-                {
-                    ProcessCell(gridPoints, gridCells, gridCellsData, x, y);
-                }
-            }
-
-            gridPoints.Dispose();
-            return (gridCells, gridCellsData);
-        }
-
-        private void ProcessCell(NativeArray<GridPoint> gridPoints, GridCell[,] gridCells, GridCellData[,] gridCellsData, int x, int y)
-        {
-            int topLeftIndex = x + y * (_gridModel.GridRowCount + 1); // add one to side length value, as grid cells count is  1 less than each side count
-            int topRightIndex = topLeftIndex + 1;
-            int bottomLeftIndex = topLeftIndex + _gridModel.GridRowCount + 1; // add one to side length value, as grid cells count is  1 less than each side count
-            int bottomRightIndex = bottomLeftIndex + 1;
-
-            if (IsCellValid(gridPoints, topLeftIndex, topRightIndex, bottomLeftIndex, bottomRightIndex))
-            {
-                GridCell cell = new GridCell(
-                    gridPoints[topLeftIndex],
-                    gridPoints[topRightIndex],
-                    gridPoints[bottomLeftIndex],
-                    gridPoints[bottomRightIndex],
-                    false
-                );
-
-                AdjustCellBasedOnRaycast(ref cell);
-                gridCells[x, y] = cell;
-                gridCellsData[x, y] = new GridCellData();
-            }
-        }
-
-        private bool IsCellValid(NativeArray<GridPoint> gridPoints, int topLeftIndex, int topRightIndex, int bottomLeftIndex, int bottomRightIndex)
-        {
-            return !(gridPoints[topLeftIndex].IsVoid || gridPoints[topRightIndex].IsVoid ||
-                     gridPoints[bottomLeftIndex].IsVoid || gridPoints[bottomRightIndex].IsVoid);
-        }
-
-        private void AdjustCellBasedOnRaycast(ref GridCell cell)
-        {
-            Vector3 rayOrigin = new Vector3(cell.Center.PosX, _rayOriginHeight, cell.Center.PosZ);
-            if (Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hit, Mathf.Infinity, _groundLayerMask))
-            {
-                if (Mathf.Abs(hit.point.y - cell.Center.PosY) > 0.1f)
-                {
-                    cell.SetAllPointsToMinimumY();
-                }
-            }
-            else
-            {
-                cell.SetAllPointsToMinimumY();
-            }
-        }
-
-        private void PrepareRaycastCommands(int rowCount, int columnCount, NativeArray<RaycastCommand> commands)
-        {
-            for (int row = 0; row < rowCount; row++)
-            {
-                for (int column = 0; column < columnCount; column++)
-                {
-                    int index = row + column * rowCount;
-                    Vector3 gridRaycastOrigin = CreateGridRaycastOrigin(row, column);
-                    QueryParameters queryParameters = new QueryParameters(_groundLayerMask, false, QueryTriggerInteraction.Ignore);
-                    commands[index] = new RaycastCommand(gridRaycastOrigin, Vector3.down, queryParameters);
-                }
-            }
-        }
-
-        private Vector3 CreateGridRaycastOrigin(int row, int column)
-        {
-            float cellWidth = _gridModel.GridCellWidth;
-            float cellHeight = _gridModel.GridCellHeight;
-
-            float gridRowOffset = _gridModel.GridRowOffset;
-            float gridColumnOffset = _gridModel.GridColumnOffset;
-
-            return new Vector3(cellWidth * row - gridRowOffset,
-                                _rayOriginHeight,
-                                cellHeight * column - gridColumnOffset);
-        }
-
-        private struct CreateGridArrayJob : IJobFor
-        {
-            [ReadOnly] public NativeArray<RaycastHit> HitResults;
-            public NativeArray<GridPoint> GridPoints;
-
-            public void Execute(int index)
-            {
-                RaycastHit hit = HitResults[index];
-                GridPoints[index] = hit.distance > 0 ? new GridPoint(hit.point.x, hit.point.y, hit.point.z, false) : new GridPoint();
-            }
-        }
-
-
     }
 }

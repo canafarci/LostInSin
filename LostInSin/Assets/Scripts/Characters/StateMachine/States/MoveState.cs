@@ -21,14 +21,14 @@ namespace LostInSin.Characters.StateMachine
         private readonly IMover _mover;
         private readonly GameInput _gameInput;
         private readonly IPositionRaycaster _positionRaycaster;
-        private readonly GridPositionConverter _gridPositionConverter;
+        private readonly IGridPositionConverter _gridPositionConverter;
         private bool _stateIsActive = false;
 
         private MoveState(SignalBus signalBus,
                           IMover mover,
                           GameInput gameInput,
                           IPositionRaycaster positionRaycaster,
-                          GridPositionConverter gridPositionConverter)
+                          IGridPositionConverter gridPositionConverter)
         {
             _signalBus = signalBus;
             _mover = mover;
@@ -63,7 +63,7 @@ namespace LostInSin.Characters.StateMachine
             }
         }
 
-        private async Task<bool> CheckCanMoveAsync()
+        private async UniTask<bool> CheckCanMoveAsync()
         {
             await UniTask.NextFrame(); //wait one frame for state ticker to check other characters for switching
             return _runtimeData.IsTicking && !_mover.MovementStarted;

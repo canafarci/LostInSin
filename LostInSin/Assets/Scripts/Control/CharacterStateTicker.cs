@@ -1,10 +1,8 @@
 using Zenject;
 using LostInSin.Characters;
 using LostInSin.Raycast;
-using UnityEngine;
 using LostInSin.Input;
 using UniRx;
-using Cysharp.Threading.Tasks;
 
 namespace LostInSin.Control
 {

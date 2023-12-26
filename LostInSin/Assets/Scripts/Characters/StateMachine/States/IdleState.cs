@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using LostInSin.Animation.Data;
 using LostInSin.Characters.StateMachine.Signals;
 using LostInSin.Identifiers;
-using UnityEngine;
 using Zenject;
 
 namespace LostInSin.Characters.StateMachine

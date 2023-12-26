@@ -67,7 +67,7 @@ Shader "Custom/GridShader"
                 float4 fillColor = _FillColor;
 
                 // Ripple effect - Use a sine wave over time and distance
-                float ripple = sin(_Time.y ); // The constants here control the speed and frequency of the ripples
+                float ripple = sin(_Time.x ); // The constants here control the speed and frequency of the ripples
 
                 // Apply the ripple effect to the cell transparency
                 fillColor.a = clamp(ripple * 0.15, 0.1, 0.3);

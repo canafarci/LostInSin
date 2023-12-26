@@ -31,18 +31,24 @@ namespace LostInSin.Context
 
             Container.BindInterfacesAndSelfTo<CharacterStateTicker>().AsSingle().NonLazy();
 
-            Container.Bind<IComponentRaycaster<Character>>().To<ComponentRaycaster<Character>>().AsSingle();
+            BindRaycasters();
+            BindGrid();
+        }
 
+        private void BindRaycasters()
+        {
+            Container.Bind<IComponentRaycaster<Character>>().To<ComponentRaycaster<Character>>().AsSingle();
             Container.Bind<IRayDrawer>().To<MousePositionRayDrawer>().AsSingle();
             Container.Bind<IPositionRaycaster>().To<MousePositionRaycaster>().AsSingle();
-
-            BindGrid();
+            Container.Bind<IGridRaycaster>().To<GridRaycaster>().AsSingle();
         }
 
         private void BindGrid()
         {
             Container.Bind<GridModel>().AsSingle();
-            Container.Bind<GridPositionConverter>().AsSingle();
+            Container.Bind<IGridPositionConverter>().To<GridPositionConverter>().AsSingle();
+            Container.Bind<IGridCellGenerator>().To<GridCellGenerator>().AsSingle();
+            Container.Bind<IGridPointsGenerator>().To<GridPointsGenerator>().AsSingle();
             Container.BindInterfacesAndSelfTo<GridGenerator>().AsSingle().NonLazy();
             //bind visuals
             Container.Bind<GridMeshGenerator>().AsSingle();

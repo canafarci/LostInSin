@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace LostInSin.Grid
 {
-    public class GridPositionConverter
+    public class GridPositionConverter : IGridPositionConverter
     {
         private readonly GridModel _gridModel;
 

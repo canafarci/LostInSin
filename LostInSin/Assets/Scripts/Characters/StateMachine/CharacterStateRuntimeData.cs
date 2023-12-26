@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using LostInSin.Grid;
-using UnityEngine;
 
 namespace LostInSin.Characters
 {
