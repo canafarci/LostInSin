@@ -15,7 +15,8 @@
         "LostInSin.Raycast",
         "LostInSin.Visuals",
         "Zenject",
-        "Zenject-TestFramework"
+        "Zenject-TestFramework",
+        "LostInSin.Grid"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
@@ -25,7 +26,8 @@
         "nunit.framework.dll",
         "Moq.dll",
         "Castle.Core.dll",
-        "Zenject-usage.dll"
+        "Zenject-usage.dll",
+        "Sirenix.Serialization.dll"
     ],
     "autoReferenced": false,
     "defineConstraints": [

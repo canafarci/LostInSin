@@ -15,7 +15,8 @@
         "LostInSin.Input",
         "LostInSin.Movement",
         "LostInSin.Raycast",
-        "LostInSin.Visuals"
+        "LostInSin.Visuals",
+        "LostInSin.Grid"
     ],
     "includePlatforms": [
         "Editor"
@@ -27,7 +28,8 @@
         "nunit.framework.dll",
         "Zenject-usage.dll",
         "Moq.dll",
-        "Castle.Core.dll"
+        "Castle.Core.dll",
+        "Sirenix.Serialization.dll"
     ],
     "autoReferenced": false,
     "defineConstraints": [

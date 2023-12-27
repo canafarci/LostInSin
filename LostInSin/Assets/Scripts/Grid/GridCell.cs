@@ -34,7 +34,7 @@ namespace LostInSin.Grid
                 (topLeft.PosX + topRight.PosX + bottomLeft.PosX + bottomRight.PosX) / 4,
                 (topLeft.PosY + topRight.PosY + bottomLeft.PosY + bottomRight.PosY) / 4,
                 (topLeft.PosZ + topRight.PosZ + bottomLeft.PosZ + bottomRight.PosZ) / 4,
-                topLeft.IsVoid && topRight.IsVoid && bottomLeft.IsVoid && bottomRight.IsVoid
+                topLeft.IsVoid || topRight.IsVoid || bottomLeft.IsVoid || bottomRight.IsVoid
             );
         }
 
