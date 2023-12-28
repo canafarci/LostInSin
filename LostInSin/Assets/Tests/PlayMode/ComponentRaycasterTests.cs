@@ -8,7 +8,7 @@ using Moq;
 using UnityEngine.TestTools;
 using System;
 
-namespace LostInSin.Tests.PlayMode
+namespace LostInSin.Raycast.Tests
 {
     [TestFixture]
     public class ComponentRaycasterTests : ZenjectIntegrationTestFixture

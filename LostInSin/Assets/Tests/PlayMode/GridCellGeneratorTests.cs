@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using Zenject;
 
-namespace LostInSin.Tests.PlayMode
+namespace LostInSin.Grid.Tests
 {
     [TestFixture]
     public class GridCellGeneratorTests : ZenjectIntegrationTestFixture

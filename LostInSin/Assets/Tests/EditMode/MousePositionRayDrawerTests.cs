@@ -5,7 +5,7 @@ using NUnit.Framework;
 using UnityEngine;
 using Zenject;
 
-namespace LostInSin.Tests.EditMode
+namespace LostInSin.Raycast.Tests
 {
     [TestFixture]
     public class MousePositionRayDrawerTests : ZenjectUnitTestFixture

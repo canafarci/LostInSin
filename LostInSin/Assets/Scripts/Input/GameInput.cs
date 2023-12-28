@@ -15,7 +15,7 @@ namespace LostInSin.Input
         readonly private CompositeDisposable _disposables = new();
         public IObservable<InputAction.CallbackContext> ClickStream { get { return _clickStream; } }
 
-        private GameInput()
+        public GameInput()
         {
             _inputActions = new PlayerInputActions();
         }

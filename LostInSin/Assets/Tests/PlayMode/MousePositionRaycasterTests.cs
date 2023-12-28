@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using Zenject;
 
-namespace LostInSin.Tests.PlayMode
+namespace LostInSin.Raycast.Tests
 {
     [TestFixture]
     public class MousePositionRaycasterTests : ZenjectIntegrationTestFixture

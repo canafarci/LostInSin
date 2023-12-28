@@ -16,7 +16,10 @@
         "LostInSin.Movement",
         "LostInSin.Raycast",
         "LostInSin.Visuals",
-        "LostInSin.Grid"
+        "LostInSin.Grid",
+        "Unity.InputSystem",
+        "UniRx",
+        "Unity.InputSystem.TestFramework"
     ],
     "includePlatforms": [
         "Editor"
