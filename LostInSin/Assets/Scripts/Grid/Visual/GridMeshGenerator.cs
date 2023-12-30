@@ -75,7 +75,5 @@ namespace LostInSin.Grid
             triangles.Add(vertexIndex + 3); //bottom right
             triangles.Add(vertexIndex + 1); //top right
         }
-
     }
-
 }
