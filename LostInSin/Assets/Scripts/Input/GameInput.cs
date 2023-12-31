@@ -8,32 +8,21 @@ using Zenject;
 
 namespace LostInSin.Input
 {
-    public class GameInput : IInitializable, IDisposable
+    public class GameInput : IInitializable
     {
         private readonly PlayerInputActions _inputActions;
-        private IObservable<InputAction.CallbackContext> _clickStream;
-        readonly private CompositeDisposable _disposables = new();
-        public IObservable<InputAction.CallbackContext> ClickStream { get { return _clickStream; } }
+        public PlayerInputActions.GameplayActions GameplayActions { get { return _gameplayActions; } }
+        public PlayerInputActions.GameplayActions _gameplayActions;
 
         public GameInput()
         {
             _inputActions = new PlayerInputActions();
         }
 
-        public void Dispose()
-        {
-            //_clickStream.Dispose();
-        }
-
         public void Initialize()
         {
-
             _inputActions.Enable();
-
-            _clickStream = Observable.FromEvent<InputAction.CallbackContext>(
-                h => _inputActions.Gameplay.Click.performed += h,
-                h => _inputActions.Gameplay.Click.performed -= h
-            );
+            _gameplayActions = _inputActions.Gameplay;
         }
     }
 }

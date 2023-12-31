@@ -3,6 +3,8 @@ using LostInSin.Characters;
 using LostInSin.Raycast;
 using LostInSin.Input;
 using UniRx;
+using UnityEngine.InputSystem;
+using System;
 
 namespace LostInSin.Control
 {
@@ -15,10 +17,12 @@ namespace LostInSin.Control
 
         public void Initialize()
         {
-            _gameInput.ClickStream.Subscribe(ctx =>
-            {
-                TryRaycastCharacter();
-            });
+            _gameInput.GameplayActions.Click.performed += OnClicked;
+        }
+
+        private void OnClicked(InputAction.CallbackContext context)
+        {
+            TryRaycastCharacter();
         }
 
         public void Tick()

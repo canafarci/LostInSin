@@ -22,7 +22,7 @@ namespace LostInSin.Input.Tests
             _gameInput.Initialize();
 
             // Assert
-            Assert.IsNotNull(_gameInput.ClickStream);
+            Assert.IsNotNull(_gameInput.GameplayActions);
         }
     }
 }

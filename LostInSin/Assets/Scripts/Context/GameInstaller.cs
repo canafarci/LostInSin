@@ -1,4 +1,6 @@
+using Cinemachine;
 using LostInSin.Animation;
+using LostInSin.Camera;
 using LostInSin.Characters;
 using LostInSin.Control;
 using LostInSin.Grid;
@@ -12,6 +14,7 @@ namespace LostInSin.Context
     public class GameInstaller : MonoInstaller<GameInstaller>
     {
         [SerializeField] private GameObject _characterPrefab;
+        [SerializeField] private CinemachineVirtualCamera _camera;
 
         public override void InstallBindings()
         {
@@ -28,11 +31,11 @@ namespace LostInSin.Context
                 .AsSingle();
 
             Container.Bind<AnimationHashes>().AsSingle();
-
             Container.BindInterfacesAndSelfTo<CharacterStateTicker>().AsSingle().NonLazy();
 
             BindRaycasters();
             BindGrid();
+            BindCamera();
         }
 
         private void BindRaycasters()
@@ -53,6 +56,15 @@ namespace LostInSin.Context
             //bind visuals
             Container.Bind<GridMeshGenerator>().AsSingle();
             Container.BindInterfacesAndSelfTo<GridMeshDisplayService>().AsSingle().NonLazy();
+        }
+
+        private void BindCamera()
+        {
+            Container.Bind<CinemachineVirtualCamera>().FromInstance(_camera);
+            Container.BindInterfacesAndSelfTo<CameraInitializer>().AsSingle().NonLazy();
+            Container.Bind<CameraModel>().AsSingle();
+            Container.BindInterfacesAndSelfTo<CameraMover>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<CameraZoomer>().AsSingle().NonLazy();
         }
 
         void InitExecutionOrder()

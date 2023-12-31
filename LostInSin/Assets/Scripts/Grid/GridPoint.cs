@@ -8,10 +8,10 @@ namespace LostInSin.Grid
         public float PosY { get { return _posY; } }
         public float PosZ { get { return _posZ; } }
         public bool IsVoid { get { return _isVoid; } }
-        private float _posX;
-        private float _posY;
-        private float _posZ;
-        private bool _isVoid;
+        private readonly float _posX;
+        private readonly float _posY;
+        private readonly float _posZ;
+        private readonly bool _isVoid;
 
         public GridPoint(float posX, float posY, float posZ, bool isVoid = true)
         {

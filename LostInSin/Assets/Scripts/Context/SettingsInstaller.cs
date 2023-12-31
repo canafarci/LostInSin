@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using LostInSin.Animation;
+using LostInSin.Camera;
 using LostInSin.Grid;
 using LostInSin.Identifiers;
 using LostInSin.Movement;
@@ -15,12 +16,14 @@ namespace LostInSin.Context
         public AnimationHashes.Data AnimationData;
         public GridModel.Data GridGenerationData;
         public GridMeshDisplayService.Data GridVisualData;
+        public CameraModel.CameraData CameraData;
         public override void InstallBindings()
         {
             Container.BindInstances(Mover,
                                     AnimationData,
                                     GridGenerationData,
-                                    GridVisualData);
+                                    GridVisualData,
+                                    CameraData);
         }
     }
 }
