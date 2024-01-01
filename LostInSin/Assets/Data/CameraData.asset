@@ -24,4 +24,5 @@ MonoBehaviour:
   CameraMoveSpeed: 10
   CameraZoomSpeed: 10
   CameraZoomMinDistance: 1
-  CameraZoomMaxDistance: 100
+  CameraZoomMaxDistance: 10
+  CameraRotateSpeed: 10

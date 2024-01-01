@@ -65,10 +65,12 @@ namespace LostInSin.Context
             Container.Bind<CameraModel>().AsSingle();
             Container.BindInterfacesAndSelfTo<CameraMover>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<CameraZoomer>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<CameraRotator>().AsSingle().NonLazy();
         }
 
         void InitExecutionOrder()
         {
+            Container.BindExecutionOrder<CameraInitializer>(-10);
             Container.BindExecutionOrder<GridMeshDisplayService>(2000);
         }
     }

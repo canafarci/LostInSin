@@ -11,5 +11,6 @@ namespace LostInSin.Camera
         public float CameraZoomSpeed;
         public float CameraZoomMinDistance;
         public float CameraZoomMaxDistance;
+        public float CameraRotateSpeed;
     }
 }

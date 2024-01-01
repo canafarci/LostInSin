@@ -67,12 +67,21 @@ namespace LostInSin.Camera
         private void MoveCamera(Vector2 direction)
         {
             // Calculate the movement step
-            Vector3 movement = new Vector3(direction.x, 0, direction.y);
-            Vector3 movementStep = _cameraModel.CameraMoveSpeed * Time.deltaTime * movement;
-            // Move the camera target
             Transform cameraTargetTransform = _cameraModel.CameraTarget.transform;
+
+            // Use the camera target's forward and right vectors for movement
+            Vector3 forwardMovement = cameraTargetTransform.forward * direction.y;
+            Vector3 rightMovement = cameraTargetTransform.right * direction.x;
+
+            // Combine forward and right movement vectors
+            Vector3 combinedMovement = forwardMovement + rightMovement;
+
+            Vector3 movementStep = _cameraModel.CameraMoveSpeed * Time.deltaTime * combinedMovement;
+
+            // Move the camera target
             cameraTargetTransform.Translate(movementStep, Space.World);
         }
+
 
     }
 }

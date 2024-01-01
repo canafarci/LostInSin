@@ -19,6 +19,7 @@ namespace LostInSin.Grid
             JobHandle gridPointCreationHandle = createGridArrayJob.Schedule(hitResults.Length, 64); // 64 is the batch size
             gridPointCreationHandle.Complete();
 
+            hitResults.Dispose();
             return gridPoints;
         }
 

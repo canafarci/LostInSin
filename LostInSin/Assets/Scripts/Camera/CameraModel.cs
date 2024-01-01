@@ -18,10 +18,12 @@ namespace LostInSin.Camera
         public float CameraZoomMinDistance { get { return _cameraData.CameraDataSO.CameraZoomMinDistance; } }
         public float CameraZoomMaxDistance { get { return _cameraData.CameraDataSO.CameraZoomMaxDistance; } }
         public float CameraZoomSpeed { get { return _cameraData.CameraDataSO.CameraZoomSpeed; } }
+        public float CameraRotateSpeed { get { return _cameraData.CameraDataSO.CameraRotateSpeed; } }
+
         public CinemachineTransposer CameraTransposer { get { return _cameraTransposer; } }
         public CinemachineComposer CameraComposer { get { return _cameraComposer; } }
-        public GameObject CameraTarget { get { return _cameraTarget; } }
         public CinemachineVirtualCamera Camera { get { return _camera; } }
+        public GameObject CameraTarget { get { return _cameraTarget; } }
 
 
         private CameraModel(CinemachineVirtualCamera camera, CameraData cameraData)
