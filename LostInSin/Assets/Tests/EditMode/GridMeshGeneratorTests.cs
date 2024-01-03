@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using LostInSin.Grid.Visual;
 using NUnit.Framework;
 using UnityEngine;
 

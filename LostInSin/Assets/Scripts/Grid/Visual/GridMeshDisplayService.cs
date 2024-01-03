@@ -1,13 +1,15 @@
+using System;
 using UnityEngine;
 using Zenject;
 
-namespace LostInSin.Grid
+namespace LostInSin.Grid.Visual
 {
     public class GridMeshDisplayService : IInitializable //TODO call draw grid from elsewhere
     {
         private readonly GridModel _gridModel;
         private readonly GridMeshGenerator _gridMeshGenerator;
         private readonly Data _data;
+        private readonly int _gridSize = Shader.PropertyToID("_GridSize");
 
         private GridMeshDisplayService(GridModel model, GridMeshGenerator meshGenerator, Data data)
         {
@@ -21,9 +23,9 @@ namespace LostInSin.Grid
             DisplayGrid();
         }
 
-        public void DisplayGrid()
+        private void DisplayGrid()
         {
-            GameObject gridObject = new GameObject("grid-visual", typeof(MeshRenderer), typeof(MeshFilter));
+            GameObject gridObject = new("grid-visual", typeof(MeshRenderer), typeof(MeshFilter));
             MeshFilter filter = gridObject.GetComponent<MeshFilter>();
             MeshRenderer renderer = gridObject.GetComponent<MeshRenderer>();
 
@@ -31,17 +33,18 @@ namespace LostInSin.Grid
             filter.mesh = gridMesh;
 
             Material mat = new Material(_data.GridShader);
-            mat.SetFloat("_GridSize", _gridModel.GridColumnCount);
+            mat.SetFloat(_gridSize, _gridModel.GridColumnCount);
 
             renderer.material = mat;
 
             gridObject.transform.position = Vector3.up / 30f;
         }
 
+        [Serializable]
         public class Data
         {
             [SerializeField] private GridVisualDataSO _gridVisualDataSO;
-            public Shader GridShader { get { return _gridVisualDataSO.GridShader; } }
+            public Shader GridShader => _gridVisualDataSO.GridShader;
         }
     }
 }

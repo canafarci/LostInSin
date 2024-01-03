@@ -6,8 +6,10 @@ namespace LostInSin.Grid
 {
     public class GridCellData
     {
-        public bool IsOccupied { get { return _isOccupied; } }
-        public Vector3 CenterPosition { get { return _centerPosition; } set { _centerPosition = value; } }
+        public bool IsOccupied => _isOccupied;
+        public Vector3 CenterPosition { get => _centerPosition;
+            set => _centerPosition = value;
+        }
         private bool _isOccupied = false;
         private Vector3 _centerPosition;
 

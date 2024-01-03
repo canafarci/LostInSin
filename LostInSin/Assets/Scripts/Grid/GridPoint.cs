@@ -4,10 +4,10 @@ namespace LostInSin.Grid
 {
     public struct GridPoint
     {
-        public float PosX { get { return _posX; } }
-        public float PosY { get { return _posY; } }
-        public float PosZ { get { return _posZ; } }
-        public bool IsVoid { get { return _isVoid; } }
+        public float PosX => _posX;
+        public float PosY => _posY;
+        public float PosZ => _posZ;
+        public bool IsVoid => _isVoid;
         private readonly float _posX;
         private readonly float _posY;
         private readonly float _posZ;

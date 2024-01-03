@@ -1,8 +1,7 @@
-using System.Collections.Generic;
 using LostInSin.Animation;
 using LostInSin.Camera;
 using LostInSin.Grid;
-using LostInSin.Identifiers;
+using LostInSin.Grid.Visual;
 using LostInSin.Movement;
 using UnityEngine;
 using Zenject;

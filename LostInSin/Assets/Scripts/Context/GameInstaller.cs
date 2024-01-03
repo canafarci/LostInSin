@@ -4,6 +4,7 @@ using LostInSin.Camera;
 using LostInSin.Characters;
 using LostInSin.Control;
 using LostInSin.Grid;
+using LostInSin.Grid.Visual;
 using LostInSin.Input;
 using LostInSin.Raycast;
 using UnityEngine;

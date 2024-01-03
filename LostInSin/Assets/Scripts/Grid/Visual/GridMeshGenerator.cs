@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace LostInSin.Grid
+namespace LostInSin.Grid.Visual
 {
     public class GridMeshGenerator
     {
