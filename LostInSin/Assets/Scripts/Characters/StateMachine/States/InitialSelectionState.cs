@@ -1,13 +1,14 @@
-using LostInSin.Animation.Data;
 using LostInSin.Characters.StateMachine.Signals;
 using LostInSin.Identifiers;
 using Zenject;
 
-namespace LostInSin.Characters.StateMachine
+namespace LostInSin.Characters.StateMachine.States
 {
     public class InitialSelectionState : IState
     {
-        [Inject(Id = CharacterStates.IdleState)] private IState _idleState;
+        [Inject(Id = CharacterStates.IdleState)]
+        private IState _idleState;
+
         private SignalBus _signalBus;
 
         private InitialSelectionState(SignalBus signalBus)

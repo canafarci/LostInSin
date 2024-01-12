@@ -13,7 +13,6 @@ namespace LostInSin.Grid
         private readonly IGridPointsGenerator _pointsGenerator;
         private readonly IGridCellGenerator _cellGenerator;
         private readonly GridModel _gridModel;
-        private readonly int _groundLayerMask;
 
         private GridGenerator(GridModel gridModel,
                               IGridRaycaster raycaster,
@@ -24,7 +23,6 @@ namespace LostInSin.Grid
             _raycaster = raycaster;
             _pointsGenerator = pointsGenerator;
             _cellGenerator = cellGenerator;
-            _groundLayerMask = LayerMask.GetMask("Ground");
         }
 
         public void Initialize()
@@ -33,22 +31,22 @@ namespace LostInSin.Grid
 
             NativeArray<RaycastHit> raycastResults = _raycaster.PerformRaycasting(raycastData);
             NativeArray<GridPoint> gridPoints = _pointsGenerator.GenerateGridPoints(raycastResults);
-            (GridCell[,], GridCellData[,]) gridCells = _cellGenerator.GenerateGridCells(gridPoints);
+            (GridCell[,] cells, GridCellData[,] data ) gridCells = _cellGenerator.GenerateGridCells(gridPoints);
 
-            _gridModel.SetGridCells(gridCells.Item1, gridCells.Item2);
+            _gridModel.SetGridCells(gridCells.cells, gridCells.data);
         }
 
         private GridRaycastData CreateRaycastData()
         {
-            return new()
-            {
-                GridRowCount = _gridModel.GridRowCount,
-                GridCellWidth = _gridModel.GridCellWidth,
-                GridCellHeight = _gridModel.GridCellHeight,
-                GridRowOffset = _gridModel.GridRowOffset,
-                GridColumnOffset = _gridModel.GridColumnOffset,
-                GridColumnCount = _gridModel.GridColumnCount,
-            };
+            return new GridRaycastData
+                   {
+                       GridRowCount = _gridModel.GridRowCount,
+                       GridCellWidth = _gridModel.GridCellWidth,
+                       GridCellHeight = _gridModel.GridCellHeight,
+                       GridRowOffset = _gridModel.GridRowOffset,
+                       GridColumnOffset = _gridModel.GridColumnOffset,
+                       GridColumnCount = _gridModel.GridColumnCount
+                   };
         }
     }
 }

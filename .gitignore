@@ -73,4 +73,9 @@ crashlytics-build.properties
 #Odin
 LostInSin/Assets/Plugins/Sirenix/
 LostInSin/Assets/Plugins/Demigiant/
-LostInSin/CodeCoverage
+LostInSin/CodeCoverage/
+#zenject
+LostInSin/Assets/Plugins/Zenject/
+#unirx
+LostInSin/Assets/Plugins/UniRx/
+

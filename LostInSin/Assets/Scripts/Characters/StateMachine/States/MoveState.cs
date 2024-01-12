@@ -1,28 +1,36 @@
+using Cysharp.Threading.Tasks;
+using LostInSin.Animation.Data;
+using LostInSin.Characters.StateMachine.Signals;
+using LostInSin.Grid;
+using LostInSin.Identifiers;
 using LostInSin.Input;
 using LostInSin.Movement;
-using UnityEngine;
-using Zenject;
 using LostInSin.Raycast;
-using LostInSin.Characters.StateMachine.Signals;
-using LostInSin.Identifiers;
-using LostInSin.Animation.Data;
-using Cysharp.Threading.Tasks;
-using LostInSin.Grid;
+using UnityEngine;
 using UnityEngine.InputSystem;
+using Zenject;
 
-namespace LostInSin.Characters.StateMachine
+namespace LostInSin.Characters.StateMachine.States
 {
     public class MoveState : IState, IInitializable
     {
         // Injected dependencies
-        [Inject(Id = CharacterStates.IdleState)] private readonly IState _idleState;
+        [Inject(Id = CharacterStates.IdleState)]
+        private readonly IState _idleState;
+
         [Inject] private readonly CharacterStateRuntimeData _runtimeData;
         [Inject] private readonly SignalBus _signalBus;
         [Inject] private readonly IMover _mover;
         [Inject] private readonly GameInput _gameInput;
         [Inject] private readonly IPositionRaycaster _positionRaycaster;
         [Inject] private readonly IGridPositionConverter _gridPositionConverter;
-        private enum StateActivity { Active, Inactive }
+
+        private enum StateActivity
+        {
+            Active,
+            Inactive
+        }
+
         private StateActivity _currentState = StateActivity.Inactive;
 
 
@@ -56,10 +64,7 @@ namespace LostInSin.Characters.StateMachine
 
         private async void HandlePlayerClick()
         {
-            if (await IsMovePossibleAsync())
-            {
-                TryMoveCharacter();
-            }
+            if (await IsMovePossibleAsync()) TryMoveCharacter();
         }
 
         private async UniTask<bool> IsMovePossibleAsync()
@@ -70,10 +75,7 @@ namespace LostInSin.Characters.StateMachine
 
         private void TryMoveCharacter()
         {
-            if (TryGetTargetGridCell(out GridCellData gridCell))
-            {
-                StartCharacterMovement(gridCell);
-            }
+            if (TryGetTargetGridCell(out GridCellData gridCell)) StartCharacterMovement(gridCell);
         }
 
         private bool TryGetTargetGridCell(out GridCellData gridCell)
@@ -109,14 +111,14 @@ namespace LostInSin.Characters.StateMachine
 
         private void UpdateRunningAnimation(bool isRunning)
         {
-            var animationChangeSignal = CreateRunningAnimationSignal(isRunning);
+            AnimationChangeSignal animationChangeSignal = CreateRunningAnimationSignal(isRunning);
             _signalBus.AbstractFire(animationChangeSignal);
         }
 
         private AnimationChangeSignal CreateRunningAnimationSignal(bool isRunning)
         {
-            var animationChangeData = new AnimationStateChangeData();
-            var animationParameter = new AnimationParameter<bool>(isRunning);
+            AnimationStateChangeData animationChangeData = new();
+            AnimationParameter<bool> animationParameter = new(isRunning);
             animationChangeData.SetAnimationParameter(animationParameter);
             animationChangeData.SetAnimationIdentifier(AnimationIdentifier.IsRunning);
 

@@ -2,6 +2,7 @@ using LostInSin.Animation;
 using LostInSin.Characters;
 using LostInSin.Characters.StateMachine;
 using LostInSin.Characters.StateMachine.Signals;
+using LostInSin.Characters.StateMachine.States;
 using LostInSin.Identifiers;
 using LostInSin.Movement;
 using LostInSin.Raycast;
@@ -46,28 +47,28 @@ namespace LostInSin.Context
         private void BindStates()
         {
             Container.BindInterfacesAndSelfTo<CharacterStateMachine>()
-                .AsSingle()
-                .NonLazy();
+                     .AsSingle()
+                     .NonLazy();
 
             Container.Bind<IState>()
-                .WithId(CharacterStates.InactiveState)
-                .To<InactiveState>()
-                .AsSingle();
+                     .WithId(CharacterStates.InactiveState)
+                     .To<InactiveState>()
+                     .AsSingle();
 
             Container.Bind<IState>()
-                .WithId(CharacterStates.MoveState)
-                .To<MoveState>()
-                .AsSingle();
+                     .WithId(CharacterStates.MoveState)
+                     .To<MoveState>()
+                     .AsSingle();
 
             Container.Bind<IState>()
-                .WithId(CharacterStates.IdleState)
-                .To<IdleState>()
-                .AsSingle();
+                     .WithId(CharacterStates.IdleState)
+                     .To<IdleState>()
+                     .AsSingle();
 
             Container.Bind<IState>()
-                .WithId(CharacterStates.InitialSelectionState)
-                .To<InitialSelectionState>()
-                .AsSingle();
+                     .WithId(CharacterStates.InitialSelectionState)
+                     .To<InitialSelectionState>()
+                     .AsSingle();
         }
 
         private void InitializeStates()
@@ -77,4 +78,3 @@ namespace LostInSin.Context
         }
     }
 }
-

@@ -1,6 +1,6 @@
-
 using System;
 using LostInSin.Animation.Data;
+using LostInSin.Characters.StateMachine.States;
 using LostInSin.Identifiers;
 
 namespace LostInSin.Characters.StateMachine.Signals
@@ -17,8 +17,7 @@ namespace LostInSin.Characters.StateMachine.Signals
             _animationChangeData = animationChangeData;
         }
 
-        public IState TargetState { get { return _targetState; } }
-        public AnimationStateChangeData AnimationStateChangeData { get { return _animationChangeData; } }
-
+        public IState TargetState => _targetState;
+        public AnimationStateChangeData AnimationStateChangeData => _animationChangeData;
     }
 }

@@ -1,0 +1,16 @@
+{
+  "name": "LostInSin.Abilities",
+  "rootNamespace": "LostInSin.Abilities",
+  "references": [
+    "GUID:b0bae5ee89912a44e9b227fa3581ac56"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": false,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

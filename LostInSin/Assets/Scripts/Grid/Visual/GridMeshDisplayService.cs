@@ -32,7 +32,7 @@ namespace LostInSin.Grid.Visual
             Mesh gridMesh = _gridMeshGenerator.CreateGridMesh(_gridModel.GridCells);
             filter.mesh = gridMesh;
 
-            Material mat = new Material(_data.GridShader);
+            Material mat = new(_data.GridShader);
             mat.SetFloat(_gridSize, _gridModel.GridColumnCount);
 
             renderer.material = mat;

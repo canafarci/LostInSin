@@ -17,7 +17,6 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 11400000, guid: 2b915f3e1d102814fb5023bd8bcc559f, type: 2}
-    - {fileID: 11400000, guid: 648fbc1def316f9459fd66db42e1c95c, type: 2}
     - {fileID: 11400000, guid: 21309d203769dc547afa84d19008938a, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -77,24 +76,17 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: GridVisualData
-      Entry: 7
-      Data: 4|LostInSin.Grid.GridMeshDisplayService+Data, LostInSin.Grid
-    - Name: _gridVisualDataSO
-      Entry: 10
-      Data: 1
-    - Name: 
-      Entry: 8
-      Data: 
     - Name: CameraData
       Entry: 7
-      Data: 5|LostInSin.Camera.CameraModel+CameraData, LostInSin.Camera
+      Data: 4|LostInSin.Camera.CameraModel+CameraData, LostInSin.Camera
     - Name: CameraDataSO
       Entry: 10
-      Data: 2
+      Data: 1
     - Name: 
       Entry: 8
       Data: 
   Mover:
     MoveSpeed: 7
     TurnSpeed: 10
+  GridVisualData:
+    _gridVisualDataSO: {fileID: 11400000, guid: 648fbc1def316f9459fd66db42e1c95c, type: 2}

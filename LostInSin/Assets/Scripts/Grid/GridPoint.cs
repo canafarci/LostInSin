@@ -4,23 +4,22 @@ namespace LostInSin.Grid
 {
     public struct GridPoint
     {
-        public float PosX => _posX;
-        public float PosY => _posY;
-        public float PosZ => _posZ;
-        public bool IsVoid => _isVoid;
-        private readonly float _posX;
-        private readonly float _posY;
-        private readonly float _posZ;
-        private readonly bool _isVoid;
+        public float PosX { get; }
+        public float PosY { get; }
+        public float PosZ { get; }
+        public bool IsVoid { get; }
 
         public GridPoint(float posX, float posY, float posZ, bool isVoid = true)
         {
-            _posX = posX;
-            _posY = posY;
-            _posZ = posZ;
-            _isVoid = isVoid;
+            PosX = posX;
+            PosY = posY;
+            PosZ = posZ;
+            IsVoid = isVoid;
         }
 
-        public readonly Vector3 ToVector3() => new Vector3(_posX, _posY, _posZ);
+        public readonly Vector3 ToVector3()
+        {
+            return new Vector3(PosX, PosY, PosZ);
+        }
     }
 }

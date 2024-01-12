@@ -1,3 +1,5 @@
+using LostInSin.Characters.StateMachine.States;
+
 namespace LostInSin.Characters.StateMachine.Signals
 {
     public class StateChangeSignal : IStateChangeSignal

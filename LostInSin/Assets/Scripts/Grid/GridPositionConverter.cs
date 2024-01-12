@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace LostInSin.Grid
@@ -11,17 +9,6 @@ namespace LostInSin.Grid
         private GridPositionConverter(GridModel gridModel)
         {
             _gridModel = gridModel;
-        }
-
-        public Vector3 GetWorldPoint(int row, int column)
-        {
-            GridCellData cell = _gridModel.GetGridCellData(row, column);
-            return cell.CenterPosition;
-        }
-
-        public Vector3 GetWorldPoint(GridCell cell)
-        {
-            return cell.Center.ToVector3();
         }
 
         public bool GetCell(Vector3 worldPosition, out GridCellData cellData)
@@ -40,6 +27,17 @@ namespace LostInSin.Grid
             }
 
             return positionIsInsideGrid;
+        }
+
+        public Vector3 GetWorldPoint(int row, int column)
+        {
+            GridCellData cell = _gridModel.GetGridCellData(row, column);
+            return cell.CenterPosition;
+        }
+
+        public Vector3 GetWorldPoint(GridCell cell)
+        {
+            return cell.Center.ToVector3();
         }
     }
 }

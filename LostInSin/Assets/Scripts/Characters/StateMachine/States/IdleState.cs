@@ -3,11 +3,13 @@ using LostInSin.Characters.StateMachine.Signals;
 using LostInSin.Identifiers;
 using Zenject;
 
-namespace LostInSin.Characters.StateMachine
+namespace LostInSin.Characters.StateMachine.States
 {
     public class IdleState : IState
     {
-        [Inject(Id = CharacterStates.MoveState)] private IState _moveState;
+        [Inject(Id = CharacterStates.MoveState)]
+        private IState _moveState;
+
         private SignalBus _signalBus;
 
         private IdleState(SignalBus signalBus)

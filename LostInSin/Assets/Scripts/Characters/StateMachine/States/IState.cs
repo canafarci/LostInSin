@@ -1,4 +1,4 @@
-namespace LostInSin.Characters.StateMachine
+namespace LostInSin.Characters.StateMachine.States
 {
     public interface IState
     {

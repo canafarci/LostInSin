@@ -5,6 +5,6 @@ namespace LostInSin.Grid
 {
     public interface IGridCellGenerator
     {
-        (GridCell[,], GridCellData[,]) GenerateGridCells(NativeArray<GridPoint> gridPoints);
+        (GridCell[,] cells,  GridCellData[,] data ) GenerateGridCells(NativeArray<GridPoint> gridPoints);
     }
 }
