@@ -7,6 +7,7 @@ using LostInSin.Grid;
 using LostInSin.Grid.Visual;
 using LostInSin.Input;
 using LostInSin.Raycast;
+using LostInSin.UI;
 using UnityEngine;
 using Zenject;
 
@@ -22,14 +23,14 @@ namespace LostInSin.Context
             InitExecutionOrder();
 
             Container.BindInterfacesAndSelfTo<GameInput>()
-                .AsSingle().NonLazy();
+                     .AsSingle().NonLazy();
 
             Container.BindFactory<Vector3, Character, Character.Factory>()
-                .FromSubContainerResolve()
-                .ByNewPrefabInstaller<CharacterInstaller>(_characterPrefab);
+                     .FromSubContainerResolve()
+                     .ByNewPrefabInstaller<CharacterInstaller>(_characterPrefab);
 
             Container.BindInterfacesAndSelfTo<CharacterSpawner>()
-                .AsSingle();
+                     .AsSingle();
 
             Container.Bind<AnimationHashes>().AsSingle();
             Container.BindInterfacesAndSelfTo<CharacterStateTicker>().AsSingle().NonLazy();
@@ -37,6 +38,7 @@ namespace LostInSin.Context
             BindRaycasters();
             BindGrid();
             BindCamera();
+            BindUI();
         }
 
         private void BindRaycasters()
@@ -69,10 +71,17 @@ namespace LostInSin.Context
             Container.BindInterfacesAndSelfTo<CameraRotator>().AsSingle().NonLazy();
         }
 
-        void InitExecutionOrder()
+        private void InitExecutionOrder()
         {
             Container.BindExecutionOrder<CameraInitializer>(-10);
             Container.BindExecutionOrder<GridMeshDisplayService>(2000);
+        }
+
+        private void BindUI()
+        {
+            Container.Bind<AbilityView>().FromComponentsInHierarchy().AsSingle();
+            Container.BindInterfacesAndSelfTo<AbilityViewModel>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<AbilityModel>().AsSingle().NonLazy();
         }
     }
 }

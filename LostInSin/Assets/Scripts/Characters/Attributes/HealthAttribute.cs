@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace LostInSin.Abilities.Attributes
+namespace LostInSin.Characters.Attributes
 {
     public class HealthAttribute : IAttribute
     {

@@ -1,6 +1,4 @@
-using UnityEngine;
-
-namespace LostInSin.Abilities.Attributes
+namespace LostInSin.Characters.Attributes
 {
     public interface IAttribute
     {

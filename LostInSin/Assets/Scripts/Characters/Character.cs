@@ -10,15 +10,14 @@ namespace LostInSin.Characters
     /// </summary>
     public class Character : MonoBehaviour
     {
-        private Transform _transform;
         private IStateTicker _stateTicker;
+
         [Inject] private CharacterStateRuntimeData _runtimeData;
 
         [Inject]
-        private void Init(IStateTicker stateTicker, Transform transform, Vector3 position)
+        private void Init(IStateTicker stateTicker, Transform inTransform, Vector3 position)
         {
-            _transform = transform;
-            _transform.position = position;
+            transform.position = position;
             _stateTicker = stateTicker;
         }
 
@@ -39,6 +38,7 @@ namespace LostInSin.Characters
                 _runtimeData.IsTicking = false;
                 _stateTicker.SwitchToInactiveState();
             }
+
             return _runtimeData.CanExitTicking;
         }
 
@@ -47,4 +47,3 @@ namespace LostInSin.Characters
         }
     }
 }
-
