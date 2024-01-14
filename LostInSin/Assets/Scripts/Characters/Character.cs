@@ -1,4 +1,5 @@
 using System;
+using LostInSin.Characters.Abilities;
 using LostInSin.Characters.StateMachine;
 using UnityEngine;
 using Zenject;
@@ -8,11 +9,15 @@ namespace LostInSin.Characters
     /// <summary>
     /// Facade class for character
     /// </summary>
-    public class Character : MonoBehaviour
+    public class Character : MonoBehaviour, IAbilityHolder
     {
         private IStateTicker _stateTicker;
 
         [Inject] private CharacterStateRuntimeData _runtimeData;
+        [Inject] private AbilitySet _abilitySet;
+
+        public AbilitySet AbilitySet { get; }
+        public AttributeSet AttributeSet { get; }
 
         [Inject]
         private void Init(IStateTicker stateTicker, Transform inTransform, Vector3 position)

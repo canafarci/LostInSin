@@ -3,7 +3,7 @@ using LostInSin.Characters.Abilities;
 
 namespace LostInSin.Characters
 {
-    public class CharacterState
+    public class AbilitySet
     {
         private List<IAbility> _characterAbilities;
     }

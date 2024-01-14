@@ -1,16 +1,15 @@
+using UnityEngine;
+
 namespace LostInSin.Characters.Abilities
 {
-    public class HealPotionAbility : IAbility
+    [CreateAssetMenu(fileName = "AbilityBlueprint", menuName = "LostInSin/Abilities", order = 0)]
+    public class HealPotionAbility : AbilityBlueprint
     {
-        public bool CanCast()
-        {
-            //player can always use a potion //TODO change to use Action Points
-            return true;
-        }
+        public float HealAmount;
 
-        public void CastAbility(Character target)
+        public override void ApplyEffect(Character instigator, AbilityTarget target)
         {
-            throw new System.NotImplementedException();
+            //target.Character.AttributeSet
         }
     }
 }
