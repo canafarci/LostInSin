@@ -5,6 +5,7 @@ using Zenject;
 using System;
 using LostInSin.Animation.Data;
 using LostInSin.Identifiers;
+using LostInSin.Signals;
 
 namespace LostInSin.Animation
 {
@@ -13,7 +14,7 @@ namespace LostInSin.Animation
         private readonly SignalBus _signalBus;
         private readonly Animator _animator;
         private readonly AnimationHashes _animationHashes;
-        readonly private CompositeDisposable _disposables = new();
+        private readonly CompositeDisposable _disposables = new();
 
 
         private AnimationStateChanger(SignalBus signalbus,

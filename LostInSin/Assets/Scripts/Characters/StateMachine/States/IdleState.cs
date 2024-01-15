@@ -1,6 +1,6 @@
 using LostInSin.Animation.Data;
-using LostInSin.Characters.StateMachine.Signals;
 using LostInSin.Identifiers;
+using LostInSin.Signals;
 using Zenject;
 
 namespace LostInSin.Characters.StateMachine.States

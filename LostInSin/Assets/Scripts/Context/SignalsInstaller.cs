@@ -1,4 +1,3 @@
-using LostInSin.Characters.StateMachine;
 using Zenject;
 
 namespace LostInSin.Context

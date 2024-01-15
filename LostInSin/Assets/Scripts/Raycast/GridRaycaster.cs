@@ -1,4 +1,4 @@
-using Raycast.Data;
+using LostInSin.Raycast.Data;
 using Unity.Collections;
 using Unity.Jobs;
 using UnityEngine;
@@ -21,8 +21,8 @@ namespace LostInSin.Raycast
             int columnCount = raycastData.GridColumnCount + 1;
             int gridSize = rowCount * columnCount;
 
-            NativeArray<RaycastHit> hitResults = new NativeArray<RaycastHit>(gridSize, Allocator.TempJob);
-            NativeArray<RaycastCommand> raycastCommands = new NativeArray<RaycastCommand>(gridSize, Allocator.TempJob);
+            NativeArray<RaycastHit> hitResults = new(gridSize, Allocator.TempJob);
+            NativeArray<RaycastCommand> raycastCommands = new(gridSize, Allocator.TempJob);
 
             PrepareRaycastCommands(rowCount, columnCount, raycastData, raycastCommands);
 
@@ -33,7 +33,10 @@ namespace LostInSin.Raycast
             return hitResults;
         }
 
-        private void PrepareRaycastCommands(int rowCount, int columnCount, GridRaycastData raycastData, NativeArray<RaycastCommand> commands)
+        private void PrepareRaycastCommands(int rowCount,
+                                            int columnCount,
+                                            GridRaycastData raycastData,
+                                            NativeArray<RaycastCommand> commands)
         {
             for (int row = 0; row < rowCount; row++)
             {
@@ -41,7 +44,7 @@ namespace LostInSin.Raycast
                 {
                     int index = row + column * rowCount;
                     Vector3 gridRaycastOrigin = CreateGridRaycastOrigin(row, column, raycastData);
-                    QueryParameters queryParameters = new QueryParameters(_groundLayerMask, false, QueryTriggerInteraction.Ignore);
+                    QueryParameters queryParameters = new(_groundLayerMask, false, QueryTriggerInteraction.Ignore);
                     commands[index] = new RaycastCommand(gridRaycastOrigin, Vector3.down, queryParameters);
                 }
             }

@@ -6,20 +6,10 @@
         "UnityEditor.TestRunner",
         "Zenject",
         "Zenject-TestFramework",
-        "LostInSin.Animation",
-        "LostInSin.Animation.Data",
-        "LostInSin.Characters",
-        "LostInSin.Characters.StateMachine",
-        "LostInSin.Control",
-        "LostInSin.Identifiers",
-        "LostInSin.Input",
-        "LostInSin.Movement",
-        "LostInSin.Raycast",
-        "LostInSin.Visuals",
-        "LostInSin.Grid",
         "Unity.InputSystem",
         "UniRx",
-        "Unity.InputSystem.TestFramework"
+        "Unity.InputSystem.TestFramework",
+        "LostInSin.Code"
     ],
     "includePlatforms": [
         "Editor"

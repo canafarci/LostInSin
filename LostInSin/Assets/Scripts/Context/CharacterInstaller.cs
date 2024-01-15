@@ -1,11 +1,10 @@
 using LostInSin.Animation;
 using LostInSin.Characters;
 using LostInSin.Characters.StateMachine;
-using LostInSin.Characters.StateMachine.Signals;
 using LostInSin.Characters.StateMachine.States;
 using LostInSin.Identifiers;
 using LostInSin.Movement;
-using LostInSin.Raycast;
+using LostInSin.Signals;
 using LostInSin.Visuals;
 using UnityEngine;
 using Zenject;

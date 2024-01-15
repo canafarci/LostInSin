@@ -1,6 +1,6 @@
 using Cinemachine;
-using LostInSin.Animation;
-using LostInSin.Camera;
+using LostInSin.Animation.Data;
+using LostInSin.Cameras;
 using LostInSin.Characters;
 using LostInSin.Control;
 using LostInSin.Grid;

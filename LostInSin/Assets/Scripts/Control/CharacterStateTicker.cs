@@ -2,9 +2,7 @@ using Zenject;
 using LostInSin.Characters;
 using LostInSin.Raycast;
 using LostInSin.Input;
-using UniRx;
 using UnityEngine.InputSystem;
-using System;
 
 namespace LostInSin.Control
 {
@@ -33,21 +31,14 @@ namespace LostInSin.Control
         private void TryRaycastCharacter()
         {
             if (_characterRaycaster.RaycastComponent(out Character character, _characterLayerMask))
-            {
                 TryChangeCharacter(character);
-            }
         }
 
         private void TryChangeCharacter(Character character)
         {
             if (_selectedCharacter == null)
-            {
                 SetNewCharacterAsSelected(character);
-            }
-            else if (_selectedCharacter.CanExitTickingCharacter())
-            {
-                SetNewCharacterAsSelected(character);
-            }
+            else if (_selectedCharacter.CanExitTickingCharacter()) SetNewCharacterAsSelected(character);
         }
 
         private void SetNewCharacterAsSelected(Character character)

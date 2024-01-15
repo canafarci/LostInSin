@@ -1,7 +1,7 @@
-using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine;
 
-namespace LostInSin.Grid
+namespace LostInSin.Grid.DataObjects
 {
     [CreateAssetMenu(fileName = "GridGenerationData", menuName = "LostInSin/GridGenerationData", order = 0)]
     public class GridGenerationSO : SerializedScriptableObject

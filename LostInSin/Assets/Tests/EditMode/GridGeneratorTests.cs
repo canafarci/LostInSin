@@ -1,10 +1,12 @@
+using LostInSin.Grid.Data;
+using LostInSin.Grid.DataObjects;
 using NUnit.Framework;
 using Moq;
 using Zenject;
 using Unity.Collections;
 using UnityEngine;
 using LostInSin.Raycast;
-using Raycast.Data;
+using LostInSin.Raycast.Data;
 using UnityEditor;
 
 namespace LostInSin.Grid.Tests
@@ -24,8 +26,9 @@ namespace LostInSin.Grid.Tests
             _mockPointsGenerator = new Mock<IGridPointsGenerator>();
             _mockCellGenerator = new Mock<IGridCellGenerator>();
 
-            GridGenerationSO gridGenerationSO = AssetDatabase.LoadAssetAtPath<GridGenerationSO>("Assets/Data/GridGenerationData.asset");
-            GridModel.Data data = new GridModel.Data();
+            GridGenerationSO gridGenerationSO =
+                AssetDatabase.LoadAssetAtPath<GridGenerationSO>("Assets/Data/GridGenerationData.asset");
+            GridModel.Data data = new();
             data.GridData = gridGenerationSO;
 
             Container.Bind<IGridRaycaster>().FromInstance(_mockRaycaster.Object);
@@ -38,15 +41,21 @@ namespace LostInSin.Grid.Tests
             Container.Inject(this);
         }
 
-        [Inject] GridGenerator _gridGenerator;
+        [Inject] private GridGenerator _gridGenerator;
 
         [Test]
         public void Initialize_CallsDependenciesCorrectly()
         {
             // Arrange
-            var mockRaycastResults = new NativeArray<RaycastHit>(/*...*/); // Setup your test data
-            var mockGridPoints = new NativeArray<GridPoint>(/*...*/);
-            var mockGridCells = (new GridCell[,] { /*...*/ }, new GridCellData[,] { /*...*/ });
+            NativeArray<RaycastHit> mockRaycastResults = new( /*...*/); // Setup your test data
+            NativeArray<GridPoint> mockGridPoints = new( /*...*/);
+            (GridCell[,], GridCellData[,]) mockGridCells = (new GridCell[,]
+                                                            {
+                                                                /*...*/
+                                                            }, new GridCellData[,]
+                                                               {
+                                                                   /*...*/
+                                                               });
 
             _mockRaycaster.Setup(x => x.PerformRaycasting(It.IsAny<GridRaycastData>()))
                           .Returns(mockRaycastResults);
@@ -63,7 +72,5 @@ namespace LostInSin.Grid.Tests
             _mockPointsGenerator.Verify(x => x.GenerateGridPoints(mockRaycastResults), Times.Once);
             _mockCellGenerator.Verify(x => x.GenerateGridCells(mockGridPoints), Times.Once);
         }
-
-
     }
 }

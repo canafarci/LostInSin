@@ -1,3 +1,5 @@
+using LostInSin.Grid.Data;
+using LostInSin.Grid.DataObjects;
 using NUnit.Framework;
 using UnityEditor;
 using UnityEngine;
@@ -12,8 +14,9 @@ namespace LostInSin.Grid.Tests
         [SetUp]
         public void SetUp()
         {
-            GridGenerationSO gridGenerationSO = AssetDatabase.LoadAssetAtPath<GridGenerationSO>("Assets/Data/GridGenerationData.asset");
-            GridModel.Data data = new GridModel.Data();
+            GridGenerationSO gridGenerationSO =
+                AssetDatabase.LoadAssetAtPath<GridGenerationSO>("Assets/Data/GridGenerationData.asset");
+            GridModel.Data data = new();
             data.GridData = gridGenerationSO;
 
             Container.Bind<GridModel>().AsSingle();
@@ -45,39 +48,64 @@ namespace LostInSin.Grid.Tests
         public void SetAndGetGridCells_ShouldWorkCorrectly()
         {
             // Arrange
-            var testCells = new GridCell[2, 2]{{new GridCell(){
-                                                        Center = new GridPoint(0, 0, 0, false),
-                                                        },
-                                                        new GridCell(){
-                                                        Center = new GridPoint(0, 0, 0, false),
-                                                        }},
-                                                        {new GridCell(){
-                                                        Center = new GridPoint(0, 0, 1, false),
-                                                        },
-                                                        new GridCell(){
-                                                        Center = new GridPoint(1, 0, 1, true),
-                                                        }}};
+            GridCell[,] testCells = new GridCell[2, 2]
+                                    {
+                                        {
+                                            new()
+                                            {
+                                                Center = new GridPoint(0, 0, 0, false)
+                                            },
+                                            new()
+                                            {
+                                                Center = new GridPoint(0, 0, 0, false)
+                                            }
+                                        },
+                                        {
+                                            new()
+                                            {
+                                                Center = new GridPoint(0, 0, 1, false)
+                                            },
+                                            new()
+                                            {
+                                                Center = new GridPoint(1, 0, 1, true)
+                                            }
+                                        }
+                                    };
 
-            var testCellData = new GridCellData[2, 2] {{new GridCellData(){
-                                                        CenterPosition = testCells[0,0].Center.ToVector3()
-                                                        },
-                                                        new GridCellData(){
-                                                        CenterPosition = testCells[0,1].Center.ToVector3()
-                                                        }},
-                                                         {new GridCellData(){
-                                                        CenterPosition = testCells[1,0].Center.ToVector3()
-                                                        },
-                                                        new GridCellData(){
-                                                        CenterPosition = testCells[1,1].Center.ToVector3()
-                                                        }}};
-
+            GridCellData[,] testCellData = new GridCellData[2, 2]
+                                           {
+                                               {
+                                                   new()
+                                                   {
+                                                       CenterPosition =
+                                                           testCells[0, 0].Center.ToVector3()
+                                                   },
+                                                   new()
+                                                   {
+                                                       CenterPosition =
+                                                           testCells[0, 1].Center.ToVector3()
+                                                   }
+                                               },
+                                               {
+                                                   new()
+                                                   {
+                                                       CenterPosition =
+                                                           testCells[1, 0].Center.ToVector3()
+                                                   },
+                                                   new()
+                                                   {
+                                                       CenterPosition =
+                                                           testCells[1, 1].Center.ToVector3()
+                                                   }
+                                               }
+                                           };
 
 
             _gridModel.SetGridCells(testCells, testCellData);
 
             // Act & Assert
             Assert.AreEqual(testCells, _gridModel.GridCells);
-            var retrievedData = _gridModel.GetGridCellData(0, 0);
+            GridCellData retrievedData = _gridModel.GetGridCellData(0, 0);
             Assert.AreEqual(testCellData[0, 0].CenterPosition, retrievedData.CenterPosition);
         }
 
@@ -85,17 +113,22 @@ namespace LostInSin.Grid.Tests
         public void GetGridCellData_ShouldReturnCorrectData()
         {
             // Arrange
-            var gridCells = new GridCell[,] { { new GridCell(new GridPoint(0, 0, 0, false),
-                                                             new GridPoint(1, 1, 1, false),
-                                                             new GridPoint(0, 1, 0, false),
-                                                             new GridPoint(0, -1, 0, false),
-                                                             false) } };
+            GridCell[,] gridCells = new GridCell[,]
+                                    {
+                                        {
+                                            new(new GridPoint(0, 0, 0, false),
+                                                new GridPoint(1, 1, 1, false),
+                                                new GridPoint(0, 1, 0, false),
+                                                new GridPoint(0, -1, 0, false),
+                                                false)
+                                        }
+                                    };
 
-            var gridCellData = new GridCellData[,] { { new GridCellData() } };
+            GridCellData[,] gridCellData = new GridCellData[,] { { new() } };
             _gridModel.SetGridCells(gridCells, gridCellData);
 
             // Act
-            var data = _gridModel.GetGridCellData(0, 0);
+            GridCellData data = _gridModel.GetGridCellData(0, 0);
 
             // Assert
             Assert.AreEqual(gridCells[0, 0].Center.ToVector3(), data.CenterPosition);

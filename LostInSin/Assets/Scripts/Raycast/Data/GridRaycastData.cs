@@ -1,4 +1,4 @@
-namespace Raycast.Data
+namespace LostInSin.Raycast.Data
 {
     public struct GridRaycastData
     {

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using LostInSin.Grid.Data;
 using NUnit.Framework;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ namespace LostInSin.Grid.Tests
         public void GridCellData_DefaultState_ShouldBeUnoccupied()
         {
             // Arrange
-            var cellData = new GridCellData();
+            GridCellData cellData = new GridCellData();
             // Assert
             Assert.IsFalse(cellData.IsOccupied);
         }
@@ -20,7 +21,7 @@ namespace LostInSin.Grid.Tests
         public void SetAsOccupied_WhenCalled_ShouldSetCellAsOccupied()
         {
             // Arrange
-            var cellData = new GridCellData();
+            GridCellData cellData = new GridCellData();
 
             // Act
             cellData.SetAsOccupied();
@@ -33,7 +34,7 @@ namespace LostInSin.Grid.Tests
         public void SetAsOccupied_WhenAlreadyOccupied_ShouldThrowException()
         {
             // Arrange
-            var cellData = new GridCellData();
+            GridCellData cellData = new GridCellData();
             cellData.SetAsOccupied();
 
             // Act & Assert
@@ -44,7 +45,7 @@ namespace LostInSin.Grid.Tests
         public void SetAsUnoccupied_WhenCalled_ShouldSetCellAsUnoccupied()
         {
             // Arrange
-            var cellData = new GridCellData();
+            GridCellData cellData = new GridCellData();
             cellData.SetAsOccupied(); // First set it as occupied
 
             // Act
@@ -58,7 +59,7 @@ namespace LostInSin.Grid.Tests
         public void SetAsUnoccupied_WhenAlreadyUnoccupied_ShouldThrowException()
         {
             // Arrange
-            var cellData = new GridCellData();
+            GridCellData cellData = new GridCellData();
 
             // Act & Assert
             Assert.Throws<System.Exception>(() => cellData.SetAsUnoccupied());
@@ -68,8 +69,8 @@ namespace LostInSin.Grid.Tests
         public void CenterPosition_WhenSet_ShouldStoreValue()
         {
             // Arrange
-            var cellData = new GridCellData();
-            var expectedPosition = new Vector3(1, 2, 3);
+            GridCellData cellData = new GridCellData();
+            Vector3 expectedPosition = new Vector3(1, 2, 3);
 
             // Act
             cellData.CenterPosition = expectedPosition;

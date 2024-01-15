@@ -1,3 +1,4 @@
+using LostInSin.Grid.Data;
 using Unity.Collections;
 using UnityEngine;
 
@@ -24,16 +25,19 @@ namespace LostInSin.Grid
             GridCellData[,] gridCellsData = new GridCellData[numCellsRow, numCellsColumn];
 
             for (int x = 0; x < numCellsRow; x++)
-            for (int y = 0; y < numCellsColumn; y++)
-                ProcessCell(gridPoints, gridCells, gridCellsData, x, y);
+                for (int y = 0; y < numCellsColumn; y++)
+                    ProcessCell(gridPoints, gridCells, gridCellsData, x, y);
 
             gridPoints.Dispose();
             return (gridCells, gridCellsData
-                );
+                   );
         }
 
-        private void ProcessCell(NativeArray<GridPoint> gridPoints, GridCell[,] gridCells, GridCellData[,] gridCellsData
-            , int x, int y)
+        private void ProcessCell(NativeArray<GridPoint> gridPoints,
+                                 GridCell[,] gridCells,
+                                 GridCellData[,] gridCellsData,
+                                 int x,
+                                 int y)
         {
             int topLeftIndex =
                 x + y * (_gridModel.GridRowCount +
@@ -47,12 +51,12 @@ namespace LostInSin.Grid
             if (IsCellValid(gridPoints, topLeftIndex, topRightIndex, bottomLeftIndex, bottomRightIndex))
             {
                 GridCell cell = new(
-                    gridPoints[topLeftIndex],
-                    gridPoints[topRightIndex],
-                    gridPoints[bottomLeftIndex],
-                    gridPoints[bottomRightIndex],
-                    false
-                );
+                                    gridPoints[topLeftIndex],
+                                    gridPoints[topRightIndex],
+                                    gridPoints[bottomLeftIndex],
+                                    gridPoints[bottomRightIndex],
+                                    false
+                                   );
 
                 AdjustCellBasedOnRaycast(ref cell);
                 gridCells[x, y] = cell;
@@ -60,8 +64,11 @@ namespace LostInSin.Grid
             }
         }
 
-        private bool IsCellValid(NativeArray<GridPoint> gridPoints, int topLeftIndex, int topRightIndex
-            , int bottomLeftIndex, int bottomRightIndex)
+        private bool IsCellValid(NativeArray<GridPoint> gridPoints,
+                                 int topLeftIndex,
+                                 int topRightIndex,
+                                 int bottomLeftIndex,
+                                 int bottomRightIndex)
         {
             return !(gridPoints[topLeftIndex].IsVoid || gridPoints[topRightIndex].IsVoid ||
                      gridPoints[bottomLeftIndex].IsVoid || gridPoints[bottomRightIndex].IsVoid);

@@ -1,3 +1,6 @@
+using LostInSin.Grid.Data;
+using LostInSin.Grid.DataObjects;
+
 namespace LostInSin.Grid
 {
     public class GridModel

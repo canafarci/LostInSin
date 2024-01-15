@@ -4,19 +4,9 @@
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "LostInSin.Animation",
-        "LostInSin.Animation.Data",
-        "LostInSin.Characters",
-        "LostInSin.Characters.StateMachine",
-        "LostInSin.Control",
-        "LostInSin.Identifiers",
-        "LostInSin.Input",
-        "LostInSin.Movement",
-        "LostInSin.Raycast",
-        "LostInSin.Visuals",
         "Zenject",
         "Zenject-TestFramework",
-        "LostInSin.Grid"
+        "LostInSin.Code"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

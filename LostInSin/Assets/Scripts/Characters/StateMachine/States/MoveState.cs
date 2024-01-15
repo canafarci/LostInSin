@@ -1,11 +1,12 @@
 using Cysharp.Threading.Tasks;
 using LostInSin.Animation.Data;
-using LostInSin.Characters.StateMachine.Signals;
 using LostInSin.Grid;
+using LostInSin.Grid.Data;
 using LostInSin.Identifiers;
 using LostInSin.Input;
 using LostInSin.Movement;
 using LostInSin.Raycast;
+using LostInSin.Signals;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;

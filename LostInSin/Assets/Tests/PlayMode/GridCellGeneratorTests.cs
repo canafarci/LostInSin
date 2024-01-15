@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using LostInSin.Grid;
+using LostInSin.Grid.Data;
+using LostInSin.Grid.DataObjects;
 using NUnit.Framework;
 using Unity.Collections;
 using UnityEditor;
@@ -13,7 +15,7 @@ namespace LostInSin.Grid.Tests
     [TestFixture]
     public class GridCellGeneratorTests : ZenjectIntegrationTestFixture
     {
-        GridGenerationSO _gridGenerationSO;
+        private GridGenerationSO _gridGenerationSO;
 
         public void CommonInstall()
         {
@@ -28,7 +30,7 @@ namespace LostInSin.Grid.Tests
             _gridGenerationSO.GridRowCount = 9;
             _gridGenerationSO.GridColumnCount = 9;
 
-            GridModel.Data data = new GridModel.Data();
+            GridModel.Data data = new();
             data.GridData = _gridGenerationSO;
 
             // Set up the Zenject container and bindings
@@ -40,6 +42,7 @@ namespace LostInSin.Grid.Tests
 
             PostInstall();
         }
+
         [Inject] private GridModel _gridModel;
         [Inject] private GridCellGenerator _gridCellGenerator;
 
@@ -55,10 +58,10 @@ namespace LostInSin.Grid.Tests
             int columnCount = _gridModel.GridColumnCount + 1;
             int gridSize = rowCount * columnCount;
 
-            var gridPoints = CreateMockGridPoints(rowCount, columnCount);
+            NativeArray<GridPoint> gridPoints = CreateMockGridPoints(rowCount, columnCount);
 
             // Act
-            var (gridCells, gridCellsData) = _gridCellGenerator.GenerateGridCells(gridPoints);
+            (GridCell[,] gridCells, GridCellData[,] gridCellsData) = _gridCellGenerator.GenerateGridCells(gridPoints);
 
             // Assert
             int expectedSize = rowCount - 1;
@@ -68,7 +71,7 @@ namespace LostInSin.Grid.Tests
 
         private NativeArray<GridPoint> CreateMockGridPoints(int row, int column)
         {
-            NativeArray<GridPoint> gridPoints = new NativeArray<GridPoint>(row * column, Allocator.Temp);
+            NativeArray<GridPoint> gridPoints = new(row * column, Allocator.Temp);
 
             for (int i = 0; i < row; i++)
             {
@@ -89,12 +92,7 @@ namespace LostInSin.Grid.Tests
         [TearDown]
         public void Cleanup()
         {
-            if (_gridGenerationSO != null)
-            {
-                ScriptableObject.DestroyImmediate(_gridGenerationSO);
-            }
+            if (_gridGenerationSO != null) ScriptableObject.DestroyImmediate(_gridGenerationSO);
         }
     }
-
-
 }

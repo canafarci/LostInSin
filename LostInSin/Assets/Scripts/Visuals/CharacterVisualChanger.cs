@@ -1,5 +1,5 @@
 using System;
-using LostInSin.Characters.StateMachine;
+using LostInSin.Signals;
 using UniRx;
 using Zenject;
 
@@ -9,7 +9,7 @@ namespace LostInSin.Visuals
     {
         private readonly SignalBus _signalBus;
         private readonly CharacterVisualsVO _characterVisualsVO;
-        readonly private CompositeDisposable _disposables = new();
+        private readonly CompositeDisposable _disposables = new();
 
         public CharacterVisualChanger(SignalBus signalBus, CharacterVisualsVO characterVisualsVO)
         {
@@ -20,8 +20,8 @@ namespace LostInSin.Visuals
         public void Initialize()
         {
             _signalBus.GetStream<ISelectionChangeSignal>()
-          .Subscribe(x => ChangeVisual(x.Selected))
-          .AddTo(_disposables);
+                      .Subscribe(x => ChangeVisual(x.Selected))
+                      .AddTo(_disposables);
         }
 
         private void ChangeVisual(bool selected)

@@ -1,4 +1,4 @@
-using Raycast.Data;
+using LostInSin.Raycast.Data;
 using Unity.Collections;
 using UnityEngine;
 

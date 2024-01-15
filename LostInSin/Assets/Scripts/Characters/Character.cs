@@ -1,5 +1,5 @@
 using System;
-using LostInSin.Characters.Abilities;
+using LostInSin.Abilities;
 using LostInSin.Characters.StateMachine;
 using UnityEngine;
 using Zenject;

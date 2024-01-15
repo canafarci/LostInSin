@@ -1,3 +1,4 @@
+using LostInSin.Grid.Data;
 using UnityEngine;
 
 namespace LostInSin.Grid

@@ -1,15 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace LostInSin.Grid
+namespace LostInSin.Grid.Data
 {
     public class GridCellData
     {
         public bool IsOccupied => _isOccupied;
-        public Vector3 CenterPosition { get => _centerPosition;
+
+        public Vector3 CenterPosition
+        {
+            get => _centerPosition;
             set => _centerPosition = value;
         }
+
         private bool _isOccupied = false;
         private Vector3 _centerPosition;
 

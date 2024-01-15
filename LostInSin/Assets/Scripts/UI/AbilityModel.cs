@@ -1,5 +1,5 @@
 using System;
-using LostInSin.Characters.Abilities;
+using LostInSin.Abilities;
 using Zenject;
 
 namespace LostInSin.UI

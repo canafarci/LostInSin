@@ -1,12 +1,8 @@
-using System;
 using System.Collections.Generic;
 using LostInSin.Identifiers;
-using Sirenix.Serialization;
 using UnityEngine;
-using UnityEngine.Rendering;
-using Zenject;
 
-namespace LostInSin.Animation
+namespace LostInSin.Animation.Data
 {
     public class AnimationHashes
     {
@@ -43,7 +39,7 @@ namespace LostInSin.Animation
 
         public class Data
         {
-            public SerializedDictionary<AnimationIdentifier, string> AnimationKeyIDPairs;
+            public Dictionary<AnimationIdentifier, string> AnimationKeyIDPairs;
         }
     }
 }

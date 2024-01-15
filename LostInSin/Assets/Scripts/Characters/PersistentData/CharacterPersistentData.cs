@@ -1,4 +1,4 @@
-using LostInSin.Characters.Abilities;
+using LostInSin.Abilities;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using LostInSin.Identifiers;

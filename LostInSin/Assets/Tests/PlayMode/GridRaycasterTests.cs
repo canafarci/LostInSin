@@ -3,9 +3,9 @@ using Unity.Collections;
 using UnityEngine;
 using Zenject;
 using System.Collections;
-using Raycast.Data;
 using UnityEngine.TestTools;
 using System.Reflection;
+using LostInSin.Raycast.Data;
 
 namespace LostInSin.Raycast.Tests
 {
@@ -52,14 +52,14 @@ namespace LostInSin.Raycast.Tests
         private GridRaycastData CreateMockGridRaycastData()
         {
             return new GridRaycastData
-            {
-                GridRowCount = 9,
-                GridColumnCount = 9,
-                GridCellWidth = 1f,
-                GridCellHeight = 1f,
-                GridRowOffset = 0.5f,
-                GridColumnOffset = 0.5f
-            };
+                   {
+                       GridRowCount = 9,
+                       GridColumnCount = 9,
+                       GridCellWidth = 1f,
+                       GridCellHeight = 1f,
+                       GridRowOffset = 0.5f,
+                       GridColumnOffset = 0.5f
+                   };
         }
 
         [UnityTest]
@@ -72,10 +72,11 @@ namespace LostInSin.Raycast.Tests
             int rowCount = _mockRaycastData.GridRowCount + 1;
             int columnCount = _mockRaycastData.GridColumnCount + 1;
             int gridSize = rowCount * columnCount;
-            NativeArray<RaycastCommand> raycastCommands = new NativeArray<RaycastCommand>(gridSize, Allocator.TempJob);
+            NativeArray<RaycastCommand> raycastCommands = new(gridSize, Allocator.TempJob);
 
             // Use reflection to invoke the private method
-            MethodInfo prepareMethod = typeof(GridRaycaster).GetMethod("PrepareRaycastCommands", BindingFlags.NonPublic | BindingFlags.Instance);
+            MethodInfo prepareMethod =
+                typeof(GridRaycaster).GetMethod("PrepareRaycastCommands", BindingFlags.NonPublic | BindingFlags.Instance);
             object[] parameters = { rowCount, columnCount, _mockRaycastData, raycastCommands };
 
             // Act
@@ -87,9 +88,10 @@ namespace LostInSin.Raycast.Tests
                 for (int column = 0; column < columnCount; column++)
                 {
                     int index = row + column * rowCount;
-                    Vector3 expectedOrigin = new Vector3(_mockRaycastData.GridCellWidth * row - _mockRaycastData.GridRowOffset,
-                                                         10f,
-                                                         _mockRaycastData.GridCellHeight * column - _mockRaycastData.GridColumnOffset);
+                    Vector3 expectedOrigin = new(_mockRaycastData.GridCellWidth * row - _mockRaycastData.GridRowOffset,
+                                                 10f,
+                                                 _mockRaycastData.GridCellHeight * column -
+                                                 _mockRaycastData.GridColumnOffset);
 
                     Assert.AreEqual(expectedOrigin, raycastCommands[index].from);
                     Assert.AreEqual(Vector3.down, raycastCommands[index].direction);
@@ -112,11 +114,9 @@ namespace LostInSin.Raycast.Tests
             yield return null;
 
             // Assert
-            foreach (var hit in hitResults)
-            {
+            foreach (RaycastHit hit in hitResults)
                 // Check if each hit result accurately hits the plane
                 Assert.IsTrue(hit.collider != null && hit.collider.gameObject == _plane);
-            }
 
             // Clean up
             hitResults.Dispose();
@@ -135,17 +135,10 @@ namespace LostInSin.Raycast.Tests
             NativeArray<RaycastHit> hitResults = _gridRaycaster.PerformRaycasting(_mockRaycastData);
 
             // Assert
-            foreach (var hit in hitResults)
-            {
-                Assert.IsNull(hit.collider); // Expect no colliders to be hit
-            }
+            foreach (RaycastHit hit in hitResults) Assert.IsNull(hit.collider); // Expect no colliders to be hit
 
             // Clean up
             hitResults.Dispose();
         }
-
-
-
     }
-
 }

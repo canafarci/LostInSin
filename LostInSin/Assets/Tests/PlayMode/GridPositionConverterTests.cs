@@ -3,6 +3,8 @@ using UnityEngine;
 using Zenject;
 using UnityEngine.TestTools;
 using System.Collections;
+using LostInSin.Grid.Data;
+using LostInSin.Grid.DataObjects;
 using LostInSin.Raycast;
 
 namespace LostInSin.Grid.Tests
@@ -12,7 +14,7 @@ namespace LostInSin.Grid.Tests
     {
         [Inject] private GridModel _gridModel;
         [Inject] private GridPositionConverter _gridPositionConverter;
-        GridGenerationSO _gridGenerationSO;
+        private GridGenerationSO _gridGenerationSO;
 
         public void SetUp()
         {
@@ -28,7 +30,7 @@ namespace LostInSin.Grid.Tests
             _gridGenerationSO.GridRowCount = 9;
             _gridGenerationSO.GridColumnCount = 9;
 
-            GridModel.Data data = new GridModel.Data();
+            GridModel.Data data = new();
             data.GridData = _gridGenerationSO;
 
             PreInstall();
@@ -63,7 +65,7 @@ namespace LostInSin.Grid.Tests
 
             // Assuming a specific center position for this cell
             Debug.Log(_gridModel);
-            var expectedWorldPoint = _gridModel.GetGridCellData(row, column).CenterPosition;
+            Vector3 expectedWorldPoint = _gridModel.GetGridCellData(row, column).CenterPosition;
 
             // Act
             Vector3 worldPoint = _gridPositionConverter.GetWorldPoint(row, column);
@@ -84,7 +86,7 @@ namespace LostInSin.Grid.Tests
             GridCellData gridCell = _gridModel.GetGridCellData(row, column);
 
             // Assuming a specific center position for this cell
-            var expectedWorldPoint = gridCell.CenterPosition;
+            Vector3 expectedWorldPoint = gridCell.CenterPosition;
 
             // Act
             Vector3 worldPoint = _gridPositionConverter.GetWorldPoint(1, 1);
@@ -100,8 +102,9 @@ namespace LostInSin.Grid.Tests
             yield return null;
 
             // Arrange
-            Vector3 worldPosition = new Vector3(0.5f, 0, 0.5f); // Example position within the grid
-            GridCellData expectedCellData = _gridModel.GetGridCellData(4, 4); // Assuming this position corresponds to row 0, column 0
+            Vector3 worldPosition = new(0.5f, 0, 0.5f); // Example position within the grid
+            GridCellData
+                expectedCellData = _gridModel.GetGridCellData(4, 4); // Assuming this position corresponds to row 0, column 0
 
             // Act
             bool result = _gridPositionConverter.GetCell(worldPosition, out GridCellData cellData);
@@ -130,16 +133,12 @@ namespace LostInSin.Grid.Tests
 
         private GridCell CreateTestGridCell()
         {
-            GridPoint topLeft = new GridPoint(0, 0, 0);
-            GridPoint topRight = new GridPoint(1, 0, 0);
-            GridPoint bottomLeft = new GridPoint(0, 0, 1);
-            GridPoint bottomRight = new GridPoint(1, 0, 1);
+            GridPoint topLeft = new(0, 0, 0);
+            GridPoint topRight = new(1, 0, 0);
+            GridPoint bottomLeft = new(0, 0, 1);
+            GridPoint bottomRight = new(1, 0, 1);
 
             return new GridCell(topLeft, topRight, bottomLeft, bottomRight, false);
         }
-
-
-
     }
-
 }

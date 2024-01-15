@@ -1,7 +1,7 @@
+using LostInSin.Grid.Data;
 using LostInSin.Raycast;
-using Raycast.Data;
+using LostInSin.Raycast.Data;
 using Unity.Collections;
-using Unity.Jobs;
 using UnityEngine;
 using Zenject;
 

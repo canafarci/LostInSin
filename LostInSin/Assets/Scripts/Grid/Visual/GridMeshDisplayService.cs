@@ -1,4 +1,5 @@
 using System;
+using LostInSin.Grid.DataObjects;
 using UnityEngine;
 using Zenject;
 
