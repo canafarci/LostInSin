@@ -1,9 +1,10 @@
 namespace LostInSin.Identifiers
 {
-    public enum AbilityIdentifiers
+    public enum AbilityIdentifiers : int
     {
-        Move,
-        HealPotion,
-        ShootArrow
+        NULL = 0,
+        Move = 1,
+        HealPotion = 2,
+        ShootArrow = 3
     }
 }

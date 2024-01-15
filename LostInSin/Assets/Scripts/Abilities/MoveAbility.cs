@@ -1,15 +1,12 @@
 using LostInSin.Characters;
+using UnityEngine;
 
 namespace LostInSin.Abilities
 {
-    public class MoveAbility : IAbility
+    [CreateAssetMenu(fileName = "Move", menuName = "LostInSin/Abilities/Move", order = 0)]
+    public class MoveAbility : AbilityBlueprint
     {
-        public bool CanCast()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void CastAbility(Character target)
+        public override void ApplyEffect(Character instigator, AbilityTarget target)
         {
             throw new System.NotImplementedException();
         }

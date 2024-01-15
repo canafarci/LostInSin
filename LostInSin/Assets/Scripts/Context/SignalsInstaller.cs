@@ -1,3 +1,4 @@
+using LostInSin.Signals;
 using Zenject;
 
 namespace LostInSin.Context
@@ -7,6 +8,9 @@ namespace LostInSin.Context
         public override void InstallBindings()
         {
             SignalBusInstaller.Install(Container);
+
+            Container.DeclareSignal<SelectInitialCharacterSignal>();
+            Container.DeclareSignal<CharacterSelectedSignal>();
         }
     }
 }

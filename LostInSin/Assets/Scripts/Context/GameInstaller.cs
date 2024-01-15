@@ -2,6 +2,7 @@ using Cinemachine;
 using LostInSin.Animation.Data;
 using LostInSin.Cameras;
 using LostInSin.Characters;
+using LostInSin.Characters.PersistentData;
 using LostInSin.Control;
 using LostInSin.Grid;
 using LostInSin.Grid.Visual;
@@ -25,7 +26,7 @@ namespace LostInSin.Context
             Container.BindInterfacesAndSelfTo<GameInput>()
                      .AsSingle().NonLazy();
 
-            Container.BindFactory<Vector3, Character, Character.Factory>()
+            Container.BindFactory<Vector3, CharacterPersistentData, Character, Character.Factory>()
                      .FromSubContainerResolve()
                      .ByNewPrefabInstaller<CharacterInstaller>(_characterPrefab);
 
@@ -33,12 +34,18 @@ namespace LostInSin.Context
                      .AsSingle();
 
             Container.Bind<AnimationHashes>().AsSingle();
-            Container.BindInterfacesAndSelfTo<CharacterStateTicker>().AsSingle().NonLazy();
 
+            BindCharacterSelection();
             BindRaycasters();
             BindGrid();
             BindCamera();
             BindUI();
+        }
+
+        private void BindCharacterSelection()
+        {
+            Container.BindInterfacesAndSelfTo<CharacterSelector>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<CharacterStateTicker>().AsSingle();
         }
 
         private void BindRaycasters()
@@ -79,9 +86,9 @@ namespace LostInSin.Context
 
         private void BindUI()
         {
-            Container.Bind<AbilityView>().FromComponentsInHierarchy().AsSingle();
-            Container.BindInterfacesAndSelfTo<AbilityViewModel>().AsSingle().NonLazy();
-            Container.BindInterfacesAndSelfTo<AbilityModel>().AsSingle().NonLazy();
+            Container.Bind<AbilityPanelIconView>().FromComponentsInHierarchy().AsSingle();
+            Container.BindInterfacesAndSelfTo<AbilityPanelViewModel>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<AbilityPanelModel>().AsSingle().NonLazy();
         }
     }
 }

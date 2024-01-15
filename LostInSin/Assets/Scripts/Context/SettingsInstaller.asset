@@ -18,7 +18,6 @@ MonoBehaviour:
     ReferencedUnityObjects:
     - {fileID: 11400000, guid: 2b915f3e1d102814fb5023bd8bcc559f, type: 2}
     - {fileID: 11400000, guid: 21309d203769dc547afa84d19008938a, type: 2}
-    - {fileID: 11400000, guid: 1edc7c7114a56f24a94973e9b1e149c3, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -26,15 +25,15 @@ MonoBehaviour:
     SerializationNodes:
     - Name: AnimationData
       Entry: 7
-      Data: 0|LostInSin.Animation.AnimationHashes+Data, LostInSin.Animation.Data
+      Data: 0|LostInSin.Animation.Data.AnimationHashes+Data, LostInSin.Code
     - Name: AnimationKeyIDPairs
       Entry: 7
       Data: 1|UnityEngine.Rendering.SerializedDictionary`2[[LostInSin.Identifiers.AnimationIdentifier,
-        LostInSin.Identifiers],[System.String, mscorlib]], Unity.RenderPipelines.Core.Runtime
+        LostInSin.Code],[System.String, mscorlib]], Unity.RenderPipelines.Core.Runtime
     - Name: comparer
       Entry: 7
       Data: 2|System.Collections.Generic.EnumEqualityComparer`1[[LostInSin.Identifiers.AnimationIdentifier,
-        LostInSin.Identifiers]], mscorlib
+        LostInSin.Code]], mscorlib
     - Name: 
       Entry: 12
       Data: 0
@@ -70,7 +69,7 @@ MonoBehaviour:
       Data: 
     - Name: GridGenerationData
       Entry: 7
-      Data: 3|LostInSin.Grid.GridModel+Data, LostInSin.Grid
+      Data: 3|LostInSin.Grid.GridModel+Data, LostInSin.Code
     - Name: GridData
       Entry: 10
       Data: 0
@@ -79,19 +78,10 @@ MonoBehaviour:
       Data: 
     - Name: CameraData
       Entry: 7
-      Data: 4|LostInSin.Camera.CameraModel+CameraData, LostInSin.Camera
+      Data: 4|LostInSin.Cameras.CameraModel+CameraData, LostInSin.Code
     - Name: CameraDataSO
       Entry: 10
       Data: 1
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: CharacterSpawnerData
-      Entry: 7
-      Data: 5|LostInSin.Characters.CharacterSpawner+Data, LostInSin.Characters
-    - Name: SavedCharacters
-      Entry: 10
-      Data: 2
     - Name: 
       Entry: 8
       Data: 
@@ -100,3 +90,4 @@ MonoBehaviour:
     TurnSpeed: 10
   GridVisualData:
     _gridVisualDataSO: {fileID: 11400000, guid: 648fbc1def316f9459fd66db42e1c95c, type: 2}
+  CharacterSavedData: {fileID: 11400000, guid: 1edc7c7114a56f24a94973e9b1e149c3, type: 2}

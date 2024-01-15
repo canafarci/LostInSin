@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using LostInSin.Abilities;
 using TMPro;
 using UniRx;
@@ -7,10 +8,10 @@ using Zenject;
 
 namespace LostInSin.UI
 {
-    public class AbilityView : MonoBehaviour
+    public class AbilityPanelIconView : MonoBehaviour
     {
         [SerializeField] private int _buttonIndex;
-        [Inject] private AbilityViewModel _viewModel;
+        [Inject] private AbilityPanelViewModel _panelViewModel;
 
         private TextMeshProUGUI _text;
 
@@ -19,11 +20,11 @@ namespace LostInSin.UI
         private void Awake()
         {
             _text = GetComponentInChildren<TextMeshProUGUI>();
-            IDisposable disposable = _viewModel.OnAbilityInfoReceived.Subscribe(AbilitiesInfoReceivedHandler);
+            IDisposable disposable = _panelViewModel.OnAbilityInfoReceived.Subscribe(AbilitiesInfoReceivedHandler);
             _disposables.Add(disposable);
         }
 
-        private void AbilitiesInfoReceivedHandler(AbilityInfo[] abilities)
+        private void AbilitiesInfoReceivedHandler(List<AbilityInfo> abilities)
         {
             _text.text = abilities[_buttonIndex].Name;
         }

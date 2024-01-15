@@ -6,45 +6,21 @@ using UnityEngine.InputSystem;
 
 namespace LostInSin.Control
 {
-    public class CharacterStateTicker : ITickable, IInitializable
+    public class CharacterStateTicker : ITickable
     {
-        [Inject] private IComponentRaycaster<Character> _characterRaycaster;
-        [Inject] private GameInput _gameInput;
-        private const int _characterLayerMask = 1 << 6;
         private Character _selectedCharacter = null;
 
-        public void Initialize()
+        public void SetTickingCharacter(Character character)
         {
-            _gameInput.GameplayActions.Click.performed += OnClicked;
-        }
-
-        private void OnClicked(InputAction.CallbackContext context)
-        {
-            TryRaycastCharacter();
+            _selectedCharacter = character;
+            _selectedCharacter.SetAsTickingCharacter();
         }
 
         public void Tick()
         {
-            _selectedCharacter?.TickState();
-        }
+            if (_selectedCharacter == null) return;
 
-        private void TryRaycastCharacter()
-        {
-            if (_characterRaycaster.RaycastComponent(out Character character, _characterLayerMask))
-                TryChangeCharacter(character);
-        }
-
-        private void TryChangeCharacter(Character character)
-        {
-            if (_selectedCharacter == null)
-                SetNewCharacterAsSelected(character);
-            else if (_selectedCharacter.CanExitTickingCharacter()) SetNewCharacterAsSelected(character);
-        }
-
-        private void SetNewCharacterAsSelected(Character character)
-        {
-            _selectedCharacter = character;
-            _selectedCharacter.SetAsTickingCharacter();
+            _selectedCharacter.TickState();
         }
     }
 }

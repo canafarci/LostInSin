@@ -1,6 +1,7 @@
 using LostInSin.Animation.Data;
 using LostInSin.Cameras;
 using LostInSin.Characters;
+using LostInSin.Characters.PersistentData;
 using LostInSin.Grid;
 using LostInSin.Grid.Visual;
 using LostInSin.Movement;
@@ -17,7 +18,7 @@ namespace LostInSin.Context
         public GridModel.Data GridGenerationData;
         public GridMeshDisplayService.Data GridVisualData;
         public CameraModel.CameraData CameraData;
-        public CharacterSpawner.Data CharacterSpawnerData;
+        public SavedCharacters CharacterSavedData;
 
         public override void InstallBindings()
         {
@@ -26,7 +27,7 @@ namespace LostInSin.Context
                                     GridGenerationData,
                                     GridVisualData,
                                     CameraData,
-                                    CharacterSpawnerData);
+                                    CharacterSavedData);
         }
     }
 }

@@ -1,5 +1,8 @@
 using System;
+using System.Collections.Generic;
 using LostInSin.Abilities;
+using LostInSin.AbilitySystem;
+using LostInSin.Characters.PersistentData;
 using LostInSin.Characters.StateMachine;
 using UnityEngine;
 using Zenject;
@@ -7,17 +10,24 @@ using Zenject;
 namespace LostInSin.Characters
 {
     /// <summary>
-    /// Facade class for character
+    /// Facade class for a character in the game.
     /// </summary>
     public class Character : MonoBehaviour, IAbilityHolder
     {
         private IStateTicker _stateTicker;
 
         [Inject] private CharacterStateRuntimeData _runtimeData;
-        [Inject] private AbilitySet _abilitySet;
+        [Inject] private readonly AbilitySet _abilitySet;
+        [Inject] private readonly AttributeSet _attributeSet;
 
-        public AbilitySet AbilitySet { get; }
-        public AttributeSet AttributeSet { get; }
+        #region Getters
+
+        public AbilitySet AbilitySet => _abilitySet;
+        public AttributeSet AttributeSet => _attributeSet;
+        public List<AbilityInfo> Abilities => _abilitySet.CharacterAbilities;
+
+        #endregion
+
 
         [Inject]
         private void Init(IStateTicker stateTicker, Transform inTransform, Vector3 position)
@@ -47,7 +57,7 @@ namespace LostInSin.Characters
             return _runtimeData.CanExitTicking;
         }
 
-        public class Factory : PlaceholderFactory<Vector3, Character>
+        public class Factory : PlaceholderFactory<Vector3, CharacterPersistentData, Character>
         {
         }
     }

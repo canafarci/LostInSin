@@ -1,5 +1,9 @@
+using LostInSin.Abilities;
+using LostInSin.AbilitySystem;
 using LostInSin.Animation;
+using LostInSin.Attributes;
 using LostInSin.Characters;
+using LostInSin.Characters.PersistentData;
 using LostInSin.Characters.StateMachine;
 using LostInSin.Characters.StateMachine.States;
 using LostInSin.Identifiers;
@@ -14,11 +18,13 @@ namespace LostInSin.Context
     public class CharacterInstaller : Installer<CharacterInstaller>
     {
         [Inject] private Vector3 _startPosition;
+        [Inject] private CharacterPersistentData _characterPersistentData;
 
         public override void InstallBindings()
         {
             Container.Bind<Character>().FromNewComponentOnRoot().AsSingle();
             Container.Bind<Vector3>().FromInstance(_startPosition);
+            Container.Bind<CharacterPersistentData>().FromInstance(_characterPersistentData);
 
             Container.Bind<Transform>().FromComponentsOnRoot().AsSingle();
             Container.Bind<Animator>().FromComponentInHierarchy().AsSingle();
@@ -32,6 +38,7 @@ namespace LostInSin.Context
             Container.Bind<CharacterStateRuntimeData>().AsSingle();
 
             BindStates();
+            BindAttributeSystem();
             InitializeStates();
         }
 
@@ -67,6 +74,32 @@ namespace LostInSin.Context
             Container.Bind<IState>()
                      .WithId(CharacterStates.InitialSelectionState)
                      .To<InitialSelectionState>()
+                     .AsSingle();
+        }
+
+        private void BindAttributeSystem()
+        {
+            Container.Bind<AbilitySet>().AsSingle();
+            Container.Bind<AttributeSet>().AsSingle();
+
+            Container.Bind<IAttribute>()
+                     .WithId(AttributeIdentifiers.Health)
+                     .To<HealthAttribute>()
+                     .AsSingle();
+
+            Container.Bind<IAttribute>()
+                     .WithId(AttributeIdentifiers.Power)
+                     .To<PowerAttribute>()
+                     .AsSingle();
+
+            Container.Bind<IAttribute>()
+                     .WithId(AttributeIdentifiers.Resilience)
+                     .To<ResilienceAttribute>()
+                     .AsSingle();
+
+            Container.Bind<IAttribute>()
+                     .WithId(AttributeIdentifiers.Luck)
+                     .To<LuckAttribute>()
                      .AsSingle();
         }
 
