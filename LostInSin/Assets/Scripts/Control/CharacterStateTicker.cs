@@ -1,8 +1,5 @@
 using Zenject;
 using LostInSin.Characters;
-using LostInSin.Raycast;
-using LostInSin.Input;
-using UnityEngine.InputSystem;
 
 namespace LostInSin.Control
 {

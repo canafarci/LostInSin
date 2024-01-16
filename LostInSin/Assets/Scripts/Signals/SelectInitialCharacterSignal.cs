@@ -2,10 +2,10 @@ using LostInSin.Characters;
 
 namespace LostInSin.Signals
 {
-    public struct SelectInitialCharacterSignal
+    public readonly struct SelectInitialCharacterSignal
     {
-        private Character _initialCharacter;
-        public Character InitialCharacter => _initialCharacter;
+        private readonly Character _initialCharacter;
+        public readonly Character InitialCharacter => _initialCharacter;
 
         public SelectInitialCharacterSignal(Character initialCharacter)
         {

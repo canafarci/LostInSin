@@ -4,6 +4,7 @@ using LostInSin.Abilities;
 using TMPro;
 using UniRx;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 namespace LostInSin.UI
@@ -15,20 +16,33 @@ namespace LostInSin.UI
 
         private readonly CompositeDisposable _disposables = new();
         private TextMeshProUGUI _text;
+        private AbilityInfo _ability;
+        private Button _button;
 
         private void Awake()
         {
             _text = GetComponentInChildren<TextMeshProUGUI>();
+            _button = GetComponentInChildren<Button>();
 
             _panelViewModel.Abilities
                            .Subscribe(AbilitiesInfoReceivedHandler)
                            .AddTo(_disposables);
+
+            _button.onClick.AddListener(ButtonClickHandler);
+        }
+
+        private void ButtonClickHandler()
+        {
+            _panelViewModel.OnButtonClicked(_ability);
         }
 
         private void AbilitiesInfoReceivedHandler(List<AbilityInfo> abilities)
         {
             if (abilities == null) return;
-            _text.text = abilities[_buttonIndex].Name;
+
+            _ability = abilities[_buttonIndex];
+
+            _text.text = _ability.Name;
         }
 
         private void OnDestroy()

@@ -1,4 +1,5 @@
 using Cinemachine;
+using LostInSin.AbilitySystem;
 using LostInSin.Animation.Data;
 using LostInSin.Cameras;
 using LostInSin.Characters;
@@ -40,6 +41,7 @@ namespace LostInSin.Context
             BindGrid();
             BindCamera();
             BindUI();
+            BindAbilitySystem();
         }
 
         private void BindCharacterSelection()
@@ -89,6 +91,11 @@ namespace LostInSin.Context
             Container.Bind<AbilityPanelIconView>().FromComponentsInHierarchy().AsSingle();
             Container.BindInterfacesAndSelfTo<AbilityPanelViewModel>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<AbilityPanelModel>().AsSingle().NonLazy();
+        }
+
+        private void BindAbilitySystem()
+        {
+            Container.BindInterfacesAndSelfTo<AbilitySystemManager>().AsSingle();
         }
     }
 }

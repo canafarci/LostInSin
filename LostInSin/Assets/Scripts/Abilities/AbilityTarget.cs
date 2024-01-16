@@ -3,12 +3,9 @@ using UnityEngine;
 
 namespace LostInSin.Abilities
 {
-    public class AbilityTarget
+    public struct AbilityTarget
     {
-        public Vector3 Point { get; }
-
-        public Character Character { get; }
-
-        public bool IsPoint { get; }
+        public Vector3 Point;
+        public Character Character;
     }
 }

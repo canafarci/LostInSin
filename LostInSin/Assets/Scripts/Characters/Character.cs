@@ -4,6 +4,7 @@ using LostInSin.Abilities;
 using LostInSin.AbilitySystem;
 using LostInSin.Characters.PersistentData;
 using LostInSin.Characters.StateMachine;
+using LostInSin.Movement;
 using UnityEngine;
 using Zenject;
 
@@ -19,15 +20,17 @@ namespace LostInSin.Characters
         [Inject] private CharacterStateRuntimeData _runtimeData;
         [Inject] private readonly AbilitySet _abilitySet;
         [Inject] private readonly AttributeSet _attributeSet;
+        [Inject] private IMover _mover;
 
         #region Getters
 
         public AbilitySet AbilitySet => _abilitySet;
         public AttributeSet AttributeSet => _attributeSet;
         public List<AbilityInfo> Abilities => _abilitySet.CharacterAbilities;
+        public IMover Mover => _mover;
+        public CharacterStateRuntimeData RuntimeData => _runtimeData;
 
         #endregion
-
 
         [Inject]
         private void Init(IStateTicker stateTicker, Transform inTransform, Vector3 position)
@@ -48,13 +51,13 @@ namespace LostInSin.Characters
 
         public bool CanExitTickingCharacter()
         {
-            if (_runtimeData.CanExitTicking)
+            if (_runtimeData.CanExitState)
             {
                 _runtimeData.IsTicking = false;
                 _stateTicker.SwitchToInactiveState();
             }
 
-            return _runtimeData.CanExitTicking;
+            return _runtimeData.CanExitState;
         }
 
         public class Factory : PlaceholderFactory<Vector3, CharacterPersistentData, Character>

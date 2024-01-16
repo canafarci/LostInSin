@@ -7,8 +7,7 @@ namespace LostInSin.Movement
     public interface IMover
     {
         public void InitializeMovement(Vector3 target);
-        public void Move();
-        public bool HasReachedDestination();
+        public bool Move();
         public bool IsMoving { get; }
     }
 }

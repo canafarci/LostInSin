@@ -62,8 +62,8 @@ namespace LostInSin.Context
                      .AsSingle();
 
             Container.Bind<IState>()
-                     .WithId(CharacterStates.MoveState)
-                     .To<MoveState>()
+                     .WithId(CharacterStates.UseAbilityState)
+                     .To<UseAbilityState>()
                      .AsSingle();
 
             Container.Bind<IState>()
@@ -105,8 +105,9 @@ namespace LostInSin.Context
 
         private void InitializeStates()
         {
-            MoveState moveState = Container.ResolveId<IState>(CharacterStates.MoveState) as MoveState;
-            moveState.Initialize();
+            UseAbilityState useAbilityState = Container.ResolveId<IState>(CharacterStates.UseAbilityState)
+                                                  as UseAbilityState;
+            useAbilityState.Initialize();
         }
     }
 }

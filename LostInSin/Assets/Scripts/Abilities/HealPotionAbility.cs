@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using LostInSin.Attributes;
 using LostInSin.Characters;
 using LostInSin.Identifiers;
@@ -10,10 +11,13 @@ namespace LostInSin.Abilities
     {
         public float HealAmount;
 
-        public override void ApplyEffect(Character instigator, AbilityTarget target)
+        public override async UniTask<AbilityCastResult> Cast(Character instigator, AbilityTarget target)
         {
             IAttribute healthAttribute = target.Character.AttributeSet.GetAttribute(AttributeIdentifiers.Health);
             healthAttribute.AddToValue(HealAmount);
+            return AbilityCastResult.Fail;
         }
+
+        public override UniTask<bool> CanCast(Character instigator, AbilityTarget target) => new(true);
     }
 }

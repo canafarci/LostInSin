@@ -25,13 +25,15 @@ namespace LostInSin.Movement
             _currentState = MovementState.Moving;
         }
 
-        public void Move()
+        public bool Move()
         {
-            if (_currentState != MovementState.Moving) return;
+            if (_currentState != MovementState.Moving) return false;
 
             Vector3 normalizedDirection = CalculateNormalizedDirection();
             TurnTowards(normalizedDirection);
             MoveTowards(normalizedDirection);
+
+            return HasReachedDestination();
         }
 
         private void TurnTowards(Vector3 normalizedDirection)
@@ -59,6 +61,7 @@ namespace LostInSin.Movement
         public bool HasReachedDestination()
         {
             if (_currentState != MovementState.Moving) return false;
+            
             bool reached = Vector3.SqrMagnitude(_transform.position - _target) < Mathf.Pow(0.02f, 2);
 
             if (reached)

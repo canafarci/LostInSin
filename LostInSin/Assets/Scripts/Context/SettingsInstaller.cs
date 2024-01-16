@@ -26,8 +26,11 @@ namespace LostInSin.Context
                                     AnimationData,
                                     GridGenerationData,
                                     GridVisualData,
-                                    CameraData,
-                                    CharacterSavedData);
+                                    CameraData);
+
+            const string path = "Data/SavedCharacters";
+
+            Container.Bind<SavedCharacters>().FromScriptableObjectResource(path).AsSingle();
         }
     }
 }

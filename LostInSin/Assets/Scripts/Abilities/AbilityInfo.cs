@@ -1,3 +1,4 @@
+using LostInSin.Characters;
 using LostInSin.Identifiers;
 
 namespace LostInSin.Abilities
@@ -8,9 +9,8 @@ namespace LostInSin.Abilities
     public class AbilityInfo
     {
         public AbilityIdentifiers AbilityIdentifier;
-
         public string Name;
-
+        public bool IsPointTargeted => AbilityBlueprint.IsPointTargeted;
         public AbilityBlueprint AbilityBlueprint;
     }
 }

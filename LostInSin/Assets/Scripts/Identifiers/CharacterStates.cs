@@ -7,9 +7,8 @@ namespace LostInSin.Identifiers
     public enum CharacterStates
     {
         InitialSelectionState,
-        MoveState,
         IdleState,
-        InactiveState
+        InactiveState,
+        UseAbilityState
     }
 }
-

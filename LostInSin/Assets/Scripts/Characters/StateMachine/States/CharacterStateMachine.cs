@@ -8,6 +8,8 @@ namespace LostInSin.Characters.StateMachine.States
 {
     public class CharacterStateMachine : IStateTicker, IInitializable, IDisposable
     {
+        [Inject] private CharacterStateRuntimeData _runtimeData;
+
         private IState _currentState;
         private IState _inactiveState;
         private SignalBus _signalBus;
@@ -27,6 +29,15 @@ namespace LostInSin.Characters.StateMachine.States
             _signalBus.GetStream<IStateChangeSignal>()
                       .Subscribe(x => TransitionState(x.TargetState))
                       .AddTo(_disposables);
+
+            _signalBus.GetStream<SelectedAbilityChangedSignal>()
+                      .Subscribe(OnSelectedAbilityChanged)
+                      .AddTo(_disposables);
+        }
+
+        private void OnSelectedAbilityChanged(SelectedAbilityChangedSignal signal)
+        {
+            if (!_runtimeData.IsTicking || _runtimeData.CanExitState) return;
         }
 
         public void Tick()

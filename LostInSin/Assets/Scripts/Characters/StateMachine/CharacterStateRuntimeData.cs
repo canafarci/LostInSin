@@ -6,7 +6,7 @@ namespace LostInSin.Characters.StateMachine
     public class CharacterStateRuntimeData
     {
         private bool _isTicking = false;
-        private bool _canExitTicking = true;
+        private bool _canExitState = true;
         private GridCellData _occupiedCell = null;
 
         public bool IsTicking
@@ -15,10 +15,10 @@ namespace LostInSin.Characters.StateMachine
             set => _isTicking = value;
         }
 
-        public bool CanExitTicking
+        public bool CanExitState
         {
-            get => _canExitTicking;
-            set => _canExitTicking = value;
+            get => _canExitState;
+            set => _canExitState = value;
         }
 
         public void ChangeOccupiedCell(GridCellData cell)

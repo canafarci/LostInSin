@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a5e0d61630541158e39e33bfee1b8fe, type: 3}
-  m_Name: Move
+  m_Script: {fileID: 11500000, guid: 4c19337313804d92b9b81d60157d2f78, type: 3}
+  m_Name: HealPotionAbility
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,4 +21,6 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  AbilityIdentifier: 0
+  AbilityIdentifier: 2
+  IsPointTargeted: 0
+  HealAmount: 25
