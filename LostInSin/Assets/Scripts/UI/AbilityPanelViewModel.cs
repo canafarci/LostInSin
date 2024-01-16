@@ -8,25 +8,26 @@ namespace LostInSin.UI
 {
     public class AbilityPanelViewModel : IInitializable, IDisposable
     {
-        public readonly ReactiveCommand<List<AbilityInfo>> OnAbilityInfoReceived = new();
         [Inject] private readonly AbilityPanelModel _panelModel;
 
-        private List<AbilityInfo> _abilities;
+        private readonly CompositeDisposable _disposables = new();
+        private readonly ReactiveProperty<List<AbilityInfo>> _abilities = new();
+
+        public ReactiveProperty<List<AbilityInfo>> Abilities => _abilities;
 
         public void Initialize()
         {
-            _panelModel.OnAbilitiesSet += AbilitiesSetHandler;
+            _panelModel.Abilities.Subscribe(AbilitiesSetHandler).AddTo(_disposables);
         }
 
         private void AbilitiesSetHandler(List<AbilityInfo> abilities)
         {
-            _abilities = abilities;
-            OnAbilityInfoReceived.Execute(abilities);
+            _abilities.Value = abilities;
         }
 
         public void Dispose()
         {
-            _panelModel.OnAbilitiesSet -= AbilitiesSetHandler;
+            _disposables.Dispose();
         }
     }
 }

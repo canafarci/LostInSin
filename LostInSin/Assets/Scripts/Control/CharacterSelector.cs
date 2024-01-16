@@ -17,7 +17,7 @@ namespace LostInSin.Control
         [Inject] private CharacterStateTicker _stateTicker;
         [Inject] private SignalBus _signalBus;
 
-        private const int _characterLayerMask = 1 << 6;
+        private const int CHARACTER_LAYER_MASK = 1 << 6;
         private readonly CompositeDisposable _disposables = new();
 
         private Character _selectedCharacter = null;
@@ -43,7 +43,7 @@ namespace LostInSin.Control
 
         private void TryRaycastCharacter()
         {
-            if (_characterRaycaster.RaycastComponent(out Character character, _characterLayerMask))
+            if (_characterRaycaster.RaycastComponent(out Character character, CHARACTER_LAYER_MASK))
                 TryChangeCharacter(character);
         }
 

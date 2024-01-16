@@ -13,23 +13,20 @@ namespace LostInSin.UI
         [Inject] private SignalBus _signalBus;
 
         private readonly CompositeDisposable _disposables = new();
+        private readonly ReactiveProperty<List<AbilityInfo>> _abilities = new();
 
-        private List<AbilityInfo> _abilities;
-
-        public event Action<List<AbilityInfo>> OnAbilitiesSet;
-
+        public ReactiveProperty<List<AbilityInfo>> Abilities => _abilities;
 
         public void Initialize()
         {
             _signalBus.GetStream<CharacterSelectedSignal>()
-                      .Subscribe(OnInitialCharacterSelect)
+                      .Subscribe(OnCharacterSelected)
                       .AddTo(_disposables);
         }
 
-        private void OnInitialCharacterSelect(CharacterSelectedSignal signal)
+        private void OnCharacterSelected(CharacterSelectedSignal signal)
         {
-            _abilities = signal.SelectedCharacter.Abilities;
-            OnAbilitiesSet?.Invoke(_abilities);
+            _abilities.Value = signal.SelectedCharacter.Abilities;
         }
 
         public void Dispose()

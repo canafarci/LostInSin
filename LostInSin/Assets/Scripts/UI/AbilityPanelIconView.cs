@@ -13,19 +13,21 @@ namespace LostInSin.UI
         [SerializeField] private int _buttonIndex;
         [Inject] private AbilityPanelViewModel _panelViewModel;
 
-        private TextMeshProUGUI _text;
-
         private readonly CompositeDisposable _disposables = new();
+        private TextMeshProUGUI _text;
 
         private void Awake()
         {
             _text = GetComponentInChildren<TextMeshProUGUI>();
-            IDisposable disposable = _panelViewModel.OnAbilityInfoReceived.Subscribe(AbilitiesInfoReceivedHandler);
-            _disposables.Add(disposable);
+
+            _panelViewModel.Abilities
+                           .Subscribe(AbilitiesInfoReceivedHandler)
+                           .AddTo(_disposables);
         }
 
         private void AbilitiesInfoReceivedHandler(List<AbilityInfo> abilities)
         {
+            if (abilities == null) return;
             _text.text = abilities[_buttonIndex].Name;
         }
 
