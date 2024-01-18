@@ -11,13 +11,23 @@ namespace LostInSin.Abilities
     {
         public float HealAmount;
 
-        public override async UniTask<AbilityCastResult> Cast(Character instigator, AbilityTarget target)
+        public override UniTask<AbilityCastResult> Cast(Character instigator, AbilityTarget target)
         {
             IAttribute healthAttribute = target.Character.AttributeSet.GetAttribute(AttributeIdentifiers.Health);
             healthAttribute.AddToValue(HealAmount);
-            return AbilityCastResult.Fail;
+            return new UniTask<AbilityCastResult>(AbilityCastResult.Fail);
         }
 
-        public override UniTask<bool> CanCast(Character instigator, AbilityTarget target) => new(true);
+        public override UniTask<bool> CanCast(Character instigator) => new(true);
+
+        public override UniTask<(AbilityCastResult castResult, AbilityTarget target)> PreCast(Character instigator)
+        {
+            AbilityCastResult castResult = AbilityCastResult.Success;
+            AbilityTarget target = new() { Character = instigator };
+
+            return new UniTask<(AbilityCastResult castResult, AbilityTarget target)>((castResult, target));
+        }
+
+        public override UniTask<bool> PostCast(Character instigator) => new(true);
     }
 }

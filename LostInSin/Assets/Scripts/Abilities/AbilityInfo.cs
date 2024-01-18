@@ -10,7 +10,6 @@ namespace LostInSin.Abilities
     {
         public AbilityIdentifiers AbilityIdentifier;
         public string Name;
-        public bool IsPointTargeted => AbilityBlueprint.IsPointTargeted;
         public AbilityBlueprint AbilityBlueprint;
     }
 }

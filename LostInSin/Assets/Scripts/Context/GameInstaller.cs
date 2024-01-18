@@ -5,6 +5,7 @@ using LostInSin.Cameras;
 using LostInSin.Characters;
 using LostInSin.Characters.PersistentData;
 using LostInSin.Control;
+using LostInSin.Core;
 using LostInSin.Grid;
 using LostInSin.Grid.Visual;
 using LostInSin.Input;
@@ -42,6 +43,7 @@ namespace LostInSin.Context
             BindCamera();
             BindUI();
             BindAbilitySystem();
+            BindCore();
         }
 
         private void BindCharacterSelection()
@@ -91,6 +93,11 @@ namespace LostInSin.Context
             Container.Bind<AbilityPanelIconView>().FromComponentsInHierarchy().AsSingle();
             Container.BindInterfacesAndSelfTo<AbilityPanelViewModel>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<AbilityPanelModel>().AsSingle().NonLazy();
+        }
+
+        private void BindCore()
+        {
+            Container.BindInterfacesAndSelfTo<PointerOverUIChecker>().AsSingle().NonLazy();
         }
 
         private void BindAbilitySystem()

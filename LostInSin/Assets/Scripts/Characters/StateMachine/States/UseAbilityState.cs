@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using LostInSin.Abilities;
 using LostInSin.AbilitySystem;
+using LostInSin.Core;
 using LostInSin.Identifiers;
 using LostInSin.Input;
 using LostInSin.Raycast;
@@ -19,7 +20,6 @@ namespace LostInSin.Characters.StateMachine.States
         [Inject] private readonly AbilitySystemManager _abilitySystemManager;
         [Inject] private readonly CharacterStateRuntimeData _runtimeData;
         [Inject] private readonly GameInput _gameInput;
-        [Inject] private readonly IPositionRaycaster _positionRaycaster;
 
         private enum StateActivity
         {
@@ -38,13 +38,13 @@ namespace LostInSin.Characters.StateMachine.States
         {
             await UniTask.NextFrame(); //wait one frame as character can be switched
 
-            if (_stateActivity == StateActivity.Inactive || _abilitySystemManager.Ability == null) return;
+            if (_stateActivity == StateActivity.Inactive) return;
 
-            AbilityInfo abilityInfo = _abilitySystemManager.Ability;
+            _runtimeData.CanExitState = false;
 
-            if (abilityInfo.IsPointTargeted)
-                if (_positionRaycaster.GetWorldPosition(out Vector3 position))
-                    await _abilitySystemManager.CastAbility(new AbilityTarget() { Point = position });
+            await _abilitySystemManager.CastAbility();
+
+            _runtimeData.CanExitState = true;
         }
 
         public void Tick()

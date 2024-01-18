@@ -19,11 +19,9 @@ namespace LostInSin.Attributes
         public void AddToValue(float change)
         {
             _currentValue = Mathf.Clamp(_currentValue += change, 0f, _maxValue);
+            Debug.Log(_currentValue);
         }
 
-        public float GetValue()
-        {
-            return _currentValue;
-        }
+        public float GetValue() => _currentValue;
     }
 }

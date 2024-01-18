@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using LostInSin.Abilities;
 using LostInSin.Characters;
@@ -17,11 +18,8 @@ namespace LostInSin.AbilitySystem
         private readonly CompositeDisposable _disposables = new();
 
         private Character _instigator;
-        private AbilityTarget _target;
-
-        private AbilityInfo _ability;
-
-        public AbilityInfo Ability => _ability;
+        private readonly Stack<AbilityInfo> _abilityStack = new();
+        private AbilityInfo _ability => _abilityStack.Peek();
 
         public void Initialize()
         {
@@ -36,21 +34,54 @@ namespace LostInSin.AbilitySystem
 
         private void OnSelectedAbilityChanged(SelectedAbilityChangedSignal signal)
         {
-            _ability = signal.Ability;
+            //if stack only contains move action, add to stack
+            if (_abilityStack.Count == 1)
+            {
+                _abilityStack.Push(signal.Ability);
+            }
+            else //pop last element and add new elemetn
+            {
+                _abilityStack.Pop();
+                _abilityStack.Push(signal.Ability);
+            }
+
+            if (_ability.AbilityBlueprint.IsUICastedAbility) CastAbility();
         }
 
         private void OnCharacterSelectedSignal(CharacterSelectedSignal signal)
         {
             _instigator = signal.SelectedCharacter;
+            AbilityInfo moveAbility = signal.SelectedCharacter
+                                            .Abilities
+                                            .Find(x => x.AbilityIdentifier == AbilityIdentifiers.Move);
+            _abilityStack.Push(moveAbility);
         }
 
-        public async UniTask<AbilityCastResult> CastAbility(AbilityTarget target)
+        /// <summary>
+        /// Casts the ability represented by the current AbilityBlueprint.
+        /// </summary>
+        /// <returns>Returns the result of the ability cast.</returns>
+        public async UniTask<AbilityCastResult> CastAbility()
         {
-            _target = target;
+            AbilityBlueprint abilityAbilityBlueprint = _ability.AbilityBlueprint;
             AbilityCastResult abilityCastResult = AbilityCastResult.Fail;
 
-            if (await _ability.AbilityBlueprint.CanCast(_instigator, _target))
-                await _ability.AbilityBlueprint.Cast(_instigator, _target);
+            if (await abilityAbilityBlueprint.CanCast(_instigator))
+            {
+                (AbilityCastResult castResult, AbilityTarget target) target =
+                    await abilityAbilityBlueprint.PreCast(_instigator);
+
+                if (target.castResult == AbilityCastResult.Fail) return AbilityCastResult.Fail;
+
+                await abilityAbilityBlueprint.Cast(_instigator, target.target);
+
+                if (target.castResult == AbilityCastResult.Fail) return AbilityCastResult.Fail;
+
+                await abilityAbilityBlueprint.PostCast(_instigator);
+            }
+
+            if (_abilityStack.Count > 1)
+                _abilityStack.Pop();
 
             return abilityCastResult;
         }

@@ -11,7 +11,7 @@ namespace LostInSin.Raycast.Tests
     public class MousePositionRayDrawerTests : ZenjectUnitTestFixture
     {
         [SetUp]
-        public void Setup()
+        public void SetUp()
         {
             Container.BindInterfacesAndSelfTo<MousePositionRayDrawer>().AsSingle();
         }
@@ -20,7 +20,7 @@ namespace LostInSin.Raycast.Tests
         public void DrawRay_ReturnsCorrectRay()
         {
             // Arrange
-            var mousePositionRayDrawer = Container.Resolve<MousePositionRayDrawer>();
+            MousePositionRayDrawer mousePositionRayDrawer = Container.Resolve<MousePositionRayDrawer>();
 
             // Act
             Ray ray = mousePositionRayDrawer.DrawRay();

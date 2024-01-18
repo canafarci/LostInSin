@@ -1,5 +1,6 @@
 using System;
 using LostInSin.Characters;
+using LostInSin.Core;
 using LostInSin.Input;
 using LostInSin.Raycast;
 using LostInSin.Signals;
@@ -15,6 +16,7 @@ namespace LostInSin.Control
         [Inject] private IComponentRaycaster<Character> _characterRaycaster;
         [Inject] private CharacterStateTicker _stateTicker;
         [Inject] private SignalBus _signalBus;
+        [Inject] private PointerOverUIChecker _pointerOverUIChecker;
 
         private const int CHARACTER_LAYER_MASK = 1 << 6;
         private readonly CompositeDisposable _disposables = new();
@@ -23,7 +25,7 @@ namespace LostInSin.Control
 
         public void Initialize()
         {
-            _gameInput.GameplayActions.Click.performed += OnClicked;
+            _gameInput.GameplayActions.Click.performed += OnClickPerformed;
 
             _signalBus.GetStream<SelectInitialCharacterSignal>()
                       .Subscribe(OnInitialCharacterSelect)
@@ -35,8 +37,9 @@ namespace LostInSin.Control
             SetNewCharacterAsSelected(signal.InitialCharacter);
         }
 
-        private void OnClicked(InputAction.CallbackContext context)
+        private void OnClickPerformed(InputAction.CallbackContext context)
         {
+            if (_pointerOverUIChecker.PointerIsOverUI) return;
             TryRaycastCharacter();
         }
 

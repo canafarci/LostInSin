@@ -13,10 +13,12 @@ namespace LostInSin.Characters.PersistentData
         public void Inject(DiContainer container)
         {
             CharacterAbilities.ForEach(x => container.Inject(x.AbilityBlueprint));
+            container.Inject(MoveAbility.AbilityBlueprint);
         }
 
         public bool DefaultSelectedCharacter = false;
         public CharacterClass CharacterClass;
         public AbilityInfo[] CharacterAbilities;
+        public AbilityInfo MoveAbility;
     }
 }

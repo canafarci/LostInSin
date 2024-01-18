@@ -21,6 +21,7 @@ namespace LostInSin.Characters
         [Inject] private readonly AbilitySet _abilitySet;
         [Inject] private readonly AttributeSet _attributeSet;
         [Inject] private IMover _mover;
+        [Inject] private SignalBus _signalBus;
 
         #region Getters
 
@@ -29,6 +30,7 @@ namespace LostInSin.Characters
         public List<AbilityInfo> Abilities => _abilitySet.CharacterAbilities;
         public IMover Mover => _mover;
         public CharacterStateRuntimeData RuntimeData => _runtimeData;
+        public SignalBus SignalBus => _signalBus;
 
         #endregion
 

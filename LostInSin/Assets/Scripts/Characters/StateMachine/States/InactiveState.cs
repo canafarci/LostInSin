@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using LostInSin.Animation;
 using LostInSin.Animation.Data;
 using LostInSin.Identifiers;
 using LostInSin.Signals;
@@ -42,20 +43,12 @@ namespace LostInSin.Characters.StateMachine.States
 
         private void FireRunningAnimationChangeSignal(bool value)
         {
-            AnimationChangeSignal animationChangeSignal = CreateRunningAnimationSignal(value);
+            AnimationChangeSignal animationChangeSignal = new AnimationChangeSignalBuilder()
+                                                          .SetAnimationParameter(value)
+                                                          .SetAnimationIdentifier(AnimationIdentifier.IsRunning)
+                                                          .Build();
+
             _signalBus.AbstractFire(animationChangeSignal);
-        }
-
-        private AnimationChangeSignal CreateRunningAnimationSignal(bool value)
-        {
-            AnimationStateChangeData animationChangeData = new();
-            AnimationParameter<bool> animationParameter = new(value);
-
-            animationChangeData.SetAnimationParameter(animationParameter);
-            animationChangeData.SetAnimationIdentifier(AnimationIdentifier.IsRunning);
-
-            AnimationChangeSignal animationChangeSignal = new(animationChangeData);
-            return animationChangeSignal;
         }
     }
 }

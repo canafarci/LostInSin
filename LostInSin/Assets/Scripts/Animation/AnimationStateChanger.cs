@@ -16,7 +16,6 @@ namespace LostInSin.Animation
         private readonly AnimationHashes _animationHashes;
         private readonly CompositeDisposable _disposables = new();
 
-
         private AnimationStateChanger(SignalBus signalbus,
                                       Animator animator,
                                       AnimationHashes animationHashes)

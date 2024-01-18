@@ -11,9 +11,11 @@ namespace LostInSin.Abilities
     public abstract class AbilityBlueprint : SerializedScriptableObject
     {
         public AbilityIdentifiers AbilityIdentifier;
-        public bool IsPointTargeted;
+        public bool IsUICastedAbility;
 
         public abstract UniTask<AbilityCastResult> Cast(Character instigator, AbilityTarget target);
-        public abstract UniTask<bool> CanCast(Character instigator, AbilityTarget target);
+        public abstract UniTask<bool> CanCast(Character instigator);
+        public abstract UniTask<(AbilityCastResult castResult, AbilityTarget target)> PreCast(Character instigator);
+        public abstract UniTask<bool> PostCast(Character instigator);
     }
 }
