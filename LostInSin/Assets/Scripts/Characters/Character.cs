@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using LostInSin.Abilities;
 using LostInSin.AbilitySystem;
+using LostInSin.Animation;
 using LostInSin.Characters.PersistentData;
 using LostInSin.Characters.StateMachine;
 using LostInSin.Movement;
@@ -22,6 +23,7 @@ namespace LostInSin.Characters
         [Inject] private readonly AttributeSet _attributeSet;
         [Inject] private IMover _mover;
         [Inject] private SignalBus _signalBus;
+        [Inject] private AnimationReference _animationReference;
 
         #region Getters
 
@@ -31,6 +33,7 @@ namespace LostInSin.Characters
         public IMover Mover => _mover;
         public CharacterStateRuntimeData RuntimeData => _runtimeData;
         public SignalBus SignalBus => _signalBus;
+        public AnimationReference AnimationReference => _animationReference;
 
         #endregion
 

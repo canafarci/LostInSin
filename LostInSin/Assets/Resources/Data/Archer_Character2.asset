@@ -96,5 +96,20 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: MoveAbility
+      Entry: 7
+      Data: 5|LostInSin.Abilities.AbilityInfo, LostInSin.Code
+    - Name: AbilityIdentifier
+      Entry: 3
+      Data: 1
+    - Name: Name
+      Entry: 1
+      Data: Move
+    - Name: AbilityBlueprint
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
   DefaultSelectedCharacter: 0
   CharacterClass: 0

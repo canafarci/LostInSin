@@ -18,28 +18,8 @@ namespace LostInSin.Abilities
     {
         [Inject] private readonly IGridPositionConverter _gridPositionConverter;
         [Inject] private readonly IPositionRaycaster _positionRaycaster;
-        [Inject] private readonly PointerOverUIChecker _pointerOverUIChecker;
-
 
         private GridCellData _gridCell;
-
-        public override async UniTask<AbilityCastResult> Cast(Character instigator, AbilityTarget target)
-        {
-            instigator.Mover.InitializeMovement(_gridCell.CenterPosition);
-            instigator.RuntimeData.ChangeOccupiedCell(_gridCell);
-
-            await UniTask.WaitWhile(() => !instigator.Mover.Move());
-
-            return AbilityCastResult.Success;
-        }
-
-        public override UniTask<bool> CanCast(Character instigator)
-        {
-            if (_pointerOverUIChecker.PointerIsOverUI)
-                return new UniTask<bool>(false);
-            else
-                return new UniTask<bool>(true);
-        }
 
         public override async UniTask<(AbilityCastResult castResult, AbilityTarget target)> PreCast(Character instigator)
         {
@@ -54,6 +34,18 @@ namespace LostInSin.Abilities
             }
 
             return (castResult, target);
+        }
+
+        public override UniTask<bool> CanCast(Character instigator) => new(true);
+
+        public override async UniTask<AbilityCastResult> Cast(Character instigator, AbilityTarget target)
+        {
+            instigator.Mover.InitializeMovement(_gridCell.CenterPosition);
+            instigator.RuntimeData.ChangeOccupiedCell(_gridCell);
+
+            await UniTask.WaitWhile(() => !instigator.Mover.Move());
+
+            return AbilityCastResult.Success;
         }
 
         public override UniTask<bool> PostCast(Character instigator)

@@ -20,6 +20,7 @@ namespace LostInSin.Characters.StateMachine.States
         [Inject] private readonly AbilitySystemManager _abilitySystemManager;
         [Inject] private readonly CharacterStateRuntimeData _runtimeData;
         [Inject] private readonly GameInput _gameInput;
+        [Inject] private readonly PointerOverUIChecker _pointerOverUIChecker;
 
         private enum StateActivity
         {
@@ -38,7 +39,7 @@ namespace LostInSin.Characters.StateMachine.States
         {
             await UniTask.NextFrame(); //wait one frame as character can be switched
 
-            if (_stateActivity == StateActivity.Inactive) return;
+            if (_stateActivity == StateActivity.Inactive || _pointerOverUIChecker.PointerIsOverUI) return;
 
             _runtimeData.CanExitState = false;
 

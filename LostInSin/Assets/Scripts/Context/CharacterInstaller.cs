@@ -33,13 +33,23 @@ namespace LostInSin.Context
             DeclareSignals();
 
             Container.Bind<IMover>().To<Mover>().AsSingle();
-            Container.BindInterfacesAndSelfTo<AnimationStateChanger>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<CharacterVisualChanger>().AsSingle().NonLazy();
             Container.Bind<CharacterStateRuntimeData>().AsSingle();
 
+            BindAnimations();
             BindStates();
             BindAttributeSystem();
             InitializeStates();
+        }
+
+        private void BindAnimations()
+        {
+            Container.BindInterfacesAndSelfTo<AnimationStateChanger>().AsSingle().NonLazy();
+
+            Container.BindInterfacesAndSelfTo<AnimationReference>()
+                     .FromComponentsInHierarchy()
+                     .AsSingle()
+                     .NonLazy();
         }
 
         private void DeclareSignals()

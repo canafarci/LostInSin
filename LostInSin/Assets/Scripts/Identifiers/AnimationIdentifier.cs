@@ -2,6 +2,9 @@ namespace LostInSin.Identifiers
 {
     public enum AnimationIdentifier
     {
-        IsRunning
+        IsRunning,
+        StartAimingArrow,
+        ShootArrow,
+        CancelAimingArrow
     }
 }

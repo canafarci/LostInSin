@@ -18,6 +18,7 @@ MonoBehaviour:
     ReferencedUnityObjects:
     - {fileID: 11400000, guid: e9dd177f9bcd2584d9e394453be5836d, type: 2}
     - {fileID: 11400000, guid: 0f22ee0b19d00854c8e242b82e376c37, type: 2}
+    - {fileID: 11400000, guid: 04cf0a3300a594346a53a0b68323a41f, type: 2}
     - {fileID: 11400000, guid: 4c07139de3660d241b97dd7799d548e6, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -65,10 +66,10 @@ MonoBehaviour:
       Data: 3|LostInSin.Abilities.AbilityInfo, LostInSin.Code
     - Name: AbilityIdentifier
       Entry: 3
-      Data: 0
+      Data: 3
     - Name: Name
       Entry: 1
-      Data: NULL
+      Data: Shoot Arrow
     - Name: AbilityBlueprint
       Entry: 10
       Data: 2
@@ -86,13 +87,28 @@ MonoBehaviour:
       Data: NULL
     - Name: AbilityBlueprint
       Entry: 10
-      Data: 2
+      Data: 3
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 13
       Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: MoveAbility
+      Entry: 7
+      Data: 5|LostInSin.Abilities.AbilityInfo, LostInSin.Code
+    - Name: AbilityIdentifier
+      Entry: 3
+      Data: 1
+    - Name: Name
+      Entry: 1
+      Data: Move
+    - Name: AbilityBlueprint
+      Entry: 10
+      Data: 1
     - Name: 
       Entry: 8
       Data: 
