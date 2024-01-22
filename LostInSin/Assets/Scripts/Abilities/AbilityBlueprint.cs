@@ -13,6 +13,10 @@ namespace LostInSin.Abilities
         public AbilityIdentifiers AbilityIdentifier;
         public bool IsUICastedAbility;
 
+        public virtual void Initialize()
+        {
+        }
+
         public virtual void OnAbilitySelected(Character instigator)
         {
         }

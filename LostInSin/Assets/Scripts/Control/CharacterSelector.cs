@@ -1,6 +1,7 @@
 using System;
 using LostInSin.Characters;
 using LostInSin.Core;
+using LostInSin.Identifiers;
 using LostInSin.Input;
 using LostInSin.Raycast;
 using LostInSin.Signals;
@@ -54,9 +55,12 @@ namespace LostInSin.Control
             if (_selectedCharacter == null)
                 SetNewCharacterAsSelected(character);
 
-            else if (_selectedCharacter.CanExitTickingCharacter())
+            else if (CanChangeCharacter(character))
                 SetNewCharacterAsSelected(character);
         }
+
+        private bool CanChangeCharacter(Character character) =>
+            character.CharacterTeam == CharacterTeam.Friendly && _selectedCharacter.CanExitTickingCharacter();
 
         private void SetNewCharacterAsSelected(Character character)
         {

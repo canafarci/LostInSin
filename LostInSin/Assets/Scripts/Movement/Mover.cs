@@ -6,12 +6,17 @@ namespace LostInSin.Movement
 {
     public class Mover : IMover
     {
-        private enum MovementState { Idle, Moving }
+        private enum MovementState
+        {
+            Idle,
+            Moving
+        }
+
         private readonly Transform _transform;
         private readonly Settings _settings;
         private Vector3 _target;
         private MovementState _currentState = MovementState.Idle;
-        public bool IsMoving { get { return _currentState == MovementState.Moving; } }
+        public bool IsMoving => _currentState == MovementState.Moving;
 
         public Mover(Transform transform, Settings settings)
         {
@@ -38,7 +43,7 @@ namespace LostInSin.Movement
 
         private void TurnTowards(Vector3 normalizedDirection)
         {
-            if (normalizedDirection != default(Vector3))
+            if (normalizedDirection != default)
             {
                 Quaternion toRotation = Quaternion.LookRotation(normalizedDirection, Vector3.up);
                 float interpolationFactor = _settings.TurnSpeed * Time.deltaTime;
@@ -58,10 +63,10 @@ namespace LostInSin.Movement
             return direction.normalized;
         }
 
-        public bool HasReachedDestination()
+        private bool HasReachedDestination()
         {
             if (_currentState != MovementState.Moving) return false;
-            
+
             bool reached = Vector3.SqrMagnitude(_transform.position - _target) < Mathf.Pow(0.02f, 2);
 
             if (reached)

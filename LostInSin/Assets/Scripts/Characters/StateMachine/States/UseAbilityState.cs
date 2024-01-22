@@ -25,6 +25,7 @@ namespace LostInSin.Characters.StateMachine.States
         private enum StateActivity
         {
             Active,
+            Casting,
             Inactive
         }
 
@@ -39,12 +40,16 @@ namespace LostInSin.Characters.StateMachine.States
         {
             await UniTask.NextFrame(); //wait one frame as character can be switched
 
-            if (_stateActivity == StateActivity.Inactive || _pointerOverUIChecker.PointerIsOverUI) return;
+            if (_stateActivity == StateActivity.Inactive ||
+                _stateActivity == StateActivity.Casting ||
+                _pointerOverUIChecker.PointerIsOverUI) return;
 
             _runtimeData.CanExitState = false;
+            _stateActivity = StateActivity.Casting;
 
             await _abilitySystemManager.CastAbility();
 
+            _stateActivity = StateActivity.Active;
             _runtimeData.CanExitState = true;
         }
 

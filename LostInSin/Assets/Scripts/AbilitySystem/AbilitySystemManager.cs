@@ -34,12 +34,10 @@ namespace LostInSin.AbilitySystem
 
         private void OnSelectedAbilityChanged(SelectedAbilityChangedSignal signal)
         {
-            Debug.Log(_abilityStack.Count);
             //if stack only contains move action, add to stack
             if (_abilityStack.Count == 1)
             {
                 _abilityStack.Push(signal.Ability);
-                Debug.Log("asddd1");
             }
             else //pop last element and add the new element
             {
@@ -47,16 +45,12 @@ namespace LostInSin.AbilitySystem
                 ability.AbilityBlueprint.OnAbilityDeselected(_instigator);
 
                 _abilityStack.Push(signal.Ability);
-
-                Debug.Log("asddd2");
             }
 
             _ability.AbilityBlueprint.OnAbilitySelected(_instigator);
 
             if (_ability.AbilityBlueprint.IsUICastedAbility)
                 CastAbility();
-
-            Debug.Log(_abilityStack.Count);
         }
 
         private void OnCharacterSelectedSignal(CharacterSelectedSignal signal)
@@ -86,6 +80,7 @@ namespace LostInSin.AbilitySystem
                 if (target.castResult == AbilityCastResult.Fail)
                     return AbilityCastResult.Fail;
 
+                Debug.Log(target.target.Character);
                 await abilityBlueprint.Cast(_instigator, target.target);
 
                 if (target.castResult == AbilityCastResult.Fail)

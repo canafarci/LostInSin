@@ -5,6 +5,7 @@ using LostInSin.AbilitySystem;
 using LostInSin.Animation;
 using LostInSin.Characters.PersistentData;
 using LostInSin.Characters.StateMachine;
+using LostInSin.Identifiers;
 using LostInSin.Movement;
 using UnityEngine;
 using Zenject;
@@ -18,12 +19,13 @@ namespace LostInSin.Characters
     {
         private IStateTicker _stateTicker;
 
-        [Inject] private CharacterStateRuntimeData _runtimeData;
+        [Inject] private readonly CharacterStateRuntimeData _runtimeData;
         [Inject] private readonly AbilitySet _abilitySet;
         [Inject] private readonly AttributeSet _attributeSet;
-        [Inject] private IMover _mover;
-        [Inject] private SignalBus _signalBus;
-        [Inject] private AnimationReference _animationReference;
+        [Inject] private readonly IMover _mover;
+        [Inject] private readonly SignalBus _signalBus;
+        [Inject] private readonly AnimationReference _animationReference;
+        [Inject] private readonly CharacterPersistentData _persistentData;
 
         #region Getters
 
@@ -34,6 +36,7 @@ namespace LostInSin.Characters
         public CharacterStateRuntimeData RuntimeData => _runtimeData;
         public SignalBus SignalBus => _signalBus;
         public AnimationReference AnimationReference => _animationReference;
+        public CharacterTeam CharacterTeam => _persistentData.CharacterTeam;
 
         #endregion
 

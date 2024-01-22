@@ -84,6 +84,7 @@ namespace LostInSin.Context
 
         private void InitExecutionOrder()
         {
+            Container.BindExecutionOrder<GameInput>(-100);
             Container.BindExecutionOrder<CameraInitializer>(-10);
             Container.BindExecutionOrder<GridMeshDisplayService>(2000);
         }

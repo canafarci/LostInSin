@@ -78,7 +78,7 @@ MonoBehaviour:
       Data: 2
     - Name: $v
       Entry: 1
-      Data: ShootArrowShootArrow
+      Data: ShootArrow
     - Name: 
       Entry: 8
       Data: 
