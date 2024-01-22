@@ -12,49 +12,26 @@ using Zenject;
 
 namespace LostInSin.Characters.StateMachine.States
 {
-    public class UseAbilityState : IState, IInitializable
+    public class UseAbilityState : IState
     {
         [Inject(Id = CharacterStates.IdleState)]
         private readonly IState _idleState;
 
         [Inject] private readonly AbilitySystemManager _abilitySystemManager;
         [Inject] private readonly CharacterStateRuntimeData _runtimeData;
-        [Inject] private readonly GameInput _gameInput;
-        [Inject] private readonly PointerOverUIChecker _pointerOverUIChecker;
+
+        private StateActivity _stateActivity = StateActivity.Inactive;
 
         private enum StateActivity
         {
             Active,
-            Casting,
             Inactive
-        }
-
-        private StateActivity _stateActivity = StateActivity.Inactive;
-
-        public void Initialize()
-        {
-            _gameInput.GameplayActions.Click.performed += OnClickPerformed;
-        }
-
-        private async void OnClickPerformed(InputAction.CallbackContext context)
-        {
-            await UniTask.NextFrame(); //wait one frame as character can be switched
-
-            if (_stateActivity == StateActivity.Inactive ||
-                _stateActivity == StateActivity.Casting ||
-                _pointerOverUIChecker.PointerIsOverUI) return;
-
-            _runtimeData.CanExitState = false;
-            _stateActivity = StateActivity.Casting;
-
-            await _abilitySystemManager.CastAbility();
-
-            _stateActivity = StateActivity.Active;
-            _runtimeData.CanExitState = true;
         }
 
         public void Tick()
         {
+            if (_stateActivity == StateActivity.Active)
+                _runtimeData.CanExitState = _abilitySystemManager.CastResult is not AbilityCastResult.InProgress;
         }
 
         public void Enter()

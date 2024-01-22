@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using LostInSin.Abilities;
 using LostInSin.Characters;
@@ -16,10 +17,12 @@ namespace LostInSin.AbilitySystem
         [Inject] private readonly SignalBus _signalBus;
 
         private readonly CompositeDisposable _disposables = new();
-
-        private Character _instigator;
         private readonly Stack<AbilityInfo> _abilityStack = new();
+        private Character _instigator;
         private AbilityInfo _ability => _abilityStack.Peek();
+        private AbilityCastResult _castResult;
+        private CancellationTokenSource _cancellationTokenSource;
+        public AbilityCastResult CastResult => _castResult;
 
         public void Initialize()
         {
@@ -35,22 +38,26 @@ namespace LostInSin.AbilitySystem
         private void OnSelectedAbilityChanged(SelectedAbilityChangedSignal signal)
         {
             //if stack only contains move action, add to stack
+            AbilityInfo signalAbility = signal.Ability;
+            if (signalAbility == _ability) return;
+
             if (_abilityStack.Count == 1)
             {
-                _abilityStack.Push(signal.Ability);
+                if (signalAbility.AbilityIdentifier != AbilityIdentifiers.Move) //check new ability is not move
+                    _abilityStack.Push(signalAbility);
             }
             else //pop last element and add the new element
             {
                 AbilityInfo ability = _abilityStack.Pop();
                 ability.AbilityBlueprint.OnAbilityDeselected(_instigator);
 
-                _abilityStack.Push(signal.Ability);
+                _abilityStack.Push(signalAbility);
             }
 
             _ability.AbilityBlueprint.OnAbilitySelected(_instigator);
+            _cancellationTokenSource = CreateCancellationTokenSource();
 
-            if (_ability.AbilityBlueprint.IsUICastedAbility)
-                CastAbility();
+            CastAbility(_cancellationTokenSource.Token);
         }
 
         private void OnCharacterSelectedSignal(CharacterSelectedSignal signal)
@@ -61,38 +68,51 @@ namespace LostInSin.AbilitySystem
             AbilityInfo moveAbility = signal.SelectedCharacter
                                             .Abilities
                                             .Find(x => x.AbilityIdentifier == AbilityIdentifiers.Move);
+
             _abilityStack.Push(moveAbility);
+            _cancellationTokenSource = CreateCancellationTokenSource();
+
+            CastAbility(_cancellationTokenSource.Token);
         }
 
         /// <summary>
         /// Casts the ability represented by the current AbilityBlueprint.
         /// </summary>
         /// <returns>Returns the result of the ability cast.</returns>
-        public async UniTask<AbilityCastResult> CastAbility()
+        private async void CastAbility(CancellationToken cancellationToken)
         {
+            if (_castResult == AbilityCastResult.InProgress) return;
+
             AbilityBlueprint abilityBlueprint = _ability.AbilityBlueprint;
-            AbilityCastResult abilityCastResult = AbilityCastResult.Fail;
+            _castResult = AbilityCastResult.SelectingTarget;
 
-            if (await abilityBlueprint.CanCast(_instigator))
+            if (await abilityBlueprint.CanCast(_instigator, cancellationToken))
             {
-                (AbilityCastResult castResult, AbilityTarget target) target = await abilityBlueprint.PreCast(_instigator);
+                (AbilityCastResult castResult, AbilityTarget target) target =
+                    await abilityBlueprint.PreCast(_instigator, cancellationToken);
 
-                if (target.castResult == AbilityCastResult.Fail)
-                    return AbilityCastResult.Fail;
+                _castResult = target.castResult;
+                if (_castResult is AbilityCastResult.Fail) return;
 
-                Debug.Log(target.target.Character);
-                await abilityBlueprint.Cast(_instigator, target.target);
-
-                if (target.castResult == AbilityCastResult.Fail)
-                    return AbilityCastResult.Fail;
-
-                await abilityBlueprint.PostCast(_instigator);
+                _castResult = await abilityBlueprint.Cast(_instigator, target.target);
+                _castResult = await abilityBlueprint.PostCast(_instigator);
             }
 
-            if (_abilityStack.Count > 1)
-                _abilityStack.Pop();
+            if (_abilityStack.Count > 1) _abilityStack.Pop();
 
-            return abilityCastResult;
+            _cancellationTokenSource = CreateCancellationTokenSource();
+            CastAbility(_cancellationTokenSource.Token);
+        }
+
+        private CancellationTokenSource CreateCancellationTokenSource()
+        {
+            if (_cancellationTokenSource != null)
+            {
+                _cancellationTokenSource.Cancel();
+                _cancellationTokenSource.Dispose();
+            }
+
+            return new CancellationTokenSource();
         }
 
         public void Dispose()

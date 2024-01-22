@@ -23,4 +23,4 @@ MonoBehaviour:
     SerializationNodes: []
   AbilityIdentifier: 3
   IsUICastedAbility: 0
-  ArrowPrefab: {fileID: 1846311025636673151, guid: 29b84697c5b570d4b9e918325ce0d607, type: 3}
+  ArrowPrefab: {fileID: 1846311025636673151, guid: 24649e56f73ad414a9a4733e8d3a2a8d, type: 3}

@@ -39,7 +39,6 @@ namespace LostInSin.Context
             BindAnimations();
             BindStates();
             BindAttributeSystem();
-            InitializeStates();
         }
 
         private void BindAnimations()
@@ -111,13 +110,6 @@ namespace LostInSin.Context
                      .WithId(AttributeIdentifiers.Luck)
                      .To<LuckAttribute>()
                      .AsSingle();
-        }
-
-        private void InitializeStates()
-        {
-            UseAbilityState useAbilityState = Container.ResolveId<IState>(CharacterStates.UseAbilityState)
-                                                  as UseAbilityState;
-            useAbilityState.Initialize();
         }
     }
 }

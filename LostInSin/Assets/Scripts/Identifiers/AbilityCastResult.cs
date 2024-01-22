@@ -4,6 +4,7 @@ namespace LostInSin.Identifiers
     {
         Fail = 0,
         InProgress = 1,
-        Success = 2
+        Success = 2,
+        SelectingTarget = 3
     }
 }

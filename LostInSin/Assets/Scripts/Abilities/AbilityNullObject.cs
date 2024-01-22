@@ -1,3 +1,4 @@
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using LostInSin.Characters;
 using LostInSin.Identifiers;
@@ -16,15 +17,17 @@ namespace LostInSin.Abilities
             return new UniTask<AbilityCastResult>(AbilityCastResult.Fail);
         }
 
-        public override UniTask<bool> CanCast(Character instigator) => new(false);
+        public override UniTask<bool> CanCast(Character instigator, CancellationToken cancellationToken) => new(false);
 
-        public override UniTask<(AbilityCastResult castResult, AbilityTarget target)> PreCast(Character instigator)
+        public override UniTask<(AbilityCastResult castResult, AbilityTarget target)> PreCast(
+            Character instigator,
+            CancellationToken cancellationToken)
         {
             AbilityCastResult castResult = AbilityCastResult.Fail;
             AbilityTarget target = default;
             return new UniTask<(AbilityCastResult castResult, AbilityTarget target)>((castResult, target));
         }
 
-        public override UniTask<bool> PostCast(Character instigator) => new(false);
+        public override UniTask<AbilityCastResult> PostCast(Character instigator) => new(AbilityCastResult.Fail);
     }
 }

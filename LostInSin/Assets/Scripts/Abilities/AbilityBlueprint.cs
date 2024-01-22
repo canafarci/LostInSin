@@ -1,3 +1,4 @@
+using System.Threading;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using LostInSin.Characters;
@@ -21,10 +22,14 @@ namespace LostInSin.Abilities
         {
         }
 
-        public abstract UniTask<bool> CanCast(Character instigator);
-        public abstract UniTask<(AbilityCastResult castResult, AbilityTarget target)> PreCast(Character instigator);
+        public abstract UniTask<bool> CanCast(Character instigator, CancellationToken cancellationToken);
+
+        public abstract UniTask<(AbilityCastResult castResult, AbilityTarget target)> PreCast(
+            Character instigator,
+            CancellationToken cancellationToken);
+
         public abstract UniTask<AbilityCastResult> Cast(Character instigator, AbilityTarget target);
-        public abstract UniTask<bool> PostCast(Character instigator);
+        public abstract UniTask<AbilityCastResult> PostCast(Character instigator);
 
         public virtual void OnAbilityDeselected(Character instigator)
         {
