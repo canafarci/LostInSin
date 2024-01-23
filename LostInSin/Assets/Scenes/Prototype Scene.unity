@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d28f38a5dc30048aacd38943a2d672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _characterPrefab: {fileID: 7240346779836529104, guid: 9e394aab35da0a3469fd7cdf594ac30b, type: 3}
+  _characterPrefab: {fileID: 4748239315064200443, guid: 20ec560e6171b51429f7e2ff5425c1d0, type: 3}
   _camera: {fileID: 1577805091}
 --- !u!114 &11045320
 MonoBehaviour:

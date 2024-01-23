@@ -44,9 +44,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: CharacterSelectedDecal
       objectReference: {fileID: 0}
+    - target: {fileID: 5222681667912262311, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7209445461687903701, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.039687634
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7209445461687903701, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
       propertyPath: m_LocalPosition.y
@@ -54,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7209445461687903701, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.5476518
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7209445461687903701, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
       propertyPath: m_LocalRotation.w
@@ -87,6 +91,10 @@ PrefabInstance:
     - target: {fileID: 8581914382870010518, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
       propertyPath: m_Name
       value: ArcherCharacter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8581914382870010518, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7921794386757203553, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}

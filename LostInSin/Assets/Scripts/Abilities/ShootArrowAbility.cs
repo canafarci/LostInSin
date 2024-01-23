@@ -81,7 +81,7 @@ namespace LostInSin.Abilities
 
                 _state = AbilityState.SelectingTarget;
 
-                MoveCharacterTowardsTarget(instigator, cancellationToken);
+                RotateCharacterTowardsTarget(instigator, cancellationToken);
                 await UniTask.WaitUntil(() => _state == AbilityState.SelectedTarget,
                                         cancellationToken: cancellationToken);
 
@@ -122,7 +122,7 @@ namespace LostInSin.Abilities
             _target = default;
         }
 
-        private async void MoveCharacterTowardsTarget(Character instigator, CancellationToken cancellationToken)
+        private async void RotateCharacterTowardsTarget(Character instigator, CancellationToken cancellationToken)
         {
             try
             {
@@ -143,6 +143,7 @@ namespace LostInSin.Abilities
         private Vector3 CalculateNormalizedDirection(Vector3 target, Transform instigator)
         {
             Vector3 direction = target - instigator.position;
+            direction.y = instigator.transform.position.y;
             return direction.normalized;
         }
 
@@ -165,8 +166,9 @@ namespace LostInSin.Abilities
             _arrow.transform.localScale = animationReference.ArrowSpawnScale;
         }
 
-        private void ResetArrowPosition(Character instigator)
+        private async void ResetArrowPosition(Character instigator)
         {
+            await UniTask.Delay(1000);
             ArcherAnimationReference animationReference = instigator.AnimationReference as ArcherAnimationReference;
             Transform spawnTransform = animationReference.ArrowSpawnPoint;
             _arrow.transform.parent = spawnTransform;

@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using LostInSin.Abilities;
 using LostInSin.AbilitySystem;
 using LostInSin.Animation;
@@ -17,21 +18,30 @@ namespace LostInSin.Context
 {
     public class CharacterInstaller : Installer<CharacterInstaller>
     {
-        [Inject] private Vector3 _startPosition;
-        [Inject] private CharacterPersistentData _characterPersistentData;
+        private Vector3 _startPosition;
+        private CharacterPersistentData _characterPersistentData;
+
+        private CharacterInstaller(CharacterPersistentData characterPersistentData, Vector3 startPosition)
+        {
+            _characterPersistentData = characterPersistentData;
+            _startPosition = startPosition;
+        }
 
         public override void InstallBindings()
         {
+            Container.InstantiatePrefab(_characterPersistentData.CharacterPrefab);
+
             Container.Bind<Character>().FromNewComponentOnRoot().AsSingle();
+            Container.Bind<Transform>().FromComponentOnRoot().AsSingle();
+            Container.Bind<CharacterVisualsVO>().FromComponentInHierarchy().AsSingle();
+
             Container.Bind<Vector3>().FromInstance(_startPosition);
             Container.Bind<CharacterPersistentData>().FromInstance(_characterPersistentData);
 
-            Container.Bind<Transform>().FromComponentsOnRoot().AsSingle();
-            Container.Bind<Animator>().FromComponentInHierarchy().AsSingle();
-            Container.Bind<CharacterVisualsVO>().FromComponentsOnRoot().AsSingle();
 
             DeclareSignals();
 
+            Container.Bind<Animator>().FromComponentInHierarchy().AsSingle();
             Container.Bind<IMover>().To<Mover>().AsSingle();
             Container.BindInterfacesAndSelfTo<CharacterVisualChanger>().AsSingle().NonLazy();
             Container.Bind<CharacterStateRuntimeData>().AsSingle();

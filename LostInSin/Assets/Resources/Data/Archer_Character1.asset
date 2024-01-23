@@ -113,4 +113,6 @@ MonoBehaviour:
       Entry: 8
       Data: 
   DefaultSelectedCharacter: 1
+  CharacterPrefab: {fileID: 7240346779836529104, guid: 9e394aab35da0a3469fd7cdf594ac30b, type: 3}
+  CharacterTeam: 0
   CharacterClass: 0

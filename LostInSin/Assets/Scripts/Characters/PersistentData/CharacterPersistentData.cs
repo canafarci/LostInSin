@@ -12,6 +12,7 @@ namespace LostInSin.Characters.PersistentData
     public class CharacterPersistentData : SerializedScriptableObject
     {
         public bool DefaultSelectedCharacter = false;
+        public GameObject CharacterPrefab;
         public CharacterTeam CharacterTeam;
         public CharacterClass CharacterClass;
         public AbilityInfo[] CharacterAbilities;
