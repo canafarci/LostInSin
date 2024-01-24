@@ -18,19 +18,22 @@ namespace LostInSin.Grid
 
         public (GridCell[,] cells, GridCellData[,] data ) GenerateGridCells(NativeArray<GridPoint> gridPoints)
         {
-            int numCellsRow = _gridModel.GridRowCount;
-            int numCellsColumn = _gridModel.GridColumnCount;
+            using (gridPoints)
+            {
+                int numCellsRow = _gridModel.GridRowCount;
+                int numCellsColumn = _gridModel.GridColumnCount;
 
-            GridCell[,] gridCells = new GridCell[numCellsRow, numCellsColumn];
-            GridCellData[,] gridCellsData = new GridCellData[numCellsRow, numCellsColumn];
+                GridCell[,] gridCells = new GridCell[numCellsRow, numCellsColumn];
+                GridCellData[,] gridCellsData = new GridCellData[numCellsRow, numCellsColumn];
 
-            for (int x = 0; x < numCellsRow; x++)
-                for (int y = 0; y < numCellsColumn; y++)
-                    ProcessCell(gridPoints, gridCells, gridCellsData, x, y);
+                for (int x = 0; x < numCellsRow; x++)
+                {
+                    for (int y = 0; y < numCellsColumn; y++)
+                        ProcessCell(gridPoints, gridCells, gridCellsData, x, y);
+                }
 
-            gridPoints.Dispose();
-            return (gridCells, gridCellsData
-                   );
+                return (gridCells, gridCellsData);
+            }
         }
 
         private void ProcessCell(NativeArray<GridPoint> gridPoints,
@@ -40,11 +43,14 @@ namespace LostInSin.Grid
                                  int y)
         {
             int topLeftIndex =
-                x + y * (_gridModel.GridRowCount +
-                         1); // add one to side length value, as grid cells count is  1 less than each side count
+                x +
+                y *
+                (_gridModel.GridRowCount +
+                 1); // add one to side length value, as grid cells count is  1 less than each side count
             int topRightIndex = topLeftIndex + 1;
             int bottomLeftIndex =
-                topLeftIndex + _gridModel.GridRowCount +
+                topLeftIndex +
+                _gridModel.GridRowCount +
                 1; // add one to side length value, as grid cells count is  1 less than each side count
             int bottomRightIndex = bottomLeftIndex + 1;
 
@@ -68,11 +74,11 @@ namespace LostInSin.Grid
                                  int topLeftIndex,
                                  int topRightIndex,
                                  int bottomLeftIndex,
-                                 int bottomRightIndex)
-        {
-            return !(gridPoints[topLeftIndex].IsVoid || gridPoints[topRightIndex].IsVoid ||
-                     gridPoints[bottomLeftIndex].IsVoid || gridPoints[bottomRightIndex].IsVoid);
-        }
+                                 int bottomRightIndex) =>
+            !(gridPoints[topLeftIndex].IsVoid ||
+              gridPoints[topRightIndex].IsVoid ||
+              gridPoints[bottomLeftIndex].IsVoid ||
+              gridPoints[bottomRightIndex].IsVoid);
 
         private void AdjustCellBasedOnRaycast(ref GridCell cell)
         {

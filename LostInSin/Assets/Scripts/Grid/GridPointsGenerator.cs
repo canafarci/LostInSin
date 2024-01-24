@@ -8,19 +8,21 @@ namespace LostInSin.Grid
     {
         public NativeArray<GridPoint> GenerateGridPoints(NativeArray<RaycastHit> hitResults)
         {
-            NativeArray<GridPoint> gridPoints = new(hitResults.Length, Allocator.TempJob);
-
-            CreateGridArrayJob createGridArrayJob = new CreateGridArrayJob
+            using (hitResults)
             {
-                HitResults = hitResults, GridPoints = gridPoints
-            };
+                NativeArray<GridPoint> gridPoints = new(hitResults.Length, Allocator.TempJob);
 
-            JobHandle gridPointCreationHandle =
-                createGridArrayJob.Schedule(hitResults.Length, 64); // 64 is the batch size
-            gridPointCreationHandle.Complete();
+                CreateGridArrayJob createGridArrayJob = new()
+                                                        {
+                                                            HitResults = hitResults, GridPoints = gridPoints
+                                                        };
 
-            hitResults.Dispose();
-            return gridPoints;
+                JobHandle gridPointCreationHandle =
+                    createGridArrayJob.Schedule(hitResults.Length, 64); // 64 is the batch size
+                gridPointCreationHandle.Complete();
+
+                return gridPoints;
+            }
         }
 
         private struct CreateGridArrayJob : IJobParallelFor
@@ -32,8 +34,8 @@ namespace LostInSin.Grid
             {
                 RaycastHit hit = HitResults[index];
                 GridPoints[index] = hit.distance > 0
-                    ? new GridPoint(hit.point.x, hit.point.y, hit.point.z, false)
-                    : new GridPoint();
+                                        ? new GridPoint(hit.point.x, hit.point.y, hit.point.z, false)
+                                        : new GridPoint();
             }
         }
     }

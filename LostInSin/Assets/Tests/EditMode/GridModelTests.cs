@@ -15,7 +15,7 @@ namespace LostInSin.Grid.Tests
         public void SetUp()
         {
             GridGenerationSO gridGenerationSO =
-                AssetDatabase.LoadAssetAtPath<GridGenerationSO>("Assets/Data/GridGenerationData.asset");
+                Resources.Load<GridGenerationSO>("Data/GridGenerationData");
             GridModel.Data data = new();
             data.GridData = gridGenerationSO;
 
@@ -39,10 +39,7 @@ namespace LostInSin.Grid.Tests
             Assert.AreEqual(_gridModel.GridCellWidth * _gridModel.GridRowCount / 2f, _gridModel.GridColumnOffset);
         }
 
-        private int RoundToEvenNumber(int number)
-        {
-            return number % 2 == 0 ? number : number - 1;
-        }
+        private int RoundToEvenNumber(int number) => number % 2 == 0 ? number : number - 1;
 
         [Test]
         public void SetAndGetGridCells_ShouldWorkCorrectly()

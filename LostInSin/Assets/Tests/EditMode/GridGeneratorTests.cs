@@ -27,7 +27,8 @@ namespace LostInSin.Grid.Tests
             _mockCellGenerator = new Mock<IGridCellGenerator>();
 
             GridGenerationSO gridGenerationSO =
-                AssetDatabase.LoadAssetAtPath<GridGenerationSO>("Assets/Data/GridGenerationData.asset");
+                Resources.Load<GridGenerationSO>("Data/GridGenerationData");
+
             GridModel.Data data = new();
             data.GridData = gridGenerationSO;
 

@@ -22,7 +22,8 @@ namespace LostInSin.Grid.Tests
             _mockHitResults[0] = new RaycastHit { point = new Vector3(1, 1, 1), distance = 1 };
             _mockHitResults[1] = new RaycastHit { point = new Vector3(2, 2, 2), distance = 1 };
             _mockHitResults[2] = new RaycastHit { point = new Vector3(3, 3, 3), distance = 1 };
-            _mockHitResults[3] = new RaycastHit { point = new Vector3(4, 4, 4), distance = 0 }; // This should result in a default GridPoint
+            _mockHitResults[3] = new RaycastHit
+                                 { point = new Vector3(4, 4, 4), distance = 0 }; // This should result in a default GridPoint
         }
 
         [Test]
@@ -46,7 +47,7 @@ namespace LostInSin.Grid.Tests
         public void GenerateGridPoints_WithEmptyRaycastHits_ShouldReturnEmptyArray()
         {
             // Arrange
-            var emptyHits = new NativeArray<RaycastHit>(0, Allocator.TempJob);
+            NativeArray<RaycastHit> emptyHits = new(0, Allocator.TempJob);
 
             // Act
             NativeArray<GridPoint> gridPoints = _gridPointsGenerator.GenerateGridPoints(emptyHits);
@@ -55,7 +56,7 @@ namespace LostInSin.Grid.Tests
             Assert.AreEqual(0, gridPoints.Length);
 
             // Clean up
-            emptyHits.Dispose();
+            _mockHitResults.Dispose();
             gridPoints.Dispose();
         }
 
@@ -91,13 +92,10 @@ namespace LostInSin.Grid.Tests
             gridPoints.Dispose();
         }
 
-        [TearDown]
-        public void Cleanup()
-        {
-            if (_mockHitResults.IsCreated)
-            {
-                _mockHitResults.Dispose();
-            }
-        }
+        // [TearDown]
+        // public void Cleanup()
+        // {
+        //     if (_mockHitResults.IsCreated) _mockHitResults.Dispose();
+        // }
     }
 }

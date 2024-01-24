@@ -41,12 +41,11 @@ namespace LostInSin.AbilitySystem
             AbilityInfo signalAbility = signal.Ability;
             if (signalAbility == _ability) return;
 
-            if (_abilityStack.Count == 1)
+            if (_abilityStack.Count == 1 && signalAbility.AbilityIdentifier != AbilityIdentifiers.Move)
             {
-                if (signalAbility.AbilityIdentifier != AbilityIdentifiers.Move) //check new ability is not move
-                    _abilityStack.Push(signalAbility);
+                _abilityStack.Push(signalAbility);
             }
-            else //pop last element and add the new element
+            else if (_abilityStack.Count > 1)
             {
                 AbilityInfo ability = _abilityStack.Pop();
                 ability.AbilityBlueprint.OnAbilityDeselected(_instigator);
@@ -55,13 +54,15 @@ namespace LostInSin.AbilitySystem
             }
 
             _ability.AbilityBlueprint.OnAbilitySelected(_instigator);
-            _cancellationTokenSource = CreateCancellationTokenSource();
 
-            CastAbility(_cancellationTokenSource.Token);
+            StartCastingAbility();
         }
 
         private void OnCharacterSelectedSignal(CharacterSelectedSignal signal)
         {
+            if (_abilityStack.Count > 0)
+                _ability.AbilityBlueprint.OnAbilityDeselected(_instigator);
+
             _abilityStack.Clear();
 
             _instigator = signal.SelectedCharacter;
@@ -70,15 +71,10 @@ namespace LostInSin.AbilitySystem
                                             .Find(x => x.AbilityIdentifier == AbilityIdentifiers.Move);
 
             _abilityStack.Push(moveAbility);
-            _cancellationTokenSource = CreateCancellationTokenSource();
 
-            CastAbility(_cancellationTokenSource.Token);
+            StartCastingAbility();
         }
 
-        /// <summary>
-        /// Casts the ability represented by the current AbilityBlueprint.
-        /// </summary>
-        /// <returns>Returns the result of the ability cast.</returns>
         private async void CastAbility(CancellationToken cancellationToken)
         {
             if (_castResult == AbilityCastResult.InProgress) return;
@@ -100,6 +96,11 @@ namespace LostInSin.AbilitySystem
 
             if (_abilityStack.Count > 1) _abilityStack.Pop();
 
+            StartCastingAbility();
+        }
+
+        private void StartCastingAbility()
+        {
             _cancellationTokenSource = CreateCancellationTokenSource();
             CastAbility(_cancellationTokenSource.Token);
         }

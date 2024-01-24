@@ -36,17 +36,15 @@ namespace LostInSin.Grid
             _gridModel.SetGridCells(gridCells.cells, gridCells.data);
         }
 
-        private GridRaycastData CreateRaycastData()
-        {
-            return new GridRaycastData
-                   {
-                       GridRowCount = _gridModel.GridRowCount,
-                       GridCellWidth = _gridModel.GridCellWidth,
-                       GridCellHeight = _gridModel.GridCellHeight,
-                       GridRowOffset = _gridModel.GridRowOffset,
-                       GridColumnOffset = _gridModel.GridColumnOffset,
-                       GridColumnCount = _gridModel.GridColumnCount
-                   };
-        }
+        private GridRaycastData CreateRaycastData() =>
+            new()
+            {
+                GridRowCount = _gridModel.GridRowCount,
+                GridCellWidth = _gridModel.GridCellWidth,
+                GridCellHeight = _gridModel.GridCellHeight,
+                GridRowOffset = _gridModel.GridRowOffset,
+                GridColumnOffset = _gridModel.GridColumnOffset,
+                GridColumnCount = _gridModel.GridColumnCount
+            };
     }
 }

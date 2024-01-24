@@ -38,7 +38,6 @@ namespace LostInSin.Context
             Container.Bind<Vector3>().FromInstance(_startPosition);
             Container.Bind<CharacterPersistentData>().FromInstance(_characterPersistentData);
 
-
             DeclareSignals();
 
             Container.Bind<Animator>().FromComponentInHierarchy().AsSingle();

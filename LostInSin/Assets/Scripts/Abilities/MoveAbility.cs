@@ -1,6 +1,5 @@
 using System;
 using System.Threading;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using LostInSin.Animation;
 using LostInSin.Characters;
@@ -68,7 +67,6 @@ namespace LostInSin.Abilities
             try
             {
                 AbilityCastResult castResult = AbilityCastResult.Fail;
-
                 _state = AbilityState.SelectingTarget;
 
                 await UniTask.WaitUntil(() => _state == AbilityState.SelectedTarget,

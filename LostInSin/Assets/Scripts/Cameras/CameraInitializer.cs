@@ -1,4 +1,3 @@
-
 using Cinemachine;
 using UnityEngine;
 using Zenject;
@@ -13,11 +12,10 @@ namespace LostInSin.Cameras
         private GameObject _cameraTarget;
 
         private CameraInitializer(CinemachineVirtualCamera camera,
-                                CameraModel cameraModel)
+                                  CameraModel cameraModel)
         {
             _camera = camera;
             _cameraModel = cameraModel;
-
         }
 
         public void Initialize()
