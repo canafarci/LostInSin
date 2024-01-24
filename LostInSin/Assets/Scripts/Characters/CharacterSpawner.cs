@@ -1,16 +1,21 @@
+using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using LostInSin.Characters.PersistentData;
+using LostInSin.Identifiers;
 using LostInSin.Signals;
 using UnityEngine;
 using Zenject;
+using Random = UnityEngine.Random;
 
 namespace LostInSin.Characters
 {
-    public class CharacterSpawner : IInitializable
+    public class CharacterSpawner : IInitializable, IDisposable
     {
         private readonly SignalBus _signalBus;
         private readonly Character.Factory _characterFactory;
         private readonly SavedCharacters _savedCharacters;
+        private readonly Dictionary<CharacterPersistentData, Character> _playerCharacters = new();
 
         private CharacterSpawner(Character.Factory characterFactory,
                                  SavedCharacters savedCharacters,
@@ -34,8 +39,13 @@ namespace LostInSin.Characters
                 Vector3 pos = new(randPos.x, 0f, randPos.y);
                 Character character = _characterFactory.Create(pos, characterData);
 
+                if (character.CharacterTeam == CharacterTeam.Friendly)
+                    _playerCharacters[characterData] = character;
+
                 FireInitialSelectedCharacterSignal(characterData, character);
             }
+
+            FireCharactersSpawnedSignal();
         }
 
         private async void FireInitialSelectedCharacterSignal(CharacterPersistentData characterData, Character character)
@@ -45,6 +55,16 @@ namespace LostInSin.Characters
                 await UniTask.DelayFrame(1); //wait one frame to finish initialization
                 _signalBus.Fire(new SelectInitialCharacterSignal(character));
             }
+        }
+
+        private void FireCharactersSpawnedSignal()
+        {
+            _signalBus.Fire(new PlayableCharactersSpawnedSignal(_playerCharacters));
+        }
+
+        public void Dispose()
+        {
+            _playerCharacters.Clear();
         }
     }
 }

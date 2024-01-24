@@ -13,8 +13,13 @@ namespace LostInSin.Characters.PersistentData
     {
         public bool DefaultSelectedCharacter = false;
         public GameObject CharacterPrefab;
+
+        public string CharacterName;
+        public Sprite CharacterAvatar;
+
         public CharacterTeam CharacterTeam;
         public CharacterClass CharacterClass;
+
         public AbilityInfo[] CharacterAbilities;
         public AbilityInfo MoveAbility;
 

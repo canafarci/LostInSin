@@ -9,7 +9,6 @@ namespace LostInSin.UI
 {
     public class AbilityPanelModel : IInitializable, IDisposable
     {
-        [Inject] private AbilityPanelViewModel _panelViewModel;
         [Inject] private SignalBus _signalBus;
 
         private readonly CompositeDisposable _disposables = new();

@@ -49,18 +49,16 @@ namespace LostInSin.Raycast.Tests
             hitResults.Dispose();
         }
 
-        private GridRaycastData CreateMockGridRaycastData()
-        {
-            return new GridRaycastData
-                   {
-                       GridRowCount = 9,
-                       GridColumnCount = 9,
-                       GridCellWidth = 1f,
-                       GridCellHeight = 1f,
-                       GridRowOffset = 0.5f,
-                       GridColumnOffset = 0.5f
-                   };
-        }
+        private GridRaycastData CreateMockGridRaycastData() =>
+            new()
+            {
+                GridRowCount = 9,
+                GridColumnCount = 9,
+                GridCellWidth = 1f,
+                GridCellHeight = 1f,
+                GridRowOffset = 0.5f,
+                GridColumnOffset = 0.5f
+            };
 
         [UnityTest]
         public IEnumerator RaycastCommands_PrepareViaReflection_ShouldHaveCorrectOriginsAndDirections()
@@ -110,7 +108,10 @@ namespace LostInSin.Raycast.Tests
             // Act
             _plane.SetActive(true);
             yield return null;
+            yield return null;
+            yield return null;
             NativeArray<RaycastHit> hitResults = _gridRaycaster.PerformRaycasting(_mockRaycastData);
+            yield return null;
             yield return null;
 
             // Assert

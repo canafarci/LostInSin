@@ -12,7 +12,7 @@ namespace LostInSin.UI
     public class AbilityPanelIconView : MonoBehaviour
     {
         [SerializeField] private int _buttonIndex;
-        [Inject] private AbilityPanelViewModel _panelViewModel;
+        [Inject] private AbilityPanelVM _panelVM;
 
         private readonly CompositeDisposable _disposables = new();
         private TextMeshProUGUI _text;
@@ -24,16 +24,16 @@ namespace LostInSin.UI
             _text = GetComponentInChildren<TextMeshProUGUI>();
             _button = GetComponentInChildren<Button>();
 
-            _panelViewModel.Abilities
-                           .Subscribe(AbilitiesInfoReceivedHandler)
-                           .AddTo(_disposables);
+            _panelVM.Abilities
+                    .Subscribe(AbilitiesInfoReceivedHandler)
+                    .AddTo(_disposables);
 
             _button.onClick.AddListener(ButtonClickHandler);
         }
 
         private void ButtonClickHandler()
         {
-            _panelViewModel.OnButtonClicked(_ability);
+            _panelVM.OnButtonClicked(_ability);
         }
 
         private void AbilitiesInfoReceivedHandler(List<AbilityInfo> abilities)

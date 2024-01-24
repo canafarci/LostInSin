@@ -8,12 +8,13 @@ using Zenject;
 
 namespace LostInSin.UI
 {
-    public class AbilityPanelViewModel : IInitializable, IDisposable
+    public class AbilityPanelVM : IInitializable, IDisposable
     {
         [Inject] private readonly AbilityPanelModel _panelModel;
         [Inject] private readonly SignalBus _signalBus;
 
         private readonly CompositeDisposable _disposables = new();
+
         private readonly ReactiveProperty<List<AbilityInfo>> _abilities = new();
 
         public ReactiveProperty<List<AbilityInfo>> Abilities => _abilities;

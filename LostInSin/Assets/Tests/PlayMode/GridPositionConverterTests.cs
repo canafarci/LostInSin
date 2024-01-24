@@ -64,7 +64,6 @@ namespace LostInSin.Grid.Tests
             int column = 1;
 
             // Assuming a specific center position for this cell
-            Debug.Log(_gridModel);
             Vector3 expectedWorldPoint = _gridModel.GetGridCellData(row, column).CenterPosition;
 
             // Act

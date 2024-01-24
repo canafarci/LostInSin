@@ -20,8 +20,8 @@ namespace LostInSin.Raycast.Tests
             _mockRayDrawer = new Mock<IRayDrawer>();
 
             Vector3 rayOrigin = Vector3.zero;
-            Vector3 rayDirection = new Vector3(0, 0, 4);
-            Ray testRay = new Ray(rayOrigin, rayDirection);
+            Vector3 rayDirection = new(0, 0, 4);
+            Ray testRay = new(rayOrigin, rayDirection);
 
             _mockRayDrawer.Setup(drawer => drawer.DrawRay()).Returns(testRay);
 
@@ -40,7 +40,7 @@ namespace LostInSin.Raycast.Tests
 
             yield return null;
             // Arrange
-            var raycaster = Container.Resolve<ComponentRaycaster<TestComponent>>();
+            ComponentRaycaster<TestComponent> raycaster = Container.Resolve<ComponentRaycaster<TestComponent>>();
 
             GameObject testObj = GameObject.CreatePrimitive(PrimitiveType.Cube);
             testObj.AddComponent<TestComponent>();
@@ -67,7 +67,7 @@ namespace LostInSin.Raycast.Tests
 
             yield return null;
             // Arrange
-            var raycaster = Container.Resolve<ComponentRaycaster<TestComponent>>();
+            ComponentRaycaster<TestComponent> raycaster = Container.Resolve<ComponentRaycaster<TestComponent>>();
 
             GameObject testObj = GameObject.CreatePrimitive(PrimitiveType.Cube);
             testObj.AddComponent<TestComponent>();
@@ -89,27 +89,30 @@ namespace LostInSin.Raycast.Tests
             CommonInstall();
 
             yield return null;
+            yield return null;
+            yield return null;
             // Arrange
-            var raycaster = Container.Resolve<ComponentRaycaster<TestComponent>>();
+            ComponentRaycaster<TestComponent> raycaster = Container.Resolve<ComponentRaycaster<TestComponent>>();
+            yield return null;
+            yield return null;
 
             GameObject testObj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            yield return null;
+            yield return null;
 
             testObj.transform.position = new Vector3(0, 0, 4);
             testObj.transform.localScale = new Vector3(3, 3, 3);
-
 
             yield return null;
             yield return null;
             yield return null;
             // Assert
             Assert.That(() => raycaster.RaycastComponent(out TestComponent component, LayerMask.GetMask("Default")),
-                  Throws.TypeOf<Exception>());
+                        Throws.TypeOf<Exception>());
         }
     }
 
     public class TestComponent : MonoBehaviour
     {
-
     }
 }
-

@@ -92,7 +92,7 @@ namespace LostInSin.Context
         private void BindUI()
         {
             Container.Bind<AbilityPanelIconView>().FromComponentsInHierarchy().AsSingle();
-            Container.BindInterfacesAndSelfTo<AbilityPanelViewModel>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<AbilityPanelVM>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<AbilityPanelModel>().AsSingle().NonLazy();
         }
 

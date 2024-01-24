@@ -5,6 +5,7 @@ using LostInSin.Characters.PersistentData;
 using LostInSin.Grid;
 using LostInSin.Grid.Visual;
 using LostInSin.Movement;
+using LostInSin.UI;
 using UnityEngine;
 using Zenject;
 
@@ -19,6 +20,7 @@ namespace LostInSin.Context
         public GridMeshDisplayService.Data GridVisualData;
         public CameraModel.CameraData CameraData;
         public SavedCharacters CharacterSavedData;
+        public CharacterSelectPanelVM.Data CharacterPanelData;
 
         public override void InstallBindings()
         {
@@ -26,7 +28,8 @@ namespace LostInSin.Context
                                     AnimationData,
                                     GridGenerationData,
                                     GridVisualData,
-                                    CameraData);
+                                    CameraData,
+                                    CharacterPanelData);
 
             const string path = "Data/SavedCharacters";
 

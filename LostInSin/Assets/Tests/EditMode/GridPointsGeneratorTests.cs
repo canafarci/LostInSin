@@ -91,11 +91,5 @@ namespace LostInSin.Grid.Tests
             // Clean up
             gridPoints.Dispose();
         }
-
-        // [TearDown]
-        // public void Cleanup()
-        // {
-        //     if (_mockHitResults.IsCreated) _mockHitResults.Dispose();
-        // }
     }
 }
