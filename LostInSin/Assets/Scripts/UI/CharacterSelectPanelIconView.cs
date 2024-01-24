@@ -11,26 +11,27 @@ namespace LostInSin.UI
 {
     public class CharacterSelectPanelIconView : MonoBehaviour
     {
-        [Inject] private CharacterSelectPanelVM _characterSelectPanelVm;
+        private CharacterSelectPanelVM _characterSelectPanelVM;
+
+        [SerializeField] private Image _image;
+        [SerializeField] private TextMeshProUGUI _text;
 
         private readonly CompositeDisposable _disposables = new();
+
+
         private CharacterPersistentData _data;
         private Button _button;
-        private Image _image;
-        private TextMeshProUGUI _text;
 
         private void Awake()
         {
             _button = GetComponentInChildren<Button>();
-            _image = GetComponentInChildren<Image>();
-            _text = GetComponentInChildren<TextMeshProUGUI>();
 
             _button.onClick.AddListener(ButtonClickHandler);
         }
 
         private void ButtonClickHandler()
         {
-            //_characterSelectViewModel.OnButtonClicked(_ability);
+            _characterSelectPanelVM.OnButtonClicked(_data);
         }
 
         private void OnDestroy()
@@ -38,11 +39,12 @@ namespace LostInSin.UI
             _disposables.Clear();
         }
 
-        public void Setup(CharacterPersistentData data)
+        public void Setup(CharacterPersistentData data, CharacterSelectPanelVM characterSelectPanelVM)
         {
             _data = data;
             _text.text = data.CharacterName;
             _image.sprite = data.CharacterAvatar;
+            _characterSelectPanelVM = characterSelectPanelVM;
         }
     }
 }

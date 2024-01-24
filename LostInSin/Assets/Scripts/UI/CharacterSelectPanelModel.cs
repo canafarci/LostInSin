@@ -4,6 +4,7 @@ using LostInSin.Characters;
 using LostInSin.Characters.PersistentData;
 using LostInSin.Signals;
 using UniRx;
+using UnityEngine;
 using Zenject;
 
 namespace LostInSin.UI
@@ -13,7 +14,6 @@ namespace LostInSin.UI
         [Inject] private SignalBus _signalBus;
 
         private readonly CompositeDisposable _disposables = new();
-
         private readonly ReactiveProperty<Dictionary<CharacterPersistentData, Character>> _characterData = new();
 
         public ReactiveProperty<Dictionary<CharacterPersistentData, Character>> CharacterData => _characterData;

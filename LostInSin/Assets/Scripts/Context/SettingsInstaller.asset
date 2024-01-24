@@ -18,6 +18,7 @@ MonoBehaviour:
     ReferencedUnityObjects:
     - {fileID: 11400000, guid: 2b915f3e1d102814fb5023bd8bcc559f, type: 2}
     - {fileID: 11400000, guid: 21309d203769dc547afa84d19008938a, type: 2}
+    - {fileID: 11400000, guid: daac52fae86ee44499019039ab123f5c, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -118,6 +119,15 @@ MonoBehaviour:
     - Name: CameraDataSO
       Entry: 10
       Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: CharacterPanelData
+      Entry: 7
+      Data: 5|LostInSin.UI.CharacterSelectPanelVM+Data, LostInSin.Code
+    - Name: _characterSelectPanelData
+      Entry: 10
+      Data: 2
     - Name: 
       Entry: 8
       Data: 

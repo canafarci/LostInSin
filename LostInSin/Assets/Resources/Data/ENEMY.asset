@@ -113,5 +113,7 @@ MonoBehaviour:
       Data: 
   DefaultSelectedCharacter: 0
   CharacterPrefab: {fileID: 8592251656423253995, guid: 1374c2a62a292c94f8888514345b8def, type: 3}
+  CharacterName: Hank
+  CharacterAvatar: {fileID: 21300000, guid: c53af5c0ab326de419c997e8536f0b8b, type: 3}
   CharacterTeam: 1
-  CharacterClass: 0
+  CharacterClass: 1

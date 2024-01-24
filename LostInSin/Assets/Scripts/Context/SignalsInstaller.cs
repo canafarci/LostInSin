@@ -13,6 +13,7 @@ namespace LostInSin.Context
             Container.DeclareSignal<CharacterSelectedSignal>();
             Container.DeclareSignal<SelectedAbilityChangedSignal>();
             Container.DeclareSignal<PlayableCharactersSpawnedSignal>();
+            Container.DeclareSignal<CharacterPortraitClickedSignal>();
         }
     }
 }

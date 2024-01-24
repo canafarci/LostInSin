@@ -114,5 +114,7 @@ MonoBehaviour:
       Data: 
   DefaultSelectedCharacter: 1
   CharacterPrefab: {fileID: 7240346779836529104, guid: 9e394aab35da0a3469fd7cdf594ac30b, type: 3}
+  CharacterName: Larissa
+  CharacterAvatar: {fileID: 21300000, guid: 7e14888cf743f974e8819ade70d1089f, type: 3}
   CharacterTeam: 0
   CharacterClass: 0

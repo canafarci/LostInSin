@@ -19,10 +19,10 @@ namespace LostInSin.UI
         [Inject] private readonly Data _data;
 
         private readonly CompositeDisposable _disposables = new();
-        private readonly ReactiveProperty<Dictionary<CharacterPersistentData, Character>> _characterData = new();
+        private Dictionary<CharacterPersistentData, Character> _characters;
 
-        public ReactiveProperty<Dictionary<CharacterPersistentData, Character>> CharacterData => _characterData;
-
+        //private readonly ReactiveProperty<Dictionary<CharacterPersistentData, Character>> _characterData = new();
+        //public ReactiveProperty<Dictionary<CharacterPersistentData, Character>> CharacterData => _characterData;
 
         public void Initialize()
         {
@@ -33,20 +33,17 @@ namespace LostInSin.UI
 
         private void CharacterDataSetHandler(Dictionary<CharacterPersistentData, Character> characters)
         {
-            CharacterData.Value = characters;
+            if (characters == null) return;
+
+            _characters = characters;
 
             foreach (CharacterPersistentData data in characters.Keys)
             {
                 CharacterSelectPanelIconView panelView = GameObject.Instantiate(_data.CharacterSelectPanelPrefab,
                                                                                 _panelView.CharacterSelectIconHolder);
 
-                panelView.Setup(data);
+                panelView.Setup(data, this);
             }
-        }
-
-        public void Dispose()
-        {
-            _disposables.Clear();
         }
 
         public class Data
@@ -55,6 +52,18 @@ namespace LostInSin.UI
 
             public CharacterSelectPanelIconView CharacterSelectPanelPrefab =>
                 _characterSelectPanelData.CharacterSelectIconPrefab;
+        }
+
+        public void OnButtonClicked(CharacterPersistentData data)
+        {
+            Character clickedCharacter = _characters[data];
+            CharacterPortraitClickedSignal signal = new(clickedCharacter);
+            _signalBus.Fire(signal);
+        }
+
+        public void Dispose()
+        {
+            _disposables.Clear();
         }
     }
 }

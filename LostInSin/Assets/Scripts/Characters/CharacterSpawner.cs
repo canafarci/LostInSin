@@ -57,9 +57,11 @@ namespace LostInSin.Characters
             }
         }
 
-        private void FireCharactersSpawnedSignal()
+        private async void FireCharactersSpawnedSignal()
         {
-            _signalBus.Fire(new PlayableCharactersSpawnedSignal(_playerCharacters));
+            await UniTask.DelayFrame(1); //wait one frame to finish initialization
+            PlayableCharactersSpawnedSignal playableCharactersSpawnedSignal = new(_playerCharacters);
+            _signalBus.Fire(playableCharactersSpawnedSignal);
         }
 
         public void Dispose()

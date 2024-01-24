@@ -94,6 +94,10 @@ namespace LostInSin.Context
             Container.Bind<AbilityPanelIconView>().FromComponentsInHierarchy().AsSingle();
             Container.BindInterfacesAndSelfTo<AbilityPanelVM>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<AbilityPanelModel>().AsSingle().NonLazy();
+
+            Container.Bind<CharacterSelectPanelView>().FromComponentsInHierarchy().AsSingle();
+            Container.BindInterfacesAndSelfTo<CharacterSelectPanelVM>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<CharacterSelectPanelModel>().AsSingle().NonLazy();
         }
 
         private void BindCore()

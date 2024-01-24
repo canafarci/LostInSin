@@ -13,11 +13,8 @@ namespace LostInSin.Control
 {
     public class CharacterSelector : IInitializable, IDisposable
     {
-        [Inject] private GameInput _gameInput;
-        [Inject] private IComponentRaycaster<Character> _characterRaycaster;
         [Inject] private CharacterStateTicker _stateTicker;
         [Inject] private SignalBus _signalBus;
-        [Inject] private PointerOverUIChecker _pointerOverUIChecker;
 
         private const int CHARACTER_LAYER_MASK = 1 << 6;
         private readonly CompositeDisposable _disposables = new();
@@ -26,10 +23,12 @@ namespace LostInSin.Control
 
         public void Initialize()
         {
-            _gameInput.GameplayActions.Click.performed += OnClickPerformed;
-
             _signalBus.GetStream<SelectInitialCharacterSignal>()
                       .Subscribe(OnInitialCharacterSelect)
+                      .AddTo(_disposables);
+
+            _signalBus.GetStream<CharacterPortraitClickedSignal>()
+                      .Subscribe(OnCharacterPortraitClicked)
                       .AddTo(_disposables);
         }
 
@@ -38,24 +37,16 @@ namespace LostInSin.Control
             SetNewCharacterAsSelected(signal.InitialCharacter);
         }
 
-        private void OnClickPerformed(InputAction.CallbackContext context)
+        private void OnCharacterPortraitClicked(CharacterPortraitClickedSignal signal)
         {
-            if (_pointerOverUIChecker.PointerIsOverUI) return;
-            TryRaycastCharacter();
-        }
-
-        private void TryRaycastCharacter()
-        {
-            if (_characterRaycaster.RaycastComponent(out Character character, CHARACTER_LAYER_MASK))
-                TryChangeCharacter(character);
+            TryChangeCharacter(signal.Character);
         }
 
         private void TryChangeCharacter(Character character)
         {
-            if (_selectedCharacter == null)
-                SetNewCharacterAsSelected(character);
+            if (_selectedCharacter == character) return;
 
-            else if (CanChangeCharacter(character))
+            if (CanChangeCharacter(character))
                 SetNewCharacterAsSelected(character);
         }
 

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using LostInSin.Abilities;
@@ -61,14 +62,16 @@ namespace LostInSin.AbilitySystem
         private void OnCharacterSelectedSignal(CharacterSelectedSignal signal)
         {
             if (_abilityStack.Count > 0)
+            {
                 _ability.AbilityBlueprint.OnAbilityDeselected(_instigator);
+                CancelAbility();
+            }
 
             _abilityStack.Clear();
-
             _instigator = signal.SelectedCharacter;
             AbilityInfo moveAbility = signal.SelectedCharacter
                                             .Abilities
-                                            .Find(x => x.AbilityIdentifier == AbilityIdentifiers.Move);
+                                            .First(x => x.AbilityIdentifier == AbilityIdentifiers.Move);
 
             _abilityStack.Push(moveAbility);
 
@@ -99,21 +102,26 @@ namespace LostInSin.AbilitySystem
             StartCastingAbility();
         }
 
-        private void StartCastingAbility()
+        private async void StartCastingAbility()
         {
             _cancellationTokenSource = CreateCancellationTokenSource();
+            await UniTask.NextFrame();
             CastAbility(_cancellationTokenSource.Token);
         }
 
         private CancellationTokenSource CreateCancellationTokenSource()
         {
-            if (_cancellationTokenSource != null)
+            CancelAbility();
+            return new CancellationTokenSource();
+        }
+
+        private void CancelAbility()
+        {
+            if (_cancellationTokenSource != null && !_cancellationTokenSource.IsCancellationRequested)
             {
                 _cancellationTokenSource.Cancel();
                 _cancellationTokenSource.Dispose();
             }
-
-            return new CancellationTokenSource();
         }
 
         public void Dispose()
