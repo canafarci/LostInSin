@@ -50,7 +50,8 @@ namespace LostInSin.Abilities
             if (_state is AbilityState.Inactive or AbilityState.SelectedTarget ||
                 _pointerOverUIChecker.PointerIsOverUI) return;
 
-            if (_characterRaycaster.RaycastComponent(out Character character, CHARACTER_LAYER_MASK))
+            if (_characterRaycaster.RaycastComponent(out Character character, CHARACTER_LAYER_MASK) &&
+                character.CharacterTeam == CharacterTeam.Enemy)
             {
                 _target = new AbilityTarget() { Character = character };
                 _state = AbilityState.SelectedTarget;
