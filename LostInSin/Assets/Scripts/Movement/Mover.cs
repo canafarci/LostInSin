@@ -12,6 +12,7 @@ namespace LostInSin.Movement
             Moving
         }
 
+        private readonly float _movementDelta = Mathf.Pow(0.05f, 2);
         private readonly Transform _transform;
         private readonly Settings _settings;
         private Vector3 _target;
@@ -67,7 +68,7 @@ namespace LostInSin.Movement
         {
             if (_currentState != MovementState.Moving) return false;
 
-            bool reached = Vector3.SqrMagnitude(_transform.position - _target) < Mathf.Pow(0.02f, 2);
+            bool reached = Vector3.SqrMagnitude(_transform.position - _target) < _movementDelta;
 
             if (reached)
                 _currentState = MovementState.Idle;
