@@ -1,6 +1,6 @@
 using LostInSin.Abilities;
 
-namespace LostInSin.Signals
+namespace LostInSin.Signals.Abilities
 {
     public readonly struct SelectedAbilityChangedSignal
     {

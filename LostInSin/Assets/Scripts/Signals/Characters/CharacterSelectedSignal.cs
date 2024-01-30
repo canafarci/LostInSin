@@ -1,6 +1,6 @@
 using LostInSin.Characters;
 
-namespace LostInSin.Signals
+namespace LostInSin.Signals.Characters
 {
     public struct CharacterSelectedSignal
     {

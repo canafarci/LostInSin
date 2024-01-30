@@ -1,5 +1,6 @@
 using System;
 using LostInSin.Signals;
+using LostInSin.Signals.Characters;
 using UniRx;
 using Zenject;
 

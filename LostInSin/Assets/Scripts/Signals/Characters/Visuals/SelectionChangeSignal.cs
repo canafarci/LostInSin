@@ -1,4 +1,4 @@
-namespace LostInSin.Signals
+namespace LostInSin.Signals.Characters.Visuals
 {
     public class SelectionChangeSignal : ISelectionChangeSignal
     {

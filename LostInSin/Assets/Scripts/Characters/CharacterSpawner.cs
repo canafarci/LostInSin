@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using LostInSin.Characters.PersistentData;
 using LostInSin.Identifiers;
 using LostInSin.Signals;
+using LostInSin.Signals.Characters;
 using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;

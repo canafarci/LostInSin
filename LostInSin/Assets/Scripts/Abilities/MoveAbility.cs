@@ -10,6 +10,7 @@ using LostInSin.Identifiers;
 using LostInSin.Input;
 using LostInSin.Raycast;
 using LostInSin.Signals;
+using LostInSin.Signals.Animations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using LostInSin.Abilities;
 using LostInSin.Signals;
+using LostInSin.Signals.Characters;
 using UniRx;
 using Zenject;
 

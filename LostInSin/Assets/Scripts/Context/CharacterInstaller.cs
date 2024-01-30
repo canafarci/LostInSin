@@ -10,6 +10,9 @@ using LostInSin.Characters.StateMachine.States;
 using LostInSin.Identifiers;
 using LostInSin.Movement;
 using LostInSin.Signals;
+using LostInSin.Signals.Animations;
+using LostInSin.Signals.Characters.States;
+using LostInSin.Signals.Characters.Visuals;
 using LostInSin.Visuals;
 using UnityEngine;
 using Zenject;
@@ -118,6 +121,11 @@ namespace LostInSin.Context
             Container.Bind<IAttribute>()
                      .WithId(AttributeIdentifiers.Luck)
                      .To<LuckAttribute>()
+                     .AsSingle();
+
+            Container.Bind<IAttribute>()
+                     .WithId(AttributeIdentifiers.ActionPoints)
+                     .To<ActionPointAttribute>()
                      .AsSingle();
         }
     }

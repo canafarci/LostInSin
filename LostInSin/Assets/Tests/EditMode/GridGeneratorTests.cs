@@ -66,7 +66,7 @@ namespace LostInSin.Grid.Tests
                               .Returns(mockGridCells);
 
             // Act
-            _gridGenerator.Initialize();
+            _gridGenerator.GenerateGrid();
 
             // Assert
             _mockRaycaster.Verify(x => x.PerformRaycasting(It.IsAny<GridRaycastData>()), Times.Once);

@@ -3,6 +3,9 @@ using LostInSin.Animation;
 using LostInSin.Animation.Data;
 using LostInSin.Identifiers;
 using LostInSin.Signals;
+using LostInSin.Signals.Animations;
+using LostInSin.Signals.Characters.States;
+using LostInSin.Signals.Characters.Visuals;
 using UnityEngine;
 using Zenject;
 

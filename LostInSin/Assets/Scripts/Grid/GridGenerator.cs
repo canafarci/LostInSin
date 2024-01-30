@@ -7,7 +7,7 @@ using Zenject;
 
 namespace LostInSin.Grid
 {
-    public class GridGenerator : IInitializable
+    public class GridGenerator
     {
         private readonly IGridRaycaster _raycaster;
         private readonly IGridPointsGenerator _pointsGenerator;
@@ -25,7 +25,7 @@ namespace LostInSin.Grid
             _cellGenerator = cellGenerator;
         }
 
-        public void Initialize()
+        public void GenerateGrid()
         {
             GridRaycastData raycastData = CreateRaycastData();
 

@@ -2,6 +2,8 @@ using Cysharp.Threading.Tasks;
 using LostInSin.Animation.Data;
 using LostInSin.Identifiers;
 using LostInSin.Signals;
+using LostInSin.Signals.Animations;
+using LostInSin.Signals.Characters.States;
 using UnityEngine;
 using Zenject;
 

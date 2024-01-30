@@ -1,6 +1,8 @@
 using System;
 using LostInSin.Identifiers;
 using LostInSin.Signals;
+using LostInSin.Signals.Abilities;
+using LostInSin.Signals.Characters.States;
 using UniRx;
 using Zenject;
 

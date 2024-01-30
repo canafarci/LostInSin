@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using LostInSin.Characters;
 using LostInSin.Characters.PersistentData;
 
-namespace LostInSin.Signals
+namespace LostInSin.Signals.Characters
 {
     public readonly struct PlayableCharactersSpawnedSignal
     {

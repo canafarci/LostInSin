@@ -1,7 +1,6 @@
 using LostInSin.Animation.Data;
-using LostInSin.Characters.StateMachine;
 
-namespace LostInSin.Signals
+namespace LostInSin.Signals.Animations
 {
     public class AnimationChangeSignal : IAnimationChangeSignal
     {

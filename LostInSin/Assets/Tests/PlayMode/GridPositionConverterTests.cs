@@ -14,6 +14,7 @@ namespace LostInSin.Grid.Tests
     {
         [Inject] private GridModel _gridModel;
         [Inject] private GridPositionConverter _gridPositionConverter;
+        [Inject] private GridGenerator _gridGenerator;
         private GridGenerationSO _gridGenerationSO;
 
         public void SetUp()
@@ -45,10 +46,12 @@ namespace LostInSin.Grid.Tests
 
             Container.Bind<IGridPositionConverter>().To<GridPositionConverter>().AsSingle();
             GridPositionConverter posConverter = Container.Resolve<IGridPositionConverter>() as GridPositionConverter;
+
             Container.Bind<GridPositionConverter>().FromInstance(posConverter);
 
-
             PostInstall();
+
+            _gridGenerator.GenerateGrid();
         }
 
         [UnityTest]
@@ -98,6 +101,8 @@ namespace LostInSin.Grid.Tests
         public IEnumerator GetCell_WithWorldPosition_ShouldReturnCorrectCellData()
         {
             SetUp();
+            yield return null;
+            yield return null;
             yield return null;
 
             // Arrange

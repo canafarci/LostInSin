@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using LostInSin.Characters;
 using LostInSin.Characters.PersistentData;
 using LostInSin.Signals;
+using LostInSin.Signals.Characters;
 using UniRx;
 using UnityEngine;
 using Zenject;

@@ -1,6 +1,6 @@
 using LostInSin.Characters.StateMachine.States;
 
-namespace LostInSin.Signals
+namespace LostInSin.Signals.Characters.States
 {
     public class StateChangeSignal : IStateChangeSignal
     {

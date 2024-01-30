@@ -1,4 +1,6 @@
 using LostInSin.Signals;
+using LostInSin.Signals.Abilities;
+using LostInSin.Signals.Characters;
 using Zenject;
 
 namespace LostInSin.Context

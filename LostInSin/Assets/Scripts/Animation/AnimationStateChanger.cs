@@ -6,6 +6,7 @@ using System;
 using LostInSin.Animation.Data;
 using LostInSin.Identifiers;
 using LostInSin.Signals;
+using LostInSin.Signals.Animations;
 
 namespace LostInSin.Animation
 {

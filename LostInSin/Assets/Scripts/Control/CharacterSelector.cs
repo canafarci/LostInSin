@@ -5,6 +5,7 @@ using LostInSin.Identifiers;
 using LostInSin.Input;
 using LostInSin.Raycast;
 using LostInSin.Signals;
+using LostInSin.Signals.Characters;
 using UniRx;
 using UnityEngine.InputSystem;
 using Zenject;

@@ -12,6 +12,7 @@ using Zenject;
 using DG.Tweening;
 using LostInSin.Attributes;
 using LostInSin.Input;
+using LostInSin.Signals.Animations;
 using UnityEngine.InputSystem;
 
 namespace LostInSin.Abilities

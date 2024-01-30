@@ -7,6 +7,8 @@ using LostInSin.Abilities;
 using LostInSin.Characters;
 using LostInSin.Identifiers;
 using LostInSin.Signals;
+using LostInSin.Signals.Abilities;
+using LostInSin.Signals.Characters;
 using UniRx;
 using UnityEngine;
 using Zenject;
