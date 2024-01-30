@@ -4,6 +4,7 @@ using LostInSin.Animation.Data;
 using LostInSin.Cameras;
 using LostInSin.Characters;
 using LostInSin.Characters.PersistentData;
+using LostInSin.Combat;
 using LostInSin.Control;
 using LostInSin.Core;
 using LostInSin.Grid;
@@ -28,15 +29,11 @@ namespace LostInSin.Context
             Container.BindInterfacesAndSelfTo<GameInput>()
                      .AsSingle().NonLazy();
 
-            Container.BindFactory<Vector3, CharacterPersistentData, Character, Character.Factory>()
-                     .FromSubContainerResolve()
-                     .ByNewPrefabInstaller<CharacterInstaller>(_characterPrefab);
-
-            Container.BindInterfacesAndSelfTo<CharacterSpawner>()
-                     .AsSingle();
-
             Container.Bind<AnimationHashes>().AsSingle();
 
+
+            BindCombatModule();
+            BindCharacters();
             BindCharacterSelection();
             BindRaycasters();
             BindGrid();
@@ -44,6 +41,22 @@ namespace LostInSin.Context
             BindUI();
             BindAbilitySystem();
             BindCore();
+        }
+
+        private void BindCombatModule()
+        {
+            Container.BindInterfacesAndSelfTo<CombatStarter>().AsSingle().NonLazy();
+            Container.Bind<CombatCharacterPicker>().AsSingle();
+        }
+
+        private void BindCharacters()
+        {
+            Container.BindFactory<Vector3, CharacterPersistentData, Character, Character.Factory>()
+                     .FromSubContainerResolve()
+                     .ByNewPrefabInstaller<CharacterInstaller>(_characterPrefab);
+
+            Container.BindInterfacesAndSelfTo<CharacterSpawner>()
+                     .AsSingle();
         }
 
         private void BindCharacterSelection()
@@ -69,7 +82,7 @@ namespace LostInSin.Context
             Container.BindInterfacesAndSelfTo<GridGenerator>().AsSingle().NonLazy();
             //bind visuals
             Container.Bind<GridMeshGenerator>().AsSingle();
-            Container.BindInterfacesAndSelfTo<GridMeshDisplayService>().AsSingle().NonLazy();
+            Container.Bind<GridMeshDisplayService>().AsSingle().NonLazy();
         }
 
         private void BindCamera()
@@ -85,8 +98,8 @@ namespace LostInSin.Context
         private void InitExecutionOrder()
         {
             Container.BindExecutionOrder<GameInput>(-100);
+            Container.BindExecutionOrder<CombatStarter>(-15);
             Container.BindExecutionOrder<CameraInitializer>(-10);
-            Container.BindExecutionOrder<GridMeshDisplayService>(2000);
         }
 
         private void BindUI()

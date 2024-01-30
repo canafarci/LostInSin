@@ -19,9 +19,12 @@ namespace LostInSin.AbilitySystem
 
         [Inject(Id = AttributeIdentifiers.Luck)]
         private IAttribute _luckAttribute;
-        
+
         [Inject(Id = AttributeIdentifiers.ActionPoints)]
         private IAttribute _actionPointAttribute;
+
+        [Inject(Id = AttributeIdentifiers.Initiative)]
+        private IAttribute _initiativeAttribute;
 
         public IAttribute GetAttribute(AttributeIdentifiers identifier)
         {
@@ -32,6 +35,7 @@ namespace LostInSin.AbilitySystem
                        AttributeIdentifiers.Resilience => _resilienceAttribute,
                        AttributeIdentifiers.Luck => _luckAttribute,
                        AttributeIdentifiers.ActionPoints => _actionPointAttribute,
+                       AttributeIdentifiers.Initiative => _initiativeAttribute,
                        _ => throw new ArgumentException($"Unknown attribute identifier: {identifier}")
                    };
         }

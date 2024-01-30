@@ -5,7 +5,7 @@ using Zenject;
 
 namespace LostInSin.Grid.Visual
 {
-    public class GridMeshDisplayService : IInitializable //TODO call draw grid from elsewhere
+    public class GridMeshDisplayService
     {
         private readonly GridModel _gridModel;
         private readonly GridMeshGenerator _gridMeshGenerator;
@@ -19,7 +19,7 @@ namespace LostInSin.Grid.Visual
             _data = data;
         }
 
-        public void Initialize()
+        public void ShowGrid()
         {
             DisplayGrid();
         }

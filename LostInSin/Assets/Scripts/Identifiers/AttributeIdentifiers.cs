@@ -6,6 +6,7 @@ namespace LostInSin.Identifiers
         Power,
         Resilience,
         Luck,
+        Initiative,
         ActionPoints
     }
 }

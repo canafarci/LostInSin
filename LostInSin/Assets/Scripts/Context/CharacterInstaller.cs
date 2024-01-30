@@ -127,6 +127,11 @@ namespace LostInSin.Context
                      .WithId(AttributeIdentifiers.ActionPoints)
                      .To<ActionPointAttribute>()
                      .AsSingle();
+
+            Container.Bind<IAttribute>()
+                     .WithId(AttributeIdentifiers.Initiative)
+                     .To<InitiativeAttribute>()
+                     .AsSingle();
         }
     }
 }
