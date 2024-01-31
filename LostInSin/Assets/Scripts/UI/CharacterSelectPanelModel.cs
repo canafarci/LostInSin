@@ -1,11 +1,8 @@
 using System;
 using System.Collections.Generic;
 using LostInSin.Characters;
-using LostInSin.Characters.PersistentData;
-using LostInSin.Signals;
 using LostInSin.Signals.Characters;
 using UniRx;
-using UnityEngine;
 using Zenject;
 
 namespace LostInSin.UI
@@ -15,9 +12,9 @@ namespace LostInSin.UI
         [Inject] private SignalBus _signalBus;
 
         private readonly CompositeDisposable _disposables = new();
-        private readonly ReactiveProperty<Dictionary<CharacterPersistentData, Character>> _characterData = new();
+        private readonly ReactiveProperty<List<Character>> _playerCharacters = new();
 
-        public ReactiveProperty<Dictionary<CharacterPersistentData, Character>> CharacterData => _characterData;
+        public ReactiveProperty<List<Character>> PlayerCharacters => _playerCharacters;
 
         public void Initialize()
         {
@@ -28,7 +25,7 @@ namespace LostInSin.UI
 
         private void OnCharacterSpawned(PlayableCharactersSpawnedSignal signal)
         {
-            _characterData.Value = signal.Characters;
+            _playerCharacters.Value = signal.Characters;
         }
 
         public void Dispose()

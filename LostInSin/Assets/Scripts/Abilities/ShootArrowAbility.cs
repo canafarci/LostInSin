@@ -52,7 +52,7 @@ namespace LostInSin.Abilities
                 _pointerOverUIChecker.PointerIsOverUI) return;
 
             if (_characterRaycaster.RaycastComponent(out Character character, CHARACTER_LAYER_MASK) &&
-                character.CharacterTeam == CharacterTeam.Enemy)
+                character.CharacterPersistentData.CharacterTeam == CharacterTeam.Enemy)
             {
                 _target = new AbilityTarget() { Character = character };
                 _state = AbilityState.SelectedTarget;

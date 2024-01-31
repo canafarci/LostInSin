@@ -52,7 +52,8 @@ namespace LostInSin.Control
         }
 
         private bool CanChangeCharacter(Character character) =>
-            character.CharacterTeam == CharacterTeam.Friendly && _selectedCharacter.CanExitTickingCharacter();
+            character.CharacterPersistentData.CharacterTeam == CharacterTeam.Friendly &&
+            _selectedCharacter.CanExitTickingCharacter();
 
         private void SetNewCharacterAsSelected(Character character)
         {

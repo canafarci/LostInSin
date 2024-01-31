@@ -38,7 +38,6 @@ namespace LostInSin.Context
             BindRaycasters();
             BindGrid();
             BindCamera();
-            BindUI();
             BindAbilitySystem();
             BindCore();
         }
@@ -100,17 +99,6 @@ namespace LostInSin.Context
             Container.BindExecutionOrder<GameInput>(-100);
             Container.BindExecutionOrder<CombatStarter>(-15);
             Container.BindExecutionOrder<CameraInitializer>(-10);
-        }
-
-        private void BindUI()
-        {
-            Container.Bind<AbilityPanelIconView>().FromComponentsInHierarchy().AsSingle();
-            Container.BindInterfacesAndSelfTo<AbilityPanelVM>().AsSingle().NonLazy();
-            Container.BindInterfacesAndSelfTo<AbilityPanelModel>().AsSingle().NonLazy();
-
-            Container.Bind<CharacterSelectPanelView>().FromComponentsInHierarchy().AsSingle();
-            Container.BindInterfacesAndSelfTo<CharacterSelectPanelVM>().AsSingle().NonLazy();
-            Container.BindInterfacesAndSelfTo<CharacterSelectPanelModel>().AsSingle().NonLazy();
         }
 
         private void BindCore()

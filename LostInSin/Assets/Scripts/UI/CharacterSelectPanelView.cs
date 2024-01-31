@@ -4,8 +4,8 @@ namespace LostInSin.UI
 {
     public class CharacterSelectPanelView : MonoBehaviour
     {
-        [SerializeField] private Transform _characterSelectIconHolder;
+        [SerializeField] private RectTransform _characterSelectIconHolder;
 
-        public Transform CharacterSelectIconHolder => _characterSelectIconHolder;
+        public RectTransform CharacterSelectIconHolder => _characterSelectIconHolder;
     }
 }

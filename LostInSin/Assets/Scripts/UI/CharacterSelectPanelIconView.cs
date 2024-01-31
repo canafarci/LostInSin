@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using LostInSin.Characters;
 using LostInSin.Characters.PersistentData;
 using TMPro;
@@ -18,9 +17,8 @@ namespace LostInSin.UI
 
         private readonly CompositeDisposable _disposables = new();
 
-
-        private CharacterPersistentData _data;
         private Button _button;
+        private Character _character;
 
         private void Awake()
         {
@@ -31,7 +29,7 @@ namespace LostInSin.UI
 
         private void ButtonClickHandler()
         {
-            _characterSelectPanelVM.OnButtonClicked(_data);
+            _characterSelectPanelVM.OnButtonClicked(_character);
         }
 
         private void OnDestroy()
@@ -39,12 +37,25 @@ namespace LostInSin.UI
             _disposables.Clear();
         }
 
-        public void Setup(CharacterPersistentData data, CharacterSelectPanelVM characterSelectPanelVM)
+        [Inject]
+        private void Init(Character character, CharacterSelectPanelVM panelVM, RectTransform parent)
         {
-            _data = data;
+            _characterSelectPanelVM = panelVM;
+            
+            transform.SetParent(parent);
+            transform.localScale = Vector3.one;
+
+            _character = character;
+
+            CharacterPersistentData data = character.CharacterPersistentData;
+
             _text.text = data.CharacterName;
             _image.sprite = data.CharacterAvatar;
-            _characterSelectPanelVM = characterSelectPanelVM;
+        }
+
+        public class Factory : PlaceholderFactory<Object, RectTransform, CharacterSelectPanelVM, Character,
+            CharacterSelectPanelIconView>
+        {
         }
     }
 }

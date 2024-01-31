@@ -16,7 +16,7 @@ namespace LostInSin.Characters
         private readonly SignalBus _signalBus;
         private readonly Character.Factory _characterFactory;
         private readonly SavedCharacters _savedCharacters;
-        private readonly Dictionary<CharacterPersistentData, Character> _playerCharacters = new();
+        private readonly List<Character> _playerCharacters = new();
 
         private CharacterSpawner(Character.Factory characterFactory,
                                  SavedCharacters savedCharacters,
@@ -40,8 +40,8 @@ namespace LostInSin.Characters
                 Vector3 pos = new(randPos.x, 0f, randPos.y);
                 Character character = _characterFactory.Create(pos, characterData);
 
-                if (character.CharacterTeam == CharacterTeam.Friendly)
-                    _playerCharacters[characterData] = character;
+                if (character.CharacterPersistentData.CharacterTeam == CharacterTeam.Friendly)
+                    _playerCharacters.Add(character);
 
                 FireInitialSelectedCharacterSignal(characterData, character);
             }

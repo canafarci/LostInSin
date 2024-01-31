@@ -36,7 +36,7 @@ namespace LostInSin.Characters
         public CharacterStateRuntimeData RuntimeData => _runtimeData;
         public SignalBus SignalBus => _signalBus;
         public AnimationReference AnimationReference => _animationReference;
-        public CharacterTeam CharacterTeam => _persistentData.CharacterTeam;
+        public CharacterPersistentData CharacterPersistentData => _persistentData;
 
         #endregion
 

@@ -17,32 +17,30 @@ namespace LostInSin.UI
         [Inject] private readonly CharacterSelectPanelView _panelView;
         [Inject] private readonly SignalBus _signalBus;
         [Inject] private readonly Data _data;
+        [Inject] private readonly CharacterSelectPanelIconView.Factory _iconViewFactory;
 
         private readonly CompositeDisposable _disposables = new();
-        private Dictionary<CharacterPersistentData, Character> _characters;
-
-        //private readonly ReactiveProperty<Dictionary<CharacterPersistentData, Character>> _characterData = new();
-        //public ReactiveProperty<Dictionary<CharacterPersistentData, Character>> CharacterData => _characterData;
+        private List<Character> _characters;
 
         public void Initialize()
         {
-            _panelModel.CharacterData
+            _panelModel.PlayerCharacters
                        .Subscribe(CharacterDataSetHandler)
                        .AddTo(_disposables);
         }
 
-        private void CharacterDataSetHandler(Dictionary<CharacterPersistentData, Character> characters)
+        private void CharacterDataSetHandler(List<Character> characters)
         {
             if (characters == null) return;
 
             _characters = characters;
 
-            foreach (CharacterPersistentData data in characters.Keys)
+            foreach (Character character in characters)
             {
-                CharacterSelectPanelIconView panelView = GameObject.Instantiate(_data.CharacterSelectPanelPrefab,
-                                                                                _panelView.CharacterSelectIconHolder);
-
-                panelView.Setup(data, this);
+                _iconViewFactory.Create(_data.CharacterSelectPanelPrefab,
+                                        _panelView.CharacterSelectIconHolder,
+                                        this,
+                                        character);
             }
         }
 
@@ -54,9 +52,8 @@ namespace LostInSin.UI
                 _characterSelectPanelData.CharacterSelectIconPrefab;
         }
 
-        public void OnButtonClicked(CharacterPersistentData data)
+        public void OnButtonClicked(Character clickedCharacter)
         {
-            Character clickedCharacter = _characters[data];
             CharacterPortraitClickedSignal signal = new(clickedCharacter);
             _signalBus.Fire(signal);
         }

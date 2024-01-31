@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 11045317}
   - component: {fileID: 11045319}
   - component: {fileID: 11045320}
+  - component: {fileID: 11045321}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -159,6 +160,7 @@ MonoBehaviour:
   _monoInstallers:
   - {fileID: 11045319}
   - {fileID: 11045320}
+  - {fileID: 11045321}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -215,6 +217,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 165e1671029c4e1439e7bbee0acbcc6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11045321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11045316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80ea09b8deae4240b9ebee7bece69407, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &16480340
@@ -1115,7 +1129,7 @@ GameObject:
   - component: {fileID: 535940271}
   - component: {fileID: 535940275}
   - component: {fileID: 535940274}
-  - component: {fileID: 535940273}
+  - component: {fileID: 535940276}
   - component: {fileID: 535940272}
   m_Layer: 5
   m_Name: TopPanel
@@ -1168,19 +1182,6 @@ MonoBehaviour:
   m_Spacing: {x: 1, y: 5}
   m_Constraint: 2
   m_ConstraintCount: 1
---- !u!114 &535940273
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 535940270}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7374ce274be74ef8b20f31e88ec6665c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _characterSelectIconHolder: {fileID: 535940271}
 --- !u!114 &535940274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1219,6 +1220,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 535940270}
   m_CullTransparentMesh: 1
+--- !u!114 &535940276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535940270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19a2e69f6e90d104d9bc38a9536a53fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _initativePanelHolder: {fileID: 0}
 --- !u!4 &541314444 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4911745757443566, guid: 30f343dac697fbb4fbf696ec35347718, type: 3}
