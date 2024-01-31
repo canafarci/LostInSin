@@ -1,20 +1,14 @@
-using System;
 using System.Collections.Generic;
 using LostInSin.Abilities;
-using LostInSin.Signals;
 using LostInSin.Signals.Abilities;
 using UniRx;
-using UnityEngine;
 using Zenject;
 
-namespace LostInSin.UI
+namespace LostInSin.UI.AbilityPanel
 {
-    public class AbilityPanelVM : IInitializable, IDisposable
+    public class AbilityPanelVM : ViewModelBase, IInitializable
     {
         [Inject] private readonly AbilityPanelModel _panelModel;
-        [Inject] private readonly SignalBus _signalBus;
-
-        private readonly CompositeDisposable _disposables = new();
 
         private readonly ReactiveProperty<List<AbilityInfo>> _abilities = new();
 
@@ -36,11 +30,6 @@ namespace LostInSin.UI
         {
             SelectedAbilityChangedSignal signal = new(ability);
             _signalBus.Fire(signal);
-        }
-
-        public void Dispose()
-        {
-            _disposables.Dispose();
         }
     }
 }

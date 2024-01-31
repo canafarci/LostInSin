@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using LostInSin.Abilities;
 using TMPro;
@@ -7,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace LostInSin.UI
+namespace LostInSin.UI.AbilityPanel
 {
     public class AbilityPanelIconView : MonoBehaviour
     {

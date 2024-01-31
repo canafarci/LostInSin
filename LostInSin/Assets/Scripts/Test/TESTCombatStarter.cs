@@ -8,9 +8,10 @@ namespace LostInSin.Test
     {
         [Inject] private SignalBus _signalBus;
 
-        private void Start()
+        private void Update()
         {
-            _signalBus.Fire(new CombatStartedSignal());
+            if (UnityEngine.Input.GetKeyDown(KeyCode.C))
+                _signalBus.Fire(new CombatStartedSignal());
         }
     }
 }

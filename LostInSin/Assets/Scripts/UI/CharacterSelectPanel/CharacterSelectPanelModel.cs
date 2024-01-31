@@ -5,7 +5,7 @@ using LostInSin.Signals.Characters;
 using UniRx;
 using Zenject;
 
-namespace LostInSin.UI
+namespace LostInSin.UI.CharacterSelectPanel
 {
     public class CharacterSelectPanelModel : IInitializable, IDisposable
     {

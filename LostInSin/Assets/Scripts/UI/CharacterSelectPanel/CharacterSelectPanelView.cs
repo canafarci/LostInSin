@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace LostInSin.UI
+namespace LostInSin.UI.CharacterSelectPanel
 {
     public class CharacterSelectPanelView : MonoBehaviour
     {

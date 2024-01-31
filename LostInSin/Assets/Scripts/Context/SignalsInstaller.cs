@@ -2,6 +2,7 @@ using LostInSin.Signals;
 using LostInSin.Signals.Abilities;
 using LostInSin.Signals.Characters;
 using LostInSin.Signals.Combat;
+using LostInSin.Signals.UI;
 using Zenject;
 
 namespace LostInSin.Context
@@ -18,6 +19,7 @@ namespace LostInSin.Context
             Container.DeclareSignal<PlayableCharactersSpawnedSignal>();
             Container.DeclareSignal<CharacterPortraitClickedSignal>();
             Container.DeclareSignal<CombatStartedSignal>();
+            Container.DeclareSignal<SetupInitiativePanelSignal>();
         }
     }
 }

@@ -1,3 +1,4 @@
+using LostInSin.UI.CharacterSelectPanel;
 using UnityEngine;
 
 namespace LostInSin.UI.Data

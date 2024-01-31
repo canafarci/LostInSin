@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace LostInSin.UI
+namespace LostInSin.UI.CharacterSelectPanel
 {
     public class CharacterSelectPanelIconView : MonoBehaviour
     {
@@ -41,7 +41,7 @@ namespace LostInSin.UI
         private void Init(Character character, CharacterSelectPanelVM panelVM, RectTransform parent)
         {
             _characterSelectPanelVM = panelVM;
-            
+
             transform.SetParent(parent);
             transform.localScale = Vector3.one;
 

@@ -6,6 +6,7 @@ using LostInSin.Grid;
 using LostInSin.Grid.Visual;
 using LostInSin.Movement;
 using LostInSin.UI;
+using LostInSin.UI.CharacterSelectPanel;
 using UnityEngine;
 using Zenject;
 

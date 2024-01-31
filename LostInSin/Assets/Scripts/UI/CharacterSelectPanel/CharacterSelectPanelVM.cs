@@ -1,25 +1,21 @@
 using System;
 using System.Collections.Generic;
-using LostInSin.Abilities;
 using LostInSin.Characters;
-using LostInSin.Characters.PersistentData;
 using LostInSin.Signals;
 using LostInSin.UI.Data;
 using UniRx;
 using UnityEngine;
 using Zenject;
 
-namespace LostInSin.UI
+namespace LostInSin.UI.CharacterSelectPanel
 {
-    public class CharacterSelectPanelVM : IInitializable, IDisposable
+    public class CharacterSelectPanelVM : ViewModelBase, IInitializable
     {
         [Inject] private readonly CharacterSelectPanelModel _panelModel;
         [Inject] private readonly CharacterSelectPanelView _panelView;
-        [Inject] private readonly SignalBus _signalBus;
         [Inject] private readonly Data _data;
         [Inject] private readonly CharacterSelectPanelIconView.Factory _iconViewFactory;
 
-        private readonly CompositeDisposable _disposables = new();
         private List<Character> _characters;
 
         public void Initialize()
@@ -56,11 +52,6 @@ namespace LostInSin.UI
         {
             CharacterPortraitClickedSignal signal = new(clickedCharacter);
             _signalBus.Fire(signal);
-        }
-
-        public void Dispose()
-        {
-            _disposables.Clear();
         }
     }
 }

@@ -16,6 +16,7 @@ namespace LostInSin.Combat
         [Inject] private readonly GridGenerator _gridGenerator;
         [Inject] private readonly GridMeshDisplayService _gridDisplayer;
         [Inject] private readonly CombatCharacterPicker _combatCharacterPicker;
+        [Inject] private readonly TurnManager _turnManager;
 
         private CompositeDisposable _disposables = new();
 
@@ -30,7 +31,9 @@ namespace LostInSin.Combat
         {
             _gridGenerator.GenerateGrid();
             _gridDisplayer.ShowGrid();
+
             List<Character> characters = _combatCharacterPicker.GetCombatCharacters();
+            _turnManager.Initialize(characters);
         }
 
         public void Dispose()

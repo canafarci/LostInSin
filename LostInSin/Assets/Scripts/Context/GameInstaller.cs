@@ -45,6 +45,7 @@ namespace LostInSin.Context
         private void BindCombatModule()
         {
             Container.BindInterfacesAndSelfTo<CombatStarter>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<TurnManager>().AsSingle();
             Container.Bind<CombatCharacterPicker>().AsSingle();
         }
 

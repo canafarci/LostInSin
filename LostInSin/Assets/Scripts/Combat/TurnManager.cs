@@ -2,14 +2,19 @@ using System.Collections.Generic;
 using System.Linq;
 using LostInSin.Characters;
 using LostInSin.Identifiers;
+using LostInSin.Signals.UI;
+using UnityEngine;
+using Zenject;
 
 namespace LostInSin.Combat
 {
     public class TurnManager
     {
+        [Inject] private SignalBus _signalBus;
+
         private List<Character> _combatCharacters;
         private LinkedList<Character> _orderedCombatCharacters;
-        private LinkedListNode<Character> _currentNode;
+        public LinkedList<Character> OrderedCombatCharacters => _orderedCombatCharacters;
 
         public void Initialize(List<Character> characters)
         {
@@ -21,19 +26,9 @@ namespace LostInSin.Combat
 
             // Initialize the LinkedList with the sorted characters
             _orderedCombatCharacters = new LinkedList<Character>(sortedCharacters);
-            // Set the starting point of the turn order
-            _currentNode = _orderedCombatCharacters.First;
-        }
 
-        public Character GetNextCharacter()
-        {
-            // If the list is empty or only has one character
-            if (_orderedCombatCharacters.Count <= 1) return _currentNode?.Value;
-
-            // Move to the next character or loop back to the start if at the end
-            _currentNode = _currentNode.Next ?? _orderedCombatCharacters.First;
-
-            return _currentNode.Value;
+            SetupInitiativePanelSignal setupInitiativePanelSignal = new(_orderedCombatCharacters);
+            _signalBus.Fire(setupInitiativePanelSignal);
         }
     }
 }
