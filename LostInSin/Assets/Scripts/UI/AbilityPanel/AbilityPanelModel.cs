@@ -18,12 +18,12 @@ namespace LostInSin.UI.AbilityPanel
 
         public void Initialize()
         {
-            _signalBus.GetStream<CharacterSelectedSignal>()
+            _signalBus.GetStream<CharacterSelectSignal>()
                       .Subscribe(OnCharacterSelected)
                       .AddTo(_disposables);
         }
 
-        private void OnCharacterSelected(CharacterSelectedSignal signal)
+        private void OnCharacterSelected(CharacterSelectSignal signal)
         {
             _abilities.Value = signal.SelectedCharacter.Abilities;
         }

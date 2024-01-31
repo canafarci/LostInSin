@@ -33,7 +33,7 @@ namespace LostInSin.Combat
             _gridDisplayer.ShowGrid();
 
             List<Character> characters = _combatCharacterPicker.GetCombatCharacters();
-            _turnManager.Initialize(characters);
+            _turnManager.InitializeTurns(characters);
         }
 
         public void Dispose()

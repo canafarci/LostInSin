@@ -2,6 +2,7 @@ using LostInSin.Characters;
 using LostInSin.UI;
 using LostInSin.UI.AbilityPanel;
 using LostInSin.UI.CharacterSelectPanel;
+using LostInSin.UI.EndTurnPanel;
 using LostInSin.UI.InitiativePanel;
 using UnityEngine;
 using Zenject;
@@ -14,9 +15,15 @@ namespace LostInSin.Context
 
         public override void InstallBindings()
         {
+            BindEndTurnPanel();
             BindAbilityPanel();
             BindCharacterSelectPanel();
             BindInitiativePanel();
+        }
+
+        private void BindEndTurnPanel()
+        {
+            Container.BindInterfacesAndSelfTo<EndTurnVM>().AsSingle().NonLazy();
         }
 
         private void BindInitiativePanel()

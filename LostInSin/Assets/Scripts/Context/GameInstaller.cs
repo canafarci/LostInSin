@@ -61,7 +61,7 @@ namespace LostInSin.Context
 
         private void BindCharacterSelection()
         {
-            Container.BindInterfacesAndSelfTo<CharacterSelector>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<CombatCharacterSelector>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<CharacterStateTicker>().AsSingle();
         }
 

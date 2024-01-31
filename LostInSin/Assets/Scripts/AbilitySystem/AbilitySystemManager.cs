@@ -33,7 +33,7 @@ namespace LostInSin.AbilitySystem
                       .Subscribe(OnSelectedAbilityChanged)
                       .AddTo(_disposables);
 
-            _signalBus.GetStream<CharacterSelectedSignal>()
+            _signalBus.GetStream<CharacterSelectSignal>()
                       .Subscribe(OnCharacterSelectedSignal)
                       .AddTo(_disposables);
         }
@@ -61,7 +61,7 @@ namespace LostInSin.AbilitySystem
             StartCastingAbility();
         }
 
-        private void OnCharacterSelectedSignal(CharacterSelectedSignal signal)
+        private void OnCharacterSelectedSignal(CharacterSelectSignal signal)
         {
             if (_abilityStack.Count > 0)
             {

@@ -2,12 +2,12 @@ using LostInSin.Characters;
 
 namespace LostInSin.Signals.Characters
 {
-    public struct CharacterSelectedSignal
+    public struct CharacterSelectSignal
     {
         private Character _selectedCharacter;
         public Character SelectedCharacter => _selectedCharacter;
 
-        public CharacterSelectedSignal(Character selectedCharacter)
+        public CharacterSelectSignal(Character selectedCharacter)
         {
             _selectedCharacter = selectedCharacter;
         }

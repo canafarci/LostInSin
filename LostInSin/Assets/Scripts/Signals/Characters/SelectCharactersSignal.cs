@@ -2,12 +2,12 @@ using LostInSin.Characters;
 
 namespace LostInSin.Signals.Characters
 {
-    public readonly struct SelectInitialCharacterSignal
+    public readonly struct SelectCharactersSignal
     {
         private readonly Character _initialCharacter;
         public readonly Character InitialCharacter => _initialCharacter;
 
-        public SelectInitialCharacterSignal(Character initialCharacter)
+        public SelectCharactersSignal(Character initialCharacter)
         {
             _initialCharacter = initialCharacter;
         }

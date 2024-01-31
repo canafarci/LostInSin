@@ -1,18 +1,14 @@
 using System;
 using LostInSin.Characters;
-using LostInSin.Core;
 using LostInSin.Identifiers;
-using LostInSin.Input;
-using LostInSin.Raycast;
 using LostInSin.Signals;
 using LostInSin.Signals.Characters;
 using UniRx;
-using UnityEngine.InputSystem;
 using Zenject;
 
 namespace LostInSin.Control
 {
-    public class CharacterSelector : IInitializable, IDisposable
+    public class CombatCharacterSelector : IInitializable, IDisposable
     {
         [Inject] private CharacterStateTicker _stateTicker;
         [Inject] private SignalBus _signalBus;
@@ -24,8 +20,8 @@ namespace LostInSin.Control
 
         public void Initialize()
         {
-            _signalBus.GetStream<SelectInitialCharacterSignal>()
-                      .Subscribe(OnInitialCharacterSelect)
+            _signalBus.GetStream<SelectCharactersSignal>()
+                      .Subscribe(OnSelectCharactersSignal)
                       .AddTo(_disposables);
 
             _signalBus.GetStream<CharacterPortraitClickedSignal>()
@@ -33,7 +29,7 @@ namespace LostInSin.Control
                       .AddTo(_disposables);
         }
 
-        private void OnInitialCharacterSelect(SelectInitialCharacterSignal signal)
+        private void OnSelectCharactersSignal(SelectCharactersSignal signal)
         {
             SetNewCharacterAsSelected(signal.InitialCharacter);
         }
@@ -58,7 +54,7 @@ namespace LostInSin.Control
         private void SetNewCharacterAsSelected(Character character)
         {
             _selectedCharacter = character;
-            _signalBus.Fire(new CharacterSelectedSignal(_selectedCharacter));
+            _signalBus.Fire(new CharacterSelectSignal(_selectedCharacter));
             _stateTicker.SetTickingCharacter(_selectedCharacter);
         }
 

@@ -42,20 +42,9 @@ namespace LostInSin.Characters
 
                 if (character.CharacterPersistentData.CharacterTeam == CharacterTeam.Friendly)
                     _playerCharacters.Add(character);
-
-                FireInitialSelectedCharacterSignal(characterData, character);
             }
 
             FireCharactersSpawnedSignal();
-        }
-
-        private async void FireInitialSelectedCharacterSignal(CharacterPersistentData characterData, Character character)
-        {
-            if (characterData.DefaultSelectedCharacter)
-            {
-                await UniTask.DelayFrame(1); //wait one frame to finish initialization
-                _signalBus.Fire(new SelectInitialCharacterSignal(character));
-            }
         }
 
         private async void FireCharactersSpawnedSignal()
@@ -69,5 +58,15 @@ namespace LostInSin.Characters
         {
             _playerCharacters.Clear();
         }
+
+        //TODO reuse when loaded after combat ended
+        // private async void FireInitialSelectedCharacterSignal(CharacterPersistentData characterData, Character character)
+        // {
+        //     if (characterData.DefaultSelectedCharacter)
+        //     {
+        //         await UniTask.DelayFrame(1); //wait one frame to finish initialization
+        //         _signalBus.Fire(new SelectCharactersSignal(character));
+        //     }
+        // }
     }
 }
