@@ -55,7 +55,7 @@ namespace LostInSin.Control
             if (_selectedCharacter == character) return;
 
             if (CanChangeCharacter(character))
-                SetNewCharacterAsSelected(character);
+                _signalBus.Fire(new CharacterSelectSignal(character));
         }
 
         private bool CanChangeCharacter(Character character)

@@ -30,13 +30,8 @@ namespace LostInSin.Combat
 
         public void Initialize()
         {
-            _signalBus.GetStream<EndTurnSignal>()
-                      .Subscribe(OnEndTurnSignal)
-                      .AddTo(_disposables);
-
-            _signalBus.GetStream<CharacterSelectSignal>()
-                      .Subscribe(OnCharacterSelectSignal)
-                      .AddTo(_disposables);
+            _signalBus.GetStream<EndTurnSignal>().Subscribe(OnEndTurnSignal).AddTo(_disposables);
+            _signalBus.GetStream<CharacterSelectSignal>().Subscribe(OnCharacterSelectSignal).AddTo(_disposables);
         }
 
         private void OnEndTurnSignal(EndTurnSignal signal)
@@ -47,10 +42,14 @@ namespace LostInSin.Combat
             if (lastCharacterTeam == CharacterTeam.Friendly)
             {
                 _charactersCompletedTurns.Add(_characterPlayingTurn.Value);
+                int selectableCharactersCount = _selectableCharacters.Count;
 
-                if (_charactersCompletedTurns.Count == _selectableCharacters.Count)
+                if (_charactersCompletedTurns.Count == selectableCharactersCount)
                 {
-                    nextCharacter = GetNextCharacter(_selectableCharacters.Count);
+                    int currentCharacterSelectableIndex = _selectableCharacters.IndexOf(_characterPlayingTurn.Value);
+                    int selectableIndexDifference = selectableCharactersCount - currentCharacterSelectableIndex;
+
+                    nextCharacter = GetNextCharacter(selectableIndexDifference);
 
                     _charactersCompletedTurns.Clear();
                 }
@@ -82,16 +81,17 @@ namespace LostInSin.Combat
             if (_characterPlayingTurn.Value == signal.Character) return;
 
             _characterPlayingTurn = _orderedCombatCharacters.EnumerateNodes()
-                                                            .First(x => x.Value == signal.Character);
+                                                            .First(x =>
+                                                                       x.Value == signal.Character);
         }
 
         private LinkedListNode<Character> GetNextCharacter(int count)
         {
-            LinkedListNode<Character> nextCharacter = default;
+            LinkedListNode<Character> nextCharacter = _characterPlayingTurn;
 
             while (count > 0)
             {
-                nextCharacter = _characterPlayingTurn.Next ?? _orderedCombatCharacters.First;
+                nextCharacter = nextCharacter.Next ?? _orderedCombatCharacters.First;
                 count--;
             }
 
