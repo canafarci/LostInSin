@@ -34,7 +34,7 @@ namespace LostInSin.AbilitySystem
                       .AddTo(_disposables);
 
             _signalBus.GetStream<CharacterSelectSignal>()
-                      .Subscribe(OnCharacterSelectedSignal)
+                      .Subscribe(OnCharacterSelectSignal)
                       .AddTo(_disposables);
         }
 
@@ -61,8 +61,16 @@ namespace LostInSin.AbilitySystem
             StartCastingAbility();
         }
 
-        private void OnCharacterSelectedSignal(CharacterSelectSignal signal)
+        private void OnCharacterSelectSignal(CharacterSelectSignal signal)
         {
+            if (signal.Character.CharacterPersistentData.CharacterTeam == CharacterTeam.Enemy)
+            {
+                _instigator = null;
+                _abilityStack.Clear();
+                _cancellationTokenSource?.Cancel();
+                return;
+            }
+
             if (_abilityStack.Count > 0)
             {
                 _ability.AbilityBlueprint.OnAbilityDeselected(_instigator);
@@ -70,8 +78,8 @@ namespace LostInSin.AbilitySystem
             }
 
             _abilityStack.Clear();
-            _instigator = signal.SelectedCharacter;
-            AbilityInfo moveAbility = signal.SelectedCharacter
+            _instigator = signal.Character;
+            AbilityInfo moveAbility = signal.Character
                                             .Abilities
                                             .First(x => x.AbilityIdentifier == AbilityIdentifiers.Move);
 

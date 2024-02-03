@@ -1,9 +1,11 @@
 using System;
 using LostInSin.Characters;
+using LostInSin.Combat;
 using LostInSin.Identifiers;
 using LostInSin.Signals;
 using LostInSin.Signals.Characters;
 using UniRx;
+using UnityEngine;
 using Zenject;
 
 namespace LostInSin.Control
@@ -12,16 +14,16 @@ namespace LostInSin.Control
     {
         [Inject] private CharacterStateTicker _stateTicker;
         [Inject] private SignalBus _signalBus;
+        [Inject] private TurnManager _turnManager;
 
-        private const int CHARACTER_LAYER_MASK = 1 << 6;
         private readonly CompositeDisposable _disposables = new();
 
-        private Character _selectedCharacter = null;
+        private Character _selectedCharacter;
 
         public void Initialize()
         {
-            _signalBus.GetStream<SelectCharactersSignal>()
-                      .Subscribe(OnSelectCharactersSignal)
+            _signalBus.GetStream<CharacterSelectSignal>()
+                      .Subscribe(OnCharacterSelectSignal)
                       .AddTo(_disposables);
 
             _signalBus.GetStream<CharacterPortraitClickedSignal>()
@@ -29,9 +31,18 @@ namespace LostInSin.Control
                       .AddTo(_disposables);
         }
 
-        private void OnSelectCharactersSignal(SelectCharactersSignal signal)
+        private void OnCharacterSelectSignal(CharacterSelectSignal signal)
         {
-            SetNewCharacterAsSelected(signal.InitialCharacter);
+            if (signal.Character.CharacterPersistentData.CharacterTeam == CharacterTeam.Friendly)
+            {
+                SetNewCharacterAsSelected(signal.Character);
+            }
+            else if (_selectedCharacter != null)
+            {
+                _stateTicker.SetTickingCharacter(null);
+                _selectedCharacter.ExitTickingCharacter();
+                _selectedCharacter = null;
+            }
         }
 
         private void OnCharacterPortraitClicked(CharacterPortraitClickedSignal signal)
@@ -47,14 +58,29 @@ namespace LostInSin.Control
                 SetNewCharacterAsSelected(character);
         }
 
-        private bool CanChangeCharacter(Character character) =>
-            character.CharacterPersistentData.CharacterTeam == CharacterTeam.Friendly &&
-            _selectedCharacter.CanExitTickingCharacter();
+        private bool CanChangeCharacter(Character character)
+        {
+            bool canChangeCharacter = false;
+
+            bool isCharactersTurn = _turnManager.SelectableCharacters.Contains(character);
+
+            if (_selectedCharacter == null)
+                canChangeCharacter = isCharactersTurn;
+            else
+                canChangeCharacter = _selectedCharacter.CanExitTickingCharacter() &&
+                                     isCharactersTurn;
+
+
+            return canChangeCharacter;
+        }
 
         private void SetNewCharacterAsSelected(Character character)
         {
+            if (_selectedCharacter != null)
+                _selectedCharacter.ExitTickingCharacter();
+
             _selectedCharacter = character;
-            _signalBus.Fire(new CharacterSelectSignal(_selectedCharacter));
+
             _stateTicker.SetTickingCharacter(_selectedCharacter);
         }
 

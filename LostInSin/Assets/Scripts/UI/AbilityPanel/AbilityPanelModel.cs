@@ -25,7 +25,7 @@ namespace LostInSin.UI.AbilityPanel
 
         private void OnCharacterSelected(CharacterSelectSignal signal)
         {
-            _abilities.Value = signal.SelectedCharacter.Abilities;
+            _abilities.Value = signal.Character.Abilities;
         }
 
         public void Dispose()

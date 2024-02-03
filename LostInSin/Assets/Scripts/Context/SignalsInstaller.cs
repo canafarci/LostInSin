@@ -13,7 +13,6 @@ namespace LostInSin.Context
         {
             SignalBusInstaller.Install(Container);
 
-            Container.DeclareSignal<SelectCharactersSignal>();
             Container.DeclareSignal<CharacterSelectSignal>();
             Container.DeclareSignal<SelectedAbilityChangedSignal>();
             Container.DeclareSignal<PlayableCharactersSpawnedSignal>();

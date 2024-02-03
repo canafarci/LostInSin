@@ -57,15 +57,12 @@ namespace LostInSin.Characters
             _runtimeData.IsTicking = true;
         }
 
-        public bool CanExitTickingCharacter()
-        {
-            if (_runtimeData.CanExitState)
-            {
-                _runtimeData.IsTicking = false;
-                _stateTicker.SwitchToInactiveState();
-            }
+        public bool CanExitTickingCharacter() => _runtimeData.CanExitState;
 
-            return _runtimeData.CanExitState;
+        public void ExitTickingCharacter()
+        {
+            _runtimeData.IsTicking = false;
+            _stateTicker.SwitchToInactiveState();
         }
 
         public class Factory : PlaceholderFactory<Vector3, CharacterPersistentData, Character>

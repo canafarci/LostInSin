@@ -4,12 +4,12 @@ namespace LostInSin.Signals.Characters
 {
     public struct CharacterSelectSignal
     {
-        private Character _selectedCharacter;
-        public Character SelectedCharacter => _selectedCharacter;
+        private Character _character;
+        public Character Character => _character;
 
-        public CharacterSelectSignal(Character selectedCharacter)
+        public CharacterSelectSignal(Character character)
         {
-            _selectedCharacter = selectedCharacter;
+            _character = character;
         }
     }
 }

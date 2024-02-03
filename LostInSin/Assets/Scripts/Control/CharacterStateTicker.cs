@@ -1,5 +1,6 @@
 using Zenject;
 using LostInSin.Characters;
+using UnityEngine;
 
 namespace LostInSin.Control
 {
@@ -9,6 +10,12 @@ namespace LostInSin.Control
 
         public void SetTickingCharacter(Character character)
         {
+            if (character == null)
+            {
+                _selectedCharacter = null;
+                return;
+            }
+
             _selectedCharacter = character;
             _selectedCharacter.SetAsTickingCharacter();
         }

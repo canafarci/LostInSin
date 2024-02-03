@@ -2,6 +2,7 @@ using LostInSin.Identifiers;
 using LostInSin.Signals;
 using LostInSin.Signals.Characters.States;
 using LostInSin.Signals.Characters.Visuals;
+using UnityEngine;
 using Zenject;
 
 namespace LostInSin.Characters.StateMachine.States

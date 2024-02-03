@@ -12,13 +12,13 @@ namespace LostInSin.Combat
 {
     public class CombatStarter : IInitializable, IDisposable
     {
-        [Inject] private SignalBus _signalBus;
+        [Inject] private readonly SignalBus _signalBus;
         [Inject] private readonly GridGenerator _gridGenerator;
         [Inject] private readonly GridMeshDisplayService _gridDisplayer;
         [Inject] private readonly CombatCharacterPicker _combatCharacterPicker;
         [Inject] private readonly TurnManager _turnManager;
 
-        private CompositeDisposable _disposables = new();
+        private readonly CompositeDisposable _disposables = new();
 
         public void Initialize()
         {
