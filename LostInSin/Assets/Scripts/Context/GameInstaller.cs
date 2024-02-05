@@ -9,7 +9,7 @@ using LostInSin.Control;
 using LostInSin.Core;
 using LostInSin.Grid;
 using LostInSin.Grid.Visual;
-using LostInSin.Input;
+using LostInSin.PlayerInput;
 using LostInSin.Raycast;
 using LostInSin.UI;
 using UnityEngine;
@@ -38,7 +38,6 @@ namespace LostInSin.Context
             BindRaycasters();
             BindGrid();
             BindCamera();
-            BindAbilitySystem();
             BindCore();
         }
 
@@ -105,11 +104,6 @@ namespace LostInSin.Context
         private void BindCore()
         {
             Container.BindInterfacesAndSelfTo<PointerOverUIChecker>().AsSingle().NonLazy();
-        }
-
-        private void BindAbilitySystem()
-        {
-            Container.BindInterfacesAndSelfTo<AbilitySystemManager>().AsSingle();
         }
     }
 }

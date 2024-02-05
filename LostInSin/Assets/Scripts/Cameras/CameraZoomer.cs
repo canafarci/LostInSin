@@ -1,4 +1,4 @@
-using LostInSin.Input;
+using LostInSin.PlayerInput;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -12,7 +12,7 @@ namespace LostInSin.Cameras
         private float _targetZoom;
 
         private CameraZoomer(GameInput gameInput,
-                            CameraModel cameraModel)
+                             CameraModel cameraModel)
         {
             _gameInput = gameInput;
             _cameraModel = cameraModel;
@@ -38,6 +38,7 @@ namespace LostInSin.Cameras
 
             ZoomCamera(zoomDirection);
         }
+
         private void ZoomCamera(Vector2 zoomDirection)
         {
             float minZoomDistance = _cameraModel.CameraZoomMinDistance;

@@ -6,12 +6,11 @@ using LostInSin.Characters;
 using LostInSin.Core;
 using LostInSin.Identifiers;
 using LostInSin.Raycast;
-using LostInSin.Signals;
 using UnityEngine;
 using Zenject;
 using DG.Tweening;
 using LostInSin.Attributes;
-using LostInSin.Input;
+using LostInSin.PlayerInput;
 using LostInSin.Signals.Animations;
 using UnityEngine.InputSystem;
 

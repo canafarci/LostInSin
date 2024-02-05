@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using LostInSin.Input;
+using LostInSin.PlayerInput;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -14,6 +12,7 @@ namespace LostInSin.Cameras
         private readonly CameraModel _cameraModel;
         private Transform _cameraTargetTransform;
         private PollingState _currentState = PollingState.Inactive;
+
         private enum PollingState
         {
             Inactive,
@@ -21,7 +20,7 @@ namespace LostInSin.Cameras
         }
 
         private CameraRotator(GameInput gameInput,
-                            CameraModel cameraModel)
+                              CameraModel cameraModel)
         {
             _gameInput = gameInput;
             _cameraModel = cameraModel;

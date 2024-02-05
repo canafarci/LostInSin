@@ -2,7 +2,7 @@ using Cinemachine;
 using UnityEngine;
 using Zenject;
 using UnityEngine.InputSystem;
-using LostInSin.Input;
+using LostInSin.PlayerInput;
 using System;
 
 
@@ -31,8 +31,10 @@ namespace LostInSin.Cameras
         {
             float borderThreshold = 10; // Define how close to the edge it should react
 
-            if (mousePosition.x < borderThreshold || mousePosition.x > Screen.width - borderThreshold ||
-                mousePosition.y < borderThreshold || mousePosition.y > Screen.height - borderThreshold)
+            if (mousePosition.x < borderThreshold ||
+                mousePosition.x > Screen.width - borderThreshold ||
+                mousePosition.y < borderThreshold ||
+                mousePosition.y > Screen.height - borderThreshold)
             {
                 Vector2 direction = GetDirectionBasedOnMousePosition(mousePosition);
                 MoveCamera(direction);
@@ -81,7 +83,5 @@ namespace LostInSin.Cameras
             // Move the camera target
             cameraTargetTransform.Translate(movementStep, Space.World);
         }
-
-
     }
 }

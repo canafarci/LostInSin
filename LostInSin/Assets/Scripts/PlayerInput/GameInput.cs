@@ -1,6 +1,6 @@
 using Zenject;
 
-namespace LostInSin.Input
+namespace LostInSin.PlayerInput
 {
     public class GameInput : IInitializable
     {

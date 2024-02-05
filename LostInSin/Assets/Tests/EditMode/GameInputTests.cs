@@ -1,5 +1,5 @@
 using NUnit.Framework;
-using LostInSin.Input;
+using LostInSin.PlayerInput;
 using UniRx;
 
 namespace LostInSin.Input.Tests
