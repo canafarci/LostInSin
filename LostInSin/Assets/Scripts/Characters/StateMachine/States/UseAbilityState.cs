@@ -1,9 +1,7 @@
-using LostInSin.AbilitySystem;
+using LostInSin.Abilities;
 using LostInSin.Identifiers;
 using LostInSin.PlayerInput;
-using UnityEngine;
 using Zenject;
-using Input = UnityEngine.Windows.Input;
 
 namespace LostInSin.Characters.StateMachine.States
 {
@@ -14,6 +12,7 @@ namespace LostInSin.Characters.StateMachine.States
 
         [Inject] private readonly CharacterStateRuntimeData _runtimeData;
         [Inject] private readonly GameInput _gameInput;
+        [Inject] private readonly AbilityExecutor _abilityExecutor;
 
         private StateActivity _stateActivity = StateActivity.Inactive;
 
@@ -27,11 +26,9 @@ namespace LostInSin.Characters.StateMachine.States
         {
             if (_stateActivity == StateActivity.Inactive) return;
 
-            //_runtimeData.CanExitState = _abilitySystemManager.CastResult is not AbilityCastResult.InProgress;
+            AbilityCastResult abilityCastResult = _abilityExecutor.Tick();
 
-            if (_gameInput.GameplayActions.Click.IsPressed())
-            {
-            }
+            _runtimeData.CanExitState = abilityCastResult is not AbilityCastResult.InProgress;
         }
 
         public void Enter()

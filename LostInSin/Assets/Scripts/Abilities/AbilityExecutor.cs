@@ -1,21 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using LostInSin.Characters;
+using LostInSin.Identifiers;
+using Zenject;
 
-namespace LostInSin
+namespace LostInSin.Abilities
 {
-    public class AbilityExecutor : MonoBehaviour
+    public class AbilityExecutor
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
+        [Inject] private Character _character;
 
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
+        private AbilityInfo _currentAbilityInfo;
+
+        public AbilityCastResult Tick() => default;
     }
 }

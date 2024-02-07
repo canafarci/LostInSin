@@ -51,6 +51,12 @@ namespace LostInSin.Context
             BindAnimations();
             BindStates();
             BindAttributeSystem();
+            BindAbilitySystem();
+        }
+
+        private void BindAbilitySystem()
+        {
+            Container.Bind<AbilityExecutor>().AsSingle();
         }
 
         private void BindAnimations()
