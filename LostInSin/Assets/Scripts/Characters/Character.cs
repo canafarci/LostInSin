@@ -31,6 +31,7 @@ namespace LostInSin.Characters
 
         public AbilitySet AbilitySet => _abilitySet;
         public AttributeSet AttributeSet => _attributeSet;
+        public AbilityInfo CurrentAbility { get; }
         public List<AbilityInfo> Abilities => _abilitySet.CharacterAbilities;
         public IMover Mover => _mover;
         public CharacterStateRuntimeData RuntimeData => _runtimeData;

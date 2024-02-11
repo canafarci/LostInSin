@@ -68,7 +68,7 @@ namespace LostInSin.Movement
         {
             if (_currentState != MovementState.Moving) return false;
 
-            bool reached = Vector3.SqrMagnitude(_transform.position - _target) < _movementDelta;
+            bool reached = Vector3.SqrMagnitude(_transform.position - _target) <  Mathf.Pow(0.05f, 2);
 
             if (reached)
                 _currentState = MovementState.Idle;

@@ -36,7 +36,7 @@ namespace LostInSin.Abilities
             SelectedTarget
         }
 
-        public override void Initialize()
+        public  void Initialize()
         {
             _gameInput.GameplayActions.Click.performed += OnClickPerformed;
         }
@@ -54,13 +54,13 @@ namespace LostInSin.Abilities
             }
         }
 
-        public override UniTask<bool> CanCast(Character instigator, CancellationToken cancellationToken)
+        public  UniTask<bool> CanCast(Character instigator, CancellationToken cancellationToken)
         {
             _instigator = instigator;
             return new UniTask<bool>(_instigator != null);
         }
 
-        public override async UniTask<(AbilityCastResult castResult, AbilityTarget target)> PreCast(
+        public  async UniTask<(AbilityCastResult castResult, AbilityTarget target)> PreCast(
             Character instigator,
             CancellationToken cancellationToken)
         {
@@ -84,7 +84,7 @@ namespace LostInSin.Abilities
             }
         }
 
-        public override async UniTask<AbilityCastResult> Cast(Character instigator, AbilityTarget target)
+        public  async UniTask<AbilityCastResult> Cast(Character instigator, AbilityTarget target)
         {
             instigator.Mover.InitializeMovement(_gridCell.CenterPosition);
             instigator.RuntimeData.ChangeOccupiedCell(_gridCell);
@@ -96,7 +96,7 @@ namespace LostInSin.Abilities
             return AbilityCastResult.Success;
         }
 
-        public override UniTask<AbilityCastResult> PostCast(Character instigator)
+        public  UniTask<AbilityCastResult> PostCast(Character instigator)
         {
             FireRunningAnimationChangeSignal(instigator, false);
             return new UniTask<AbilityCastResult>(AbilityCastResult.Success);
@@ -138,7 +138,7 @@ namespace LostInSin.Abilities
                    !gridCell.IsOccupied;
         }
 
-        public override void OnAbilityDeselected(Character instigator)
+        public  void OnAbilityDeselected(Character instigator)
         {
             FireRunningAnimationChangeSignal(instigator, false);
             _state = AbilityState.Inactive;

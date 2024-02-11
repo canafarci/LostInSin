@@ -8,9 +8,10 @@ using Zenject;
 
 namespace LostInSin.Abilities.AbilityData.TargetGetter
 {
-    [CreateAssetMenu(fileName = "Enemy Target Getter", menuName = "LostInSin/Abilities/Target Getter/Enemy Target Getter",
+    [CreateAssetMenu(fileName = "Enemy Target Selector",
+                     menuName = "LostInSin/Abilities/Target Selector/Enemy Target Selector",
                      order = 0)]
-    public class CharacterTargetGetter : AbilityTargetGetter
+    public class CharacterTargetSelector : AbilityTargetSelector
     {
         public int CountOfTargets;
 

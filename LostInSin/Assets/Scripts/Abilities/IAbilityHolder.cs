@@ -6,5 +6,6 @@ namespace LostInSin.Abilities
     {
         public AbilitySet AbilitySet { get; }
         public AttributeSet AttributeSet { get; }
+        public AbilityInfo CurrentAbility { get; }
     }
 }

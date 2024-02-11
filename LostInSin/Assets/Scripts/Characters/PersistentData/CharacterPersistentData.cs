@@ -27,12 +27,12 @@ namespace LostInSin.Characters.PersistentData
         {
             await UniTask.NextFrame(); //wait one frame for other dependencies to be injected, as SOs are loaded first
 
-            CharacterAbilities.ForEach(x =>
-                                       {
-                                           container.Inject(x.AbilityBlueprint);
-                                           x.AbilityBlueprint.Initialize();
-                                       });
-            container.Inject(MoveAbility.AbilityBlueprint);
+            // CharacterAbilities.ForEach(x =>
+            //                            {
+            //                                container.Inject(x.AbilityBlueprint);
+            //                                x.AbilityBlueprint.Initialize();
+            //                            });
+            // container.Inject(MoveAbility.AbilityBlueprint);
         }
     }
 }

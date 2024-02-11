@@ -1,6 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using LostInSin.Abilities.AbilityData.Abstract;
 using LostInSin.Characters;
 using LostInSin.Identifiers;
 using Sirenix.OdinInspector;
@@ -14,25 +15,8 @@ namespace LostInSin.Abilities
         public AbilityIdentifiers AbilityIdentifier;
         public bool IsUICastedAbility;
 
-        public virtual void Initialize()
-        {
-        }
-
-        public virtual void OnAbilitySelected(Character instigator)
-        {
-        }
-
-        public abstract UniTask<bool> CanCast(Character instigator, CancellationToken cancellationToken);
-
-        public abstract UniTask<(AbilityCastResult castResult, AbilityTarget target)> PreCast(
-            Character instigator,
-            CancellationToken cancellationToken);
-
-        public abstract UniTask<AbilityCastResult> Cast(Character instigator, AbilityTarget target);
-        public abstract UniTask<AbilityCastResult> PostCast(Character instigator);
-
-        public virtual void OnAbilityDeselected(Character instigator)
-        {
-        }
+        public AbilityCastingStarter[] CastingStarters;
+        public AbilityRequirements[] AbilityRequirements;
+        public AbilityTargetSelector AbilityTargetSelector;
     }
 }

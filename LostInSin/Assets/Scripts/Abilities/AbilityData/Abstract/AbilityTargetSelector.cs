@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace LostInSin.Abilities.AbilityData.Abstract
 {
-    public abstract class AbilityTargetGetter : SerializedScriptableObject
+    public abstract class AbilityTargetSelector : SerializedScriptableObject
     {
         public abstract List<AbilityTarget> GetTarget(Character instigator);
     }

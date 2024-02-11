@@ -40,7 +40,7 @@ namespace LostInSin.Abilities
             SelectedTarget
         }
 
-        public override void Initialize()
+        public void Initialize()
         {
             _gameInput.GameplayActions.Click.performed += OnClickPerformed;
         }
@@ -58,13 +58,13 @@ namespace LostInSin.Abilities
             }
         }
 
-        public override UniTask<bool> CanCast(Character instigator, CancellationToken cancellationToken)
+        public UniTask<bool> CanCast(Character instigator, CancellationToken cancellationToken)
         {
             FireDrawArrowSignal(instigator, AnimationIdentifier.StartAimingArrow);
             return new UniTask<bool>(true);
         }
 
-        public override async UniTask<(AbilityCastResult castResult, AbilityTarget target)> PreCast(
+        public async UniTask<(AbilityCastResult castResult, AbilityTarget target)> PreCast(
             Character instigator,
             CancellationToken cancellationToken)
         {
@@ -96,7 +96,7 @@ namespace LostInSin.Abilities
             }
         }
 
-        public override async UniTask<AbilityCastResult> Cast(Character instigator, AbilityTarget target)
+        public async UniTask<AbilityCastResult> Cast(Character instigator, AbilityTarget target)
         {
             FireDrawArrowSignal(instigator, AnimationIdentifier.ShootArrow);
             await UniTask.Delay(100);
@@ -110,13 +110,13 @@ namespace LostInSin.Abilities
             return AbilityCastResult.InProgress;
         }
 
-        public override UniTask<AbilityCastResult> PostCast(Character instigator)
+        public UniTask<AbilityCastResult> PostCast(Character instigator)
         {
             ResetArrowPosition(instigator);
             return new UniTask<AbilityCastResult>(AbilityCastResult.Success);
         }
 
-        public override void OnAbilityDeselected(Character instigator)
+        public void OnAbilityDeselected(Character instigator)
         {
             FireDrawArrowSignal(instigator, AnimationIdentifier.CancelAimingArrow);
             _state = AbilityState.Inactive;
