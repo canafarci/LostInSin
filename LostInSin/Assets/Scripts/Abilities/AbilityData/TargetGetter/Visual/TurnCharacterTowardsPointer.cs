@@ -8,7 +8,7 @@ namespace LostInSin.Abilities.AbilityData.TargetGetter.Visual
 {
     [CreateAssetMenu(fileName = "Turn Character Towards Pointer",
                      menuName = "LostInSin/Abilities/Target Getter/Visual/Turn Character Towards Pointer", order = 0)]
-    public class TurnCharacterTowardsPointer : AbilityTargetGetterVisual
+    public class TurnCharacterTowardsPointer : AbilityTargetSelectorVisual
     {
         [Inject] private readonly IPositionRaycaster _positionRaycaster;
 

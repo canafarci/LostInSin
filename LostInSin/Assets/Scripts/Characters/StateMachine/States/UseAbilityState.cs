@@ -34,6 +34,7 @@ namespace LostInSin.Characters.StateMachine.States
         public void Enter()
         {
             _stateActivity = StateActivity.Active;
+            _abilityExecutor.StartExecutingAbility();
         }
 
         public void Exit()
