@@ -1,6 +1,0 @@
-﻿{
-    "name": "Zenject",
-    "references": [
-        "UniRx"
-    ]
-}
