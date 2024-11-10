@@ -1,5 +1,3 @@
-using VContainer.Unity;
-using VContainer;
 using System;
 using Cysharp.Threading.Tasks;
 using LostInSin.Runtime.CrossScene.LoadingScreen.Signals;
@@ -11,6 +9,8 @@ using LostInSin.Runtime.Infrastructure.ApplicationState;
 using LostInSin.Runtime.Infrastructure.ApplicationState.Signals;
 using LostInSin.Runtime.Infrastructure.Data;
 using LostInSin.Runtime.Infrastructure.Signals;
+using VContainer;
+using VContainer.Unity;
 
 namespace LostInSin.Runtime.Gameplay.GameplayLifecycle
 {

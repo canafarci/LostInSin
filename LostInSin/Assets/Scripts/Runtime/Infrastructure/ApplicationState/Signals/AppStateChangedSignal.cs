@@ -13,6 +13,5 @@ namespace LostInSin.Runtime.Infrastructure.ApplicationState.Signals
 			_newState = newState;
 			_oldState = oldState;
 		}
-
 	}
 }

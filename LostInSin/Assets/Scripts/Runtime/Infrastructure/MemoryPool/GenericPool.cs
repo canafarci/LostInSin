@@ -10,10 +10,10 @@ namespace LostInSin.Runtime.Infrastructure.MemoryPool
 		public GenericPool()
 		{
 			_genericPool = new ObjectPool<T>(OnCreate,
-			                                 OnTakeFromPool,
-			                                 OnReturnToPool,
-			                                 OnDestroy,
-			                                 true, 10, 100);
+				OnTakeFromPool,
+				OnReturnToPool,
+				OnDestroy,
+				true, 10, 100);
 		}
 
 		public T Get()

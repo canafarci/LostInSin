@@ -7,6 +7,7 @@ namespace LostInSin.Runtime.Gameplay.Signals
 		private readonly GameState _newState;
 
 		public GameState newState => _newState;
+
 		public ChangeGameStateSignal(GameState newState)
 		{
 			_newState = newState;

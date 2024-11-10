@@ -11,8 +11,8 @@ namespace LostInSin.Runtime.Utility.Extensions
 			Color color = image.color;
 			color.a = startValue;
 			image.color = color;
-			
-			DOTween.ToAlpha(()=> image.color, x=> image.color = x, endValue, duration);
-		}	
+
+			DOTween.ToAlpha(() => image.color, x => image.color = x, endValue, duration);
+		}
 	}
 }

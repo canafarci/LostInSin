@@ -10,7 +10,7 @@ namespace LostInSin.Runtime.Infrastructure.ApplicationState
 		public static void RegisterAppController(this IContainerBuilder builder)
 		{
 			builder.RegisterEntryPoint<ApplicationStateController>();
-			
+
 			builder.DeclareSignal<ChangeAppStateSignal>();
 			builder.DeclareSignal<AppStateChangedSignal>();
 		}

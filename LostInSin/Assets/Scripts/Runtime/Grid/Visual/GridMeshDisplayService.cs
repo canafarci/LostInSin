@@ -1,7 +1,5 @@
-using System;
 using LostInSin.Runtime.Grid.DataObjects;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace LostInSin.Runtime.Grid.Visual
 {

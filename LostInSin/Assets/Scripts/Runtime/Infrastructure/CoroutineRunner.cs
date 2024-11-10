@@ -8,10 +8,7 @@ namespace LostInSin.Runtime.Infrastructure
 
 		private void Awake()
 		{
-			if (instance == null)
-			{
-				instance = this;
-			}
+			if (instance == null) instance = this;
 		}
 	}
 }

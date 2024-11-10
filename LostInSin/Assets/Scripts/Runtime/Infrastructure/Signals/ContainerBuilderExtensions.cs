@@ -6,15 +6,12 @@ namespace LostInSin.Runtime.Infrastructure.Signals
 {
 	public static class ContainerBuilderExtensions
 	{
-		private static readonly List<Type> DeclaredSignalTypes = new List<Type>();
+		private static readonly List<Type> DeclaredSignalTypes = new();
 
 		public static void DeclareSignal<TSignal>(this IContainerBuilder builder)
 		{
-			var signalType = typeof(TSignal);
-			if (!DeclaredSignalTypes.Contains(signalType))
-			{
-				DeclaredSignalTypes.Add(signalType);
-			}
+			Type signalType = typeof(TSignal);
+			if (!DeclaredSignalTypes.Contains(signalType)) DeclaredSignalTypes.Add(signalType);
 		}
 
 		public static void RegisterSignalBus(this IContainerBuilder builder)

@@ -9,7 +9,7 @@ namespace LostInSin.Runtime.Gameplay.Signals
 
 		public GameState newState => _newState;
 		public GameState oldState => _oldState;
-		
+
 		public GameStateChangedSignal(GameState newState, GameState oldState)
 		{
 			_newState = newState;

@@ -5,7 +5,7 @@ namespace LostInSin.Runtime.Infrastructure.ApplicationState.Signals
 		private readonly AppStateID _newState;
 
 		public AppStateID newState => _newState;
-		
+
 		public ChangeAppStateSignal(AppStateID newState)
 		{
 			_newState = newState;

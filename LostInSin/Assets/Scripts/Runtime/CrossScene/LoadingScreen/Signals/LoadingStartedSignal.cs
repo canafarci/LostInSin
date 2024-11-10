@@ -7,11 +7,10 @@ namespace LostInSin.Runtime.CrossScene.LoadingScreen.Signals
 		private readonly AsyncOperation _asyncOperation;
 
 		public AsyncOperation asyncOperation => _asyncOperation;
-		
+
 		public LoadingStartedSignal(AsyncOperation asyncOperation)
 		{
 			_asyncOperation = asyncOperation;
 		}
-
 	}
 }

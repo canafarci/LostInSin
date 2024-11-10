@@ -11,13 +11,12 @@ namespace LostInSin.Runtime.CrossScene.Signals
 		public AudioSourceType audioSourceType => _audioSourceType;
 		public AudioClipID audioClipID => _audioClipID;
 		public float volume => _volume;
-		
+
 		public PlayAudioSignal(AudioSourceType audioSourceType, AudioClipID audioClipID, float volume = 1f)
 		{
 			_audioSourceType = audioSourceType;
 			_audioClipID = audioClipID;
 			_volume = volume;
 		}
-
 	}
 }

@@ -1,9 +1,9 @@
 namespace LostInSin.Runtime.CrossScene.Enums
 {
-    public enum PanelActivationState
-    {
-        Active,
-        Animating,
-        Inactive
-    }
+	public enum PanelActivationState
+	{
+		Active,
+		Animating,
+		Inactive
+	}
 }

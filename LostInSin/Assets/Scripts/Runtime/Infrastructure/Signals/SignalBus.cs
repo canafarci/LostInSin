@@ -14,19 +14,16 @@ namespace LostInSin.Runtime.Infrastructure.Signals
 		{
 			// Initialize subscriptions for declared signals
 			foreach (Type signalType in declaredSignals)
-			{
 				_subscriptions[signalType] = new SignalSubscription(signalType);
-			}
 		}
 
 		public void Subscribe<TSignal>(Action<TSignal> handler)
 		{
 			Type signalType = typeof(TSignal);
 			if (!_subscriptions.TryGetValue(signalType, out SignalSubscription subscription))
-			{
-				throw new InvalidOperationException($"Signal '{signalType.Name}' has not been declared. Please declare it during container setup.");
-			}
-			
+				throw new InvalidOperationException(
+					$"Signal '{signalType.Name}' has not been declared. Please declare it during container setup.");
+
 			subscription.Add(handler);
 		}
 
@@ -35,9 +32,7 @@ namespace LostInSin.Runtime.Infrastructure.Signals
 			Type signalType = typeof(TSignal);
 
 			if (_subscriptions.TryGetValue(signalType, out SignalSubscription subscription))
-			{
 				subscription.Remove(handler);
-			}
 		}
 
 		public void Fire<TSignal>(TSignal signal)
@@ -46,17 +41,14 @@ namespace LostInSin.Runtime.Infrastructure.Signals
 			if (_subscriptions.TryGetValue(signalType, out SignalSubscription subscription))
 			{
 				if (subscription.HasHandlers())
-				{
 					subscription.Invoke(signal);
-				}
 				else
-				{
 					Debug.LogWarning($"No subscribers for signal '{signalType.Name}'.");
-				}
 			}
 			else
 			{
-				throw new InvalidOperationException($"Signal '{signalType.Name}' has not been declared. Please declare it during container setup.");
+				throw new InvalidOperationException(
+					$"Signal '{signalType.Name}' has not been declared. Please declare it during container setup.");
 			}
 		}
 
@@ -111,7 +103,6 @@ namespace LostInSin.Runtime.Infrastructure.Signals
 				}
 
 				foreach (Delegate handler in handlersCopy)
-				{
 					try
 					{
 						handler.DynamicInvoke(signal);
@@ -124,9 +115,8 @@ namespace LostInSin.Runtime.Infrastructure.Signals
 					{
 						Debug.LogError(ex);
 					}
-				}
 			}
-			
+
 			public bool HasHandlers()
 			{
 				_lock.EnterReadLock();
@@ -137,7 +127,7 @@ namespace LostInSin.Runtime.Infrastructure.Signals
 					//Which might not get injected if it gets deselected in App Settings
 					if (_signalType == typeof(AppStateChangedSignal))
 						return true;
-					
+
 					return _handlers.Count > 0;
 				}
 				finally
