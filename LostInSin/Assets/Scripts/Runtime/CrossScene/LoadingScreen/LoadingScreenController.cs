@@ -19,7 +19,7 @@ namespace LostInSin.Runtime.CrossScene.LoadingScreen
 
 		protected override void SubscribeToEvents()
 		{
-			SignalBus.Subscribe<LoadingStartedSignal>(OnLoadingStartedSignal);
+			_signalBus.Subscribe<LoadingStartedSignal>(OnLoadingStartedSignal);
 		}
 
 		private async void OnLoadingStartedSignal(LoadingStartedSignal signal)
@@ -42,7 +42,7 @@ namespace LostInSin.Runtime.CrossScene.LoadingScreen
 			}
 
 			_view.gameObject.SetActive(false);
-			SignalBus.Fire(new LoadingFinishedSignal());
+			_signalBus.Fire(new LoadingFinishedSignal());
 		}
 
 		private void LerpFillImage(float targetFillAmount)
@@ -52,7 +52,7 @@ namespace LostInSin.Runtime.CrossScene.LoadingScreen
 
 		protected override void UnsubscribeFromEvents()
 		{
-			SignalBus.Unsubscribe<LoadingStartedSignal>(OnLoadingStartedSignal);
+			_signalBus.Unsubscribe<LoadingStartedSignal>(OnLoadingStartedSignal);
 		}
 	}
 }

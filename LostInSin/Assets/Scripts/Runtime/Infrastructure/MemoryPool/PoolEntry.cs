@@ -1,28 +1,31 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using LostInSin.Runtime.Infrastructure.ApplicationState;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace LostInSin.Runtime.Infrastructure.MemoryPool
 {
 	[Serializable]
 	public class PoolEntry
 	{
-		[HorizontalGroup("IsMono")] [HideLabel]
-		public bool IsMonoBehaviour;
+		[FoldoutGroup("Pool Entry Data")] public bool IsMonoBehaviour;
 
-		[HorizontalGroup("Prefab")] [HideLabel] [ShowIf("@this.IsMonoBehaviour")]
+		[FoldoutGroup("Pool Entry Data")] [ShowIf(nameof(IsMonoBehaviour))]
 		public GameObject Prefab;
 
 		// Store the class type as a string for serialization
-		[FormerlySerializedAs("classTypeName")]
-		[HorizontalGroup("Class")]
-		[HideLabel]
-		[ValueDropdown("GetClassTypeNames")]
-		[SerializeField]
+		[FoldoutGroup("Pool Entry Data")] [ValueDropdown("GetClassTypeNames")] [SerializeField]
 		private string ClassTypeName;
+
+		[FoldoutGroup("Pool Entry Data")] public int InitialSize = 5;
+		[FoldoutGroup("Pool Entry Data")] public int DefaultCapacity = 10;
+		[FoldoutGroup("Pool Entry Data")] public int MaximumSize = 100;
+		[FoldoutGroup("Pool Entry Data")] public bool RecycleWithSceneChange = true;
+
+		[FoldoutGroup("Pool Entry Data")] [ShowIf(nameof(RecycleWithSceneChange))]
+		public AppStateID RecycleSceneID;
 
 		// Property to get the actual Type from the string
 		public Type classType
@@ -36,8 +39,9 @@ namespace LostInSin.Runtime.Infrastructure.MemoryPool
 		{
 			IEnumerable<ValueDropdownItem<string>> types = AppDomain.CurrentDomain.GetAssemblies()
 				.SelectMany(assembly => assembly.GetTypes())
-				.Where(t => t.IsClass && !t.IsAbstract)
+				.Where(t => t.IsClass && !t.IsAbstract && typeof(IPoolable).IsAssignableFrom(t))
 				.Select(type => new ValueDropdownItem<string>(type.FullName, type.AssemblyQualifiedName));
+
 
 			return types;
 		}

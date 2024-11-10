@@ -9,7 +9,7 @@ namespace LostInSin.Runtime.Infrastructure.ApplicationState
 
 		protected override void SubscribeToEvents()
 		{
-			SignalBus.Subscribe<ChangeAppStateSignal>(OnAppStateChangeSignal);
+			_signalBus.Subscribe<ChangeAppStateSignal>(OnAppStateChangeSignal);
 		}
 
 		private void OnAppStateChangeSignal(ChangeAppStateSignal signal)
@@ -17,12 +17,12 @@ namespace LostInSin.Runtime.Infrastructure.ApplicationState
 			AppStateID oldState = _currentStateID;
 			_currentStateID = signal.newState;
 
-			SignalBus.Fire(new AppStateChangedSignal(_currentStateID, oldState));
+			_signalBus.Fire(new AppStateChangedSignal(_currentStateID, oldState));
 		}
 
 		protected override void UnsubscribeFromEvents()
 		{
-			SignalBus.Unsubscribe<ChangeAppStateSignal>(OnAppStateChangeSignal);
+			_signalBus.Unsubscribe<ChangeAppStateSignal>(OnAppStateChangeSignal);
 		}
 	}
 }

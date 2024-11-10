@@ -7,7 +7,7 @@ namespace LostInSin.Runtime.Infrastructure.Templates
 {
 	public abstract class SignalListener : IInitializable, IDisposable
 	{
-		[Inject] protected SignalBus SignalBus;
+		[Inject] protected SignalBus _signalBus;
 
 		public virtual void Initialize()
 		{

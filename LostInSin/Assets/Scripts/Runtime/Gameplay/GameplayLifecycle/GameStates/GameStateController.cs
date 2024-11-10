@@ -17,8 +17,8 @@ namespace LostInSin.Runtime.Gameplay.GameplayLifecycle.GameStates
 
 		protected override void SubscribeToEvents()
 		{
-			SignalBus.Subscribe<ChangeGameStateSignal>(OnChangeGameStateSignal);
-			SignalBus.Subscribe<TriggerLevelEndSignal>(OnTriggerLevelEndSignal);
+			_signalBus.Subscribe<ChangeGameStateSignal>(OnChangeGameStateSignal);
+			_signalBus.Subscribe<TriggerLevelEndSignal>(OnTriggerLevelEndSignal);
 		}
 
 		private void OnTriggerLevelEndSignal(TriggerLevelEndSignal signal)
@@ -40,13 +40,13 @@ namespace LostInSin.Runtime.Gameplay.GameplayLifecycle.GameStates
 			GameState oldState = _currentState;
 			_currentState = newState;
 
-			SignalBus.Fire(new GameStateChangedSignal(_currentState, oldState));
+			_signalBus.Fire(new GameStateChangedSignal(_currentState, oldState));
 		}
 
 		protected override void UnsubscribeFromEvents()
 		{
-			SignalBus.Unsubscribe<ChangeGameStateSignal>(OnChangeGameStateSignal);
-			SignalBus.Unsubscribe<TriggerLevelEndSignal>(OnTriggerLevelEndSignal);
+			_signalBus.Unsubscribe<ChangeGameStateSignal>(OnChangeGameStateSignal);
+			_signalBus.Unsubscribe<TriggerLevelEndSignal>(OnTriggerLevelEndSignal);
 		}
 	}
 }

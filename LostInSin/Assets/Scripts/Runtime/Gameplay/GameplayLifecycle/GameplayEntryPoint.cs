@@ -1,21 +1,38 @@
+using VContainer.Unity;
+using VContainer;
 using System;
 using Cysharp.Threading.Tasks;
 using LostInSin.Runtime.CrossScene.LoadingScreen.Signals;
 using LostInSin.Runtime.Gameplay.Enums;
 using LostInSin.Runtime.Gameplay.Signals;
+using LostInSin.Runtime.Grid;
+using LostInSin.Runtime.Grid.Visual;
 using LostInSin.Runtime.Infrastructure.ApplicationState;
 using LostInSin.Runtime.Infrastructure.ApplicationState.Signals;
 using LostInSin.Runtime.Infrastructure.Data;
 using LostInSin.Runtime.Infrastructure.Signals;
-using VContainer;
-using VContainer.Unity;
 
 namespace LostInSin.Runtime.Gameplay.GameplayLifecycle
 {
 	public class GameplayEntryPoint : IInitializable, IStartable, IDisposable
 	{
-		[Inject] private SignalBus _signalBus;
-		[Inject] private ApplicationSettings _applicationSettings;
+		private readonly SignalBus _signalBus;
+		private readonly ApplicationSettings _applicationSettings;
+		private readonly GridGenerator _gridGenerator;
+		private readonly GridMeshDisplayService _gridMeshDisplayService;
+
+		[Inject]
+		public GameplayEntryPoint(
+			SignalBus signalBus,
+			ApplicationSettings applicationSettings,
+			GridGenerator gridGenerator,
+			GridMeshDisplayService gridMeshDisplayService)
+		{
+			_signalBus = signalBus;
+			_applicationSettings = applicationSettings;
+			_gridGenerator = gridGenerator;
+			_gridMeshDisplayService = gridMeshDisplayService;
+		}
 
 		public void Initialize()
 		{
@@ -48,6 +65,13 @@ namespace LostInSin.Runtime.Gameplay.GameplayLifecycle
 
 		private void InitializeGameplay()
 		{
+			// Generate the grid
+			_gridGenerator.GenerateGrid();
+
+			// Display the grid mesh
+			_gridMeshDisplayService.ShowGrid();
+
+			// Additional initialization logic if needed
 		}
 
 		public void Dispose()

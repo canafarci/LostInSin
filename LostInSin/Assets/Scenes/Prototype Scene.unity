@@ -823,6 +823,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Core
       objectReference: {fileID: 0}
+    - target: {fileID: 4317900172441832059, guid: e563829a3b56145bfae39e6b5fb7e977, type: 3}
+      propertyPath: GridVisualDataSo
+      value: 
+      objectReference: {fileID: 11400000, guid: 648fbc1def316f9459fd66db42e1c95c, type: 2}
+    - target: {fileID: 4317900172441832059, guid: e563829a3b56145bfae39e6b5fb7e977, type: 3}
+      propertyPath: GridGenerationDataSo
+      value: 
+      objectReference: {fileID: 11400000, guid: 2b915f3e1d102814fb5023bd8bcc559f, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

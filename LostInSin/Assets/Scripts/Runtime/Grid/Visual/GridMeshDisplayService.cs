@@ -9,14 +9,14 @@ namespace LostInSin.Runtime.Grid.Visual
 	{
 		private readonly GridModel _gridModel;
 		private readonly GridMeshGenerator _gridMeshGenerator;
-		private readonly Data _data;
+		private readonly GridVisualDataSo _visualData;
 		private readonly int _gridSize = Shader.PropertyToID("_GridSize");
 
-		private GridMeshDisplayService(GridModel model, GridMeshGenerator meshGenerator, Data data)
+		private GridMeshDisplayService(GridModel model, GridMeshGenerator meshGenerator, GridVisualDataSo visualData)
 		{
 			_gridModel = model;
 			_gridMeshGenerator = meshGenerator;
-			_data = data;
+			_visualData = visualData;
 		}
 
 		public void ShowGrid()
@@ -33,21 +33,12 @@ namespace LostInSin.Runtime.Grid.Visual
 			Mesh gridMesh = _gridMeshGenerator.CreateGridMesh(_gridModel.gridCells);
 			filter.mesh = gridMesh;
 
-			Material mat = new(_data.gridShader);
+			Material mat = new(_visualData.GridShader);
 			mat.SetFloat(_gridSize, _gridModel.gridColumnCount);
 
 			renderer.material = mat;
 
 			gridObject.transform.position = Vector3.up / 30f;
-		}
-
-		[Serializable]
-		public class Data
-		{
-			[FormerlySerializedAs("_gridVisualDataSO")] [SerializeField]
-			private GridVisualDataSo GridVisualDataSo;
-
-			public Shader gridShader => GridVisualDataSo.GridShader;
 		}
 	}
 }

@@ -18,20 +18,20 @@ namespace LostInSin.Runtime.CrossScene
 
 		protected override void SubscribeToEvents()
 		{
-			SignalBus.Subscribe<LoadSceneSignal>(OnLoadSceneMessage);
+			_signalBus.Subscribe<LoadSceneSignal>(OnLoadSceneMessage);
 		}
 
 		protected override void UnsubscribeFromEvents()
 		{
-			SignalBus.Unsubscribe<LoadSceneSignal>(OnLoadSceneMessage);
+			_signalBus.Unsubscribe<LoadSceneSignal>(OnLoadSceneMessage);
 		}
 
 		private void OnLoadSceneMessage(LoadSceneSignal signal)
 		{
 			AsyncOperation operation = SceneManager.LoadSceneAsync(signal.sceneID);
-			SignalBus.Fire(new ChangeAppStateSignal(AppStateID.Loading));
+			_signalBus.Fire(new ChangeAppStateSignal(AppStateID.Loading));
 
-			if (_applicationSettings.ShowLoadingScreen) SignalBus.Fire(new LoadingStartedSignal(operation));
+			if (_applicationSettings.ShowLoadingScreen) _signalBus.Fire(new LoadingStartedSignal(operation));
 
 			DOTween.KillAll();
 			GC.Collect();

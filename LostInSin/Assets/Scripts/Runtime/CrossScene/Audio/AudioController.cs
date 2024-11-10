@@ -19,8 +19,8 @@ namespace LostInSin.Runtime.CrossScene.Audio
 
 		protected override void SubscribeToEvents()
 		{
-			SignalBus.Subscribe<ChangeAudioSettingsSignal>(AudioSettingsChangeHandler);
-			SignalBus.Subscribe<PlayAudioSignal>(PlayAudioMessageHandler);
+			_signalBus.Subscribe<ChangeAudioSettingsSignal>(AudioSettingsChangeHandler);
+			_signalBus.Subscribe<PlayAudioSignal>(PlayAudioMessageHandler);
 		}
 
 		private void PlayAudioMessageHandler(PlayAudioSignal signal)
@@ -57,8 +57,8 @@ namespace LostInSin.Runtime.CrossScene.Audio
 
 		protected override void UnsubscribeFromEvents()
 		{
-			SignalBus.Unsubscribe<ChangeAudioSettingsSignal>(AudioSettingsChangeHandler);
-			SignalBus.Unsubscribe<PlayAudioSignal>(PlayAudioMessageHandler);
+			_signalBus.Unsubscribe<ChangeAudioSettingsSignal>(AudioSettingsChangeHandler);
+			_signalBus.Unsubscribe<PlayAudioSignal>(PlayAudioMessageHandler);
 		}
 	}
 }

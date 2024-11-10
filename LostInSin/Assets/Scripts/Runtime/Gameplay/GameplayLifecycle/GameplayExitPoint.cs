@@ -24,14 +24,14 @@ namespace LostInSin.Runtime.Gameplay.GameplayLifecycle
 
 		protected override void SubscribeToEvents()
 		{
-			SignalBus.Subscribe<ExitGameplayLevelSignal>(OnExitGameplayLevelSignal);
+			_signalBus.Subscribe<ExitGameplayLevelSignal>(OnExitGameplayLevelSignal);
 		}
 
 		private void OnExitGameplayLevelSignal(ExitGameplayLevelSignal signal)
 		{
 			var targetSceneIndex = GetNextLevelIndex();
 
-			SignalBus.Fire(new LoadSceneSignal(targetSceneIndex));
+			_signalBus.Fire(new LoadSceneSignal(targetSceneIndex));
 		}
 
 		private int GetNextLevelIndex()
@@ -46,7 +46,7 @@ namespace LostInSin.Runtime.Gameplay.GameplayLifecycle
 
 		protected override void UnsubscribeFromEvents()
 		{
-			SignalBus.Unsubscribe<ExitGameplayLevelSignal>(OnExitGameplayLevelSignal);
+			_signalBus.Unsubscribe<ExitGameplayLevelSignal>(OnExitGameplayLevelSignal);
 		}
 	}
 }
