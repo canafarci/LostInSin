@@ -12,7 +12,7 @@ using LostInSin.Runtime.Infrastructure.Signals;
 using VContainer;
 using VContainer.Unity;
 
-namespace LostInSin.Runtime.Gameplay.GameplayLifecycle
+namespace LostInSin.Runtime.Gameplay.GameplayLifecycle.Entry
 {
 	public class GameplayEntryPoint : IInitializable, IStartable, IDisposable
 	{

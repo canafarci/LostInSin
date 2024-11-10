@@ -45,7 +45,7 @@ namespace LostInSin.Runtime.Grid
 
 		public class Data
 		{
-			public GridGenerationSo GridData;
+			public GridGenerationSO GridData;
 		}
 	}
 }

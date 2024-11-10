@@ -7,10 +7,10 @@ namespace LostInSin.Runtime.Grid.Visual
 	{
 		private readonly GridModel _gridModel;
 		private readonly GridMeshGenerator _gridMeshGenerator;
-		private readonly GridVisualDataSo _visualData;
+		private readonly GridVisualDataSO _visualData;
 		private readonly int _gridSize = Shader.PropertyToID("_GridSize");
 
-		private GridMeshDisplayService(GridModel model, GridMeshGenerator meshGenerator, GridVisualDataSo visualData)
+		private GridMeshDisplayService(GridModel model, GridMeshGenerator meshGenerator, GridVisualDataSO visualData)
 		{
 			_gridModel = model;
 			_gridMeshGenerator = meshGenerator;

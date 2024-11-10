@@ -1,0 +1,9 @@
+//characters are in free roam mode
+//when they find enemies, it turns into turn based mode
+//turn manager sorts all characters based on their initiative
+//turn manager gives control to the first character in the queue.
+
+	//character spends ability points
+	//character passes the turn
+
+//turn manager pushes character to the end of the queue

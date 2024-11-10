@@ -1,6 +1,10 @@
 // GameplayScope.cs
 
+using System.Collections.Generic;
+using LostInSin.Runtime.Gameplay.Characters;
+using LostInSin.Runtime.Gameplay.Data;
 using LostInSin.Runtime.Gameplay.GameplayLifecycle;
+using LostInSin.Runtime.Gameplay.GameplayLifecycle.Entry;
 using LostInSin.Runtime.Gameplay.GameplayLifecycle.GameStates;
 using LostInSin.Runtime.Grid;
 using LostInSin.Runtime.Grid.DataObjects;
@@ -14,18 +18,30 @@ namespace LostInSin.Runtime.Scopes
 {
 	public class GameplayScope : LifetimeScope
 	{
-		[SerializeField] private GridGenerationSo GridGenerationDataSo;
-		[SerializeField] private GridVisualDataSo GridVisualDataSo;
+		[SerializeField] private GridGenerationSO GridGenerationDataSo;
+		[SerializeField] private GridVisualDataSO GridVisualDataSo;
+		[SerializeField] private List<CharacterFacade> EnemyCharactersInScene;
+		[SerializeField] private PlayerCharactersSO PlayerCharactersSO;
 
 		protected override void Configure(IContainerBuilder builder)
 		{
+			RegisterInstances(builder);
 			RegisterGameplayLifecycleManagers(builder);
 			RegisterGridComponents(builder);
 		}
 
+		private void RegisterInstances(IContainerBuilder builder)
+		{
+			builder.RegisterInstance(EnemyCharactersInScene);
+			builder.RegisterInstance(PlayerCharactersSO);
+		}
+
 		private void RegisterGameplayLifecycleManagers(IContainerBuilder builder)
 		{
+			//Entry
 			builder.RegisterEntryPoint<GameplayEntryPoint>();
+			builder.RegisterEntryPoint<PlayerCharactersSpawner>();
+
 			builder.RegisterEntryPoint<GameplayExitPoint>();
 			builder.RegisterEntryPoint<GameStateController>();
 			builder.Register<IGameStateModel, GameStateModel>(Lifetime.Singleton);
