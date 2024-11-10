@@ -70,8 +70,6 @@ namespace LostInSin.Runtime.Gameplay.GameplayLifecycle.Entry
 
 			// Display the grid mesh
 			_gridMeshDisplayService.ShowGrid();
-
-			// Additional initialization logic if needed
 		}
 
 		public void Dispose()

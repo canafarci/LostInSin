@@ -73,6 +73,8 @@ namespace LostInSin.Runtime.Scopes
 			builder.DeclareSignal<ChangeGameStateSignal>();
 			builder.DeclareSignal<TriggerLevelEndSignal>();
 			builder.DeclareSignal<ExitGameplayLevelSignal>();
+
+			builder.DeclareSignal<EndCharacterTurnSignal>();
 		}
 
 		private void RegisterLoadingScreen(IContainerBuilder builder)

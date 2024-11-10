@@ -3,9 +3,11 @@
 using System.Collections.Generic;
 using LostInSin.Runtime.Gameplay.Characters;
 using LostInSin.Runtime.Gameplay.Data;
+using LostInSin.Runtime.Gameplay.Data.SceneReferences;
 using LostInSin.Runtime.Gameplay.GameplayLifecycle;
 using LostInSin.Runtime.Gameplay.GameplayLifecycle.Entry;
 using LostInSin.Runtime.Gameplay.GameplayLifecycle.GameStates;
+using LostInSin.Runtime.Gameplay.Turns;
 using LostInSin.Runtime.Grid;
 using LostInSin.Runtime.Grid.DataObjects;
 using LostInSin.Runtime.Grid.Visual;
@@ -28,6 +30,9 @@ namespace LostInSin.Runtime.Scopes
 			RegisterInstances(builder);
 			RegisterGameplayLifecycleManagers(builder);
 			RegisterGridComponents(builder);
+			RegisterServices(builder);
+
+			builder.RegisterEntryPoint<TurnController>();
 		}
 
 		private void RegisterInstances(IContainerBuilder builder)
@@ -79,6 +84,12 @@ namespace LostInSin.Runtime.Scopes
 
 			// Register GridPositionConverter
 			builder.Register<IGridPositionConverter, GridPositionConverter>(Lifetime.Singleton);
+		}
+
+		private void RegisterServices(IContainerBuilder builder)
+		{
+			builder.Register<ICharactersInSceneModel, CharactersInSceneModel>(Lifetime.Singleton);
+			builder.RegisterEntryPoint<CharacterController>();
 		}
 	}
 }

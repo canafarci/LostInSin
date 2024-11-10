@@ -14,6 +14,7 @@ namespace LostInSin.Runtime.Gameplay.Characters
 		public int CurrentHealth;
 		public int MaxActionPoints = 8;
 		public int CurrentActionPoints;
+		public int Initiative;
 		public List<Ability> Abilities;
 
 		public void Initialize()
@@ -22,6 +23,7 @@ namespace LostInSin.Runtime.Gameplay.Characters
 			MaxHealth = _characterData.MaxHealth;
 			CurrentHealth = MaxHealth;
 			MaxActionPoints = _characterData.MaxActionPoints;
+			Initiative = _characterData.Initiative;
 			Abilities = new List<Ability>(_characterData.Abilities);
 		}
 
