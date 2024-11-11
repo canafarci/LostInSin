@@ -1,5 +1,6 @@
 // Assets/Scripts/Characters/CharacterData.cs
 
+using System.Collections.Generic;
 using LostInSin.Runtime.Gameplay.Abilities;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ namespace LostInSin.Runtime.Gameplay.Characters
 		public string CharacterName;
 		public int MaxHealth;
 		public int MaxActionPoints;
-		public Ability[] Abilities;
+		public List<Ability> Abilities;
 		public int Initiative;
 		public bool IsPlayerCharacter;
 		public GameObject Prefab;

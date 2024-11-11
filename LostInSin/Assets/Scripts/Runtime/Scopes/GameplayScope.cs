@@ -8,6 +8,7 @@ using LostInSin.Runtime.Gameplay.GameplayLifecycle;
 using LostInSin.Runtime.Gameplay.GameplayLifecycle.Entry;
 using LostInSin.Runtime.Gameplay.GameplayLifecycle.GameStates;
 using LostInSin.Runtime.Gameplay.Turns;
+using LostInSin.Runtime.Gameplay.UI.AbilityPanel;
 using LostInSin.Runtime.Grid;
 using LostInSin.Runtime.Grid.DataObjects;
 using LostInSin.Runtime.Grid.Visual;
@@ -22,8 +23,9 @@ namespace LostInSin.Runtime.Scopes
 	{
 		[SerializeField] private GridGenerationSO GridGenerationDataSo;
 		[SerializeField] private GridVisualDataSO GridVisualDataSo;
-		[SerializeField] private List<CharacterFacade> EnemyCharactersInScene;
 		[SerializeField] private PlayerCharactersSO PlayerCharactersSO;
+		[SerializeField] private List<CharacterFacade> EnemyCharactersInScene;
+		[SerializeField] private List<AbilityView> AbilityViews;
 
 		protected override void Configure(IContainerBuilder builder)
 		{
@@ -32,12 +34,19 @@ namespace LostInSin.Runtime.Scopes
 			RegisterGridComponents(builder);
 			RegisterServices(builder);
 			RegisterTurnModule(builder);
+			RegisterAbilityUI(builder);
+		}
+
+		private void RegisterAbilityUI(IContainerBuilder builder)
+		{
+			builder.Register<IAbilityPanelMediator, AbilityPanelMediator>(Lifetime.Singleton);
 		}
 
 		private void RegisterInstances(IContainerBuilder builder)
 		{
 			builder.RegisterInstance(EnemyCharactersInScene);
 			builder.RegisterInstance(PlayerCharactersSO);
+			builder.RegisterInstance(AbilityViews);
 		}
 
 		private void RegisterGameplayLifecycleManagers(IContainerBuilder builder)
@@ -94,6 +103,7 @@ namespace LostInSin.Runtime.Scopes
 		private void RegisterTurnModule(IContainerBuilder builder)
 		{
 			builder.RegisterEntryPoint<TurnController>();
+			builder.RegisterEntryPoint<TurnMediator>().AsSelf();
 			builder.RegisterComponentInHierarchy<TurnView>().AsSelf();
 			builder.Register<ITurnModel, TurnModel>(Lifetime.Singleton);
 		}

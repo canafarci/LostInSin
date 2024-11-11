@@ -4,6 +4,6 @@ namespace LostInSin.Runtime.Gameplay.Turns
 {
 	public interface ITurnModel
 	{
-		public CharacterFacade characterToPlay { get; set; }
+		public CharacterFacade activeCharacter { get; set; }
 	}
 }

@@ -10,23 +10,19 @@ namespace LostInSin.Runtime.Gameplay.Characters
 		[Inject] private CharacterData _characterData;
 
 		public string characterName { get; private set; }
-		public int maxHealth { get; private set; }
 		public int currentHealth { get; private set; }
-		public int maxActionPoints { get; private set; }
 		public int currentActionPoints { get; private set; }
-		public bool isPlayerCharacter { get; private set; }
 		public int initiative { get; private set; }
+		public CharacterData characterData => _characterData;
+
 		public List<Ability> Abilities;
 
 		public void Initialize()
 		{
-			characterName = _characterData.CharacterName;
-			maxHealth = _characterData.MaxHealth;
-			currentHealth = maxHealth;
-			maxActionPoints = _characterData.MaxActionPoints;
-			initiative = _characterData.Initiative;
-			isPlayerCharacter = _characterData.IsPlayerCharacter;
-			Abilities = new List<Ability>(_characterData.Abilities);
+			characterName = characterData.CharacterName;
+			currentHealth = characterData.MaxHealth;
+			initiative = characterData.Initiative;
+			Abilities = new List<Ability>(characterData.Abilities);
 		}
 
 		public void UseActionPoints(int amount)
@@ -38,7 +34,7 @@ namespace LostInSin.Runtime.Gameplay.Characters
 
 		public void ResetActionPoints()
 		{
-			currentActionPoints = maxActionPoints;
+			currentActionPoints = characterData.MaxActionPoints;
 		}
 
 		public void TakeDamage(int amount)
