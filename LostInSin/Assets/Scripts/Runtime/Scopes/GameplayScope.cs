@@ -31,8 +31,7 @@ namespace LostInSin.Runtime.Scopes
 			RegisterGameplayLifecycleManagers(builder);
 			RegisterGridComponents(builder);
 			RegisterServices(builder);
-
-			builder.RegisterEntryPoint<TurnController>();
+			RegisterTurnModule(builder);
 		}
 
 		private void RegisterInstances(IContainerBuilder builder)
@@ -89,7 +88,14 @@ namespace LostInSin.Runtime.Scopes
 		private void RegisterServices(IContainerBuilder builder)
 		{
 			builder.Register<ICharactersInSceneModel, CharactersInSceneModel>(Lifetime.Singleton);
-			builder.RegisterEntryPoint<CharacterController>();
+			builder.RegisterEntryPoint<CharactersInSceneController>();
+		}
+
+		private void RegisterTurnModule(IContainerBuilder builder)
+		{
+			builder.RegisterEntryPoint<TurnController>();
+			builder.RegisterComponentInHierarchy<TurnView>().AsSelf();
+			builder.Register<ITurnModel, TurnModel>(Lifetime.Singleton);
 		}
 	}
 }

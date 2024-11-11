@@ -11,12 +11,29 @@ namespace LostInSin.Runtime.Gameplay.Turns
 {
 	public class TurnController : SignalListener
 	{
-		[Inject] private ICharactersInSceneModel _charactersInSceneModel;
-		private Queue<CharacterFacade> _characterTurnQueue = new();
+		private readonly ICharactersInSceneModel _charactersInSceneModel;
+		private readonly ITurnModel _turnModel;
+		private readonly TurnView _view;
+
+
+		private readonly Queue<CharacterFacade> _characterTurnQueue = new();
+
+		public TurnController(ICharactersInSceneModel charactersInSceneModel, TurnView view, ITurnModel turnModel)
+		{
+			_charactersInSceneModel = charactersInSceneModel;
+			_view = view;
+			_turnModel = turnModel;
+		}
 
 		protected override void SubscribeToEvents()
 		{
 			_signalBus.Subscribe<GameStateChangedSignal>(OnGameStateChangedHandler);
+			_view.endTurnButton.onClick.AddListener(OnEndTurnButtonClickedHandler);
+		}
+
+		private void OnEndTurnButtonClickedHandler()
+		{
+			AdvanceTurn();
 		}
 
 		private void OnGameStateChangedHandler(GameStateChangedSignal signal)
@@ -24,7 +41,7 @@ namespace LostInSin.Runtime.Gameplay.Turns
 			if (signal.newState == GameState.Playing)
 			{
 				InitializeTurnOrder();
-				ProcessTurn();
+				AdvanceTurn();
 			}
 		}
 
@@ -41,11 +58,12 @@ namespace LostInSin.Runtime.Gameplay.Turns
 			}
 		}
 
-		private void ProcessTurn()
+		private void AdvanceTurn()
 		{
 			CharacterFacade characterToPlay = _characterTurnQueue.Dequeue();
 			//push character to the end of the queue
 			_characterTurnQueue.Enqueue(characterToPlay);
+			_turnModel.characterToPlay = characterToPlay;
 
 			characterToPlay.SetAsActiveCharacter();
 		}
@@ -53,6 +71,7 @@ namespace LostInSin.Runtime.Gameplay.Turns
 		protected override void UnsubscribeFromEvents()
 		{
 			_signalBus.Unsubscribe<GameStateChangedSignal>(OnGameStateChangedHandler);
+			_view.endTurnButton.onClick.RemoveAllListeners();
 		}
 	}
 }
