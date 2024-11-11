@@ -9,42 +9,44 @@ namespace LostInSin.Runtime.Gameplay.Characters
 	{
 		[Inject] private CharacterData _characterData;
 
-		public string CharacterName;
-		public int MaxHealth;
-		public int CurrentHealth;
-		public int MaxActionPoints = 8;
-		public int CurrentActionPoints;
-		public int Initiative;
+		public string characterName { get; private set; }
+		public int maxHealth { get; private set; }
+		public int currentHealth { get; private set; }
+		public int maxActionPoints { get; private set; }
+		public int currentActionPoints { get; private set; }
+		public bool isPlayerCharacter { get; private set; }
+		public int initiative { get; private set; }
 		public List<Ability> Abilities;
 
 		public void Initialize()
 		{
-			CharacterName = _characterData.CharacterName;
-			MaxHealth = _characterData.MaxHealth;
-			CurrentHealth = MaxHealth;
-			MaxActionPoints = _characterData.MaxActionPoints;
-			Initiative = _characterData.Initiative;
+			characterName = _characterData.CharacterName;
+			maxHealth = _characterData.MaxHealth;
+			currentHealth = maxHealth;
+			maxActionPoints = _characterData.MaxActionPoints;
+			initiative = _characterData.Initiative;
+			isPlayerCharacter = _characterData.IsPlayerCharacter;
 			Abilities = new List<Ability>(_characterData.Abilities);
 		}
 
 		public void UseActionPoints(int amount)
 		{
-			CurrentActionPoints -= amount;
-			if (CurrentActionPoints < 0)
-				CurrentActionPoints = 0;
+			currentActionPoints -= amount;
+			if (currentActionPoints < 0)
+				currentActionPoints = 0;
 		}
 
 		public void ResetActionPoints()
 		{
-			CurrentActionPoints = MaxActionPoints;
+			currentActionPoints = maxActionPoints;
 		}
 
 		public void TakeDamage(int amount)
 		{
-			CurrentHealth -= amount;
-			if (CurrentHealth <= 0)
+			currentHealth -= amount;
+			if (currentHealth <= 0)
 			{
-				CurrentHealth = 0;
+				currentHealth = 0;
 				Die();
 			}
 		}

@@ -13,6 +13,7 @@ namespace LostInSin.Runtime.Gameplay.Characters
 		public int MaxActionPoints;
 		public Ability[] Abilities;
 		public int Initiative;
+		public bool IsPlayerCharacter;
 		public GameObject Prefab;
 	}
 }

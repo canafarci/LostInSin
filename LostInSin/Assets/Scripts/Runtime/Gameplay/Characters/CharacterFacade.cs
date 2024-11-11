@@ -11,7 +11,7 @@ namespace LostInSin.Runtime.Gameplay.Characters
 
 		public void SetAsActiveCharacter()
 		{
-			UnityEngine.Debug.Log($"Is Active {_character.CharacterName}");
+			UnityEngine.Debug.Log($"Is Active {_character.characterName}");
 		}
 	}
 }

@@ -32,7 +32,7 @@ namespace LostInSin.Runtime.Gameplay.Turns
 		{
 			List<CharacterFacade> allCharacters =
 				new List<CharacterFacade>(_charactersInSceneModel.allCharactersInScene)
-					.OrderBy(facade => facade.character.Initiative)
+					.OrderBy(facade => facade.character.initiative)
 					.ToList();
 
 			foreach (CharacterFacade facade in allCharacters)

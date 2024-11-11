@@ -1,9 +1,9 @@
+using UnityEngine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using LostInSin.Runtime.Infrastructure.ApplicationState;
 using Sirenix.OdinInspector;
-using UnityEngine;
+using LostInSin.Runtime.Infrastructure.ApplicationState;
 
 namespace LostInSin.Runtime.Infrastructure.MemoryPool
 {
@@ -22,10 +22,10 @@ namespace LostInSin.Runtime.Infrastructure.MemoryPool
 		[FoldoutGroup("Pool Entry Data")] public int InitialSize = 5;
 		[FoldoutGroup("Pool Entry Data")] public int DefaultCapacity = 10;
 		[FoldoutGroup("Pool Entry Data")] public int MaximumSize = 100;
-		[FoldoutGroup("Pool Entry Data")] public bool RecycleWithSceneChange = true;
+		[FoldoutGroup("Pool Entry Data")] public bool ManagePoolOnSceneChange = true;
 
-		[FoldoutGroup("Pool Entry Data")] [ShowIf(nameof(RecycleWithSceneChange))]
-		public AppStateID RecycleSceneID;
+		[FoldoutGroup("Pool Entry Data")] [ShowIf(nameof(ManagePoolOnSceneChange))]
+		public AppStateID LifetimeSceneID;
 
 		// Property to get the actual Type from the string
 		public Type classType
@@ -37,7 +37,7 @@ namespace LostInSin.Runtime.Infrastructure.MemoryPool
 		// Odin dropdown to show available classes
 		private static IEnumerable<ValueDropdownItem<string>> GetClassTypeNames()
 		{
-			IEnumerable<ValueDropdownItem<string>> types = AppDomain.CurrentDomain.GetAssemblies()
+			var types = AppDomain.CurrentDomain.GetAssemblies()
 				.SelectMany(assembly => assembly.GetTypes())
 				.Where(t => t.IsClass && !t.IsAbstract && typeof(IPoolable).IsAssignableFrom(t))
 				.Select(type => new ValueDropdownItem<string>(type.FullName, type.AssemblyQualifiedName));
