@@ -404,3 +404,4 @@ MonoBehaviour:
   AudioDataSo: {fileID: 11400000, guid: 20a7e24eaa0f545b680bc1905df674e4, type: 2}
   AudioView: {fileID: 9013529549580266518}
   PoolConfig: {fileID: 11400000, guid: 1bb4d5465cfab4c8d89b88e42d40fc3e, type: 2}
+  CurrencyConfig: {fileID: 11400000, guid: 015b54be31a284d4eb0b47745f28b0bb, type: 2}

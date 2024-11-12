@@ -1,5 +1,6 @@
 using LostInSin.Runtime.CrossScene;
 using LostInSin.Runtime.CrossScene.Audio;
+using LostInSin.Runtime.CrossScene.Currency;
 using LostInSin.Runtime.CrossScene.Data;
 using LostInSin.Runtime.CrossScene.LoadingScreen;
 using LostInSin.Runtime.CrossScene.LoadingScreen.Signals;
@@ -25,6 +26,8 @@ namespace LostInSin.Runtime.Scopes
 
 		[SerializeField] private AudioView AudioView;
 		[SerializeField] private PoolConfig PoolConfig;
+		[SerializeField] private CurrencyConfig CurrencyConfig;
+
 
 		protected override void Configure(IContainerBuilder builder)
 		{
@@ -40,6 +43,7 @@ namespace LostInSin.Runtime.Scopes
 			builder.RegisterInstance(AudioDataSo);
 			builder.RegisterInstance(AudioView);
 			builder.RegisterInstance(ApplicationSettings);
+			builder.RegisterInstance(CurrencyConfig);
 		}
 
 		private static void RegisterEntryPoints(IContainerBuilder builder)
@@ -52,6 +56,7 @@ namespace LostInSin.Runtime.Scopes
 		{
 			builder.Register<IAudioModel, AudioModel>(Lifetime.Singleton);
 			builder.Register<AudioMediator>(Lifetime.Singleton).AsSelf();
+			builder.Register<ICurrencyModel, CurrencyModel>(Lifetime.Singleton);
 
 			builder.Register<IGameplayPersistentData, GameplayPersistentData>(Lifetime.Singleton);
 
@@ -67,6 +72,7 @@ namespace LostInSin.Runtime.Scopes
 			builder.DeclareSignal<ChangeAudioSettingsSignal>();
 			builder.DeclareSignal<ChangeHapticActivationSignal>();
 			builder.DeclareSignal<PlayAudioSignal>();
+			builder.DeclareSignal<CurrencyChangedSignal>();
 
 			//Gameplay
 			builder.DeclareSignal<GameStateChangedSignal>();
