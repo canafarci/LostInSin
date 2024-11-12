@@ -1,7 +1,9 @@
 // GameplayScope.cs
 
 using System.Collections.Generic;
+using LostInSin.Runtime.Gameplay.Abilities.AbilityPlaying;
 using LostInSin.Runtime.Gameplay.Characters;
+using LostInSin.Runtime.Gameplay.Controls;
 using LostInSin.Runtime.Gameplay.Data;
 using LostInSin.Runtime.Gameplay.Data.SceneReferences;
 using LostInSin.Runtime.Gameplay.GameplayLifecycle;
@@ -34,12 +36,20 @@ namespace LostInSin.Runtime.Scopes
 			RegisterGridComponents(builder);
 			RegisterServices(builder);
 			RegisterTurnModule(builder);
+			RegisterAbilityModule(builder);
+		}
+
+		private void RegisterAbilityModule(IContainerBuilder builder)
+		{
 			RegisterAbilityUI(builder);
+
+			builder.Register<PlayerInputPoller>(Lifetime.Singleton).AsImplementedInterfaces();
+			builder.Register<AbilityPlayer>(Lifetime.Singleton).AsImplementedInterfaces();
 		}
 
 		private void RegisterAbilityUI(IContainerBuilder builder)
 		{
-			builder.Register<IAbilityPanelMediator, AbilityPanelMediator>(Lifetime.Singleton);
+			builder.Register<AbilityPanelMediator>(Lifetime.Singleton).AsImplementedInterfaces();
 		}
 
 		private void RegisterInstances(IContainerBuilder builder)
