@@ -1,11 +1,16 @@
 using System.Collections.Generic;
 using LostInSin.Runtime.Gameplay.Abilities.AbilityExecution;
+using LostInSin.Runtime.Gameplay.Signals;
+using LostInSin.Runtime.Infrastructure.Signals;
+using VContainer;
 using VContainer.Unity;
 
 namespace LostInSin.Runtime.Gameplay.Abilities.AbilityPlaying
 {
 	public class AbilityPlayer : ITickable, IAbilityPlayer
 	{
+		[Inject] private SignalBus _signalBus;
+
 		private Stack<AbilityExecutionLogic> _actionsToPlay = new();
 		private AbilityExecutionLogic _currentPlayingAbility = null;
 
@@ -13,7 +18,6 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityPlaying
 
 		public void AddAbilityForPlaying(AbilityExecutionLogic abilityExecutionLogic) =>
 			_actionsToPlay.Push(abilityExecutionLogic);
-
 
 		public void Tick()
 		{
@@ -32,10 +36,26 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityPlaying
 
 			if (_currentPlayingAbility.executionStage == AbilityExecutionStage.Complete)
 			{
-				if (_actionsToPlay.Count > 0)
-					_currentPlayingAbility = _actionsToPlay.Pop();
-				else
-					_currentPlayingAbility = null;
+				TryPopNextAbility();
+			}
+		}
+
+		private void TryPopNextAbility()
+		{
+			if (_actionsToPlay.Count > 0)
+				_currentPlayingAbility = _actionsToPlay.Pop();
+			else
+			{
+				CheckUserAPAndAdvanceTurn(_currentPlayingAbility);
+				_currentPlayingAbility = null;
+			}
+		}
+
+		private void CheckUserAPAndAdvanceTurn(AbilityExecutionLogic currentPlayingAbility)
+		{
+			if (currentPlayingAbility.abilityRequestData.User.currentActionPoints == 0)
+			{
+				_signalBus.Fire(new EndCharacterTurnSignal());
 			}
 		}
 	}

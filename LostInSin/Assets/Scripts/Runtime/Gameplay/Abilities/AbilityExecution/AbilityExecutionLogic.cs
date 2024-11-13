@@ -9,9 +9,11 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution
 
 		public AbilityExecutionStage executionStage { get; set; }
 
-		public virtual void Initialize(AbilityRequestData abilityRequestData)
+		public AbilityRequestData abilityRequestData => _abilityRequestData;
+
+		public virtual void Initialize(AbilityRequestData requestData)
 		{
-			_abilityRequestData = abilityRequestData;
+			_abilityRequestData = requestData;
 			executionStage = AbilityExecutionStage.Starting;
 		}
 

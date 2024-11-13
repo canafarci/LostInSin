@@ -79,6 +79,8 @@ namespace LostInSin.Runtime.Scopes
 			builder.DeclareSignal<ChangeGameStateSignal>();
 			builder.DeclareSignal<TriggerLevelEndSignal>();
 			builder.DeclareSignal<ExitGameplayLevelSignal>();
+			builder.DeclareSignal<CharacterAPChangedSignal>();
+			builder.DeclareSignal<ActiveTurnCharacterChangedSignal>();
 
 			builder.DeclareSignal<EndCharacterTurnSignal>();
 		}

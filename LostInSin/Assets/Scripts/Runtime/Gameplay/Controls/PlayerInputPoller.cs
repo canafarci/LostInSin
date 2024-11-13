@@ -32,25 +32,29 @@ namespace LostInSin.Runtime.Gameplay.Controls
 		public void Initialize()
 		{
 			_abilityPanelMediator.OnAbilityClicked += AbilityClickedHandler;
-			_signalBus.Subscribe<EndCharacterTurnSignal>(EndCharacterTurnSignalHandler);
+			_signalBus.Subscribe<ActiveTurnCharacterChangedSignal>(OnActiveTurnCharacterChangedSignal);
 		}
 
-		private void EndCharacterTurnSignalHandler(EndCharacterTurnSignal signal)
+		private void OnActiveTurnCharacterChangedSignal(ActiveTurnCharacterChangedSignal signal)
 		{
 			_ability = null;
 		}
 
 		private void AbilityClickedHandler(Ability ability)
 		{
+			if (!CharacterHasEnoughAP(ability.ActionPointCost)) return;
+
 			ability.AbilityRequest.Initialize(new AbilityRequestData());
 			ability.AbilityRequest.StartRequest();
 
-			if (ability.AbilityRequest.AbilityRequestType.HasFlag(AbilityRequestType.SelfTargeted))
-			{
-				ability.AbilityRequest.abilityRequestData.User = _turnModel.activeCharacter.character;
-			}
+			ability.AbilityRequest.abilityRequestData.User = _turnModel.activeCharacter.character;
 
 			_ability = ability;
+		}
+
+		private bool CharacterHasEnoughAP(int abilityActionPointCost)
+		{
+			return _turnModel.activeCharacter.actionPoints >= abilityActionPointCost;
 		}
 
 		public void Tick()
@@ -63,6 +67,7 @@ namespace LostInSin.Runtime.Gameplay.Controls
 			{
 				_ability.AbilityExecutionLogic.Initialize(_ability.AbilityRequest.abilityRequestData);
 				_abilityPlayer.AddAbilityForPlaying(_ability.AbilityExecutionLogic);
+				_turnModel.activeCharacter.ReduceActionPoints(_ability.ActionPointCost);
 				_ability = null;
 				return;
 			}

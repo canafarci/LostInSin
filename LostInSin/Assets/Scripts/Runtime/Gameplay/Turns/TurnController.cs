@@ -29,7 +29,13 @@ namespace LostInSin.Runtime.Gameplay.Turns
 		protected override void SubscribeToEvents()
 		{
 			_signalBus.Subscribe<GameStateChangedSignal>(OnGameStateChangedHandler);
+			_signalBus.Subscribe<EndCharacterTurnSignal>(OnEndCharacterTurnSignal);
 			_mediator.OnEndTurnButtonClicked += OnEndTurnButtonClickedHandler;
+		}
+
+		private void OnEndCharacterTurnSignal(EndCharacterTurnSignal signal)
+		{
+			AdvanceTurn();
 		}
 
 		private void OnEndTurnButtonClickedHandler()
@@ -68,11 +74,13 @@ namespace LostInSin.Runtime.Gameplay.Turns
 			_mediator.SetUpUI(characterToPlay);
 
 			characterToPlay.SetAsActiveCharacter();
+			_signalBus.Fire(new ActiveTurnCharacterChangedSignal());
 		}
 
 		protected override void UnsubscribeFromEvents()
 		{
 			_signalBus.Unsubscribe<GameStateChangedSignal>(OnGameStateChangedHandler);
+			_signalBus.Unsubscribe<EndCharacterTurnSignal>(OnEndCharacterTurnSignal);
 			_mediator.OnEndTurnButtonClicked -= OnEndTurnButtonClickedHandler;
 		}
 	}

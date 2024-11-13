@@ -11,6 +11,7 @@ using LostInSin.Runtime.Gameplay.GameplayLifecycle.Entry;
 using LostInSin.Runtime.Gameplay.GameplayLifecycle.GameStates;
 using LostInSin.Runtime.Gameplay.Turns;
 using LostInSin.Runtime.Gameplay.UI.AbilityPanel;
+using LostInSin.Runtime.Gameplay.UI.ActiveTurnCharacterInfoPanel;
 using LostInSin.Runtime.Grid;
 using LostInSin.Runtime.Grid.DataObjects;
 using LostInSin.Runtime.Grid.Visual;
@@ -116,6 +117,10 @@ namespace LostInSin.Runtime.Scopes
 			builder.RegisterEntryPoint<TurnMediator>().AsSelf();
 			builder.RegisterComponentInHierarchy<TurnView>().AsSelf();
 			builder.Register<ITurnModel, TurnModel>(Lifetime.Singleton);
+
+
+			builder.RegisterComponentInHierarchy<ActiveTurnCharacterInfoPanelView>().AsSelf();
+			builder.RegisterEntryPoint<ActiveTurnCharacterInfoPanelController>();
 		}
 	}
 }

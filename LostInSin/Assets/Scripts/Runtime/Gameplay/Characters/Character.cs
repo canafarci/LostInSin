@@ -21,6 +21,7 @@ namespace LostInSin.Runtime.Gameplay.Characters
 		{
 			characterName = characterData.CharacterName;
 			currentHealth = characterData.MaxHealth;
+			currentActionPoints = characterData.MaxActionPoints;
 			initiative = characterData.Initiative;
 			Abilities = new List<Ability>(characterData.Abilities);
 		}
@@ -28,8 +29,6 @@ namespace LostInSin.Runtime.Gameplay.Characters
 		public void UseActionPoints(int amount)
 		{
 			currentActionPoints -= amount;
-			if (currentActionPoints < 0)
-				currentActionPoints = 0;
 		}
 
 		public void ResetActionPoints()

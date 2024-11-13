@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterName: Archer
   MaxHealth: 10
-  MaxActionPoints: 8
+  MaxActionPoints: 9
   Abilities:
   - {fileID: 11400000, guid: 7d85560cf15ee5a48ada8733ca4d529d, type: 2}
   Initiative: 4

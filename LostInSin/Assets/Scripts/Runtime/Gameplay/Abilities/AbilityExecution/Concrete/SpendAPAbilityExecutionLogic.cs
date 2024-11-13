@@ -10,7 +10,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.Concrete
 	{
 		public override void StartAction()
 		{
-			Debug.Log($"USE AP ACTION on user {_abilityRequestData.User.characterName}");
+			Debug.Log($"USE AP ACTION on user {abilityRequestData.User.characterName}");
 			EndAction();
 		}
 
