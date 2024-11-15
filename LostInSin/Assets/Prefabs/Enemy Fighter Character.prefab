@@ -74,13 +74,67 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7209445461687903701, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6043066167460863318}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8581914382870010518, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7243513441177058450}
   m_SourcePrefab: {fileID: 100100000, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+--- !u!114 &2878059703718498755 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2869979332872711358, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+  m_PrefabInstance: {fileID: 10373832382020989}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8592251656423253995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91a99298d6ed4c4e9901be4b21a29dc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7217513737838876840 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7209445461687903701, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
   m_PrefabInstance: {fileID: 10373832382020989}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8592251656423253995 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8581914382870010518, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+  m_PrefabInstance: {fileID: 10373832382020989}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7243513441177058450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8592251656423253995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Graph: {fileID: 2765420858585935899, guid: 8c7211e21ca4a9b419ae55df845aab8b, type: 2}
+  m_BlackboardVariableOverridesList:
+  - rid: 4514603896590565658
+  - rid: 4514603896590565659
+  references:
+    version: 2
+    RefIds:
+    - rid: 4514603896590565658
+      type: {class: 'BlackboardVariable`1[[LostInSin.Runtime.Gameplay.Characters.CharacterFacade, LostInSin.Runtime]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 10663169074858175977
+          m_Value1: 8356879932742084988
+        Name: CharacterFacade
+        m_Value: {fileID: 2878059703718498755}
+    - rid: 4514603896590565659
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 8592251656423253995}
 --- !u!1001 &6043066167460367402
 PrefabInstance:
   m_ObjectHideFlags: 0
