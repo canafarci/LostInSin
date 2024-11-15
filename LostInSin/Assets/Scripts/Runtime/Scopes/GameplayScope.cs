@@ -112,6 +112,8 @@ namespace LostInSin.Runtime.Scopes
 		{
 			builder.Register<ICharactersInSceneModel, CharactersInSceneModel>(Lifetime.Singleton);
 			builder.RegisterEntryPoint<CharactersInSceneController>();
+
+			builder.Register<TurnSystemFacade>(Lifetime.Singleton).AsSelf();
 		}
 
 		private void RegisterTurnModule(IContainerBuilder builder)

@@ -25,8 +25,9 @@ namespace LostInSin.Runtime.BehaviourTree
 
 		protected override Status OnUpdate()
 		{
-			ITurnModel btReferencesTurnModel = BTReferences.Value.TurnModel;
-			if (btReferencesTurnModel.activeCharacter == Agent.Value)
+			TurnSystemFacade turnSystemFacade = BTReferences.Value.turnSystemFacade;
+
+			if (turnSystemFacade.activeCharacter == Agent.Value)
 			{
 				return Status.Success;
 			}

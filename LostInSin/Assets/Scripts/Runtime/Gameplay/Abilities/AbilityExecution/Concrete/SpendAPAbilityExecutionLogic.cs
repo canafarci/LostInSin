@@ -8,15 +8,29 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.Concrete
 		menuName = "LostInSin/Abilities/AbilityExecution/SpendAPAbility")]
 	public class SpendAPAbilityExecutionLogic : AbilityExecutionLogic
 	{
-		public override void StartAction()
+		private float _executionTime = 1f;
+		private float _executionTimer;
+
+		public override void Initialize(AbilityRequestData requestData)
 		{
-			Debug.Log($"USE AP ACTION on user {abilityRequestData.User.characterName}");
-			EndAction();
+			base.Initialize(requestData);
+			_executionTimer = 0f;
 		}
 
-		public override void UpdateAction()
+		public override void StartAbility()
 		{
-			throw new Exception("This should never happen, this is an instant effect");
+			Debug.Log($"USE AP ACTION on user {abilityRequestData.User.characterName}");
+			executionStage = AbilityExecutionStage.Updating;
+		}
+
+		public override void UpdateAbility()
+		{
+			_executionTimer += Time.deltaTime;
+
+			if (_executionTimer >= _executionTime)
+			{
+				EndAbility();
+			}
 		}
 	}
 }

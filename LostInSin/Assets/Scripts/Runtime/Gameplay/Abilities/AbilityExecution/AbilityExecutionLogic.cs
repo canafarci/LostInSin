@@ -1,5 +1,6 @@
 using LostInSin.Runtime.Gameplay.Abilities.AbilityRequests;
 using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution
 {
@@ -18,15 +19,16 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution
 		}
 
 		// Logic to execute when the action starts
-		public abstract void StartAction();
+		public abstract void StartAbility();
 
 		// Logic to execute during action execution (if any)
-		public abstract void UpdateAction();
+		public abstract void UpdateAbility();
 
 		// Finalize action
-		protected virtual void EndAction()
+		protected virtual void EndAbility()
 		{
 			executionStage = AbilityExecutionStage.Complete;
+			Debug.Log("Action Ended");
 		}
 	}
 }

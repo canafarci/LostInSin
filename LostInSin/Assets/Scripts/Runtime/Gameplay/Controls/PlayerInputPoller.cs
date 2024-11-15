@@ -43,6 +43,7 @@ namespace LostInSin.Runtime.Gameplay.Controls
 		private void AbilityClickedHandler(Ability ability)
 		{
 			if (!CharacterHasEnoughAP(ability.ActionPointCost)) return;
+			if (_abilityPlayer.isPlaying) return;
 
 			ability.AbilityRequest.Initialize(new AbilityRequestData());
 			ability.AbilityRequest.StartRequest();

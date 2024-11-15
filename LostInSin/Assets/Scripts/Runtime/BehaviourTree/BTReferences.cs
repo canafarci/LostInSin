@@ -6,8 +6,8 @@ namespace LostInSin.Runtime.BehaviourTree
 {
 	public class BTReferences : MonoBehaviour
 	{
-		[Inject] private ITurnModel _turnModel;
+		[Inject] private TurnSystemFacade _turnSystemFacade;
 
-		public ITurnModel TurnModel => _turnModel;
+		public TurnSystemFacade turnSystemFacade => _turnSystemFacade;
 	}
 }

@@ -21,24 +21,32 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityPlaying
 
 		public void Tick()
 		{
-			if (_currentPlayingAbility == null && _actionsToPlay.Count > 0)
+			if (ShouldPlayNextAbility())
 			{
 				_currentPlayingAbility = _actionsToPlay.Pop();
-				_currentPlayingAbility.StartAction();
+				//start ability is called here
+				_currentPlayingAbility.StartAbility();
 			}
 
-			if (_currentPlayingAbility == null) return;
-
-			if (_currentPlayingAbility.executionStage == AbilityExecutionStage.Updating)
+			if (_currentPlayingAbility != null) //ability could be null if there is no abilities to play
 			{
-				_currentPlayingAbility.UpdateAction();
-			}
+				if (ShouldUpdateAbility())
+				{
+					_currentPlayingAbility.UpdateAbility();
+				}
 
-			if (_currentPlayingAbility.executionStage == AbilityExecutionStage.Complete)
-			{
-				TryPopNextAbility();
+				if (ShouldFinishAbility())
+				{
+					TryPopNextAbility();
+				}
 			}
 		}
+
+		private bool ShouldPlayNextAbility() => _currentPlayingAbility == null && _actionsToPlay.Count > 0;
+
+		private bool ShouldFinishAbility() => _currentPlayingAbility.executionStage == AbilityExecutionStage.Complete;
+
+		private bool ShouldUpdateAbility() => _currentPlayingAbility.executionStage == AbilityExecutionStage.Updating;
 
 		private void TryPopNextAbility()
 		{
