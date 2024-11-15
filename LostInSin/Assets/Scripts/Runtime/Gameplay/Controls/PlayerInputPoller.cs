@@ -67,8 +67,8 @@ namespace LostInSin.Runtime.Gameplay.Controls
 			if (_ability.AbilityRequest.abilityRequestState == AbilityRequestState.Finished)
 			{
 				_ability.AbilityExecutionLogic.Initialize(_ability.AbilityRequest.abilityRequestData);
-				_abilityPlayer.AddAbilityForPlaying(_ability.AbilityExecutionLogic);
 				_turnModel.activeCharacter.ReduceActionPoints(_ability.ActionPointCost);
+				_abilityPlayer.AddAbilityForPlaying(_ability.AbilityExecutionLogic);
 				_ability = null;
 				return;
 			}
