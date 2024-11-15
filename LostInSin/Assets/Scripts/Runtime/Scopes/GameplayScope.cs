@@ -9,12 +9,14 @@ using LostInSin.Runtime.Gameplay.Data.SceneReferences;
 using LostInSin.Runtime.Gameplay.GameplayLifecycle;
 using LostInSin.Runtime.Gameplay.GameplayLifecycle.Entry;
 using LostInSin.Runtime.Gameplay.GameplayLifecycle.GameStates;
+using LostInSin.Runtime.Gameplay.Signals;
 using LostInSin.Runtime.Gameplay.Turns;
 using LostInSin.Runtime.Gameplay.UI.AbilityPanel;
 using LostInSin.Runtime.Gameplay.UI.ActiveTurnCharacterInfoPanel;
 using LostInSin.Runtime.Grid;
 using LostInSin.Runtime.Grid.DataObjects;
 using LostInSin.Runtime.Grid.Visual;
+using LostInSin.Runtime.Infrastructure.Signals;
 using LostInSin.Runtime.Raycast;
 using UnityEngine;
 using VContainer;
@@ -38,6 +40,7 @@ namespace LostInSin.Runtime.Scopes
 			RegisterServices(builder);
 			RegisterTurnModule(builder);
 			RegisterAbilityModule(builder);
+			RegisterSignals(builder);
 		}
 
 		private void RegisterAbilityModule(IContainerBuilder builder)
@@ -121,6 +124,17 @@ namespace LostInSin.Runtime.Scopes
 
 			builder.RegisterComponentInHierarchy<ActiveTurnCharacterInfoPanelView>().AsSelf();
 			builder.RegisterEntryPoint<ActiveTurnCharacterInfoPanelController>();
+		}
+
+		private void RegisterSignals(IContainerBuilder builder)
+		{
+			builder.DeclareSignal<GameStateChangedSignal>();
+			builder.DeclareSignal<ChangeGameStateSignal>();
+			builder.DeclareSignal<TriggerLevelEndSignal>();
+			builder.DeclareSignal<ExitGameplayLevelSignal>();
+			builder.DeclareSignal<CharacterAPChangedSignal>();
+			builder.DeclareSignal<ActiveTurnCharacterChangedSignal>();
+			builder.DeclareSignal<EndCharacterTurnSignal>();
 		}
 	}
 }

@@ -10,21 +10,38 @@ namespace LostInSin.Runtime.Infrastructure.Signals
 	{
 		private readonly Dictionary<Type, SignalSubscription> _subscriptions = new();
 
-		public SignalBus(IEnumerable<Type> declaredSignals)
+		public SignalBus(List<Type> signalTypes)
 		{
-			// Initialize subscriptions for declared signals
-			foreach (Type signalType in declaredSignals)
+			foreach (Type signalType in signalTypes)
+			{
+				if (!_subscriptions.ContainsKey(signalType))
+				{
+					_subscriptions[signalType] = new SignalSubscription(signalType);
+				}
+			}
+		}
+
+		public void DeclareSignal<TSignal>()
+		{
+			Type signalType = typeof(TSignal);
+			if (!_subscriptions.ContainsKey(signalType))
+			{
 				_subscriptions[signalType] = new SignalSubscription(signalType);
+			}
 		}
 
 		public void Subscribe<TSignal>(Action<TSignal> handler)
 		{
 			Type signalType = typeof(TSignal);
-			if (!_subscriptions.TryGetValue(signalType, out SignalSubscription subscription))
+			if (_subscriptions.TryGetValue(signalType, out SignalSubscription subscription))
+			{
+				subscription.Add(handler);
+			}
+			else
+			{
 				throw new InvalidOperationException(
 					$"Signal '{signalType.Name}' has not been declared. Please declare it during container setup.");
-
-			subscription.Add(handler);
+			}
 		}
 
 		public void Unsubscribe<TSignal>(Action<TSignal> handler)
@@ -32,7 +49,9 @@ namespace LostInSin.Runtime.Infrastructure.Signals
 			Type signalType = typeof(TSignal);
 
 			if (_subscriptions.TryGetValue(signalType, out SignalSubscription subscription))
+			{
 				subscription.Remove(handler);
+			}
 		}
 
 		public void Fire<TSignal>(TSignal signal)
@@ -41,9 +60,13 @@ namespace LostInSin.Runtime.Infrastructure.Signals
 			if (_subscriptions.TryGetValue(signalType, out SignalSubscription subscription))
 			{
 				if (subscription.HasHandlers())
+				{
 					subscription.Invoke(signal);
+				}
 				else
+				{
 					Debug.LogWarning($"No subscribers for signal '{signalType.Name}'.");
+				}
 			}
 			else
 			{
@@ -103,6 +126,7 @@ namespace LostInSin.Runtime.Infrastructure.Signals
 				}
 
 				foreach (Delegate handler in handlersCopy)
+				{
 					try
 					{
 						handler.DynamicInvoke(signal);
@@ -115,6 +139,7 @@ namespace LostInSin.Runtime.Infrastructure.Signals
 					{
 						Debug.LogError(ex);
 					}
+				}
 			}
 
 			public bool HasHandlers()
@@ -122,9 +147,8 @@ namespace LostInSin.Runtime.Infrastructure.Signals
 				_lock.EnterReadLock();
 				try
 				{
-					//Exclude App State Changed Signal
-					//Because this signal is used by Loading Screen in Bootstrap scene
-					//Which might not get injected if it gets deselected in App Settings
+					// Exclude App State Changed Signal to
+					//avoid warnings in bootstrap
 					if (_signalType == typeof(AppStateChangedSignal))
 						return true;
 

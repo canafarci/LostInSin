@@ -6,21 +6,35 @@ namespace LostInSin.Runtime.Infrastructure.Signals
 {
 	public static class ContainerBuilderExtensions
 	{
-		private static readonly List<Type> DeclaredSignalTypes = new();
+		private static SignalBus _signalBus = null;
+		private static List<Type> _applicationScopeSignalTypes = new List<Type>();
 
 		public static void DeclareSignal<TSignal>(this IContainerBuilder builder)
 		{
-			Type signalType = typeof(TSignal);
-			if (!DeclaredSignalTypes.Contains(signalType)) DeclaredSignalTypes.Add(signalType);
+			if (_signalBus == null)
+			{
+				_applicationScopeSignalTypes.Add(typeof(TSignal));
+			}
+			else
+			{
+				_signalBus.DeclareSignal<TSignal>();
+			}
+
+
+			// Register a build callback to declare the signal when the container is built
+			builder.RegisterBuildCallback(container =>
+			{
+				var signalBus = container.Resolve<SignalBus>();
+				signalBus.DeclareSignal<TSignal>();
+			});
 		}
 
 		public static void RegisterSignalBus(this IContainerBuilder builder)
 		{
-			// Register the SignalBus with the declared signal types
-			builder.Register<SignalBus>(resolver => new SignalBus(DeclaredSignalTypes), Lifetime.Singleton);
+			// Register the SignalBus as a singleton
+			builder.Register<SignalBus>(Lifetime.Singleton).WithParameter(_applicationScopeSignalTypes);
 
-			// Clear the declared signals list to prevent issues if the container is built multiple times
-			DeclaredSignalTypes.Clear();
+			builder.RegisterBuildCallback(container => { _signalBus = container.Resolve<SignalBus>(); });
 		}
 	}
 }

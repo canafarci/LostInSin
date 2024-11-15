@@ -73,16 +73,6 @@ namespace LostInSin.Runtime.Scopes
 			builder.DeclareSignal<ChangeHapticActivationSignal>();
 			builder.DeclareSignal<PlayAudioSignal>();
 			builder.DeclareSignal<CurrencyChangedSignal>();
-
-			//Gameplay
-			builder.DeclareSignal<GameStateChangedSignal>();
-			builder.DeclareSignal<ChangeGameStateSignal>();
-			builder.DeclareSignal<TriggerLevelEndSignal>();
-			builder.DeclareSignal<ExitGameplayLevelSignal>();
-			builder.DeclareSignal<CharacterAPChangedSignal>();
-			builder.DeclareSignal<ActiveTurnCharacterChangedSignal>();
-
-			builder.DeclareSignal<EndCharacterTurnSignal>();
 		}
 
 		private void RegisterLoadingScreen(IContainerBuilder builder)
