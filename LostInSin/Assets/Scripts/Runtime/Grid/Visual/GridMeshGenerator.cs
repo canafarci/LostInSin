@@ -5,7 +5,7 @@ namespace LostInSin.Runtime.Grid.Visual
 {
 	public class GridMeshGenerator
 	{
-		public Mesh CreateGridMesh(GridCell[,] gridCells)
+		public Mesh CreateGridMesh(GridCellData[,] gridCells)
 		{
 			List<Vector3> vertices = new();
 			List<Vector2> uvs = new(); // List for UVs
@@ -28,7 +28,7 @@ namespace LostInSin.Runtime.Grid.Visual
 			return mesh;
 		}
 
-		private void AddCellToMesh(GridCell cell,
+		private void AddCellToMesh(GridCellData cellData,
 			List<Vector3> vertices,
 			List<Vector2> uvs,
 			List<int> triangles,
@@ -39,10 +39,10 @@ namespace LostInSin.Runtime.Grid.Visual
 		{
 			var vertexIndex = vertices.Count;
 
-			vertices.Add(cell.TopLeft.ToVector3());
-			vertices.Add(cell.TopRight.ToVector3());
-			vertices.Add(cell.BottomLeft.ToVector3());
-			vertices.Add(cell.BottomRight.ToVector3());
+			vertices.Add(cellData.TopLeft.ToVector3());
+			vertices.Add(cellData.TopRight.ToVector3());
+			vertices.Add(cellData.BottomLeft.ToVector3());
+			vertices.Add(cellData.BottomRight.ToVector3());
 
 			// Calculate UVs based on the cell's position within the grid
 			var uvWidth = 1f / gridWidth;

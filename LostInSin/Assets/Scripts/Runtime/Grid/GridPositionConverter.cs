@@ -12,18 +12,18 @@ namespace LostInSin.Runtime.Grid
 			_gridModel = gridModel;
 		}
 
-		public bool GetCell(Vector3 worldPosition, out GridCellData cellData)
+		public bool GetCell(Vector3 worldPosition, out GridCell cell)
 		{
 			var row = Mathf.FloorToInt(worldPosition.x / _gridModel.gridCellWidth + _gridModel.gridRowOffset);
 			var column = Mathf.FloorToInt(worldPosition.z / _gridModel.gridCellHeight + _gridModel.gridColumnOffset);
 
 			var positionIsInsideGrid = false;
-			cellData = null;
+			cell = null;
 
 			//cell count is 1 less than row and column size
 			if (row >= 0 && column >= 0 && row < _gridModel.gridRowCount - 1 && column < _gridModel.gridColumnCount - 1)
 			{
-				cellData = _gridModel.GetGridCellData(row, column);
+				cell = _gridModel.GetGridCellData(row, column);
 				positionIsInsideGrid = true;
 			}
 
@@ -32,13 +32,13 @@ namespace LostInSin.Runtime.Grid
 
 		public Vector3 GetWorldPoint(int row, int column)
 		{
-			GridCellData cell = _gridModel.GetGridCellData(row, column);
+			GridCell cell = _gridModel.GetGridCellData(row, column);
 			return cell.centerPosition;
 		}
 
-		public Vector3 GetWorldPoint(GridCell cell)
+		public Vector3 GetWorldPoint(GridCellData cellData)
 		{
-			return cell.Center.ToVector3();
+			return cellData.Center.ToVector3();
 		}
 	}
 }

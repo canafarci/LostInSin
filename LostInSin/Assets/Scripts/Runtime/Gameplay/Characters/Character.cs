@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using LostInSin.Runtime.Gameplay.Abilities;
+using LostInSin.Runtime.Grid.Data;
 using VContainer;
 using VContainer.Unity;
 
@@ -13,6 +14,7 @@ namespace LostInSin.Runtime.Gameplay.Characters
 		public int currentHealth { get; private set; }
 		public int currentActionPoints { get; private set; }
 		public int initiative { get; private set; }
+		public GridCell currentCell { get; set; }
 		public CharacterData characterData => _characterData;
 
 		public List<Ability> Abilities;

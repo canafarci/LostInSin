@@ -28,7 +28,6 @@ namespace LostInSin.Runtime.Scopes
 		[SerializeField] private PoolConfig PoolConfig;
 		[SerializeField] private CurrencyConfig CurrencyConfig;
 
-
 		protected override void Configure(IContainerBuilder builder)
 		{
 			RegisterInstances(builder);

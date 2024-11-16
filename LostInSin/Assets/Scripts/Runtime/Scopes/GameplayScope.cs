@@ -17,6 +17,7 @@ using LostInSin.Runtime.Grid;
 using LostInSin.Runtime.Grid.DataObjects;
 using LostInSin.Runtime.Grid.Visual;
 using LostInSin.Runtime.Infrastructure.Signals;
+using LostInSin.Runtime.Pathfinding;
 using LostInSin.Runtime.Raycast;
 using UnityEngine;
 using VContainer;
@@ -112,7 +113,10 @@ namespace LostInSin.Runtime.Scopes
 		private void RegisterServices(IContainerBuilder builder)
 		{
 			builder.Register<ICharactersInSceneModel, CharactersInSceneModel>(Lifetime.Singleton);
+			builder.Register<GridPathfinder>(Lifetime.Singleton).AsImplementedInterfaces();
+
 			builder.RegisterEntryPoint<CharactersInSceneController>();
+			builder.RegisterEntryPoint<CombatStartCharacterGridPositionSetter>().AsSelf();
 
 			builder.Register<TurnSystemFacade>(Lifetime.Singleton).AsSelf();
 		}

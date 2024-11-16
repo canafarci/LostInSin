@@ -26,9 +26,9 @@ namespace LostInSin.Runtime.BehaviourTree.Abilities
 
 			ability.AbilityRequest.Initialize(new AbilityRequestData());
 			ability.AbilityRequest.StartRequest();
-			ability.AbilityRequest.abilityRequestData.User = Agent.Value;
+			ability.AbilityRequest.data.User = Agent.Value;
 
-			ability.AbilityExecutionLogic.Initialize(ability.AbilityRequest.abilityRequestData);
+			ability.AbilityExecutionLogic.Initialize(ability.AbilityRequest.data);
 			BTReference.Value.turnSystemFacade.AddAbilityForPlaying(ability.AbilityExecutionLogic);
 
 			Agent.Value.ReduceActionPoints(ability.ActionPointCost);

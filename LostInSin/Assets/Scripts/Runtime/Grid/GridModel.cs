@@ -6,14 +6,14 @@ namespace LostInSin.Runtime.Grid
 	public class GridModel
 	{
 		private readonly Data _data;
-		private GridCellData[,] _gridCellData;
+		private GridCell[,] _gridCellData;
 
 		private GridModel(Data data)
 		{
 			_data = data;
 		}
 
-		public GridCell[,] gridCells { get; private set; }
+		public GridCellData[,] gridCells { get; private set; }
 
 		public int gridCellWidth => _data.GridData.GridXSize;
 		public int gridCellHeight => _data.GridData.GridYSize;
@@ -22,17 +22,17 @@ namespace LostInSin.Runtime.Grid
 		public float gridRowOffset => gridCellHeight * gridColumnCount / 2f;
 		public float gridColumnOffset => gridCellWidth * gridRowCount / 2f;
 
-		public void SetGridCells(GridCell[,] cells, GridCellData[,] gridCellData)
+		public void SetGridCells(GridCellData[,] cells, GridCell[,] gridCellData)
 		{
 			gridCells = cells;
 			_gridCellData = gridCellData;
 		}
 
-		public GridCellData GetGridCellData(int row, int column)
+		public GridCell GetGridCellData(int row, int column)
 		{
-			GridCell cell = gridCells[row, column];
-			GridCellData data = _gridCellData[row, column];
-			data.centerPosition = cell.Center.ToVector3();
+			GridCellData cellData = gridCells[row, column];
+			GridCell data = _gridCellData[row, column];
+			data.centerPosition = cellData.Center.ToVector3();
 			return data;
 		}
 

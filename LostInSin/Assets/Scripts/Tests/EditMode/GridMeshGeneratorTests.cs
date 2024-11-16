@@ -9,7 +9,7 @@ namespace LostInSin.Tests.EditMode.Tests.EditMode
 	public class GridMeshGeneratorTests
 	{
 		private GridMeshGenerator _gridMeshGenerator;
-		private GridCell[,] _gridCells;
+		private GridCellData[,] _gridCells;
 
 		[SetUp]
 		public void SetUp()
@@ -17,7 +17,7 @@ namespace LostInSin.Tests.EditMode.Tests.EditMode
 			_gridMeshGenerator = new GridMeshGenerator();
 
 			// Initialize grid cells with mock data
-			_gridCells = new GridCell[2, 2]
+			_gridCells = new GridCellData[2, 2]
 			{
 				{
 					new(new GridPoint(0, 0, 0), new GridPoint(1, 0, 0), new GridPoint(0, 0, 1), new GridPoint(1, 0, 1),

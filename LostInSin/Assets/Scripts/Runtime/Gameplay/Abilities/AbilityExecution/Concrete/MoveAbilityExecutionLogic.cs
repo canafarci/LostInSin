@@ -1,7 +1,4 @@
-using DG.Tweening;
-using DG.Tweening.Core;
-using DG.Tweening.Plugins.Options;
-using LostInSin.Runtime.Gameplay.Characters;
+using LostInSin.Runtime.Gameplay.Abilities.AbilityRequests;
 using UnityEngine;
 
 namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.Concrete
@@ -10,30 +7,42 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.Concrete
 		menuName = "LostInSin/Abilities/AbilityExecution/Move Ability")]
 	public class MoveAbilityExecutionLogic : AbilityExecutionLogic
 	{
-		private TweenerCore<Vector3, Vector3, VectorOptions> _moveTween;
+		private Vector3 _targetPosition;
+		private int _positionIndex;
+
+		public override void Initialize(AbilityRequestData requestData)
+		{
+			base.Initialize(requestData);
+
+			_targetPosition = default;
+			_positionIndex = 0;
+		}
 
 		public override void StartAbility()
 		{
-			CharacterFacade character = _abilityRequestData.User;
-
-			_moveTween = character.transform.DOMove(_abilityRequestData.TargetGridCell.centerPosition, 4f)
-				.SetSpeedBased();
-
 			executionStage = AbilityExecutionStage.Updating;
+			_targetPosition = _abilityRequestData.PathCells[_positionIndex].centerPosition;
+			Debug.Log(_abilityRequestData.PathCells.Count);
 		}
 
 		public override void UpdateAbility()
 		{
-			if (!_moveTween.active)
+			Transform userTransform = _abilityRequestData.User.transform;
+
+			if (Vector3.SqrMagnitude(userTransform.position - _targetPosition) > 0.01f)
+			{
+				Vector3 direction = _targetPosition - userTransform.position;
+				userTransform.position += direction.normalized * 5f * Time.deltaTime;
+			}
+
+			else if (_positionIndex < _abilityRequestData.PathCells.Count - 1)
+			{
+				_targetPosition = _abilityRequestData.PathCells[++_positionIndex].centerPosition;
+			}
+			else
 			{
 				EndAbility();
 			}
-		}
-
-		protected override void EndAbility()
-		{
-			_moveTween = null;
-			base.EndAbility();
 		}
 	}
 }

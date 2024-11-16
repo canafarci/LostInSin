@@ -1,10 +1,13 @@
 using System;
+using System.Collections.Generic;
 using LostInSin.Runtime.Gameplay.Abilities.AbilityPlaying;
 using LostInSin.Runtime.Gameplay.Abilities.AbilityRequests;
 using LostInSin.Runtime.Gameplay.Signals;
 using LostInSin.Runtime.Gameplay.Turns;
 using LostInSin.Runtime.Gameplay.UI.AbilityPanel;
+using LostInSin.Runtime.Grid.Data;
 using LostInSin.Runtime.Infrastructure.Signals;
+using LostInSin.Runtime.Pathfinding;
 using UnityEngine;
 using VContainer.Unity;
 
@@ -17,6 +20,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.Player
 		private readonly IAbilityPanelMediator _abilityPanelMediator;
 		private readonly IAbilityPlayer _abilityPlayer;
 		private readonly PlayerRaycaster _playerRaycaster;
+		private readonly IGridPathfinder _gridPathfinder;
 		private Ability _ability;
 		private RaycastRequest _raycastRequest;
 
@@ -24,13 +28,15 @@ namespace LostInSin.Runtime.Gameplay.Abilities.Player
 			ITurnModel turnModel,
 			IAbilityPanelMediator abilityPanelMediator,
 			IAbilityPlayer abilityPlayer,
-			PlayerRaycaster playerRaycaster)
+			PlayerRaycaster playerRaycaster,
+			IGridPathfinder gridPathfinder)
 		{
 			_signalBus = signalBus;
 			_turnModel = turnModel;
 			_abilityPanelMediator = abilityPanelMediator;
 			_abilityPlayer = abilityPlayer;
 			_playerRaycaster = playerRaycaster;
+			_gridPathfinder = gridPathfinder;
 		}
 
 		private bool CharacterHasEnoughAP(int abilityActionPointCost)
@@ -40,19 +46,17 @@ namespace LostInSin.Runtime.Gameplay.Abilities.Player
 
 		public void Tick()
 		{
-			if (_ability == null ||
-			    _turnModel.activeCharacter == null ||
-			    !_turnModel.activeCharacter.isPlayerCharacter) return;
+			if (ShouldNotTick()) return;
 
 			AbilityRequest abilityRequest = _ability.AbilityRequest;
 
-			if (abilityRequest.abilityRequestState == AbilityRequestState.Complete)
+			if (abilityRequest.state == AbilityRequestState.Complete)
 			{
 				SendAbilityForPlaying(abilityRequest);
 				return;
 			}
 
-			if (abilityRequest.abilityRequestState == AbilityRequestState.Continue)
+			if (abilityRequest.state == AbilityRequestState.Continue)
 			{
 				abilityRequest.UpdateRequest();
 
@@ -60,18 +64,43 @@ namespace LostInSin.Runtime.Gameplay.Abilities.Player
 				{
 					CreateRaycastRequestOnMouseClick();
 				}
+
+				if (AbilityIsGridPathfindingLogic(abilityRequest))
+				{
+					TryFindPath(abilityRequest);
+				}
 			}
+		}
+
+		private void TryFindPath(AbilityRequest abilityRequest)
+		{
+			if (_gridPathfinder.FindPath(abilityRequest, out List<GridCell> pathCells))
+			{
+				abilityRequest.data.PathCells = pathCells;
+			}
+		}
+
+		private bool AbilityIsGridPathfindingLogic(AbilityRequest abilityRequest)
+		{
+			return abilityRequest.RequestType.HasFlag(AbilityRequestType.GridPathFinding);
+		}
+
+		private bool ShouldNotTick()
+		{
+			return _ability == null ||
+			       _turnModel.activeCharacter == null ||
+			       !_turnModel.activeCharacter.isPlayerCharacter;
 		}
 
 		private static bool AbilityIsRaycastLogic(AbilityRequest abilityRequest)
 		{
-			return abilityRequest.AbilityRequestType.HasFlag(AbilityRequestType.PositionRaycasted) ||
-			       abilityRequest.AbilityRequestType.HasFlag(AbilityRequestType.GridPositionRaycasted);
+			return abilityRequest.RequestType.HasFlag(AbilityRequestType.PositionRaycasted) ||
+			       abilityRequest.RequestType.HasFlag(AbilityRequestType.GridPositionRaycasted);
 		}
 
 		private void SendAbilityForPlaying(AbilityRequest abilityRequest)
 		{
-			_ability.AbilityExecutionLogic.Initialize(abilityRequest.abilityRequestData);
+			_ability.AbilityExecutionLogic.Initialize(abilityRequest.data);
 			_turnModel.activeCharacter.ReduceActionPoints(_ability.ActionPointCost);
 
 			_abilityPlayer.AddAbilityForPlaying(_ability.AbilityExecutionLogic);
@@ -95,7 +124,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.Player
 			_playerRaycaster.TryRaycast(abilityRequest, ref _raycastRequest);
 		}
 
-		#region SUBSCIBTIONS_AND_UNSUBSCRIPTIONS
+		#region SUBSCRIPTIONS_AND_UNSUBSCRIPTIONS
 
 		public void Initialize()
 		{
@@ -116,7 +145,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.Player
 			ability.AbilityRequest.Initialize(new AbilityRequestData());
 			ability.AbilityRequest.StartRequest();
 
-			ability.AbilityRequest.abilityRequestData.User = _turnModel.activeCharacter;
+			ability.AbilityRequest.data.User = _turnModel.activeCharacter;
 
 			_ability = ability;
 		}

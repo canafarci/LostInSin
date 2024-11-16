@@ -2,6 +2,7 @@ using LostInSin.Runtime.Gameplay.Abilities.AbilityRequests;
 using LostInSin.Runtime.Grid;
 using LostInSin.Runtime.Grid.Data;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using VContainer.Unity;
 
 namespace LostInSin.Runtime.Gameplay.Abilities.Player
@@ -25,10 +26,10 @@ namespace LostInSin.Runtime.Gameplay.Abilities.Player
 		public void TryRaycast(AbilityRequest abilityRequest, ref RaycastRequest raycastRequest)
 		{
 			Ray ray = _mainCamera.ScreenPointToRay(raycastRequest.mousePosition);
-			LayerMask mask = abilityRequest.AbilityRequestConfig.LayerMask;
-			AbilityRequestType requestType = abilityRequest.AbilityRequestType;
+			LayerMask mask = abilityRequest.Config.LayerMask;
+			AbilityRequestType requestType = abilityRequest.RequestType;
 
-			if (!Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, mask))
+			if (IsInvalidRaycast(ray, mask, out RaycastHit hit))
 			{
 				raycastRequest.isProcessed = true;
 				return;
@@ -38,17 +39,24 @@ namespace LostInSin.Runtime.Gameplay.Abilities.Player
 
 			if (requestType.HasFlag(AbilityRequestType.GridPositionRaycasted))
 			{
-				if (_gridPositionConverter.GetCell(position, out GridCellData gridCellData) && !gridCellData.isOccupied)
+				if (_gridPositionConverter.GetCell(position, out GridCell gridCell) && !gridCell.isOccupied)
 				{
-					abilityRequest.abilityRequestData.TargetGridCell = gridCellData;
+					abilityRequest.data.TargetGridCell = gridCell;
 				}
 			}
 			else if (requestType.HasFlag(AbilityRequestType.PositionRaycasted))
 			{
-				abilityRequest.abilityRequestData.TargetPosition = position;
+				abilityRequest.data.TargetPosition = position;
 			}
 
 			raycastRequest.isProcessed = true;
+		}
+
+		private static bool IsInvalidRaycast(Ray ray, LayerMask mask, out RaycastHit hit)
+		{
+			hit = default;
+			return EventSystem.current.IsPointerOverGameObject() ||
+			       !Physics.Raycast(ray, out hit, Mathf.Infinity, mask);
 		}
 	}
 }

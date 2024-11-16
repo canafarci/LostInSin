@@ -9,7 +9,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Concrete
 	{
 		public override void StartRequest()
 		{
-			abilityRequestState = AbilityRequestState.Complete;
+			state = AbilityRequestState.Complete;
 		}
 
 		public override void UpdateRequest()

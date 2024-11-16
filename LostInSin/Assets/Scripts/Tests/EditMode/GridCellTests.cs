@@ -4,77 +4,77 @@ using UnityEngine;
 
 namespace LostInSin.Tests.EditMode.Tests.EditMode
 {
-	public class GridCellDataTests
+	public class GridCellTests
 	{
 		[Test]
 		public void GridCellData_DefaultState_ShouldBeUnoccupied()
 		{
 			// Arrange
-			GridCellData cellData = new();
+			GridCell cell = new();
 			// Assert
-			Assert.IsFalse(cellData.isOccupied);
+			Assert.IsFalse(cell.isOccupied);
 		}
 
 		[Test]
 		public void SetAsOccupied_WhenCalled_ShouldSetCellAsOccupied()
 		{
 			// Arrange
-			GridCellData cellData = new();
+			GridCell cell = new();
 
 			// Act
-			cellData.SetAsOccupied();
+			cell.SetAsOccupied();
 
 			// Assert
-			Assert.IsTrue(cellData.isOccupied);
+			Assert.IsTrue(cell.isOccupied);
 		}
 
 		[Test]
 		public void SetAsOccupied_WhenAlreadyOccupied_ShouldThrowException()
 		{
 			// Arrange
-			GridCellData cellData = new();
-			cellData.SetAsOccupied();
+			GridCell cell = new();
+			cell.SetAsOccupied();
 
 			// Act & Assert
-			Assert.Throws<System.Exception>(() => cellData.SetAsOccupied());
+			Assert.Throws<System.Exception>(() => cell.SetAsOccupied());
 		}
 
 		[Test]
 		public void SetAsUnoccupied_WhenCalled_ShouldSetCellAsUnoccupied()
 		{
 			// Arrange
-			GridCellData cellData = new();
-			cellData.SetAsOccupied(); // First set it as occupied
+			GridCell cell = new();
+			cell.SetAsOccupied(); // First set it as occupied
 
 			// Act
-			cellData.SetAsUnoccupied();
+			cell.SetAsUnoccupied();
 
 			// Assert
-			Assert.IsFalse(cellData.isOccupied);
+			Assert.IsFalse(cell.isOccupied);
 		}
 
 		[Test]
 		public void SetAsUnoccupied_WhenAlreadyUnoccupied_ShouldThrowException()
 		{
 			// Arrange
-			GridCellData cellData = new();
+			GridCell cell = new();
 
 			// Act & Assert
-			Assert.Throws<System.Exception>(() => cellData.SetAsUnoccupied());
+			Assert.Throws<System.Exception>(() => cell.SetAsUnoccupied());
 		}
 
 		[Test]
 		public void CenterPosition_WhenSet_ShouldStoreValue()
 		{
 			// Arrange
-			GridCellData cellData = new();
+			GridCell cell = new();
 			Vector3 expectedPosition = new(1, 2, 3);
 
 			// Act
-			cellData.centerPosition = expectedPosition;
+			cell.centerPosition = expectedPosition;
 
 			// Assert
-			Assert.AreEqual(expectedPosition, cellData.centerPosition);
+			Assert.AreEqual(expectedPosition, cell.centerPosition);
 		}
 	}
 }

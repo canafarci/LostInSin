@@ -20,18 +20,21 @@ namespace LostInSin.Runtime.Gameplay.GameplayLifecycle.Entry
 		private readonly ApplicationSettings _applicationSettings;
 		private readonly GridGenerator _gridGenerator;
 		private readonly GridMeshDisplayService _gridMeshDisplayService;
+		private readonly CombatStartCharacterGridPositionSetter _combatStartCharacterGridPositionSetter;
 
 		[Inject]
 		public GameplayEntryPoint(
 			SignalBus signalBus,
 			ApplicationSettings applicationSettings,
 			GridGenerator gridGenerator,
-			GridMeshDisplayService gridMeshDisplayService)
+			GridMeshDisplayService gridMeshDisplayService,
+			CombatStartCharacterGridPositionSetter combatStartCharacterGridPositionSetter)
 		{
 			_signalBus = signalBus;
 			_applicationSettings = applicationSettings;
 			_gridGenerator = gridGenerator;
 			_gridMeshDisplayService = gridMeshDisplayService;
+			_combatStartCharacterGridPositionSetter = combatStartCharacterGridPositionSetter;
 		}
 
 		public void Initialize()
@@ -70,6 +73,8 @@ namespace LostInSin.Runtime.Gameplay.GameplayLifecycle.Entry
 
 			// Display the grid mesh
 			_gridMeshDisplayService.ShowGrid();
+
+			_combatStartCharacterGridPositionSetter.SetPositions();
 		}
 
 		public void Dispose()

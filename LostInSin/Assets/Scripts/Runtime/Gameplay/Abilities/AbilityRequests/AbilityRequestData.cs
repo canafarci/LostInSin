@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using LostInSin.Runtime.Gameplay.Characters;
 using LostInSin.Runtime.Grid.Data;
 using UnityEngine;
@@ -8,13 +9,15 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests
 	{
 		public CharacterFacade User;
 		public Vector3 TargetPosition;
-		public GridCellData TargetGridCell;
+		public GridCell TargetGridCell;
+		public List<GridCell> PathCells;
 
 		public void Reset()
 		{
 			User = null;
+			PathCells = null;
 			TargetPosition = default;
-			TargetGridCell = default;
+			TargetGridCell = null;
 		}
 	}
 }

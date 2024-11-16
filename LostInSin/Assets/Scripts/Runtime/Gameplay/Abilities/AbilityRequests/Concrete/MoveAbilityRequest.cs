@@ -10,15 +10,15 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Concrete
 		public override void StartRequest()
 		{
 			//TODO change cursor
-			abilityRequestState = AbilityRequestState.Continue;
+			state = AbilityRequestState.Continue;
 		}
 
 		public override void UpdateRequest()
 		{
-			if (abilityRequestData.TargetGridCell != default(GridCellData))
+			if (data.PathCells != null)
 			{
-				abilityRequestData.TargetGridCell.SetAsOccupied();
-				abilityRequestState = AbilityRequestState.Complete;
+				data.User.SetCharacterCell(data.TargetGridCell);
+				state = AbilityRequestState.Complete;
 			}
 		}
 	}

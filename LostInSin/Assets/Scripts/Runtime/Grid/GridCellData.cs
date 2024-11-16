@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace LostInSin.Runtime.Grid
 {
-	public struct GridCell
+	public struct GridCellData
 	{
 		public GridPoint TopLeft;
 		public GridPoint TopRight;
@@ -11,7 +11,7 @@ namespace LostInSin.Runtime.Grid
 		public GridPoint Center;
 		public bool IsInvalid;
 
-		public GridCell(GridPoint topLeft,
+		public GridCellData(GridPoint topLeft,
 			GridPoint topRight,
 			GridPoint bottomLeft,
 			GridPoint bottomRight,

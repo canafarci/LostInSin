@@ -1,19 +1,20 @@
 using Sirenix.OdinInspector;
+using UnityEngine.Serialization;
 
 namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests
 {
 	public abstract class AbilityRequest : SerializedScriptableObject
 	{
-		public AbilityRequestType AbilityRequestType;
-		public AbilityRequestConfig AbilityRequestConfig;
-		public AbilityRequestState abilityRequestState { get; set; }
-		public AbilityRequestData abilityRequestData { get; private set; }
+		[EnumToggleButtons] public AbilityRequestType RequestType;
+		public AbilityRequestConfig Config;
+		public AbilityRequestState state { get; set; }
+		public AbilityRequestData data { get; private set; }
 
 
 		public virtual void Initialize(AbilityRequestData requestData)
 		{
-			abilityRequestState = AbilityRequestState.Initializing;
-			abilityRequestData = requestData;
+			state = AbilityRequestState.Initializing;
+			data = requestData;
 		}
 
 		// Logic to execute when the action starts

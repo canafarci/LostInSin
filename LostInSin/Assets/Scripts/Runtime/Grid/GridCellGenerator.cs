@@ -16,15 +16,15 @@ namespace LostInSin.Runtime.Grid
 			_gridModel = gridModel;
 		}
 
-		public (GridCell[,] cells, GridCellData[,] data ) GenerateGridCells(NativeArray<GridPoint> gridPoints)
+		public (GridCellData[,] cells, GridCell[,] data ) GenerateGridCells(NativeArray<GridPoint> gridPoints)
 		{
 			using (gridPoints)
 			{
 				var numCellsRow = _gridModel.gridRowCount;
 				var numCellsColumn = _gridModel.gridColumnCount;
 
-				GridCell[,] gridCells = new GridCell[numCellsRow, numCellsColumn];
-				GridCellData[,] gridCellsData = new GridCellData[numCellsRow, numCellsColumn];
+				GridCellData[,] gridCells = new GridCellData[numCellsRow, numCellsColumn];
+				GridCell[,] gridCellsData = new GridCell[numCellsRow, numCellsColumn];
 
 				for (var x = 0; x < numCellsRow; x++)
 				for (var y = 0; y < numCellsColumn; y++)
@@ -35,8 +35,8 @@ namespace LostInSin.Runtime.Grid
 		}
 
 		private void ProcessCell(NativeArray<GridPoint> gridPoints,
-			GridCell[,] gridCells,
-			GridCellData[,] gridCellsData,
+			GridCellData[,] gridCells,
+			GridCell[,] gridCellsData,
 			int x,
 			int y)
 		{
@@ -54,7 +54,7 @@ namespace LostInSin.Runtime.Grid
 
 			if (IsCellValid(gridPoints, topLeftIndex, topRightIndex, bottomLeftIndex, bottomRightIndex))
 			{
-				GridCell cell = new(
+				GridCellData cellData = new(
 					gridPoints[topLeftIndex],
 					gridPoints[topRightIndex],
 					gridPoints[bottomLeftIndex],
@@ -62,9 +62,9 @@ namespace LostInSin.Runtime.Grid
 					false
 				);
 
-				AdjustCellBasedOnRaycast(ref cell);
-				gridCells[x, y] = cell;
-				gridCellsData[x, y] = new GridCellData();
+				AdjustCellBasedOnRaycast(ref cellData);
+				gridCells[x, y] = cellData;
+				gridCellsData[x, y] = new GridCell();
 			}
 		}
 
@@ -80,16 +80,16 @@ namespace LostInSin.Runtime.Grid
 			         gridPoints[bottomRightIndex].isVoid);
 		}
 
-		private void AdjustCellBasedOnRaycast(ref GridCell cell)
+		private void AdjustCellBasedOnRaycast(ref GridCellData cellData)
 		{
-			Vector3 rayOrigin = new(cell.Center.posX, RAY_ORIGIN_HEIGHT, cell.Center.posZ);
+			Vector3 rayOrigin = new(cellData.Center.posX, RAY_ORIGIN_HEIGHT, cellData.Center.posZ);
 			if (Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hit, Mathf.Infinity, _groundLayerMask))
 			{
-				if (Mathf.Abs(hit.point.y - cell.Center.posY) > 0.1f) cell.SetAllPointsToMinimumY();
+				if (Mathf.Abs(hit.point.y - cellData.Center.posY) > 0.1f) cellData.SetAllPointsToMinimumY();
 			}
 			else
 			{
-				cell.SetAllPointsToMinimumY();
+				cellData.SetAllPointsToMinimumY();
 			}
 		}
 	}

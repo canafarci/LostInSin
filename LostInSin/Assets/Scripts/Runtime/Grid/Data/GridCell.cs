@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace LostInSin.Runtime.Grid.Data
 {
-	public class GridCellData
+	public class GridCell
 	{
 		public bool isOccupied => _isOccupied;
 

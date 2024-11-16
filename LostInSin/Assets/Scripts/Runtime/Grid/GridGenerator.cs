@@ -30,7 +30,7 @@ namespace LostInSin.Runtime.Grid
 
 			NativeArray<RaycastHit> raycastResults = _raycaster.PerformRaycasting(raycastData);
 			NativeArray<GridPoint> gridPoints = _pointsGenerator.GenerateGridPoints(raycastResults);
-			(GridCell[,] cells, GridCellData[,] data) gridCells = _cellGenerator.GenerateGridCells(gridPoints);
+			(GridCellData[,] cells, GridCell[,] data) gridCells = _cellGenerator.GenerateGridCells(gridPoints);
 
 			_gridModel.SetGridCells(gridCells.cells, gridCells.data);
 		}
