@@ -12,7 +12,6 @@ namespace LostInSin.Runtime.Gameplay.Abilities
 	{
 		public string AbilityName;
 		public int DefaultActionPointCost;
-		public int DynamicActionPointCost;
 		public Sprite Icon;
 		public AbilityRequest AbilityRequest;
 		public AbilityExecutionLogic AbilityExecutionLogic;

@@ -21,6 +21,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.Player
 		private readonly IAbilityPlayer _abilityPlayer;
 		private readonly PlayerRaycaster _playerRaycaster;
 		private readonly IGridPathfinder _gridPathfinder;
+
 		private Ability _ability;
 		private RaycastRequest _raycastRequest;
 
@@ -52,8 +53,15 @@ namespace LostInSin.Runtime.Gameplay.Abilities.Player
 
 			if (abilityRequest.state == AbilityRequestState.Complete)
 			{
-				SendAbilityForPlaying(abilityRequest);
-				return;
+				int actionPointCost = abilityRequest.data.DynamicActionPointCost + _ability.DefaultActionPointCost;
+
+				if (CharacterHasEnoughAP(actionPointCost))
+				{
+					SendAbilityForPlaying(abilityRequest);
+					return;
+				}
+
+				_ability = null;
 			}
 
 			if (abilityRequest.state == AbilityRequestState.Continue)
@@ -70,6 +78,16 @@ namespace LostInSin.Runtime.Gameplay.Abilities.Player
 					TryFindPath(abilityRequest);
 				}
 			}
+		}
+
+		private void SendAbilityForPlaying(AbilityRequest abilityRequest)
+		{
+			_ability.AbilityExecutionLogic.Initialize(abilityRequest.data);
+			int actionPointCost = abilityRequest.data.DynamicActionPointCost + _ability.DefaultActionPointCost;
+			_turnModel.activeCharacter.ReduceActionPoints(actionPointCost);
+
+			_abilityPlayer.AddAbilityForPlaying(_ability.AbilityExecutionLogic);
+			_ability = null;
 		}
 
 		private void TryFindPath(AbilityRequest abilityRequest)
@@ -96,16 +114,6 @@ namespace LostInSin.Runtime.Gameplay.Abilities.Player
 		{
 			return abilityRequest.RequestType.HasFlag(AbilityRequestType.PositionRaycasted) ||
 			       abilityRequest.RequestType.HasFlag(AbilityRequestType.GridPositionRaycasted);
-		}
-
-		private void SendAbilityForPlaying(AbilityRequest abilityRequest)
-		{
-			_ability.AbilityExecutionLogic.Initialize(abilityRequest.data);
-			_turnModel.activeCharacter.ReduceActionPoints(_ability.DefaultActionPointCost);
-
-			_abilityPlayer.AddAbilityForPlaying(_ability.AbilityExecutionLogic);
-
-			_ability = null;
 		}
 
 		private void CreateRaycastRequestOnMouseClick()
@@ -142,7 +150,8 @@ namespace LostInSin.Runtime.Gameplay.Abilities.Player
 			if (!CharacterHasEnoughAP(ability.DefaultActionPointCost)) return;
 			if (_abilityPlayer.isPlaying) return;
 
-			ability.AbilityRequest.Initialize(new AbilityRequestData());
+			AbilityRequestData abilityRequestData = new AbilityRequestData(ability.DefaultActionPointCost);
+			ability.AbilityRequest.Initialize(abilityRequestData);
 			ability.AbilityRequest.StartRequest();
 
 			ability.AbilityRequest.data.User = _turnModel.activeCharacter;

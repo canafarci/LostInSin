@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using LostInSin.Runtime.Gameplay.Abilities.Player;
+using LostInSin.Runtime.Gameplay.Characters;
 using LostInSin.Runtime.Gameplay.Signals;
+using LostInSin.Runtime.Gameplay.Turns;
 using LostInSin.Runtime.Grid.Data;
 using LostInSin.Runtime.Infrastructure.Templates;
 using LostInSin.Runtime.Pathfinding;
@@ -20,7 +22,12 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Visuals
 		private const float UPDATE_INTERVAL = 0.05f;
 		private float _updateTimer = 0f;
 
-		public GridPathfindingAbilityVisualDisplayer(IGridPathfinder gridPathfinder, PlayerRaycaster playerRaycaster)
+		private Color _validColor = new Color(0f, .7f, 0f, .8f);
+		private Color _invalidColor = new Color(.7f, 0f, 0f, .8f);
+		private Color _currentColor;
+
+		public GridPathfindingAbilityVisualDisplayer(IGridPathfinder gridPathfinder,
+			PlayerRaycaster playerRaycaster)
 		{
 			_gridPathfinder = gridPathfinder;
 			_playerRaycaster = playerRaycaster;
@@ -29,8 +36,6 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Visuals
 			_lineRenderer.startWidth = 0.1f;
 			_lineRenderer.endWidth = 0.1f;
 			_lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
-			_lineRenderer.startColor = Color.green;
-			_lineRenderer.endColor = Color.green;
 		}
 
 		protected override void SubscribeToEvents()
@@ -72,7 +77,8 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Visuals
 
 		private void DisplayPathAsLine(GridCell targetCell)
 		{
-			if (_gridPathfinder.FindPath(_abilityRequest.data.User.currentCell, targetCell, out List<GridCell> path))
+			CharacterFacade characterFacade = _abilityRequest.data.User;
+			if (_gridPathfinder.FindPath(characterFacade.currentCell, targetCell, out List<GridCell> path))
 			{
 				// Convert the path of GridCells to an array of Vector3 positions
 				Vector3[] positions = new Vector3[path.Count];
@@ -84,10 +90,30 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Visuals
 				// Configure the LineRenderer
 				_lineRenderer.positionCount = positions.Length;
 				_lineRenderer.SetPositions(positions);
+
+				ChangeColorBasedOnPlayerAP(path, characterFacade);
 			}
 			else
 			{
 				ClearLineRenderer();
+			}
+		}
+
+		private void ChangeColorBasedOnPlayerAP(List<GridCell> path, CharacterFacade characterFacade)
+		{
+			int apCost = _abilityRequest.data.DefaultActionPointCost + path.Count - 1;
+
+			if (apCost > characterFacade.actionPoints && _currentColor != _invalidColor)
+			{
+				_lineRenderer.startColor = _invalidColor;
+				_lineRenderer.endColor = _invalidColor;
+				_currentColor = _invalidColor;
+			}
+			else if (apCost <= characterFacade.actionPoints && _currentColor != _validColor)
+			{
+				_lineRenderer.startColor = _validColor;
+				_lineRenderer.endColor = _validColor;
+				_currentColor = _validColor;
 			}
 		}
 

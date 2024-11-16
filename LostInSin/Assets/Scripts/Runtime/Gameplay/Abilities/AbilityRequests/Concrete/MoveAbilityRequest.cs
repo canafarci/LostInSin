@@ -17,7 +17,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Concrete
 		{
 			if (data.PathCells != null)
 			{
-				data.User.SetCharacterCell(data.TargetGridCell);
+				data.DynamicActionPointCost = data.PathCells.Count - 1;
 				state = AbilityRequestState.Complete;
 			}
 		}

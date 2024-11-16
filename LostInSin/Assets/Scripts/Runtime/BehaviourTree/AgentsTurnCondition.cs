@@ -8,17 +8,16 @@ namespace LostInSin.Runtime.BehaviourTree
 {
 	[Serializable, Unity.Properties.GeneratePropertyBag]
 	[Condition(name: "AgentsTurn",
-		story: "Current [Agent] 's Turn [BTReferences]",
+		story: "Current [Agent] 's Turn",
 		category: "TurnConditions",
 		id: "287f38d2ff2a28b4576bdd05e7d965a1")]
 	public partial class AgentsTurnCondition : Condition
 	{
 		[SerializeReference] public BlackboardVariable<CharacterFacade> Agent;
-		[SerializeReference] public BlackboardVariable<BTReferences> BTReferences;
 
 		public override bool IsTrue()
 		{
-			TurnSystemFacade turnSystemFacade = BTReferences.Value.turnSystemFacade;
+			TurnSystemFacade turnSystemFacade = BTReferences.instance.turnSystemFacade;
 
 			return turnSystemFacade.activeCharacter == Agent.Value;
 		}

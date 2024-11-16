@@ -11,6 +11,13 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests
 		public Vector3 TargetPosition;
 		public GridCell TargetGridCell;
 		public List<GridCell> PathCells;
+		public int DynamicActionPointCost;
+		public int DefaultActionPointCost;
+
+		public AbilityRequestData(int abilityDefaultActionPointCost)
+		{
+			DefaultActionPointCost = abilityDefaultActionPointCost;
+		}
 
 		public void Reset()
 		{
@@ -18,6 +25,8 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests
 			PathCells = null;
 			TargetPosition = default;
 			TargetGridCell = null;
+			DynamicActionPointCost = 0;
+			DefaultActionPointCost = 0;
 		}
 	}
 }

@@ -21,6 +21,8 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.Concrete
 		public override void StartAbility()
 		{
 			executionStage = AbilityExecutionStage.Updating;
+
+			_abilityRequestData.User.SetCharacterCell(_abilityRequestData.TargetGridCell);
 			_targetPosition = _abilityRequestData.PathCells[_positionIndex].centerPosition;
 		}
 
@@ -33,7 +35,6 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.Concrete
 				Vector3 direction = _targetPosition - userTransform.position;
 				userTransform.position += direction.normalized * 5f * Time.deltaTime;
 			}
-
 			else if (_positionIndex < _abilityRequestData.PathCells.Count - 1)
 			{
 				_targetPosition = _abilityRequestData.PathCells[++_positionIndex].centerPosition;
