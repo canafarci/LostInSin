@@ -25,7 +25,7 @@ namespace LostInSin.Runtime.Gameplay.GameplayLifecycle.Entry
 			{
 				if (_gridPositionConverter.GetCell(facade.transform.position, out GridCell cell))
 				{
-					facade.SetCharacterCell(cell);
+					facade.SetCharacterCell(cell, warp: true);
 				}
 				else
 				{

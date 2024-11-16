@@ -18,7 +18,7 @@ namespace LostInSin.Runtime.BehaviourTree
 
 		public override bool IsTrue()
 		{
-			return Agent.Value.actionPoints >= Ability.Value.ActionPointCost;
+			return Agent.Value.actionPoints >= Ability.Value.DefaultActionPointCost;
 		}
 	}
 }

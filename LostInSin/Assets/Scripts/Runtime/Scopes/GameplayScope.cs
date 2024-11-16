@@ -1,7 +1,6 @@
-// GameplayScope.cs
-
 using System.Collections.Generic;
 using LostInSin.Runtime.Gameplay.Abilities.AbilityPlaying;
+using LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Visuals;
 using LostInSin.Runtime.Gameplay.Abilities.Player;
 using LostInSin.Runtime.Gameplay.Characters;
 using LostInSin.Runtime.Gameplay.Data;
@@ -17,7 +16,6 @@ using LostInSin.Runtime.Grid;
 using LostInSin.Runtime.Grid.DataObjects;
 using LostInSin.Runtime.Grid.Visual;
 using LostInSin.Runtime.Infrastructure.Signals;
-using LostInSin.Runtime.Pathfinding;
 using LostInSin.Runtime.Raycast;
 using UnityEngine;
 using VContainer;
@@ -51,6 +49,8 @@ namespace LostInSin.Runtime.Scopes
 			builder.Register<PlayerAbilityRequestFiller>(Lifetime.Singleton).AsImplementedInterfaces();
 			builder.Register<AbilityPlayer>(Lifetime.Singleton).AsImplementedInterfaces();
 			builder.Register<PlayerRaycaster>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
+			builder.Register<GridPathfindingAbilityVisualDisplayer>(Lifetime.Singleton).AsImplementedInterfaces()
+				.AsSelf();
 		}
 
 		private void RegisterAbilityUI(IContainerBuilder builder)
@@ -128,7 +128,6 @@ namespace LostInSin.Runtime.Scopes
 			builder.RegisterComponentInHierarchy<TurnView>().AsSelf();
 			builder.Register<ITurnModel, TurnModel>(Lifetime.Singleton);
 
-
 			builder.RegisterComponentInHierarchy<ActiveTurnCharacterInfoPanelView>().AsSelf();
 			builder.RegisterEntryPoint<ActiveTurnCharacterInfoPanelController>();
 		}
@@ -142,6 +141,7 @@ namespace LostInSin.Runtime.Scopes
 			builder.DeclareSignal<CharacterAPChangedSignal>();
 			builder.DeclareSignal<ActiveTurnCharacterChangedSignal>();
 			builder.DeclareSignal<EndCharacterTurnSignal>();
+			builder.DeclareSignal<AbilityRequestCreatedSignal>();
 		}
 	}
 }

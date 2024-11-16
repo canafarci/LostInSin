@@ -52,6 +52,25 @@ namespace LostInSin.Runtime.Gameplay.Abilities.Player
 			raycastRequest.isProcessed = true;
 		}
 
+		//this is called inside FixedUpdate
+		public bool RaycastForGridCell(out GridCell gridCell)
+		{
+			Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+			LayerMask mask = LayerMask.GetMask("Ground");
+			gridCell = null;
+
+			if (IsInvalidRaycast(ray, mask, out RaycastHit hit)) return false;
+
+			if (_gridPositionConverter.GetCell(hit.point, out GridCell newGridCell))
+			{
+				gridCell = newGridCell;
+				return true;
+			}
+
+			return false;
+		}
+
+
 		private static bool IsInvalidRaycast(Ray ray, LayerMask mask, out RaycastHit hit)
 		{
 			hit = default;

@@ -101,7 +101,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.Player
 		private void SendAbilityForPlaying(AbilityRequest abilityRequest)
 		{
 			_ability.AbilityExecutionLogic.Initialize(abilityRequest.data);
-			_turnModel.activeCharacter.ReduceActionPoints(_ability.ActionPointCost);
+			_turnModel.activeCharacter.ReduceActionPoints(_ability.DefaultActionPointCost);
 
 			_abilityPlayer.AddAbilityForPlaying(_ability.AbilityExecutionLogic);
 
@@ -139,7 +139,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.Player
 
 		private void AbilityClickedHandler(Ability ability)
 		{
-			if (!CharacterHasEnoughAP(ability.ActionPointCost)) return;
+			if (!CharacterHasEnoughAP(ability.DefaultActionPointCost)) return;
 			if (_abilityPlayer.isPlaying) return;
 
 			ability.AbilityRequest.Initialize(new AbilityRequestData());
@@ -148,6 +148,8 @@ namespace LostInSin.Runtime.Gameplay.Abilities.Player
 			ability.AbilityRequest.data.User = _turnModel.activeCharacter;
 
 			_ability = ability;
+			//used to create visuals for the request, e.g. drawing a path to display the movement
+			_signalBus.Fire(new AbilityRequestCreatedSignal(_ability.AbilityRequest));
 		}
 
 		public void Dispose()

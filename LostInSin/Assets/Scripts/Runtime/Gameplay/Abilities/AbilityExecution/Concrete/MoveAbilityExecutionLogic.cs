@@ -22,7 +22,6 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.Concrete
 		{
 			executionStage = AbilityExecutionStage.Updating;
 			_targetPosition = _abilityRequestData.PathCells[_positionIndex].centerPosition;
-			Debug.Log(_abilityRequestData.PathCells.Count);
 		}
 
 		public override void UpdateAbility()

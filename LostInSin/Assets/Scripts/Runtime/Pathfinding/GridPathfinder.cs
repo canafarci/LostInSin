@@ -9,7 +9,7 @@ using LostInSin.Runtime.Pathfinding;
 using UnityEngine;
 using VContainer.Unity;
 
-public class GridPathfinder : IGridPathfinder, IPostStartable
+public class GridPathfinder : IGridPathfinder
 {
 	private readonly GridModel _gridModel;
 
@@ -21,10 +21,8 @@ public class GridPathfinder : IGridPathfinder, IPostStartable
 		_gridModel = gridModel;
 	}
 
-	public async void PostStart()
+	private void InitializePathfinder()
 	{
-		await UniTask.Delay(TimeSpan.FromSeconds(2f));
-
 		// Build a mapping from GridCell to its position and store GridCellData
 		for (int row = 0; row < _gridModel.gridRowCount - 1; row++)
 		{
@@ -40,6 +38,12 @@ public class GridPathfinder : IGridPathfinder, IPostStartable
 		}
 	}
 
+	public bool FindPath(GridCell startCell, GridCell targetCell, out List<GridCell> pathCells)
+	{
+		pathCells = new List<GridCell>();
+		return FindPath(ref pathCells, startCell, targetCell);
+	}
+
 	public bool FindPath(AbilityRequest abilityRequest, out List<GridCell> pathCells)
 	{
 		pathCells = new List<GridCell>();
@@ -48,6 +52,13 @@ public class GridPathfinder : IGridPathfinder, IPostStartable
 
 		GridCell startCell = abilityRequest.data.User.currentCell;
 		GridCell targetCell = abilityRequest.data.TargetGridCell;
+
+		return FindPath(ref pathCells, startCell, targetCell);
+	}
+
+	private bool FindPath(ref List<GridCell> pathCells, GridCell startCell, GridCell targetCell)
+	{
+		InitializePathfinder();
 
 		// Check if startCell and targetCell are valid
 		if (!_cellPositions.ContainsKey(startCell) || !_cellPositions.ContainsKey(targetCell))
@@ -94,6 +105,7 @@ public class GridPathfinder : IGridPathfinder, IPostStartable
 
 		return false; // Path not found
 	}
+
 
 	private float HeuristicCostEstimate(GridCell a, GridCell b)
 	{
