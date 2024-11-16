@@ -5,7 +5,7 @@ using UnityEngine;
 namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.Concrete
 {
 	[CreateAssetMenu(fileName = "Spend AP Ability Execution Logic",
-		menuName = "LostInSin/Abilities/AbilityExecution/SpendAPAbility")]
+		menuName = "LostInSin/Abilities/AbilityExecution/Spend AP Ability")]
 	public class SpendAPAbilityExecutionLogic : AbilityExecutionLogic
 	{
 		private float _executionTime = 1f;

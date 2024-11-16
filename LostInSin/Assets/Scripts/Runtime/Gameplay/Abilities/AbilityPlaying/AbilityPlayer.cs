@@ -61,7 +61,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityPlaying
 
 		private void CheckUserAPAndAdvanceTurn(AbilityExecutionLogic currentPlayingAbility)
 		{
-			if (currentPlayingAbility.abilityRequestData.User.currentActionPoints == 0)
+			if (currentPlayingAbility.abilityRequestData.User.actionPoints == 0)
 			{
 				_signalBus.Fire(new EndCharacterTurnSignal());
 			}

@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2903592718a2482495ba096cd9019de2, type: 3}
-  m_Name: Spend AP Ability Request
+  m_Script: {fileID: 11500000, guid: 61bb542d547f4d5fa94fd96bd91eae93, type: 3}
+  m_Name: Move Ability Execution Logic
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,5 +21,3 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  AbilityRequestType: 0
-  AbilityRequestConfig: {fileID: 11400000, guid: 6d43e4593659d6a4a8e73cce8762750c, type: 2}

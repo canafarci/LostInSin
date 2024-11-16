@@ -8,7 +8,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution
 	{
 		protected AbilityRequestData _abilityRequestData;
 
-		public AbilityExecutionStage executionStage { get; set; }
+		public AbilityExecutionStage executionStage { get; protected set; }
 
 		public AbilityRequestData abilityRequestData => _abilityRequestData;
 

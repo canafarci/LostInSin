@@ -6,6 +6,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests
 	public enum AbilityRequestType
 	{
 		SelfTargeted,
-		MouseClick,
+		PositionRaycasted,
+		GridPositionRaycasted
 	}
 }

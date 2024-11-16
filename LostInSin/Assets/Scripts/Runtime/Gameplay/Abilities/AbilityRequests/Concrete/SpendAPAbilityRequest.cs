@@ -4,15 +4,15 @@ using UnityEngine;
 namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Concrete
 {
 	[CreateAssetMenu(fileName = "Spend AP Ability Request",
-		menuName = "LostInSin/Abilities/AbilityRequests/SpendAPAbility")]
+		menuName = "LostInSin/Abilities/AbilityRequests/Spend AP Ability")]
 	public class SpendAPAbilityRequest : AbilityRequest
 	{
 		public override void StartRequest()
 		{
-			abilityRequestState = AbilityRequestState.Finished;
+			abilityRequestState = AbilityRequestState.Complete;
 		}
 
-		public override AbilityRequestState UpdateRequest()
+		public override void UpdateRequest()
 		{
 			throw new Exception("This should never happen.");
 		}

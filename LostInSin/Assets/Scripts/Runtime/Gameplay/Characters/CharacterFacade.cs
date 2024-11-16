@@ -13,21 +13,21 @@ namespace LostInSin.Runtime.Gameplay.Characters
 		[Inject] private Character _character;
 		[Inject] private SignalBus _signalBus;
 
-		public bool isPlayerCharacter => character.characterData.IsPlayerCharacter;
-		public List<Ability> abilities => character.characterData.Abilities;
-		public int actionPoints => character.currentActionPoints;
-		public string characterName => character.characterName;
-		public Character character => _character;
+		public bool isPlayerCharacter => _character.characterData.IsPlayerCharacter;
+		public List<Ability> abilities => _character.characterData.Abilities;
+		public int actionPoints => _character.currentActionPoints;
+		public int initiative => _character.initiative;
+		public string characterName => _character.characterName;
 
 		public void SetAsActiveCharacter()
 		{
-			UnityEngine.Debug.Log($"Is Active {character.characterName}");
+			UnityEngine.Debug.Log($"Is Active {_character.characterName}");
 			_character.ResetActionPoints();
 		}
 
 		public void ReduceActionPoints(int abilityActionPointCost)
 		{
-			character.UseActionPoints(abilityActionPointCost);
+			_character.UseActionPoints(abilityActionPointCost);
 			_signalBus.Fire(new CharacterAPChangedSignal());
 		}
 	}

@@ -2,8 +2,8 @@
 
 using System.Collections.Generic;
 using LostInSin.Runtime.Gameplay.Abilities.AbilityPlaying;
+using LostInSin.Runtime.Gameplay.Abilities.Player;
 using LostInSin.Runtime.Gameplay.Characters;
-using LostInSin.Runtime.Gameplay.Controls;
 using LostInSin.Runtime.Gameplay.Data;
 using LostInSin.Runtime.Gameplay.Data.SceneReferences;
 using LostInSin.Runtime.Gameplay.GameplayLifecycle;
@@ -47,8 +47,9 @@ namespace LostInSin.Runtime.Scopes
 		{
 			RegisterAbilityUI(builder);
 
-			builder.Register<PlayerInputPoller>(Lifetime.Singleton).AsImplementedInterfaces();
+			builder.Register<PlayerAbilityRequestFiller>(Lifetime.Singleton).AsImplementedInterfaces();
 			builder.Register<AbilityPlayer>(Lifetime.Singleton).AsImplementedInterfaces();
+			builder.Register<PlayerRaycaster>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
 		}
 
 		private void RegisterAbilityUI(IContainerBuilder builder)

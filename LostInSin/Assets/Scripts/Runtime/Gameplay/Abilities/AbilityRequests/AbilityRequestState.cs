@@ -4,7 +4,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests
 	{
 		Initializing,
 		Continue,
-		Finished,
+		Complete,
 		Cancelled
 	}
 }
