@@ -13,7 +13,7 @@ using VContainer.Unity;
 
 namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Visuals
 {
-	public class GridPathfindingAbilityVisualDisplayer : SignalListener, IFixedTickable
+	public class MoveAbilityVisualDisplayer : SignalListener, IFixedTickable
 	{
 		private AbilityRequest _abilityRequest;
 		private readonly IGridPathfinder _gridPathfinder;
@@ -26,7 +26,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Visuals
 		private Color _invalidColor = new Color(.7f, 0f, 0f, .8f);
 		private Color _currentColor;
 
-		public GridPathfindingAbilityVisualDisplayer(IGridPathfinder gridPathfinder,
+		public MoveAbilityVisualDisplayer(IGridPathfinder gridPathfinder,
 			PlayerRaycaster playerRaycaster)
 		{
 			_gridPathfinder = gridPathfinder;
@@ -47,7 +47,8 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Visuals
 		{
 			AbilityRequest abilityRequest = signal.request;
 			if (!abilityRequest.data.User.isPlayerCharacter) return;
-			if (!abilityRequest.RequestType.HasFlag(AbilityRequestType.GridPathFinding)) return;
+			if (!(abilityRequest.RequestType.HasFlag(AbilityRequestType.GridPathFinding) &&
+			      abilityRequest.RequestType.HasFlag(AbilityRequestType.Movement))) return;
 
 			_abilityRequest = abilityRequest;
 		}

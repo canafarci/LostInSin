@@ -49,7 +49,7 @@ namespace LostInSin.Runtime.Scopes
 			builder.Register<PlayerAbilityRequestFiller>(Lifetime.Singleton).AsImplementedInterfaces();
 			builder.Register<AbilityPlayer>(Lifetime.Singleton).AsImplementedInterfaces();
 			builder.Register<PlayerRaycaster>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
-			builder.Register<GridPathfindingAbilityVisualDisplayer>(Lifetime.Singleton).AsImplementedInterfaces()
+			builder.Register<MoveAbilityVisualDisplayer>(Lifetime.Singleton).AsImplementedInterfaces()
 				.AsSelf();
 		}
 

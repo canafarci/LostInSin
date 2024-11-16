@@ -8,6 +8,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests
 		SelfTargeted = 1 << 1,
 		PositionRaycasted = 1 << 2,
 		GridPositionRaycasted = 1 << 3,
-		GridPathFinding = 1 << 4
+		GridPathFinding = 1 << 4,
+		Movement = 1 << 5,
 	}
 }
