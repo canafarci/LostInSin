@@ -14,6 +14,8 @@ namespace LostInSin.Runtime.Gameplay.UI.AbilityPanel
 
 		public void SetAbilityUI(List<Ability> abilities)
 		{
+			RemoveViewClickListeners();
+
 			for (int i = 0; i < abilities.Count; i++)
 			{
 				SetupView(_abilityViews[i], abilities[i]);
@@ -27,8 +29,6 @@ namespace LostInSin.Runtime.Gameplay.UI.AbilityPanel
 
 		private void SetupView(AbilityView abilityView, Ability ability)
 		{
-			RemoveViewClickListeners();
-
 			abilityView.gameObject.SetActive(true);
 
 			abilityView.abilityIcon.sprite = ability.Icon;
@@ -37,17 +37,17 @@ namespace LostInSin.Runtime.Gameplay.UI.AbilityPanel
 			abilityView.abilityButton.onClick.AddListener(() => OnAbilityClicked?.Invoke(ability));
 		}
 
-		public void Dispose()
-		{
-			RemoveViewClickListeners();
-		}
-
 		private void RemoveViewClickListeners()
 		{
 			foreach (AbilityView view in _abilityViews)
 			{
 				view.abilityButton.onClick.RemoveAllListeners();
 			}
+		}
+
+		public void Dispose()
+		{
+			RemoveViewClickListeners();
 		}
 	}
 }
