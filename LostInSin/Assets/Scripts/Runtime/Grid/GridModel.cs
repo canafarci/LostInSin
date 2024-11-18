@@ -1,19 +1,20 @@
 using LostInSin.Runtime.Grid.Data;
 using LostInSin.Runtime.Grid.DataObjects;
+using UnityEngine;
 
 namespace LostInSin.Runtime.Grid
 {
 	public class GridModel
 	{
 		private readonly Data _data;
-		private GridCell[,] _gridCellData;
+		private GridCell[,] _gridCells;
 
 		private GridModel(Data data)
 		{
 			_data = data;
 		}
 
-		public GridCellData[,] gridCells { get; private set; }
+		public GridCellData[,] gridCellsData { get; private set; }
 
 		public int gridCellWidth => _data.GridData.GridXSize;
 		public int gridCellHeight => _data.GridData.GridYSize;
@@ -24,16 +25,32 @@ namespace LostInSin.Runtime.Grid
 
 		public void SetGridCells(GridCellData[,] cells, GridCell[,] gridCellData)
 		{
-			gridCells = cells;
-			_gridCellData = gridCellData;
+			gridCellsData = cells;
+			_gridCells = gridCellData;
+
+			SetGridCellData();
 		}
 
-		public GridCell GetGridCellData(int row, int column)
+		public GridCell GetGridCell(int row, int column)
 		{
-			GridCellData cellData = gridCells[row, column];
-			GridCell data = _gridCellData[row, column];
-			data.centerPosition = cellData.Center.ToVector3();
-			return data;
+			GridCell cell = _gridCells[row, column];
+			return cell;
+		}
+
+		private void SetGridCellData()
+		{
+			for (int x = 0; x < _gridCells.GetLength(0); x++)
+			{
+				for (int y = 0; y < _gridCells.GetLength(1); y++)
+				{
+					GridCellData cellData = gridCellsData[x, y];
+					GridCell cell = _gridCells[x, y];
+
+					cell.centerPosition = cellData.Center.ToVector3();
+					cell.x = x;
+					cell.y = y;
+				}
+			}
 		}
 
 		private int RoundToEvenNumber(int number)

@@ -23,7 +23,7 @@ namespace LostInSin.Runtime.Grid
 			//cell count is 1 less than row and column size
 			if (row >= 0 && column >= 0 && row < _gridModel.gridRowCount - 1 && column < _gridModel.gridColumnCount - 1)
 			{
-				cell = _gridModel.GetGridCellData(row, column);
+				cell = _gridModel.GetGridCell(row, column);
 				positionIsInsideGrid = true;
 			}
 
@@ -32,8 +32,13 @@ namespace LostInSin.Runtime.Grid
 
 		public Vector3 GetWorldPoint(int row, int column)
 		{
-			GridCell cell = _gridModel.GetGridCellData(row, column);
-			return cell.centerPosition;
+			GridCell gridCell = GetCell(row, column);
+			return gridCell.centerPosition;
+		}
+
+		public GridCell GetCell(int row, int column)
+		{
+			return _gridModel.GetGridCell(row, column);
 		}
 
 		public Vector3 GetWorldPoint(GridCellData cellData)

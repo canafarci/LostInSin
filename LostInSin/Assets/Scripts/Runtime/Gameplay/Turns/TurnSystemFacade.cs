@@ -10,7 +10,6 @@ namespace LostInSin.Runtime.Gameplay.Turns
 		[Inject] private IAbilityPlayer _abilityPlayer;
 		[Inject] private ITurnModel _turnModel;
 
-
 		public bool isPlayingAbility => _abilityPlayer.isPlaying;
 		public CharacterFacade activeCharacter => _turnModel.activeCharacter;
 

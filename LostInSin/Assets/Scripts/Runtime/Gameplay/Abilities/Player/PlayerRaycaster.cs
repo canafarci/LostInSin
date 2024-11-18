@@ -22,38 +22,55 @@ namespace LostInSin.Runtime.Gameplay.Abilities.Player
 			_mainCamera = Camera.main;
 		}
 
-		//this is called inside FixedUpdate
-		public void TryRaycast(AbilityRequest abilityRequest, ref RaycastRequest raycastRequest)
+		public bool TryRaycastForEmptyGridCell(AbilityRequest abilityRequest, ref RaycastRequest raycastRequest, out GridCell cell)
 		{
+			if (TryRaycastForGridCell(abilityRequest, ref raycastRequest, out cell) && !cell.isOccupied)
+				return true;
+			else
+				return false;
+		}
+
+
+		//this is called inside FixedUpdate
+		public bool TryRaycastForGridCell(AbilityRequest abilityRequest, ref RaycastRequest raycastRequest, out GridCell cell)
+		{
+			raycastRequest.isProcessed = true;
+
+			if (TryRaycastForPosition(abilityRequest, ref raycastRequest, out Vector3 position) &&
+			    _gridPositionConverter.GetCell(position, out GridCell gridCell))
+			{
+				cell = gridCell;
+				return true;
+			}
+			else
+			{
+				cell = null;
+				return false;
+			}
+		}
+
+		public bool TryRaycastForPosition(AbilityRequest abilityRequest,
+			ref RaycastRequest raycastRequest,
+			out Vector3 position)
+		{
+			raycastRequest.isProcessed = true;
+
 			Ray ray = _mainCamera.ScreenPointToRay(raycastRequest.mousePosition);
 			LayerMask mask = abilityRequest.Config.LayerMask;
 			AbilityRequestType requestType = abilityRequest.RequestType;
+			position = default;
 
 			if (IsInvalidRaycast(ray, mask, out RaycastHit hit))
 			{
-				raycastRequest.isProcessed = true;
-				return;
+				return false;
 			}
 
-			Vector3 position = hit.point;
-
-			if (requestType.HasFlag(AbilityRequestType.GridPositionRaycasted))
-			{
-				if (_gridPositionConverter.GetCell(position, out GridCell gridCell) && !gridCell.isOccupied)
-				{
-					abilityRequest.data.TargetGridCell = gridCell;
-				}
-			}
-			else if (requestType.HasFlag(AbilityRequestType.PositionRaycasted))
-			{
-				abilityRequest.data.TargetPosition = position;
-			}
-
-			raycastRequest.isProcessed = true;
+			position = hit.point;
+			return true;
 		}
 
 		//this is called inside FixedUpdate
-		public bool RaycastForGridCell(out GridCell gridCell)
+		public bool TryRaycastForGridCell(out GridCell gridCell)
 		{
 			Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
 			LayerMask mask = LayerMask.GetMask("Ground");

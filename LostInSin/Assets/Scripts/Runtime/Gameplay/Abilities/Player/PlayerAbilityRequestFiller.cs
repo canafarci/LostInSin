@@ -129,7 +129,28 @@ namespace LostInSin.Runtime.Gameplay.Abilities.Player
 			if (_raycastRequest == null || _raycastRequest.isProcessed) return;
 
 			AbilityRequest abilityRequest = _ability.AbilityRequest;
-			_playerRaycaster.TryRaycast(abilityRequest, ref _raycastRequest);
+			AbilityRequestType requestType = abilityRequest.RequestType;
+
+			if (AbilityIsGridMovementLogic(requestType))
+			{
+				if (_playerRaycaster.TryRaycastForEmptyGridCell(abilityRequest, ref _raycastRequest, out GridCell gridCell))
+				{
+					abilityRequest.data.TargetGridCell = gridCell;
+				}
+			}
+			else if (requestType.HasFlag(AbilityRequestType.PositionRaycasted))
+			{
+				if (_playerRaycaster.TryRaycastForPosition(abilityRequest, ref _raycastRequest, out Vector3 position))
+				{
+					abilityRequest.data.TargetPosition = position;
+				}
+			}
+		}
+
+		private static bool AbilityIsGridMovementLogic(AbilityRequestType requestType)
+		{
+			return requestType.HasFlag(AbilityRequestType.GridPositionRaycasted) &&
+			       requestType.HasFlag(AbilityRequestType.Movement);
 		}
 
 		#region SUBSCRIPTIONS_AND_UNSUBSCRIPTIONS

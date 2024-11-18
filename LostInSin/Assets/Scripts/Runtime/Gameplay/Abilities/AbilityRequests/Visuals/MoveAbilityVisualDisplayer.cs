@@ -57,9 +57,10 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Visuals
 		{
 			if (ShouldNotDraw()) return;
 
-			_playerRaycaster.RaycastForGridCell(out GridCell targetCell);
-
-			DisplayPathAsLine(targetCell);
+			if (_playerRaycaster.TryRaycastForGridCell(out GridCell targetCell))
+			{
+				DisplayPathAsLine(targetCell);
+			}
 		}
 
 		private bool ShouldNotDraw()

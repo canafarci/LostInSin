@@ -14,6 +14,8 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests
 		public int DynamicActionPointCost;
 		public int DefaultActionPointCost;
 
+		public int totalActionPointCost => DynamicActionPointCost + DefaultActionPointCost;
+
 		public AbilityRequestData(int abilityDefaultActionPointCost)
 		{
 			DefaultActionPointCost = abilityDefaultActionPointCost;

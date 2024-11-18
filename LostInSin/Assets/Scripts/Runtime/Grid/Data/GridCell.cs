@@ -4,31 +4,26 @@ namespace LostInSin.Runtime.Grid.Data
 {
 	public class GridCell
 	{
-		public bool isOccupied => _isOccupied;
+		public bool isOccupied { get; private set; }
+		public Vector3 centerPosition { get; set; }
 
-		public Vector3 centerPosition
-		{
-			get => _centerPosition;
-			set => _centerPosition = value;
-		}
-
-		private bool _isOccupied = false;
-		private Vector3 _centerPosition;
+		public int x { get; set; }
+		public int y { get; set; }
 
 		public void SetAsOccupied()
 		{
-			if (_isOccupied)
+			if (isOccupied)
 				throw new System.Exception("Cell is already occupied!");
 
-			_isOccupied = true;
+			isOccupied = true;
 		}
 
 		public void SetAsUnoccupied()
 		{
-			if (!_isOccupied)
+			if (!isOccupied)
 				throw new System.Exception("Cell is already unoccupied!");
 
-			_isOccupied = false;
+			isOccupied = false;
 		}
 	}
 }

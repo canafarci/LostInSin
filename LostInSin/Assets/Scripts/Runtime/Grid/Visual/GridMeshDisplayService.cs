@@ -28,7 +28,7 @@ namespace LostInSin.Runtime.Grid.Visual
 			MeshFilter filter = gridObject.GetComponent<MeshFilter>();
 			MeshRenderer renderer = gridObject.GetComponent<MeshRenderer>();
 
-			Mesh gridMesh = _gridMeshGenerator.CreateGridMesh(_gridModel.gridCells);
+			Mesh gridMesh = _gridMeshGenerator.CreateGridMesh(_gridModel.gridCellsData);
 			filter.mesh = gridMesh;
 
 			Material mat = new(_visualData.GridShader);

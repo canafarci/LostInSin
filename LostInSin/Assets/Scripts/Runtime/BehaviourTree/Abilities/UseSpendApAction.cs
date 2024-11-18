@@ -14,7 +14,7 @@ namespace LostInSin.Runtime.BehaviourTree.Abilities
 		story: "[Agent] uses [SpendAPAbility]",
 		category: "Action",
 		id: "9a47957bb200851e8de6949f1356d809")]
-	public partial class UseSpendApActionAction : Action
+	public partial class UseSpendApAction : Action
 	{
 		[SerializeReference] public BlackboardVariable<CharacterFacade> Agent;
 		[SerializeReference] public BlackboardVariable<Ability> SpendAPAbility;

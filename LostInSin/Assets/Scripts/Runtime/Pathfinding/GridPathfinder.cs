@@ -28,11 +28,11 @@ public class GridPathfinder : IGridPathfinder
 		{
 			for (int col = 0; col < _gridModel.gridColumnCount - 1; col++)
 			{
-				GridCellData cellData = _gridModel.gridCells[row, col];
+				GridCellData cellData = _gridModel.gridCellsData[row, col];
 				if (cellData.IsInvalid)
 					continue; // Skip invalid cells
 
-				GridCell cell = _gridModel.GetGridCellData(row, col);
+				GridCell cell = _gridModel.GetGridCell(row, col);
 				_cellPositions[cell] = (row, col);
 			}
 		}
@@ -143,11 +143,11 @@ public class GridPathfinder : IGridPathfinder
 
 			if (newRow >= 0 && newRow < _gridModel.gridRowCount && newCol >= 0 && newCol < _gridModel.gridColumnCount)
 			{
-				GridCellData neighborCellData = _gridModel.gridCells[newRow, newCol];
+				GridCellData neighborCellData = _gridModel.gridCellsData[newRow, newCol];
 				if (neighborCellData.IsInvalid)
 					continue; // Skip invalid cells
 
-				GridCell neighborCell = _gridModel.GetGridCellData(newRow, newCol);
+				GridCell neighborCell = _gridModel.GetGridCell(newRow, newCol);
 				if (!_cellPositions.ContainsKey(neighborCell))
 					continue; // Neighbor is invalid or not accessible
 
