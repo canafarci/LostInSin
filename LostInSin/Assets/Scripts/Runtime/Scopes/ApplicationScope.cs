@@ -5,14 +5,13 @@ using LostInSin.Runtime.CrossScene.Data;
 using LostInSin.Runtime.CrossScene.LoadingScreen;
 using LostInSin.Runtime.CrossScene.LoadingScreen.Signals;
 using LostInSin.Runtime.CrossScene.Signals;
+using LostInSin.Runtime.Gameplay.Characters.Visuals;
 using LostInSin.Runtime.Gameplay.Characters.Visuals.Data;
-using LostInSin.Runtime.Gameplay.Signals;
 using LostInSin.Runtime.Infrastructure.ApplicationState;
 using LostInSin.Runtime.Infrastructure.Data;
 using LostInSin.Runtime.Infrastructure.MemoryPool;
 using LostInSin.Runtime.Infrastructure.Signals;
 using UnityEngine;
-using UnityEngine.Serialization;
 using VContainer;
 using VContainer.Unity;
 
@@ -25,7 +24,9 @@ namespace LostInSin.Runtime.Scopes
 		[SerializeField] private AudioView AudioView;
 		[SerializeField] private PoolConfig PoolConfig;
 		[SerializeField] private CurrencyConfig CurrencyConfig;
+		[SerializeField] private CharacterAnimationClipsData CharacterAnimationClipsData;
 		[SerializeField] private CharacterAnimationData CharacterAnimationData;
+
 
 		protected override void Configure(IContainerBuilder builder)
 		{
@@ -34,6 +35,12 @@ namespace LostInSin.Runtime.Scopes
 			RegisterServices(builder);
 			RegisterSignals(builder);
 			RegisterLoadingScreen(builder);
+			RegisterAnimationHelpers(builder);
+		}
+
+		private void RegisterAnimationHelpers(IContainerBuilder builder)
+		{
+			builder.RegisterEntryPoint<AnimationConstants>().AsSelf();
 		}
 
 		private void RegisterInstances(IContainerBuilder builder)
@@ -42,6 +49,7 @@ namespace LostInSin.Runtime.Scopes
 			builder.RegisterInstance(AudioDataSO);
 			builder.RegisterInstance(AudioView);
 			builder.RegisterInstance(CurrencyConfig);
+			builder.RegisterInstance(CharacterAnimationClipsData);
 			builder.RegisterInstance(CharacterAnimationData);
 		}
 

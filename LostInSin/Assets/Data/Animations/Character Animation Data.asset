@@ -9,56 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7986a73ec2a64b71855b61c18946ad41, type: 3}
+  m_Script: {fileID: 11500000, guid: 09af0435e63044a2826bc186bcc66f3f, type: 3}
   m_Name: Character Animation Data
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 9000000, guid: e2958561779b1a748a4246b9d0c0b309, type: 3}
-    - {fileID: -203655887218126122, guid: 4e5adc20806ef4f448221abe50320303, type: 3}
+    ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: CharacterAnimations
-      Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[UnityEngine.Avatar, UnityEngine.AnimationModule],[LostInSin.Runtime.Gameplay.Characters.Visuals.Data.CharacterAnimationClips,
-        LostInSin.Runtime]], mscorlib
-    - Name: comparer
-      Entry: 7
-      Data: 1|System.Collections.Generic.ObjectEqualityComparer`1[[UnityEngine.Avatar,
-        UnityEngine.AnimationModule]], mscorlib
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 10
-      Data: 0
-    - Name: $v
-      Entry: 7
-      Data: LostInSin.Runtime.Gameplay.Characters.Visuals.Data.CharacterAnimationClips,
-        LostInSin.Runtime
-    - Name: IdleAnimation
-      Entry: 10
-      Data: 1
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+    SerializationNodes: []
+  MovementSpeed: 5
+  RotationSpeed: 10

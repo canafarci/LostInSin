@@ -405,4 +405,5 @@ MonoBehaviour:
   AudioView: {fileID: 9013529549580266518}
   PoolConfig: {fileID: 11400000, guid: 1bb4d5465cfab4c8d89b88e42d40fc3e, type: 2}
   CurrencyConfig: {fileID: 11400000, guid: 015b54be31a284d4eb0b47745f28b0bb, type: 2}
-  CharacterAnimationData: {fileID: 11400000, guid: 25b6be0e944eff648b1a859684eae153, type: 2}
+  CharacterAnimationClipsData: {fileID: 11400000, guid: 25b6be0e944eff648b1a859684eae153, type: 2}
+  CharacterAnimationData: {fileID: 11400000, guid: 01ab009d8df50f04f93ac1437d0c9331, type: 2}
