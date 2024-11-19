@@ -38,9 +38,11 @@ namespace LostInSin.Runtime.Infrastructure.MemoryPool
 		private static IEnumerable<ValueDropdownItem<string>> GetClassTypeNames()
 		{
 			var types = AppDomain.CurrentDomain.GetAssemblies()
+				.Where(assembly => assembly.GetName().Name == "LostInSin.Runtime")
 				.SelectMany(assembly => assembly.GetTypes())
-				.Where(t => t.IsClass && !t.IsAbstract && typeof(IPoolable).IsAssignableFrom(t))
-				.Select(type => new ValueDropdownItem<string>(type.FullName, type.AssemblyQualifiedName));
+				.Where(t => t.IsClass && !t.IsAbstract &&
+				            (typeof(IPoolable).IsAssignableFrom(t) || (t.BaseType != null && typeof(Poolable).IsAssignableFrom(t.BaseType))))
+				.Select(type => new ValueDropdownItem<string>(type.Name, type.AssemblyQualifiedName));
 
 
 			return types;

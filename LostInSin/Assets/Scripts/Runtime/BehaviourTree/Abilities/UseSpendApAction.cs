@@ -11,9 +11,9 @@ namespace LostInSin.Runtime.BehaviourTree.Abilities
 {
 	[Serializable, GeneratePropertyBag]
 	[NodeDescription(name: "UseSpendAPAction",
-		story: "[Agent] uses [SpendAPAbility]",
-		category: "Action",
-		id: "9a47957bb200851e8de6949f1356d809")]
+	                 story: "[Agent] uses [SpendAPAbility]",
+	                 category: "Action",
+	                 id: "9a47957bb200851e8de6949f1356d809")]
 	public partial class UseSpendApAction : Action
 	{
 		[SerializeReference] public BlackboardVariable<CharacterFacade> Agent;
@@ -23,15 +23,14 @@ namespace LostInSin.Runtime.BehaviourTree.Abilities
 		{
 			Ability ability = SpendAPAbility.Value;
 
-			AbilityRequestData abilityRequestData = new AbilityRequestData(ability.DefaultActionPointCost);
-			ability.AbilityRequest.Initialize(abilityRequestData);
-			ability.AbilityRequest.StartRequest();
-			ability.AbilityRequest.data.User = Agent.Value;
+			ability.AbilityRequest.Initialize();
+			AbilityRequestData abilityRequestData = ability.AbilityRequest.data;
+			abilityRequestData.User = Agent.Value;
 
-			ability.AbilityExecutionLogic.Initialize(ability.AbilityRequest.data);
+			ability.AbilityExecutionLogic.Initialize(abilityRequestData);
 			BTReferences.instance.turnSystemFacade.AddAbilityForPlaying(ability.AbilityExecutionLogic);
 
-			Agent.Value.ReduceActionPoints(ability.DefaultActionPointCost);
+			Agent.Value.ReduceActionPoints(abilityRequestData.totalActionPointCost);
 
 			return Status.Success;
 		}

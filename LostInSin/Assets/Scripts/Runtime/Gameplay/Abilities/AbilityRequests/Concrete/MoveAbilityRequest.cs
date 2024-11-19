@@ -4,10 +4,10 @@ using UnityEngine;
 namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Concrete
 {
 	[CreateAssetMenu(fileName = "Move Ability Request",
-		menuName = "LostInSin/Abilities/AbilityRequests/Move Ability")]
+	                 menuName = "LostInSin/Abilities/AbilityRequests/Move Ability")]
 	public class MoveAbilityRequest : AbilityRequest
 	{
-		public override void StartRequest()
+		protected override void StartRequest()
 		{
 			//TODO change cursor
 			state = AbilityRequestState.Continue;

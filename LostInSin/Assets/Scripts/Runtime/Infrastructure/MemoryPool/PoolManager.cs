@@ -11,8 +11,8 @@ namespace LostInSin.Runtime.Infrastructure.MemoryPool
 {
 	public class PoolManager : SignalListener
 	{
-		private readonly Dictionary<Type, object> _monoPools = new();
-		private readonly Dictionary<Type, object> _genericPools = new();
+		private static readonly Dictionary<Type, object> _monoPools = new();
+		private static readonly Dictionary<Type, object> _genericPools = new();
 		private readonly PoolConfig _config;
 
 		public static event Action<AppStateID, AppStateID> OnAppStateChanged;
@@ -53,10 +53,10 @@ namespace LostInSin.Runtime.Infrastructure.MemoryPool
 					Type poolType = generic.MakeGenericType(monoType);
 
 					PoolParams poolParams = new PoolParams(entry.InitialSize,
-						entry.DefaultCapacity,
-						entry.MaximumSize,
-						entry.ManagePoolOnSceneChange,
-						entry.LifetimeSceneID);
+					                                       entry.DefaultCapacity,
+					                                       entry.MaximumSize,
+					                                       entry.ManagePoolOnSceneChange,
+					                                       entry.LifetimeSceneID);
 
 					// Use the constructor that takes a GameObject parameter
 					object pool = Activator.CreateInstance(poolType, entry.Prefab, poolParams);
@@ -72,10 +72,10 @@ namespace LostInSin.Runtime.Infrastructure.MemoryPool
 					Type poolType = generic.MakeGenericType(type);
 
 					PoolParams poolParams = new PoolParams(entry.InitialSize,
-						entry.DefaultCapacity,
-						entry.MaximumSize,
-						entry.ManagePoolOnSceneChange,
-						entry.LifetimeSceneID);
+					                                       entry.DefaultCapacity,
+					                                       entry.MaximumSize,
+					                                       entry.ManagePoolOnSceneChange,
+					                                       entry.LifetimeSceneID);
 
 					object pool = Activator.CreateInstance(poolType, new object[] { poolParams });
 
@@ -84,7 +84,7 @@ namespace LostInSin.Runtime.Infrastructure.MemoryPool
 			}
 		}
 
-		public T GetMono<T>() where T : MonoBehaviour, IPoolable
+		public static T GetMono<T>() where T : MonoBehaviour, IPoolable
 		{
 			if (_monoPools.TryGetValue(typeof(T), out object poolObj))
 			{
@@ -97,7 +97,7 @@ namespace LostInSin.Runtime.Infrastructure.MemoryPool
 			throw new InvalidOperationException($"No pool found for type {typeof(T)}.");
 		}
 
-		public T GetPure<T>() where T : class, IPoolable
+		public static T GetPure<T>() where T : class, IPoolable
 		{
 			if (_genericPools.TryGetValue(typeof(T), out object poolObj))
 			{
@@ -109,7 +109,7 @@ namespace LostInSin.Runtime.Infrastructure.MemoryPool
 			throw new InvalidOperationException($"No pool found for type {typeof(T)}.");
 		}
 
-		public void ReleaseMono<T>(T obj) where T : MonoBehaviour, IPoolable
+		public static void ReleaseMono<T>(T obj) where T : MonoBehaviour, IPoolable
 		{
 			if (_monoPools.TryGetValue(typeof(T), out object poolObj))
 			{
@@ -122,7 +122,7 @@ namespace LostInSin.Runtime.Infrastructure.MemoryPool
 				Debug.LogError($"No pool found for type {typeof(T)}.");
 		}
 
-		public void ReleasePure<T>(T obj) where T : class, IPoolable
+		public static void ReleasePure<T>(T obj) where T : class, IPoolable
 		{
 			if (_genericPools.TryGetValue(typeof(T), out object poolObj))
 			{

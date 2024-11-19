@@ -1,3 +1,4 @@
+using LostInSin.Runtime.Infrastructure.MemoryPool;
 using Sirenix.OdinInspector;
 using UnityEngine.Serialization;
 
@@ -11,14 +12,16 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests
 		public AbilityRequestData data { get; private set; }
 
 
-		public virtual void Initialize(AbilityRequestData requestData)
+		public virtual void Initialize()
 		{
 			state = AbilityRequestState.Initializing;
-			data = requestData;
+			data = PoolManager.GetPure<AbilityRequestData>();
+			data.DefaultActionPointCost = Config.DefaultActionPointCost;
+			StartRequest();
 		}
 
 		// Logic to execute when the action starts
-		public abstract void StartRequest();
+		protected abstract void StartRequest();
 
 		// Logic to execute during action execution (if any)
 		public abstract void UpdateRequest();

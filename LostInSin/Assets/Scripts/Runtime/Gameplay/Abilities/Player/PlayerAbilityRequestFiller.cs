@@ -53,9 +53,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.Player
 
 			if (abilityRequest.state == AbilityRequestState.Complete)
 			{
-				int actionPointCost = abilityRequest.data.DynamicActionPointCost + _ability.DefaultActionPointCost;
-
-				if (CharacterHasEnoughAP(actionPointCost))
+				if (CharacterHasEnoughAP(abilityRequest.data.totalActionPointCost))
 				{
 					SendAbilityForPlaying(abilityRequest);
 					return;
@@ -83,8 +81,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.Player
 		private void SendAbilityForPlaying(AbilityRequest abilityRequest)
 		{
 			_ability.AbilityExecutionLogic.Initialize(abilityRequest.data);
-			int actionPointCost = abilityRequest.data.DynamicActionPointCost + _ability.DefaultActionPointCost;
-			_turnModel.activeCharacter.ReduceActionPoints(actionPointCost);
+			_turnModel.activeCharacter.ReduceActionPoints(abilityRequest.data.totalActionPointCost);
 
 			_abilityPlayer.AddAbilityForPlaying(_ability.AbilityExecutionLogic);
 			_ability = null;
@@ -168,12 +165,10 @@ namespace LostInSin.Runtime.Gameplay.Abilities.Player
 
 		private void AbilityClickedHandler(Ability ability)
 		{
-			if (!CharacterHasEnoughAP(ability.DefaultActionPointCost)) return;
+			if (!CharacterHasEnoughAP(ability.AbilityRequest.Config.DefaultActionPointCost)) return;
 			if (_abilityPlayer.isPlaying) return;
 
-			AbilityRequestData abilityRequestData = new AbilityRequestData(ability.DefaultActionPointCost);
-			ability.AbilityRequest.Initialize(abilityRequestData);
-			ability.AbilityRequest.StartRequest();
+			ability.AbilityRequest.Initialize();
 
 			ability.AbilityRequest.data.User = _turnModel.activeCharacter;
 

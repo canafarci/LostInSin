@@ -11,7 +11,6 @@ namespace LostInSin.Runtime.Gameplay.Abilities
 	public class Ability : SerializedScriptableObject
 	{
 		public string AbilityName;
-		public int DefaultActionPointCost;
 		public Sprite Icon;
 		public AbilityRequest AbilityRequest;
 		public AbilityExecutionLogic AbilityExecutionLogic;

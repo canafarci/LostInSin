@@ -14,9 +14,9 @@ namespace LostInSin.Runtime.BehaviourTree.Abilities
 {
 	[Serializable, GeneratePropertyBag]
 	[NodeDescription(name: "MoveTowardsEnemy",
-		story: "[Agent] uses [MoveAbility] Towards Target",
-		category: "Action",
-		id: "eb6866cb9e72c98cd920d3e7565218e3")]
+	                 story: "[Agent] uses [MoveAbility] Towards Target",
+	                 category: "Action",
+	                 id: "eb6866cb9e72c98cd920d3e7565218e3")]
 	public partial class MoveTowardsEnemyAction : Action
 	{
 		[SerializeReference] public BlackboardVariable<CharacterFacade> Agent;
@@ -95,21 +95,21 @@ namespace LostInSin.Runtime.BehaviourTree.Abilities
 
 		private bool TryExecuteMove(GridCell closestCell, List<GridCell> pathCells)
 		{
-			var ability = MoveAbility.Value;
-			var requestData = new AbilityRequestData(ability.DefaultActionPointCost)
-			{
-				TargetGridCell = closestCell,
-				User = Agent.Value,
-				PathCells = pathCells
-			};
+			Ability ability = MoveAbility.Value;
+			ability.AbilityRequest.Initialize(); //creates an ability request data inside Initialize func
 
-			ability.AbilityRequest.Initialize(requestData);
+			AbilityRequestData abilityRequestData = ability.AbilityRequest.data;
+			abilityRequestData.TargetGridCell = closestCell;
+			abilityRequestData.User = Agent.Value;
+			abilityRequestData.PathCells = pathCells;
+
 
 			if (!CanAffordAbility(ability))
 				return false;
 
-			Agent.Value.ReduceActionPoints(requestData.totalActionPointCost);
-			ability.AbilityExecutionLogic.Initialize(requestData);
+
+			Agent.Value.ReduceActionPoints(abilityRequestData.totalActionPointCost);
+			ability.AbilityExecutionLogic.Initialize(abilityRequestData);
 
 			BTReferences.instance.turnSystemFacade.AddAbilityForPlaying(ability.AbilityExecutionLogic);
 			return true;
@@ -117,10 +117,8 @@ namespace LostInSin.Runtime.BehaviourTree.Abilities
 
 		private bool CanAffordAbility(Ability ability)
 		{
-			ability.AbilityRequest.StartRequest();
 			ability.AbilityRequest.UpdateRequest();
-
 			return ability.AbilityRequest.data.totalActionPointCost <= Agent.Value.actionPoints;
 		}
 	}
-} /**/
+}
