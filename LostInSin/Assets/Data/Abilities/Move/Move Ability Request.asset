@@ -22,4 +22,10 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   RequestType: 57
-  Config: {fileID: 11400000, guid: c234c753827d5c44e9ea42425c053f7d, type: 2}
+  DefaultActionPointCost: 0
+  GroundLayerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  CharacterLayerMask:
+    serializedVersion: 2
+    m_Bits: 0

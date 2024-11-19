@@ -16,15 +16,15 @@ namespace LostInSin.Runtime.Gameplay.Characters.Visuals
 		[Inject] private CharacterAnimationClipsData _characterAnimationClipsData;
 		[Inject] private Avatar _characterAvatar;
 
-		private Dictionary<AnimationID, AnimationClip> _characterAnimationClips;
+		private Dictionary<AnimationID, TransitionAssetBase> _characterAnimationClips;
 
 		public void PlayAnimation(AnimationID animationID)
 		{
 			Assert.IsNotNull(_characterAnimationClips[animationID],
 			                 $"The animation clip with ID {animationID} was not found on the character with Avatar {_characterAvatar}.");
 
-			AnimationClip animationClip = _characterAnimationClips[animationID];
-			_animancerComponent.Play(animationClip, fadeDuration: .25f);
+			TransitionAssetBase transitionAsset = _characterAnimationClips[animationID];
+			_animancerComponent.Play(transitionAsset, fadeDuration: .25f);
 		}
 
 		public void Start()

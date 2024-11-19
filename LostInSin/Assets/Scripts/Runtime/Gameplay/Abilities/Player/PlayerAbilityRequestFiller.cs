@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using LostInSin.Runtime.Gameplay.Abilities.AbilityPlaying;
 using LostInSin.Runtime.Gameplay.Abilities.AbilityRequests;
+using LostInSin.Runtime.Gameplay.Characters;
 using LostInSin.Runtime.Gameplay.Signals;
 using LostInSin.Runtime.Gameplay.Turns;
 using LostInSin.Runtime.Gameplay.UI.AbilityPanel;
@@ -110,7 +111,8 @@ namespace LostInSin.Runtime.Gameplay.Abilities.Player
 		private static bool AbilityIsRaycastLogic(AbilityRequest abilityRequest)
 		{
 			return abilityRequest.RequestType.HasFlag(AbilityRequestType.PositionRaycasted) ||
-			       abilityRequest.RequestType.HasFlag(AbilityRequestType.GridPositionRaycasted);
+			       abilityRequest.RequestType.HasFlag(AbilityRequestType.GridPositionRaycasted) ||
+			       abilityRequest.RequestType.HasFlag(AbilityRequestType.EnemyTargeted);
 		}
 
 		private void CreateRaycastRequestOnMouseClick()
@@ -142,6 +144,16 @@ namespace LostInSin.Runtime.Gameplay.Abilities.Player
 					abilityRequest.data.TargetPosition = position;
 				}
 			}
+			else if (requestType.HasFlag(AbilityRequestType.EnemyTargeted))
+			{
+				if (_playerRaycaster.TryRaycastForComponent(ref _raycastRequest,
+				                                            abilityRequest.CharacterLayerMask,
+				                                            out CharacterFacade character)
+				    && !character.isPlayerCharacter)
+				{
+					abilityRequest.data.Target = character;
+				}
+			}
 		}
 
 		private static bool AbilityIsGridMovementLogic(AbilityRequestType requestType)
@@ -165,7 +177,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.Player
 
 		private void AbilityClickedHandler(Ability ability)
 		{
-			if (!CharacterHasEnoughAP(ability.AbilityRequest.Config.DefaultActionPointCost)) return;
+			if (!CharacterHasEnoughAP(ability.AbilityRequest.DefaultActionPointCost)) return;
 			if (_abilityPlayer.isPlaying) return;
 
 			ability.AbilityRequest.Initialize();

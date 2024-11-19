@@ -12,6 +12,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests
 		public int DynamicActionPointCost;
 
 		public CharacterFacade User;
+		public CharacterFacade Target;
 		public Vector3 TargetPosition;
 		public GridCell TargetGridCell;
 		public List<GridCell> PathCells;
@@ -24,6 +25,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests
 			PathCells = null;
 			TargetPosition = default;
 			TargetGridCell = null;
+			Target = null;
 			DynamicActionPointCost = 0;
 			DefaultActionPointCost = 0;
 		}

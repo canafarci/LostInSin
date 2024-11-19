@@ -17,8 +17,8 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 9000000, guid: e2958561779b1a748a4246b9d0c0b309, type: 3}
-    - {fileID: -203655887218126122, guid: 4e5adc20806ef4f448221abe50320303, type: 3}
-    - {fileID: -203655887218126122, guid: c9e823fe877043c45846d12aecdd780f, type: 3}
+    - {fileID: 11400000, guid: 857a42e3a861acc4baf7df0339b4b565, type: 2}
+    - {fileID: 11400000, guid: 4870d635c8b76364da8d8e832daf6ebd, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -27,7 +27,7 @@ MonoBehaviour:
     - Name: CharacterAnimations
       Entry: 7
       Data: 0|System.Collections.Generic.Dictionary`2[[UnityEngine.Avatar, UnityEngine.AnimationModule],[System.Collections.Generic.Dictionary`2[[LostInSin.Runtime.Gameplay.Characters.Visuals.Enums.AnimationID,
-        LostInSin.Runtime],[UnityEngine.AnimationClip, UnityEngine.AnimationModule]],
+        LostInSin.Runtime],[Animancer.TransitionAssetBase, Kybernetik.Animancer.Lite]],
         mscorlib]], mscorlib
     - Name: comparer
       Entry: 7
@@ -48,7 +48,7 @@ MonoBehaviour:
     - Name: $v
       Entry: 7
       Data: 2|System.Collections.Generic.Dictionary`2[[LostInSin.Runtime.Gameplay.Characters.Visuals.Enums.AnimationID,
-        LostInSin.Runtime],[UnityEngine.AnimationClip, UnityEngine.AnimationModule]],
+        LostInSin.Runtime],[Animancer.TransitionAssetBase, Kybernetik.Animancer.Lite]],
         mscorlib
     - Name: comparer
       Entry: 7

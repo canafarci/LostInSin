@@ -6,7 +6,8 @@ using UnityEngine;
 
 namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.Concrete
 {
-	[CreateAssetMenu(fileName = "Move Ability Execution Logic", menuName = "LostInSin/Abilities/AbilityExecution/Move Ability")]
+	[CreateAssetMenu(fileName = "Move Ability Execution Logic",
+	                 menuName = "LostInSin/Abilities/AbilityExecution/Move Ability")]
 	public class MoveAbilityExecutionLogic : AbilityExecutionLogic
 	{
 		private Vector3 _targetPosition;

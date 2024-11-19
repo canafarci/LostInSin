@@ -22,6 +22,22 @@ namespace LostInSin.Runtime.Gameplay.Abilities.Player
 			_mainCamera = Camera.main;
 		}
 
+		public bool TryRaycastForComponent<T>(ref RaycastRequest raycastRequest, LayerMask layerMask, out T component)
+			where T : MonoBehaviour
+		{
+			Ray ray = _mainCamera.ScreenPointToRay(raycastRequest.mousePosition);
+
+			if (Physics.Raycast(ray, out RaycastHit raycastHit, Mathf.Infinity, layerMask) &&
+			    raycastHit.transform.TryGetComponent(out T hitComponent))
+			{
+				component = hitComponent;
+				return true;
+			}
+
+			component = null;
+			return false;
+		}
+
 		public bool TryRaycastForEmptyGridCell(AbilityRequest abilityRequest, ref RaycastRequest raycastRequest, out GridCell cell)
 		{
 			if (TryRaycastForGridCell(abilityRequest, ref raycastRequest, out cell) && !cell.isOccupied)
@@ -34,8 +50,6 @@ namespace LostInSin.Runtime.Gameplay.Abilities.Player
 		//this is called inside FixedUpdate
 		public bool TryRaycastForGridCell(AbilityRequest abilityRequest, ref RaycastRequest raycastRequest, out GridCell cell)
 		{
-			raycastRequest.isProcessed = true;
-
 			if (TryRaycastForPosition(abilityRequest, ref raycastRequest, out Vector3 position) &&
 			    _gridPositionConverter.GetCell(position, out GridCell gridCell))
 			{
@@ -53,11 +67,8 @@ namespace LostInSin.Runtime.Gameplay.Abilities.Player
 			ref RaycastRequest raycastRequest,
 			out Vector3 position)
 		{
-			raycastRequest.isProcessed = true;
-
 			Ray ray = _mainCamera.ScreenPointToRay(raycastRequest.mousePosition);
-			LayerMask mask = abilityRequest.Config.LayerMask;
-			AbilityRequestType requestType = abilityRequest.RequestType;
+			LayerMask mask = abilityRequest.GroundLayerMask;
 			position = default;
 
 			if (IsInvalidRaycast(ray, mask, out RaycastHit hit))
