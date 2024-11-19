@@ -9,6 +9,7 @@ using LostInSin.Runtime.Infrastructure.ApplicationState;
 using LostInSin.Runtime.Infrastructure.ApplicationState.Signals;
 using LostInSin.Runtime.Infrastructure.Data;
 using LostInSin.Runtime.Infrastructure.Signals;
+using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 

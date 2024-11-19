@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1.242
       objectReference: {fileID: 0}
+    - target: {fileID: 4948821754011473127, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+      propertyPath: _Animator
+      value: 
+      objectReference: {fileID: 6043066167453156506}
     - target: {fileID: 5222681667912262311, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -20,6 +24,18 @@ PrefabInstance:
       propertyPath: CharacterData
       value: 
       objectReference: {fileID: 11400000, guid: 5704f2f59cc2aae46b7ab77e48f0458b, type: 2}
+    - target: {fileID: 6471824597244290162, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+      propertyPath: CharacterAvatar
+      value: 
+      objectReference: {fileID: 9000000, guid: e2958561779b1a748a4246b9d0c0b309, type: 3}
+    - target: {fileID: 6471824597244290162, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+      propertyPath: AnimancerComponent
+      value: 
+      objectReference: {fileID: 9083679929331683766}
+    - target: {fileID: 6471824597244290162, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+      propertyPath: CharacterAnimationData
+      value: 
+      objectReference: {fileID: 11400000, guid: 1849ca30a34e9ec478a026f130a2c545, type: 2}
     - target: {fileID: 7209445461687903701, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -125,7 +141,7 @@ MonoBehaviour:
         GUID:
           m_Value0: 10663169074858175977
           m_Value1: 8356879932742084988
-        Name: CharacterFacade
+        Name: AgentCharacterFacade
         m_Value: {fileID: 2878059703718498755}
     - rid: 4514603896590565659
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
@@ -198,8 +214,36 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 115648, guid: 5ad43ee3802caa04ab0928a13c462a56, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9083679929331683766}
   m_SourcePrefab: {fileID: 100100000, guid: 5ad43ee3802caa04ab0928a13c462a56, type: 3}
+--- !u!95 &6043066167453156506 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9570480, guid: 5ad43ee3802caa04ab0928a13c462a56, type: 3}
+  m_PrefabInstance: {fileID: 6043066167460367402}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6043066167460483050 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 115648, guid: 5ad43ee3802caa04ab0928a13c462a56, type: 3}
+  m_PrefabInstance: {fileID: 6043066167460367402}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &9083679929331683766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6043066167460483050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ad50f81b1d25c441943c37a89ba23f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Animator: {fileID: 6043066167453156506}
+  _Transitions: {fileID: 0}
+  _ActionOnDisable: 0
 --- !u!4 &6043066167460863318 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 495996, guid: 5ad43ee3802caa04ab0928a13c462a56, type: 3}

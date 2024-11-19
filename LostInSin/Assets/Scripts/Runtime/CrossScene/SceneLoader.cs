@@ -28,10 +28,13 @@ namespace LostInSin.Runtime.CrossScene
 
 		private void OnLoadSceneMessage(LoadSceneSignal signal)
 		{
-			AsyncOperation operation = SceneManager.LoadSceneAsync(signal.sceneID);
 			_signalBus.Fire(new ChangeAppStateSignal(AppStateID.Loading));
+			AsyncOperation operation = SceneManager.LoadSceneAsync(signal.sceneID);
 
-			if (_applicationSettings.ShowLoadingScreen) _signalBus.Fire(new LoadingStartedSignal(operation));
+			if (_applicationSettings.ShowLoadingScreen)
+			{
+				_signalBus.Fire(new LoadingStartedSignal(operation));
+			}
 
 			DOTween.KillAll();
 			GC.Collect();

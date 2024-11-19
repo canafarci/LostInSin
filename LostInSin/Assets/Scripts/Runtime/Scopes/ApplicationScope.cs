@@ -5,6 +5,7 @@ using LostInSin.Runtime.CrossScene.Data;
 using LostInSin.Runtime.CrossScene.LoadingScreen;
 using LostInSin.Runtime.CrossScene.LoadingScreen.Signals;
 using LostInSin.Runtime.CrossScene.Signals;
+using LostInSin.Runtime.Gameplay.Characters.Visuals.Data;
 using LostInSin.Runtime.Gameplay.Signals;
 using LostInSin.Runtime.Infrastructure.ApplicationState;
 using LostInSin.Runtime.Infrastructure.Data;
@@ -20,13 +21,11 @@ namespace LostInSin.Runtime.Scopes
 	public class ApplicationScope : LifetimeScope
 	{
 		[SerializeField] private ApplicationSettings ApplicationSettings;
-
-		[FormerlySerializedAs("AudioDataSO")] [SerializeField]
-		private AudioDataSo AudioDataSo;
-
+		[SerializeField] private AudioDataSo AudioDataSO;
 		[SerializeField] private AudioView AudioView;
 		[SerializeField] private PoolConfig PoolConfig;
 		[SerializeField] private CurrencyConfig CurrencyConfig;
+		[SerializeField] private CharacterAnimationData CharacterAnimationData;
 
 		protected override void Configure(IContainerBuilder builder)
 		{
@@ -39,10 +38,11 @@ namespace LostInSin.Runtime.Scopes
 
 		private void RegisterInstances(IContainerBuilder builder)
 		{
-			builder.RegisterInstance(AudioDataSo);
-			builder.RegisterInstance(AudioView);
 			builder.RegisterInstance(ApplicationSettings);
+			builder.RegisterInstance(AudioDataSO);
+			builder.RegisterInstance(AudioView);
 			builder.RegisterInstance(CurrencyConfig);
+			builder.RegisterInstance(CharacterAnimationData);
 		}
 
 		private static void RegisterEntryPoints(IContainerBuilder builder)
