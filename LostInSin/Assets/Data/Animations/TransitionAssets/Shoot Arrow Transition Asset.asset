@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5a8877f26e7a6a43aaf06fade1a064a, type: 3}
+  m_Name: Shoot Arrow Transition Asset
+  m_EditorClassIdentifier: 
+  _Transition:
+    rid: 4514603989646704742
+  references:
+    version: 2
+    RefIds:
+    - rid: 4514603989646704742
+      type: {class: ClipTransitionSequence, ns: Animancer, asm: Kybernetik.Animancer}
+      data:
+        _FadeDuration: 0.25
+        _Speed: 1
+        _Events:
+          _NormalizedTimes:
+          - 0.094936706
+          _Callbacks: []
+          _Names: []
+        _Clip: {fileID: 7400000, guid: 0970fe0af5f70af48b80ebb7af6bb5ff, type: 2}
+        _NormalizedStartTime: NaN
+        _Others:
+        - _FadeDuration: 0.5
+          _Speed: 1
+          _Events:
+            _NormalizedTimes:
+            - 0.97
+            _Callbacks: []
+            _Names: []
+          _Clip: {fileID: 7400000, guid: a113b9c0da5729149a12aa1094de842b, type: 2}
+          _NormalizedStartTime: 0.06666666
+        - _FadeDuration: 0.25
+          _Speed: 1
+          _Events:
+            _NormalizedTimes:
+            - 0.60439014
+            - NaN
+            _Callbacks: []
+            _Names:
+            - {fileID: 11400000, guid: 827fb1bfb87d6b34794f1764593ff0ea, type: 2}
+          _Clip: {fileID: 7400000, guid: 4ab9723cfaacb454586f5e8f28f862aa, type: 2}
+          _NormalizedStartTime: 0.36585364
+        - _FadeDuration: 0.25
+          _Speed: 1
+          _Events:
+            _NormalizedTimes:
+            - 0.13114753
+            _Callbacks: []
+            _Names: []
+          _Clip: {fileID: -203655887218126122, guid: 4e5adc20806ef4f448221abe50320303, type: 3}
+          _NormalizedStartTime: 0.049180325

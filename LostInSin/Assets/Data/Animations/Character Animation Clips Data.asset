@@ -17,8 +17,9 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 9000000, guid: e2958561779b1a748a4246b9d0c0b309, type: 3}
-    - {fileID: 11400000, guid: 857a42e3a861acc4baf7df0339b4b565, type: 2}
+    - {fileID: 11400000, guid: 141d9d5dc4561464fa1affe5a4f45885, type: 2}
     - {fileID: 11400000, guid: 4870d635c8b76364da8d8e832daf6ebd, type: 2}
+    - {fileID: 11400000, guid: 827fb1bfb87d6b34794f1764593ff0ea, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -27,7 +28,7 @@ MonoBehaviour:
     - Name: CharacterAnimations
       Entry: 7
       Data: 0|System.Collections.Generic.Dictionary`2[[UnityEngine.Avatar, UnityEngine.AnimationModule],[System.Collections.Generic.Dictionary`2[[LostInSin.Runtime.Gameplay.Characters.Visuals.Enums.AnimationID,
-        LostInSin.Runtime],[Animancer.TransitionAssetBase, Kybernetik.Animancer.Lite]],
+        LostInSin.Runtime],[Animancer.TransitionAssetBase, Kybernetik.Animancer]],
         mscorlib]], mscorlib
     - Name: comparer
       Entry: 7
@@ -48,7 +49,7 @@ MonoBehaviour:
     - Name: $v
       Entry: 7
       Data: 2|System.Collections.Generic.Dictionary`2[[LostInSin.Runtime.Gameplay.Characters.Visuals.Enums.AnimationID,
-        LostInSin.Runtime],[Animancer.TransitionAssetBase, Kybernetik.Animancer.Lite]],
+        LostInSin.Runtime],[Animancer.TransitionAssetBase, Kybernetik.Animancer]],
         mscorlib
     - Name: comparer
       Entry: 7
@@ -65,7 +66,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 3
     - Name: 
       Entry: 7
       Data: 
@@ -91,11 +92,55 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 2
+    - Name: $v
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 13
       Data: 
     - Name: 
       Entry: 8
       Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: AnimationEventsLookup
+      Entry: 7
+      Data: 4|System.Collections.Generic.Dictionary`2[[Animancer.TransitionAssetBase,
+        Kybernetik.Animancer],[Animancer.StringAsset, Kybernetik.Animancer]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 5|System.Collections.Generic.ObjectEqualityComparer`1[[Animancer.TransitionAssetBase,
+        Kybernetik.Animancer]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 10
+      Data: 1
+    - Name: $v
+      Entry: 10
+      Data: 3
     - Name: 
       Entry: 8
       Data: 

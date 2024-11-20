@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Animancer;
 using LostInSin.Runtime.Gameplay.Characters.Visuals.Enums;
 using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 using UnityEngine;
 
 namespace LostInSin.Runtime.Gameplay.Characters.Visuals.Data
@@ -11,5 +12,6 @@ namespace LostInSin.Runtime.Gameplay.Characters.Visuals.Data
 	public class CharacterAnimationClipsData : SerializedScriptableObject
 	{
 		public Dictionary<Avatar, Dictionary<AnimationID, TransitionAssetBase>> CharacterAnimations;
+		public Dictionary<TransitionAssetBase, StringAsset> AnimationEventsLookup;
 	}
 }
