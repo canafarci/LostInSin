@@ -47,7 +47,6 @@ namespace LostInSin.Runtime.Gameplay.Characters.Visuals
 
 		private void OnAnimationEvent(StringAsset value)
 		{
-			Debug.Log($"{value} Triggered");
 			_signalBus.Fire(new AnimationEventSignal(value));
 		}
 	}

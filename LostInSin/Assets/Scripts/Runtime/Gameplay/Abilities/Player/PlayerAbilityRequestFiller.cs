@@ -151,7 +151,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.Player
 				                                            out CharacterFacade character)
 				    && !character.isPlayerCharacter)
 				{
-					abilityRequest.data.Target = character;
+					abilityRequest.data.TargetCharacter = character;
 				}
 			}
 		}

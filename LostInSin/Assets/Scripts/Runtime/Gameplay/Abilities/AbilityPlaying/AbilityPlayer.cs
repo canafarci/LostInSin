@@ -34,6 +34,11 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityPlaying
 
 				if (ShouldFinishAbility())
 				{
+					_currentPlayingAbility.FinishAbility();
+				}
+
+				if (ShouldEndAbility())
+				{
 					_currentPlayingAbility.EndAbility();
 					TryPopNextAbility();
 				}
@@ -42,7 +47,8 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityPlaying
 
 		private bool ShouldPlayNextAbility() => _currentPlayingAbility == null && _actionsToPlay.Count > 0;
 
-		private bool ShouldFinishAbility() => _currentPlayingAbility.executionStage == AbilityExecutionStage.Complete;
+		private bool ShouldEndAbility() => _currentPlayingAbility.executionStage == AbilityExecutionStage.Complete;
+		private bool ShouldFinishAbility() => _currentPlayingAbility.executionStage == AbilityExecutionStage.Finishing;
 
 		private bool ShouldUpdateAbility() => _currentPlayingAbility.executionStage == AbilityExecutionStage.Updating;
 

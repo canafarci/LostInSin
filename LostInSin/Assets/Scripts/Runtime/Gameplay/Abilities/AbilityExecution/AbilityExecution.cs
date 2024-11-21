@@ -25,7 +25,11 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution
 		// Logic to execute during action execution (if any)
 		public abstract void UpdateAbility();
 
-		// Finalize action
+		// Finalize action (if any)
+		public virtual void FinishAbility()
+		{
+		}
+
 		public virtual void EndAbility()
 		{
 			executionStage = AbilityExecutionStage.Complete;
