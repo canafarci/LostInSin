@@ -1,9 +1,7 @@
-using Animancer;
-using LostInSin.Runtime.Gameplay.Characters.Visuals.Data;
-using UnityEngine;
+using LostInSin.Runtime.Gameplay.Characters.Visuals.Animations.Data;
 using VContainer.Unity;
 
-namespace LostInSin.Runtime.Gameplay.Characters.Visuals
+namespace LostInSin.Runtime.Gameplay.Characters.Visuals.Animations
 {
 	public class AnimationConstants : IInitializable
 	{

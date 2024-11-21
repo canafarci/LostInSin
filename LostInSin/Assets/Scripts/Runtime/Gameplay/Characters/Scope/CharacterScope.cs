@@ -1,6 +1,6 @@
 using Animancer;
 using LostInSin.Runtime.Gameplay.Characters.Visuals;
-using LostInSin.Runtime.Gameplay.Characters.Visuals.Data;
+using LostInSin.Runtime.Gameplay.Characters.Visuals.Animations;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;

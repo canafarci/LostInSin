@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
 using Animancer;
-using LostInSin.Runtime.Gameplay.Characters.Visuals.Data;
-using LostInSin.Runtime.Gameplay.Characters.Visuals.Enums;
+using LostInSin.Runtime.Gameplay.Characters.Visuals.Animations.Data;
+using LostInSin.Runtime.Gameplay.Characters.Visuals.Animations.Enums;
 using LostInSin.Runtime.Gameplay.Signals;
 using LostInSin.Runtime.Infrastructure.Signals;
 using UnityEngine;
@@ -10,7 +9,7 @@ using UnityEngine.Assertions;
 using VContainer;
 using VContainer.Unity;
 
-namespace LostInSin.Runtime.Gameplay.Characters.Visuals
+namespace LostInSin.Runtime.Gameplay.Characters.Visuals.Animations
 {
 	public class CharacterAnimationPlayer : IStartable, IInitializable
 	{

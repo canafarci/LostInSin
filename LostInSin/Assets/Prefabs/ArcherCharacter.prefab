@@ -1,5 +1,50 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3342864617376907947
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1537378548623474018}
+  - component: {fileID: 8746653039144008824}
+  m_Layer: 0
+  m_Name: ArrowHandBone
+  m_TagString: Untagged
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1537378548623474018
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3342864617376907947}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8850320095018504509}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8746653039144008824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3342864617376907947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9851b59fa05b468e8226068052e494ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnimationBoneID: 0
 --- !u!1001 &1397229279812838214
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8,42 +53,36 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 50890300540772203, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 50890300540772203, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 50890300540772203, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 50890300540772203, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 50890300540772203, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.274
-      objectReference: {fileID: 0}
-    - target: {fileID: 50890300540772203, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 50890300540772203, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1257218676604144814, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.295
       objectReference: {fileID: 0}
-    - target: {fileID: 3199217059877935360, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
-      propertyPath: m_Name
-      value: CharacterSelectedDecal
+    - target: {fileID: 2869979332872711358, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 2869979332872711358, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+    - target: {fileID: 2869979332872711358, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.size
+      value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2869979332872711358, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+      propertyPath: 'serializationData.PrefabModifications.Array.data[0]'
+      value: '"path":"AnimationBones","add_keys":{"$id":0,"$type":"System.Object[],
+        mscorlib","$rlength":1,"$rcontent":[{"$id":1,"$type":"LostInSin.Runtime.Gameplay.Characters.Visuals.Animations.Enums.AnimationBoneID,
+        LostInSin.Runtime",0}]},"remove_keys":null'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869979332872711358, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+      propertyPath: 'serializationData.PrefabModifications.Array.data[1]'
+      value: '"path":"AnimationBones.{0es}","value":$eref:0'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869979332872711358, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869979332872711358, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+      propertyPath: 'serializationData.PrefabModificationsReferencedUnityObjects.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1537378548623474018}
     - target: {fileID: 5222681667912262311, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -277,6 +316,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 433366, guid: f7e586317327fe240bef5a82944f49c2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4134040900505067183}
+    - targetCorrespondingSourceObject: {fileID: 446026, guid: f7e586317327fe240bef5a82944f49c2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1537378548623474018}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 136616, guid: f7e586317327fe240bef5a82944f49c2, type: 3}
       insertIndex: -1
@@ -305,6 +347,11 @@ MonoBehaviour:
 --- !u!4 &8850320095018484641 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 433366, guid: f7e586317327fe240bef5a82944f49c2, type: 3}
+  m_PrefabInstance: {fileID: 8850320095018393463}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8850320095018504509 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 446026, guid: f7e586317327fe240bef5a82944f49c2, type: 3}
   m_PrefabInstance: {fileID: 8850320095018393463}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &8850320095018599461 stripped

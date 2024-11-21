@@ -1,21 +1,25 @@
+using System;
+using UnityEngine;
+using Sirenix.OdinInspector;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
+using VContainer;
 using LostInSin.Runtime.Gameplay.Abilities;
-using LostInSin.Runtime.Gameplay.Characters.Visuals;
-using LostInSin.Runtime.Gameplay.Characters.Visuals.Enums;
+using LostInSin.Runtime.Gameplay.Characters.Visuals.Animations;
+using LostInSin.Runtime.Gameplay.Characters.Visuals.Animations.Enums;
 using LostInSin.Runtime.Gameplay.Signals;
 using LostInSin.Runtime.Grid.Data;
 using LostInSin.Runtime.Infrastructure.Signals;
-using UnityEngine;
-using VContainer;
+using Sirenix.Serialization;
 
 namespace LostInSin.Runtime.Gameplay.Characters
 {
-	public class CharacterFacade : MonoBehaviour
+	public class CharacterFacade : SerializedMonoBehaviour
 	{
 		[Inject] private Character _character;
 		[Inject] private SignalBus _signalBus;
 		[Inject] private CharacterAnimationPlayer _characterAnimationPlayer;
+
+		private Dictionary<AnimationBoneID, Transform> _animationBones = new();
 
 		public bool isPlayerCharacter => _character.characterData.IsPlayerCharacter;
 		public List<Ability> abilities => _character.characterData.Abilities;
@@ -23,6 +27,13 @@ namespace LostInSin.Runtime.Gameplay.Characters
 		public int initiative => _character.initiative;
 		public string characterName => _character.characterName;
 		public GridCell currentCell => _character.currentCell;
+
+		public Dictionary<AnimationBoneID, Transform> animationBones => _animationBones;
+
+		private void Awake()
+		{
+			InitializeBoneLookup();
+		}
 
 		public void SetCharacterCell(GridCell cell, bool warp = false)
 		{
@@ -50,5 +61,13 @@ namespace LostInSin.Runtime.Gameplay.Characters
 		}
 
 		public void PlayAnimation(AnimationID animationID, float crossfadeDuration = 0.25f) => _characterAnimationPlayer.PlayAnimation(animationID, crossfadeDuration);
+
+		private void InitializeBoneLookup()
+		{
+			foreach (AnimationBone bone in transform.GetComponentsInChildren<AnimationBone>())
+			{
+				_animationBones[bone.BoneID] = bone.transform;
+			}
+		}
 	}
 }

@@ -1,6 +1,9 @@
 using Animancer;
+using LostInSin.Runtime.Gameplay.Abilities.Projectiles;
 using LostInSin.Runtime.Gameplay.Characters.Visuals;
-using LostInSin.Runtime.Gameplay.Characters.Visuals.Enums;
+using LostInSin.Runtime.Gameplay.Characters.Visuals.Animations;
+using LostInSin.Runtime.Gameplay.Characters.Visuals.Animations.Enums;
+using LostInSin.Runtime.Infrastructure.MemoryPool;
 using UnityEngine;
 
 namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.Concrete
@@ -11,18 +14,18 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.Concrete
 	{
 		public StringAsset ShootArrowTrigger;
 		private Vector3 _direction;
+		private Arrow _arrow;
 
 		public override void StartAbility()
 		{
 			requestData.User.PlayAnimation(AnimationID.DrawArrow);
+
+			GetArrowFromPool();
+
+			SetCharacterDirection();
+
 			executionStage = AbilityExecutionStage.Updating;
-
-			_direction = (requestData.TargetCharacter.transform.position - requestData.User.transform.position).normalized;
-			_direction.y = 0;
-
-			_direction = Quaternion.Euler(0, 90, 0) * _direction;
 		}
-
 		public override void UpdateAbility()
 		{
 			SlerpRotationTowardDirection();
@@ -46,16 +49,33 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.Concrete
 			}
 		}
 
-		public override void EndAbility()
-		{
-			base.EndAbility();
-		}
-
 		private void SlerpRotationTowardDirection()
 		{
 			requestData.User.transform.rotation = Quaternion.Slerp(requestData.User.transform.rotation,
 			                                                       Quaternion.LookRotation(_direction),
 			                                                       AnimationConstants.rotationSpeed * Time.deltaTime);
+		}
+
+		private void SetCharacterDirection()
+		{
+			_direction = (requestData.TargetCharacter.transform.position - requestData.User.transform.position).normalized;
+			_direction.y = 0;
+			_direction = Quaternion.Euler(0, 90, 0) * _direction;
+		}
+		
+		private void GetArrowFromPool()
+		{
+			_arrow = PoolManager.GetMono<Arrow>();
+			
+			Vector3 originalPos = _arrow.transform.position;
+			Quaternion originalRot = _arrow.transform.rotation;
+			Vector3 originalScale = _arrow.transform.lossyScale;
+			
+			_arrow.transform.SetParent(requestData.User.animationBones[AnimationBoneID.ArrowHand], false);
+			
+			_arrow.transform.localRotation = originalRot;
+			_arrow.transform.localPosition = originalPos;
+			_arrow.transform.localScale = originalScale;
 		}
 	}
 }

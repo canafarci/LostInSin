@@ -40,3 +40,12 @@ MonoBehaviour:
     MaximumSize: 100
     ManagePoolOnSceneChange: 1
     LifetimeSceneID: 3
+  - IsMonoBehaviour: 1
+    Prefab: {fileID: 1846311025636673151, guid: 24649e56f73ad414a9a4733e8d3a2a8d, type: 3}
+    ClassTypeName: LostInSin.Runtime.Gameplay.Abilities.Projectiles.Arrow, LostInSin.Runtime,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    InitialSize: 5
+    DefaultCapacity: 10
+    MaximumSize: 100
+    ManagePoolOnSceneChange: 1
+    LifetimeSceneID: 3

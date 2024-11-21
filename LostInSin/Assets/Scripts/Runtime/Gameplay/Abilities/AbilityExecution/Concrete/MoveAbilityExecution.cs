@@ -1,7 +1,8 @@
 using LostInSin.Runtime.Gameplay.Abilities.AbilityRequests;
 using LostInSin.Runtime.Gameplay.Characters;
 using LostInSin.Runtime.Gameplay.Characters.Visuals;
-using LostInSin.Runtime.Gameplay.Characters.Visuals.Enums;
+using LostInSin.Runtime.Gameplay.Characters.Visuals.Animations;
+using LostInSin.Runtime.Gameplay.Characters.Visuals.Animations.Enums;
 using UnityEngine;
 
 namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.Concrete

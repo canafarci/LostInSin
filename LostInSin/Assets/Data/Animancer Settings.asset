@@ -23,35 +23,36 @@ MonoBehaviour:
     version: 2
     RefIds:
     - rid: 4514603965523690166
-      type: {class: AnimancerComponentPreviewSettings, ns: Animancer.Editor.Previews, asm: Kybernetik.Animancer.Lite}
+      type: {class: AnimancerComponentPreviewSettings, ns: Animancer.Editor.Previews, asm: Kybernetik.Animancer.Editor}
       data:
         _RepaintRate: 30
     - rid: 4514603965523690167
-      type: {class: AnimancerGraphControls, ns: Animancer.Editor, asm: Kybernetik.Animancer.Lite}
+      type: {class: AnimancerGraphControls, ns: Animancer.Editor, asm: Kybernetik.Animancer.Editor}
       data:
         _FrameStep: 0.02
     - rid: 4514603965523690168
-      type: {class: TransitionPreviewSettings, ns: Animancer.Editor.Previews, asm: Kybernetik.Animancer.Lite}
+      type: {class: TransitionPreviewSettings, ns: Animancer.Editor.Previews, asm: Kybernetik.Animancer.Editor}
       data:
         _AutoClose: 1
         _SceneLighting: 0
         _ShowSkybox: 0
         _FrameStep: 0.02
         _SceneEnvironment: {fileID: 0}
-        _Models: []
+        _Models:
+        - {fileID: 7240346779836529104, guid: 9e394aab35da0a3469fd7cdf594ac30b, type: 3}
     - rid: 4514603965523690169
-      type: {class: SerializableEventSequenceDrawerSettings, ns: Animancer.Editor, asm: Kybernetik.Animancer.Lite}
+      type: {class: SerializableEventSequenceDrawerSettings, ns: Animancer.Editor, asm: Kybernetik.Animancer.Editor}
       data:
         _HideEventCallbacks: 0
     - rid: 4514603965523690170
-      type: {class: AnimationTimeAttributeSettings, ns: Animancer.Units.Editor, asm: Kybernetik.Animancer.Lite}
+      type: {class: AnimationTimeAttributeSettings, ns: Animancer.Units.Editor, asm: Kybernetik.Animancer.Editor}
       data:
         showApproximations: 1
         showNormalized: 1
         showSeconds: 1
         showFrames: 1
     - rid: 4514603965523690171
-      type: {class: GenerateSpriteAnimationsSettings, ns: Animancer.Editor.Tools, asm: Kybernetik.Animancer.Lite}
+      type: {class: GenerateSpriteAnimationsSettings, ns: Animancer.Editor.Tools, asm: Kybernetik.Animancer.Editor}
       data:
         _FrameRate: 12
         _HierarchyPath: 
