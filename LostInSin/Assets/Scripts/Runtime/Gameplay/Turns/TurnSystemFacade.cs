@@ -13,7 +13,7 @@ namespace LostInSin.Runtime.Gameplay.Turns
 		public bool isPlayingAbility => _abilityPlayer.isPlaying;
 		public CharacterFacade activeCharacter => _turnModel.activeCharacter;
 
-		public void AddAbilityForPlaying(AbilityExecutionLogic abilityExecutionLogic) =>
-			_abilityPlayer.AddAbilityForPlaying(abilityExecutionLogic);
+		public void AddAbilityForPlaying(AbilityExecution abilityExecution) =>
+			_abilityPlayer.AddAbilityForPlaying(abilityExecution);
 	}
 }

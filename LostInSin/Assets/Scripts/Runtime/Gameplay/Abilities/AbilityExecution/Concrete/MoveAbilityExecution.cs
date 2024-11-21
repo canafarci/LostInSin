@@ -8,7 +8,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.Concrete
 {
 	[CreateAssetMenu(fileName = "Move Ability Execution Logic",
 	                 menuName = "LostInSin/Abilities/AbilityExecution/Move Ability")]
-	public class MoveAbilityExecutionLogic : AbilityExecutionLogic
+	public class MoveAbilityExecution : AbilityExecution
 	{
 		private Vector3 _targetPosition;
 		private Vector3 _targetDirection;
@@ -26,16 +26,16 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.Concrete
 		{
 			executionStage = AbilityExecutionStage.Updating;
 
-			CharacterFacade characterFacade = _abilityRequestData.User;
+			CharacterFacade characterFacade = requestData.User;
 			characterFacade.PlayAnimation(AnimationID.Move);
-			characterFacade.SetCharacterCell(_abilityRequestData.TargetGridCell);
+			characterFacade.SetCharacterCell(requestData.TargetGridCell);
 
 			UpdatePositionAndDirection(characterFacade);
 		}
 
 		public override void UpdateAbility()
 		{
-			Transform userTransform = _abilityRequestData.User.transform;
+			Transform userTransform = requestData.User.transform;
 
 			if (Vector3.SqrMagnitude(userTransform.position - _targetPosition) > 0.01f)
 			{
@@ -44,26 +44,26 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.Concrete
 				                                          Quaternion.LookRotation(_targetDirection),
 				                                          AnimationConstants.rotationSpeed * Time.deltaTime);
 			}
-			else if (_positionIndex < _abilityRequestData.PathCells.Count - 1)
+			else if (_positionIndex < requestData.PathCells.Count - 1)
 			{
 				_positionIndex++;
-				UpdatePositionAndDirection(_abilityRequestData.User);
+				UpdatePositionAndDirection(requestData.User);
 			}
 			else
 			{
-				EndAbility();
+				executionStage = AbilityExecutionStage.Complete;
 			}
 		}
 
-		protected override void EndAbility()
+		public override void EndAbility()
 		{
-			_abilityRequestData.User.PlayAnimation(AnimationID.Idle);
+			requestData.User.PlayAnimation(AnimationID.Idle);
 			base.EndAbility();
 		}
 
 		private void UpdatePositionAndDirection(CharacterFacade characterFacade)
 		{
-			_targetPosition = _abilityRequestData.PathCells[_positionIndex].centerPosition;
+			_targetPosition = requestData.PathCells[_positionIndex].centerPosition;
 			_targetDirection = (_targetPosition - characterFacade.transform.position).normalized;
 		}
 	}

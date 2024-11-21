@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4db1d49c133b45eea9bede88d3493536, type: 3}
-  m_Name: Spend AP Ability
+  m_Script: {fileID: 11500000, guid: 65296dff6497468481801b4401b806e6, type: 3}
+  m_Name: Shoot Arrow Ability Request
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,7 +21,11 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  AbilityName: Spend AP
-  Icon: {fileID: 21300000, guid: a75ddb2acfe03174c87f41bd9fc3f406, type: 3}
-  AbilityRequest: {fileID: 11400000, guid: fd0dff54cb5515a4797115fa4233a376, type: 2}
-  AbilityExecution: {fileID: 11400000, guid: 0fa9047240ab5df4ea99e6e5fe4f1b55, type: 2}
+  RequestType: 64
+  DefaultActionPointCost: 3
+  GroundLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  CharacterLayerMask:
+    serializedVersion: 2
+    m_Bits: 64

@@ -109,9 +109,9 @@ namespace LostInSin.Runtime.BehaviourTree.Abilities
 
 
 			Agent.Value.ReduceActionPoints(abilityRequestData.totalActionPointCost);
-			ability.AbilityExecutionLogic.Initialize(abilityRequestData);
+			ability.AbilityExecution.Initialize(abilityRequestData);
 
-			BTReferences.instance.turnSystemFacade.AddAbilityForPlaying(ability.AbilityExecutionLogic);
+			BTReferences.instance.turnSystemFacade.AddAbilityForPlaying(ability.AbilityExecution);
 			return true;
 		}
 

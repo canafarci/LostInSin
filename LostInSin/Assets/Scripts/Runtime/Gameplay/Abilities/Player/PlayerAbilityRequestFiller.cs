@@ -81,10 +81,10 @@ namespace LostInSin.Runtime.Gameplay.Abilities.Player
 
 		private void SendAbilityForPlaying(AbilityRequest abilityRequest)
 		{
-			_ability.AbilityExecutionLogic.Initialize(abilityRequest.data);
+			_ability.AbilityExecution.Initialize(abilityRequest.data);
 			_turnModel.activeCharacter.ReduceActionPoints(abilityRequest.data.totalActionPointCost);
 
-			_abilityPlayer.AddAbilityForPlaying(_ability.AbilityExecutionLogic);
+			_abilityPlayer.AddAbilityForPlaying(_ability.AbilityExecution);
 			_ability = null;
 		}
 

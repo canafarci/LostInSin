@@ -5,7 +5,7 @@ using UnityEngine;
 namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.Concrete
 {
 	[CreateAssetMenu(fileName = "Spend AP Ability Execution Logic", menuName = "LostInSin/Abilities/AbilityExecution/Spend AP Ability")]
-	public class SpendAPAbilityExecutionLogic : AbilityExecutionLogic
+	public class SpendAPAbilityExecution : AbilityExecution
 	{
 		private float _executionTime = 1f;
 		private float _executionTimer;
@@ -18,7 +18,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.Concrete
 
 		public override void StartAbility()
 		{
-			Debug.Log($"USE AP ACTION on user {abilityRequestData.User.characterName}");
+			Debug.Log($"USE AP ACTION on user {requestData.User.characterName}");
 			executionStage = AbilityExecutionStage.Updating;
 		}
 
@@ -28,7 +28,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.Concrete
 
 			if (_executionTimer >= _executionTime)
 			{
-				EndAbility();
+				executionStage = AbilityExecutionStage.Complete;
 			}
 		}
 	}

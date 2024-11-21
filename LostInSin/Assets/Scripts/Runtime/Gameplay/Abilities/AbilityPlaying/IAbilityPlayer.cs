@@ -4,7 +4,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityPlaying
 {
 	public interface IAbilityPlayer
 	{
-		void AddAbilityForPlaying(AbilityExecutionLogic abilityExecutionLogic);
+		void AddAbilityForPlaying(AbilityExecution.AbilityExecution abilityExecution);
 		bool isPlaying { get; }
 	}
 }

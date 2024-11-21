@@ -31,3 +31,12 @@ MonoBehaviour:
     MaximumSize: 100
     ManagePoolOnSceneChange: 1
     LifetimeSceneID: 3
+  - IsMonoBehaviour: 0
+    Prefab: {fileID: 0}
+    ClassTypeName: LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.AbilityExecutionData,
+      LostInSin.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    InitialSize: 5
+    DefaultCapacity: 10
+    MaximumSize: 100
+    ManagePoolOnSceneChange: 1
+    LifetimeSceneID: 3

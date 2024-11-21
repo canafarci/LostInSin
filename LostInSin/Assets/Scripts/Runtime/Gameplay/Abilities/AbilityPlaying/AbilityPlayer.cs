@@ -1,23 +1,20 @@
 using System.Collections.Generic;
 using LostInSin.Runtime.Gameplay.Abilities.AbilityExecution;
 using LostInSin.Runtime.Gameplay.Signals;
-using LostInSin.Runtime.Infrastructure.Signals;
-using VContainer;
+using LostInSin.Runtime.Infrastructure.Templates;
 using VContainer.Unity;
 
 namespace LostInSin.Runtime.Gameplay.Abilities.AbilityPlaying
 {
-	public class AbilityPlayer : ITickable, IAbilityPlayer
+	public class AbilityPlayer : SignalListener, ITickable, IAbilityPlayer
 	{
-		[Inject] private SignalBus _signalBus;
-
-		private Stack<AbilityExecutionLogic> _actionsToPlay = new();
-		private AbilityExecutionLogic _currentPlayingAbility = null;
+		private Stack<AbilityExecution.AbilityExecution> _actionsToPlay = new();
+		private AbilityExecution.AbilityExecution _currentPlayingAbility = null;
 
 		public bool isPlaying => _currentPlayingAbility != null || _actionsToPlay.Count > 0;
 
-		public void AddAbilityForPlaying(AbilityExecutionLogic abilityExecutionLogic) =>
-			_actionsToPlay.Push(abilityExecutionLogic);
+		public void AddAbilityForPlaying(AbilityExecution.AbilityExecution abilityExecution) =>
+			_actionsToPlay.Push(abilityExecution);
 
 		public void Tick()
 		{
@@ -37,6 +34,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityPlaying
 
 				if (ShouldFinishAbility())
 				{
+					_currentPlayingAbility.EndAbility();
 					TryPopNextAbility();
 				}
 			}
@@ -59,12 +57,27 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityPlaying
 			}
 		}
 
-		private void CheckUserAPAndAdvanceTurn(AbilityExecutionLogic currentPlayingAbility)
+		private void CheckUserAPAndAdvanceTurn(AbilityExecution.AbilityExecution currentPlayingAbility)
 		{
-			if (currentPlayingAbility.abilityRequestData.User.actionPoints == 0)
+			if (currentPlayingAbility.requestData.User.actionPoints == 0)
 			{
 				_signalBus.Fire(new EndCharacterTurnSignal());
 			}
+		}
+
+		protected override void SubscribeToEvents()
+		{
+			_signalBus.Subscribe<AnimationEventSignal>(OnAnimationEventSignalHandler);
+		}
+
+		private void OnAnimationEventSignalHandler(AnimationEventSignal signal)
+		{
+			_currentPlayingAbility.executionData.AbilityTriggers.Add(signal.stringAsset);
+		}
+
+		protected override void UnsubscribeFromEvents()
+		{
+			_signalBus.Unsubscribe<AnimationEventSignal>(OnAnimationEventSignalHandler);
 		}
 	}
 }

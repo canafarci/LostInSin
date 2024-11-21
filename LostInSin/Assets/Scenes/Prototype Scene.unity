@@ -3490,7 +3490,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7217513737838876840, guid: 1374c2a62a292c94f8888514345b8def, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.82
+      value: -2.25
       objectReference: {fileID: 0}
     - target: {fileID: 7217513737838876840, guid: 1374c2a62a292c94f8888514345b8def, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3524,22 +3524,57 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Fighter Character
       objectReference: {fileID: 0}
+    - target: {fileID: 8592251656423253995, guid: 1374c2a62a292c94f8888514345b8def, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8592251656423253995, guid: 1374c2a62a292c94f8888514345b8def, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1561983409}
   m_SourcePrefab: {fileID: 100100000, guid: 1374c2a62a292c94f8888514345b8def, type: 3}
 --- !u!114 &1561983407 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2878059703718498755, guid: 1374c2a62a292c94f8888514345b8def, type: 3}
   m_PrefabInstance: {fileID: 1561983406}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1561983408}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91a99298d6ed4c4e9901be4b21a29dc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1561983408 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8592251656423253995, guid: 1374c2a62a292c94f8888514345b8def, type: 3}
+  m_PrefabInstance: {fileID: 1561983406}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &1561983409
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561983408}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2.4255867
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.71279335, z: 0}
 --- !u!1 &1577805089
 GameObject:
   m_ObjectHideFlags: 0

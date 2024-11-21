@@ -49,6 +49,6 @@ namespace LostInSin.Runtime.Gameplay.Characters
 			_signalBus.Fire(new CharacterAPChangedSignal());
 		}
 
-		public void PlayAnimation(AnimationID animationID) => _characterAnimationPlayer.PlayAnimation(animationID);
+		public void PlayAnimation(AnimationID animationID, float crossfadeDuration = 0.25f) => _characterAnimationPlayer.PlayAnimation(animationID, crossfadeDuration);
 	}
 }

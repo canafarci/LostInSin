@@ -1,21 +1,22 @@
 using LostInSin.Runtime.Gameplay.Abilities.AbilityRequests;
+using LostInSin.Runtime.Infrastructure.MemoryPool;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution
 {
-	public abstract class AbilityExecutionLogic : SerializedScriptableObject
+	public abstract class AbilityExecution : SerializedScriptableObject
 	{
-		protected AbilityRequestData _abilityRequestData;
-
 		public AbilityExecutionStage executionStage { get; protected set; }
 
-		public AbilityRequestData abilityRequestData => _abilityRequestData;
+		public AbilityRequestData requestData { get; private set; }
+		public AbilityExecutionData executionData { get; private set; }
 
 		public virtual void Initialize(AbilityRequestData requestData)
 		{
-			_abilityRequestData = requestData;
+			this.requestData = requestData;
 			executionStage = AbilityExecutionStage.Starting;
+			executionData = PoolManager.GetPure<AbilityExecutionData>();
 		}
 
 		// Logic to execute when the action starts
@@ -25,7 +26,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution
 		public abstract void UpdateAbility();
 
 		// Finalize action
-		protected virtual void EndAbility()
+		public virtual void EndAbility()
 		{
 			executionStage = AbilityExecutionStage.Complete;
 			Debug.Log("Action Ended");

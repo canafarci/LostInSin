@@ -22,7 +22,6 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   AbilityName: Move
-  ActionPointCost: 2
   Icon: {fileID: 21300000, guid: 74b7b65e380254640b1550785ef1f125, type: 3}
   AbilityRequest: {fileID: 11400000, guid: 63fe086092cbd0f47ae1d0b0b3ea5fca, type: 2}
-  AbilityExecutionLogic: {fileID: 11400000, guid: 2364dce8e7efe1a4497d28b3add9774f, type: 2}
+  AbilityExecution: {fileID: 11400000, guid: 2364dce8e7efe1a4497d28b3add9774f, type: 2}

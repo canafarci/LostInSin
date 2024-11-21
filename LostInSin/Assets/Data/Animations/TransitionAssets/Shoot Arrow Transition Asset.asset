@@ -45,9 +45,10 @@ MonoBehaviour:
             _NormalizedTimes:
             - 0.60439014
             - NaN
-            _Callbacks: []
+            _Callbacks:
+            - rid: 4514604030807244885
             _Names:
-            - {fileID: 11400000, guid: 827fb1bfb87d6b34794f1764593ff0ea, type: 2}
+            - {fileID: 11400000, guid: 91f2aceaeb7027d4cbb3f592bc952522, type: 2}
           _Clip: {fileID: 7400000, guid: 4ab9723cfaacb454586f5e8f28f862aa, type: 2}
           _NormalizedStartTime: 0.36585364
         - _FadeDuration: 0.25
@@ -59,3 +60,7 @@ MonoBehaviour:
             _Names: []
           _Clip: {fileID: -203655887218126122, guid: 4e5adc20806ef4f448221abe50320303, type: 3}
           _NormalizedStartTime: 0.049180325
+    - rid: 4514604030807244885
+      type: {class: AnimancerEvent/ParameterObject, ns: Animancer, asm: Kybernetik.Animancer}
+      data:
+        _Value: {fileID: 11400000, guid: 91f2aceaeb7027d4cbb3f592bc952522, type: 2}

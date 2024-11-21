@@ -12,6 +12,6 @@ namespace LostInSin.Runtime.Gameplay.Characters.Visuals.Data
 	public class CharacterAnimationClipsData : SerializedScriptableObject
 	{
 		public Dictionary<Avatar, Dictionary<AnimationID, TransitionAssetBase>> CharacterAnimations;
-		public Dictionary<TransitionAssetBase, StringAsset> AnimationEventsLookup;
+		public List<StringAsset> AnimationEventStringAssets;
 	}
 }
