@@ -58,6 +58,10 @@ PrefabInstance:
       value: 1.295
       objectReference: {fileID: 0}
     - target: {fileID: 2869979332872711358, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+      propertyPath: ProjectileHitPoint
+      value: 
+      objectReference: {fileID: 149037809594724328}
+    - target: {fileID: 2869979332872711358, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 2869979332872711358, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
@@ -163,6 +167,11 @@ PrefabInstance:
       addedObject: {fileID: 8850320095018599461}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+--- !u!4 &149037809594724328 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1257218676604144814, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+  m_PrefabInstance: {fileID: 1397229279812838214}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8606076331994728083 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7209445461687903701, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}

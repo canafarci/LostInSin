@@ -12,6 +12,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1.242
       objectReference: {fileID: 0}
+    - target: {fileID: 2869979332872711358, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+      propertyPath: ProjectileHitPoint
+      value: 
+      objectReference: {fileID: 1249277531415966163}
+    - target: {fileID: 2869979332872711358, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 2869979332872711358, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
     - target: {fileID: 4948821754011473127, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
       propertyPath: _Animator
       value: 
@@ -95,6 +103,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 7243513441177058450}
   m_SourcePrefab: {fileID: 100100000, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+--- !u!4 &1249277531415966163 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1257218676604144814, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+  m_PrefabInstance: {fileID: 10373832382020989}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2878059703718498755 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2869979332872711358, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}

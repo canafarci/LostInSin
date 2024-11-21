@@ -1,4 +1,5 @@
 using Animancer;
+using Cysharp.Threading.Tasks;
 using LostInSin.Runtime.Gameplay.Abilities.Projectiles;
 using LostInSin.Runtime.Gameplay.Characters.Visuals;
 using LostInSin.Runtime.Gameplay.Characters.Visuals.Animations;
@@ -26,12 +27,15 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.Concrete
 
 			executionStage = AbilityExecutionStage.Updating;
 		}
+
 		public override void UpdateAbility()
 		{
 			SlerpRotationTowardDirection();
 
 			if (executionData.AbilityTriggers.Contains(ShootArrowTrigger))
 			{
+				_arrow.Shoot(damage: 10, target: requestData.TargetCharacter);
+
 				_direction = Quaternion.Euler(0, -90, 0) * _direction;
 				requestData.User.PlayAnimation(AnimationID.Idle, 0.1f);
 				executionStage = AbilityExecutionStage.Finishing;
@@ -43,7 +47,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.Concrete
 			SlerpRotationTowardDirection();
 
 			float dot = Quaternion.Dot(requestData.User.transform.rotation, Quaternion.LookRotation(_direction));
-			if (Mathf.Abs(dot) > 0.9999f) // if dot value is near 1, this means they are identical
+			if (_arrow.reachedTarget && Mathf.Abs(dot) > 0.9999f) // if dot value is near 1, this means they are identical
 			{
 				executionStage = AbilityExecutionStage.Complete;
 			}
@@ -62,20 +66,14 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.Concrete
 			_direction.y = 0;
 			_direction = Quaternion.Euler(0, 90, 0) * _direction;
 		}
-		
+
 		private void GetArrowFromPool()
 		{
 			_arrow = PoolManager.GetMono<Arrow>();
-			
-			Vector3 originalPos = _arrow.transform.position;
-			Quaternion originalRot = _arrow.transform.rotation;
-			Vector3 originalScale = _arrow.transform.lossyScale;
-			
-			_arrow.transform.SetParent(requestData.User.animationBones[AnimationBoneID.ArrowHand], false);
-			
-			_arrow.transform.localRotation = originalRot;
-			_arrow.transform.localPosition = originalPos;
-			_arrow.transform.localScale = originalScale;
+
+
+			_arrow.transform.SetParent(requestData.User.animationBones[AnimationBoneID.ArrowHand]);
+			_arrow.ResetPosition();
 		}
 	}
 }

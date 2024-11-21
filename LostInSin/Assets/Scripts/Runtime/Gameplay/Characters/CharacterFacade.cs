@@ -29,6 +29,7 @@ namespace LostInSin.Runtime.Gameplay.Characters
 		public GridCell currentCell => _character.currentCell;
 
 		public Dictionary<AnimationBoneID, Transform> animationBones => _animationBones;
+		public Transform ProjectileHitPoint;
 
 		private void Awake()
 		{

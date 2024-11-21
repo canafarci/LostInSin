@@ -43,14 +43,14 @@ MonoBehaviour:
           _Speed: 1
           _Events:
             _NormalizedTimes:
-            - 0.60439014
+            - 0.23607346
             - NaN
             _Callbacks:
             - rid: 4514604030807244885
             _Names:
             - {fileID: 11400000, guid: 91f2aceaeb7027d4cbb3f592bc952522, type: 2}
           _Clip: {fileID: 7400000, guid: 4ab9723cfaacb454586f5e8f28f862aa, type: 2}
-          _NormalizedStartTime: 0.36585364
+          _NormalizedStartTime: 0
         - _FadeDuration: 0.25
           _Speed: 1
           _Events:
