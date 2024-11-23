@@ -12,12 +12,14 @@ namespace LostInSin.Runtime.Gameplay.Characters.Scope
 		[SerializeField] private CharacterData CharacterData;
 		[SerializeField] private AnimancerComponent AnimancerComponent;
 		[SerializeField] private Avatar CharacterAvatar;
+		[SerializeField] private CharacterVisualReferences CharacterVisualReferences;
 
 		protected override void Configure(IContainerBuilder builder)
 		{
 			builder.RegisterInstance(CharacterData);
 			builder.RegisterInstance(AnimancerComponent);
 			builder.RegisterInstance(CharacterAvatar);
+			builder.RegisterInstance(CharacterVisualReferences);
 
 			builder.RegisterEntryPoint<Character>().AsSelf();
 			builder.RegisterEntryPoint<CharacterAnimationPlayer>().AsSelf();

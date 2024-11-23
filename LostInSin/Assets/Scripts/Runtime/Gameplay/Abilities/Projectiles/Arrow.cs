@@ -17,7 +17,6 @@ namespace LostInSin.Runtime.Gameplay.Abilities.Projectiles
 
 		public void Shoot(int damage, CharacterFacade target)
 		{
-			Debug.Log("Called");
 			transform.parent = null;
 
 			_damage = damage;

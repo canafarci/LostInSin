@@ -13,13 +13,12 @@ using Sirenix.Serialization;
 
 namespace LostInSin.Runtime.Gameplay.Characters
 {
-	public class CharacterFacade : SerializedMonoBehaviour
+	public class CharacterFacade : MonoBehaviour
 	{
 		[Inject] private Character _character;
 		[Inject] private SignalBus _signalBus;
 		[Inject] private CharacterAnimationPlayer _characterAnimationPlayer;
-
-		private Dictionary<AnimationBoneID, Transform> _animationBones = new();
+		[Inject] private CharacterVisualReferences _characterVisualReferences;
 
 		public bool isPlayerCharacter => _character.characterData.IsPlayerCharacter;
 		public List<Ability> abilities => _character.characterData.Abilities;
@@ -27,14 +26,9 @@ namespace LostInSin.Runtime.Gameplay.Characters
 		public int initiative => _character.initiative;
 		public string characterName => _character.characterName;
 		public GridCell currentCell => _character.currentCell;
+		public Transform ProjectileHitPoint => _characterVisualReferences.ProjectileHitPoint;
+		public Dictionary<AnimationBoneID, Transform> animationBones => _characterVisualReferences.animationBones;
 
-		public Dictionary<AnimationBoneID, Transform> animationBones => _animationBones;
-		public Transform ProjectileHitPoint;
-
-		private void Awake()
-		{
-			InitializeBoneLookup();
-		}
 
 		public void SetCharacterCell(GridCell cell, bool warp = false)
 		{
@@ -62,13 +56,5 @@ namespace LostInSin.Runtime.Gameplay.Characters
 		}
 
 		public void PlayAnimation(AnimationID animationID, float crossfadeDuration = 0.25f) => _characterAnimationPlayer.PlayAnimation(animationID, crossfadeDuration);
-
-		private void InitializeBoneLookup()
-		{
-			foreach (AnimationBone bone in transform.GetComponentsInChildren<AnimationBone>())
-			{
-				_animationBones[bone.BoneID] = bone.transform;
-			}
-		}
 	}
 }
