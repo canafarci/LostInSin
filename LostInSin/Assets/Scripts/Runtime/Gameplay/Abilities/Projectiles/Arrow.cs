@@ -8,21 +8,26 @@ namespace LostInSin.Runtime.Gameplay.Abilities.Projectiles
 {
 	public class Arrow : MonoBehaviour, IPoolable
 	{
+		public bool ReachedTarget = false;
+
 		private Vector3 _originalPos;
 		private Quaternion _originalRot;
 		private Vector3 _originalScale;
-		private int _damage;
 		private CharacterFacade _target;
-		public bool reachedTarget => Vector3.SqrMagnitude(transform.position - _target.transform.position) < 0.1f;
 
-		public void Shoot(int damage, CharacterFacade target)
+		public void Shoot(CharacterFacade target)
 		{
 			transform.parent = null;
 
-			_damage = damage;
 			_target = target;
 
-			transform.DOMove(target.ProjectileHitPoint.position, 10f).SetSpeedBased();
+			transform.DOMove(target.visualReferences.ProjectileHitPoint.position, 10f)
+				.SetSpeedBased()
+				.OnComplete(() =>
+				{
+					ReachedTarget = true;
+					transform.parent = _target.visualReferences.ProjectileHitPoint;
+				});
 		}
 
 		public void ResetPosition()
@@ -45,10 +50,13 @@ namespace LostInSin.Runtime.Gameplay.Abilities.Projectiles
 
 		public void OnReturnToPool()
 		{
+			transform.parent = null;
 		}
 
 		public void OnGetFromPool()
 		{
+			_target = null;
+			ReachedTarget = false;
 		}
 	}
 }

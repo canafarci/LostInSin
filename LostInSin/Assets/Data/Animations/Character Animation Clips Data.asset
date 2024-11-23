@@ -20,6 +20,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 857a42e3a861acc4baf7df0339b4b565, type: 2}
     - {fileID: 11400000, guid: 4870d635c8b76364da8d8e832daf6ebd, type: 2}
     - {fileID: 11400000, guid: 141d9d5dc4561464fa1affe5a4f45885, type: 2}
+    - {fileID: 11400000, guid: 2062241df8caaed47a670b83030324b6, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -27,7 +28,7 @@ MonoBehaviour:
     SerializationNodes:
     - Name: CharacterAnimations
       Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[UnityEngine.Avatar, UnityEngine.AnimationModule],[System.Collections.Generic.Dictionary`2[[LostInSin.Runtime.Gameplay.Characters.Visuals.Enums.AnimationID,
+      Data: 0|System.Collections.Generic.Dictionary`2[[UnityEngine.Avatar, UnityEngine.AnimationModule],[System.Collections.Generic.Dictionary`2[[LostInSin.Runtime.Gameplay.Characters.Visuals.Animations.Enums.AnimationID,
         LostInSin.Runtime],[Animancer.TransitionAssetBase, Kybernetik.Animancer]],
         mscorlib]], mscorlib
     - Name: comparer
@@ -48,12 +49,12 @@ MonoBehaviour:
       Data: 0
     - Name: $v
       Entry: 7
-      Data: 2|System.Collections.Generic.Dictionary`2[[LostInSin.Runtime.Gameplay.Characters.Visuals.Enums.AnimationID,
+      Data: 2|System.Collections.Generic.Dictionary`2[[LostInSin.Runtime.Gameplay.Characters.Visuals.Animations.Enums.AnimationID,
         LostInSin.Runtime],[Animancer.TransitionAssetBase, Kybernetik.Animancer]],
         mscorlib
     - Name: comparer
       Entry: 7
-      Data: 3|System.Collections.Generic.EnumEqualityComparer`1[[LostInSin.Runtime.Gameplay.Characters.Visuals.Enums.AnimationID,
+      Data: 3|System.Collections.Generic.EnumEqualityComparer`1[[LostInSin.Runtime.Gameplay.Characters.Visuals.Animations.Enums.AnimationID,
         LostInSin.Runtime]], mscorlib
     - Name: 
       Entry: 12
@@ -66,7 +67,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 4
     - Name: 
       Entry: 7
       Data: 
@@ -100,6 +101,18 @@ MonoBehaviour:
     - Name: $v
       Entry: 10
       Data: 3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 3
+    - Name: $v
+      Entry: 10
+      Data: 4
     - Name: 
       Entry: 8
       Data: 

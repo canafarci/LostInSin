@@ -22,3 +22,4 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   ShootArrowTrigger: {fileID: 11400000, guid: 91f2aceaeb7027d4cbb3f592bc952522, type: 2}
+  BaseDamage: 10

@@ -22,12 +22,29 @@ namespace LostInSin.Runtime.Gameplay.Characters
 
 		public bool isPlayerCharacter => _character.characterData.IsPlayerCharacter;
 		public List<Ability> abilities => _character.characterData.Abilities;
-		public int actionPoints => _character.currentActionPoints;
-		public int initiative => _character.initiative;
+
+		public int actionPoints => _character.currentStats[StatID.ActionPoint];
+		public int initiative => _character.currentStats[StatID.Initiative];
+
 		public string characterName => _character.characterName;
 		public GridCell currentCell => _character.currentCell;
-		public Transform ProjectileHitPoint => _characterVisualReferences.ProjectileHitPoint;
-		public Dictionary<AnimationBoneID, Transform> animationBones => _characterVisualReferences.animationBones;
+		public CharacterVisualReferences visualReferences => _characterVisualReferences;
+
+		public void TakeDamage(int change)
+		{
+			int currentHealth = _character.currentStats[StatID.Health];
+			currentHealth -= change;
+
+			if (currentHealth <= 0)
+			{
+				_character.currentStats[StatID.Health] = 0;
+				PlayAnimation(AnimationID.Die);
+			}
+			else
+			{
+				_character.currentStats[StatID.Health] = currentHealth;
+			}
+		}
 
 
 		public void SetCharacterCell(GridCell cell, bool warp = false)
@@ -46,12 +63,12 @@ namespace LostInSin.Runtime.Gameplay.Characters
 		public void SetAsActiveCharacter()
 		{
 			UnityEngine.Debug.Log($"Is Active {_character.characterName}");
-			_character.ResetActionPoints();
+			_character.currentStats[StatID.ActionPoint] = _character.maxStats[StatID.ActionPoint];
 		}
 
 		public void ReduceActionPoints(int abilityActionPointCost)
 		{
-			_character.UseActionPoints(abilityActionPointCost);
+			_character.currentStats[StatID.ActionPoint] -= abilityActionPointCost;
 			_signalBus.Fire(new CharacterAPChangedSignal());
 		}
 

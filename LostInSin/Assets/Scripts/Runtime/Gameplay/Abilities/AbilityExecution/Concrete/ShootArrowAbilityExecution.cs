@@ -14,6 +14,8 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.Concrete
 	public class ShootArrowAbilityExecution : AbilityExecution
 	{
 		public StringAsset ShootArrowTrigger;
+		public int BaseDamage;
+
 		private Vector3 _direction;
 		private Arrow _arrow;
 
@@ -34,7 +36,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.Concrete
 
 			if (executionData.AbilityTriggers.Contains(ShootArrowTrigger))
 			{
-				_arrow.Shoot(damage: 10, target: requestData.TargetCharacter);
+				_arrow.Shoot(target: requestData.TargetCharacter);
 
 				_direction = Quaternion.Euler(0, -90, 0) * _direction;
 				requestData.User.PlayAnimation(AnimationID.Idle, 0.1f);
@@ -47,8 +49,10 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.Concrete
 			SlerpRotationTowardDirection();
 
 			float dot = Quaternion.Dot(requestData.User.transform.rotation, Quaternion.LookRotation(_direction));
-			if (_arrow.reachedTarget && Mathf.Abs(dot) > 0.9999f) // if dot value is near 1, this means they are identical
+
+			if (_arrow.ReachedTarget && Mathf.Abs(dot) > 0.9999f) // if dot value is near 1, this means they are identical
 			{
+				requestData.TargetCharacter.TakeDamage(BaseDamage);
 				executionStage = AbilityExecutionStage.Complete;
 			}
 		}
@@ -72,7 +76,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.Concrete
 			_arrow = PoolManager.GetMono<Arrow>();
 
 
-			_arrow.transform.SetParent(requestData.User.animationBones[AnimationBoneID.ArrowHand]);
+			_arrow.transform.SetParent(requestData.User.visualReferences.animationBones[AnimationBoneID.ArrowHand]);
 			_arrow.ResetPosition();
 		}
 	}
