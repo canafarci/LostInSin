@@ -18,6 +18,6 @@ MonoBehaviour:
   MaxActionPoints: 9
   Abilities:
   - {fileID: 11400000, guid: 7d85560cf15ee5a48ada8733ca4d529d, type: 2}
-  Initiative: 5
+  Initiative: 3
   IsPlayerCharacter: 0
   Prefab: {fileID: 8592251656423253995, guid: 1374c2a62a292c94f8888514345b8def, type: 3}

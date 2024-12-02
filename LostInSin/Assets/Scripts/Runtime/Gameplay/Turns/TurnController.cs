@@ -6,7 +6,6 @@ using LostInSin.Runtime.Gameplay.Enums;
 using LostInSin.Runtime.Gameplay.Signals;
 using LostInSin.Runtime.Gameplay.UI.Turns;
 using LostInSin.Runtime.Infrastructure.Templates;
-using VContainer;
 
 namespace LostInSin.Runtime.Gameplay.Turns
 {
@@ -15,9 +14,6 @@ namespace LostInSin.Runtime.Gameplay.Turns
 		private readonly ICharactersInSceneModel _charactersInSceneModel;
 		private readonly TurnMediator _mediator;
 		private readonly ITurnModel _turnModel;
-
-
-		private readonly Queue<CharacterFacade> _characterTurnQueue = new();
 
 		public TurnController(ICharactersInSceneModel charactersInSceneModel, TurnMediator mediator,
 			ITurnModel turnModel)
@@ -49,7 +45,7 @@ namespace LostInSin.Runtime.Gameplay.Turns
 			if (signal.newState == GameState.Playing)
 			{
 				InitializeTurnOrder();
-				AdvanceTurn();
+				SetCharacterTurn(_turnModel.characterTurnQueue.First.Value);
 			}
 		}
 
@@ -62,15 +58,25 @@ namespace LostInSin.Runtime.Gameplay.Turns
 
 			foreach (CharacterFacade facade in allCharacters)
 			{
-				_characterTurnQueue.Enqueue(facade);
+				_turnModel.characterTurnQueue.AddFirst(facade);
 			}
 		}
 
 		private void AdvanceTurn()
 		{
-			CharacterFacade characterToPlay = _characterTurnQueue.Dequeue();
-			//push character to the end of the queue
-			_characterTurnQueue.Enqueue(characterToPlay);
+			//push character to the end of the linked list
+			LinkedListNode<CharacterFacade> firstNode = _turnModel.characterTurnQueue.First;
+
+			_turnModel.characterTurnQueue.RemoveFirst();
+			_turnModel.characterTurnQueue.AddLast(firstNode);
+
+			CharacterFacade characterToPlay = _turnModel.characterTurnQueue.First.Value;
+
+			SetCharacterTurn(characterToPlay);
+		}
+
+		private void SetCharacterTurn(CharacterFacade characterToPlay)
+		{
 			_turnModel.activeCharacter = characterToPlay;
 			_mediator.SetUpUI(characterToPlay);
 

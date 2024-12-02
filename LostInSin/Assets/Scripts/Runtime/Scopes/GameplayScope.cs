@@ -12,6 +12,7 @@ using LostInSin.Runtime.Gameplay.Signals;
 using LostInSin.Runtime.Gameplay.Turns;
 using LostInSin.Runtime.Gameplay.UI.AbilityPanel;
 using LostInSin.Runtime.Gameplay.UI.ActiveTurnCharacterInfoPanel;
+using LostInSin.Runtime.Gameplay.UI.InitiativePanel;
 using LostInSin.Runtime.Gameplay.UI.Turns;
 using LostInSin.Runtime.Grid;
 using LostInSin.Runtime.Grid.DataObjects;
@@ -131,6 +132,8 @@ namespace LostInSin.Runtime.Scopes
 
 			builder.RegisterComponentInHierarchy<ActiveTurnCharacterInfoPanelView>().AsSelf();
 			builder.RegisterEntryPoint<ActiveTurnCharacterInfoPanelController>();
+
+			builder.RegisterEntryPoint<InitiativePanelController>();
 		}
 
 		private void RegisterSignals(IContainerBuilder builder)
