@@ -89,6 +89,10 @@ PrefabInstance:
       value: 1.295
       objectReference: {fileID: 0}
     - target: {fileID: 2609978574087500088, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+      propertyPath: CharacterPortrait
+      value: 
+      objectReference: {fileID: 21300000, guid: 6c9f0039672389349974321cbec9ce88, type: 3}
+    - target: {fileID: 2609978574087500088, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
       propertyPath: ProjectileHitPoint
       value: 
       objectReference: {fileID: 1593021729051609806}
@@ -125,7 +129,7 @@ PrefabInstance:
     - target: {fileID: 6471824597244290162, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
       propertyPath: CharacterData
       value: 
-      objectReference: {fileID: 11400000, guid: c7d3c59149b393747ac8880fcb7cebb8, type: 2}
+      objectReference: {fileID: 11400000, guid: 11539a9c674ff7249a4a9aee263ff559, type: 2}
     - target: {fileID: 6471824597244290162, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
       propertyPath: CharacterAvatar
       value: 
@@ -180,7 +184,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8581914382870010518, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
       propertyPath: m_Name
-      value: ArcherCharacter
+      value: Enemy Archer Character
       objectReference: {fileID: 0}
     - target: {fileID: 8581914382870010518, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
       propertyPath: m_Layer
@@ -196,8 +200,53 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7209445461687903701, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8850320095018599461}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8581914382870010518, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6986468753353544484}
   m_SourcePrefab: {fileID: 100100000, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+--- !u!114 &3798718527571218424 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2869979332872711358, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+  m_PrefabInstance: {fileID: 1397229279812838214}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7240346779836529104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91a99298d6ed4c4e9901be4b21a29dc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &7240346779836529104 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8581914382870010518, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+  m_PrefabInstance: {fileID: 1397229279812838214}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6986468753353544484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7240346779836529104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Graph: {fileID: 4553400752229106214, guid: 92e96176e1f12d04da42322fa4232a72, type: 2}
+  m_BlackboardVariableOverridesList:
+  - rid: 4798449125738152486
+  references:
+    version: 2
+    RefIds:
+    - rid: 4798449125738152486
+      type: {class: 'BlackboardVariable`1[[LostInSin.Runtime.Gameplay.Characters.CharacterFacade, LostInSin.Runtime]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 5898846766218652182
+          m_Value1: 4365108177924924020
+        Name: Agent Character Facade
+        m_Value: {fileID: 3798718527571218424}
 --- !u!4 &8606076331994728083 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7209445461687903701, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
@@ -289,9 +338,49 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8606076331994728083}
     m_Modifications:
+    - target: {fileID: 107574, guid: f7e586317327fe240bef5a82944f49c2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 109980, guid: f7e586317327fe240bef5a82944f49c2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 111920, guid: f7e586317327fe240bef5a82944f49c2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 123484, guid: f7e586317327fe240bef5a82944f49c2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 135966, guid: f7e586317327fe240bef5a82944f49c2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 136616, guid: f7e586317327fe240bef5a82944f49c2, type: 3}
       propertyPath: m_Name
-      value: Character_Female_Druid_01
+      value: Character_Male_Rouge_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 145082, guid: f7e586317327fe240bef5a82944f49c2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 153282, guid: f7e586317327fe240bef5a82944f49c2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 165908, guid: f7e586317327fe240bef5a82944f49c2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 190722, guid: f7e586317327fe240bef5a82944f49c2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 191024, guid: f7e586317327fe240bef5a82944f49c2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 482130, guid: f7e586317327fe240bef5a82944f49c2, type: 3}
       propertyPath: m_LocalPosition.x

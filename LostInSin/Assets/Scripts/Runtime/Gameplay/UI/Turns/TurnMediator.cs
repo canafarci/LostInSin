@@ -3,7 +3,7 @@ using LostInSin.Runtime.Gameplay.Characters;
 using LostInSin.Runtime.Gameplay.UI.AbilityPanel;
 using VContainer.Unity;
 
-namespace LostInSin.Runtime.Gameplay.Turns
+namespace LostInSin.Runtime.Gameplay.UI.Turns
 {
 	public class TurnMediator : IInitializable, IDisposable
 	{

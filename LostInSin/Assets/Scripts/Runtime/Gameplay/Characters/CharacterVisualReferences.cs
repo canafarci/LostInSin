@@ -2,11 +2,16 @@ using System.Collections.Generic;
 using LostInSin.Runtime.Gameplay.Characters.Visuals.Animations;
 using LostInSin.Runtime.Gameplay.Characters.Visuals.Animations.Enums;
 using UnityEngine;
+using VContainer;
 
 namespace LostInSin.Runtime.Gameplay.Characters
 {
 	public class CharacterVisualReferences : MonoBehaviour
 	{
+		[Inject] private CharacterData _characterData;
+
+		public Sprite characterPortrait { get; private set; }
+
 		private Dictionary<AnimationBoneID, Transform> _animationBones = new();
 		public Transform ProjectileHitPoint;
 
@@ -14,6 +19,7 @@ namespace LostInSin.Runtime.Gameplay.Characters
 
 		private void Awake()
 		{
+			characterPortrait = _characterData.CharacterPortrait;
 			InitializeBoneLookup();
 		}
 

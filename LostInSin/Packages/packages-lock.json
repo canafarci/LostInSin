@@ -22,7 +22,7 @@
       "dependencies": {}
     },
     "com.unity.behavior": {
-      "version": "1.0.5",
+      "version": "1.0.6",
       "depth": 0,
       "source": "registry",
       "dependencies": {

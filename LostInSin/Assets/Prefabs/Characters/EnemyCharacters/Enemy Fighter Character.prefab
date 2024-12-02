@@ -44,6 +44,10 @@ PrefabInstance:
       value: 1.242
       objectReference: {fileID: 0}
     - target: {fileID: 2609978574087500088, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
+      propertyPath: CharacterPortrait
+      value: 
+      objectReference: {fileID: 21300000, guid: 9d75af442c529074e8656cf16d66eb3e, type: 3}
+    - target: {fileID: 2609978574087500088, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
       propertyPath: ProjectileHitPoint
       value: 
       objectReference: {fileID: 7569454111414488608}

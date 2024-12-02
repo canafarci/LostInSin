@@ -4,7 +4,7 @@ using LostInSin.Runtime.Gameplay.Characters;
 using Unity.Behavior;
 using UnityEngine;
 
-namespace LostInSin.Runtime.BehaviourTree
+namespace LostInSin.Runtime.BehaviourTree.Abilities
 {
 	[Serializable, Unity.Properties.GeneratePropertyBag]
 	[Condition(name: "HasEnoughAPForAbility",

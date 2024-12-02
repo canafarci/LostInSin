@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace LostInSin.Runtime.Gameplay.Turns
+namespace LostInSin.Runtime.Gameplay.UI.Turns
 {
 	public class TurnView : MonoBehaviour
 	{

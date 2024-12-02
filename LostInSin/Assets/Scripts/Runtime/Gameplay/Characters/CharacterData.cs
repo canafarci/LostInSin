@@ -9,6 +9,7 @@ namespace LostInSin.Runtime.Gameplay.Characters
 	[CreateAssetMenu(fileName = "CharacterData", menuName = "LostInSin/CharacterData")]
 	public class CharacterData : ScriptableObject
 	{
+		public Sprite CharacterPortrait;
 		public string CharacterName;
 		public int MaxHealth;
 		public int MaxActionPoints;

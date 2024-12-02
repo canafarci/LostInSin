@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78589fb9f36149608c0b519e6a2b77c4, type: 3}
   m_Name: Archer Character Data
   m_EditorClassIdentifier: 
+  CharacterPortrait: {fileID: 0}
   CharacterName: Archer
-  MaxHealth: 10
+  MaxHealth: 40
   MaxActionPoints: 9
   Abilities:
   - {fileID: 11400000, guid: 7d85560cf15ee5a48ada8733ca4d529d, type: 2}

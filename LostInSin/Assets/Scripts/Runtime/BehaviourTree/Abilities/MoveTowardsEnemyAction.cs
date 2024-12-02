@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using LostInSin.Runtime.BehaviourTree.Utility;
 using LostInSin.Runtime.Gameplay.Abilities;
 using LostInSin.Runtime.Gameplay.Abilities.AbilityRequests;
 using LostInSin.Runtime.Gameplay.Characters;
@@ -115,6 +116,7 @@ namespace LostInSin.Runtime.BehaviourTree.Abilities
 			return true;
 		}
 
+		//this ability has dynamic cost, so check it during runtime
 		private bool CanAffordAbility(Ability ability)
 		{
 			ability.AbilityRequest.UpdateRequest();
