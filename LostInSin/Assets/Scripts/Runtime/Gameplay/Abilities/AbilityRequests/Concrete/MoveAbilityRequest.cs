@@ -1,4 +1,3 @@
-using LostInSin.Runtime.Grid.Data;
 using UnityEngine;
 
 namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Concrete

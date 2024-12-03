@@ -1,4 +1,4 @@
-using LostInSin.Runtime.Grid;
+using LostInSin.Runtime.Gameplay.Grid;
 using NUnit.Framework;
 using Unity.Collections;
 using UnityEngine;

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using LostInSin.Runtime.Gameplay.Abilities;
 using LostInSin.Runtime.Gameplay.Characters.Visuals.Animations.Enums;
-using LostInSin.Runtime.Grid.Data;
+using LostInSin.Runtime.Gameplay.Grid.Data;
 using VContainer;
 using VContainer.Unity;
 

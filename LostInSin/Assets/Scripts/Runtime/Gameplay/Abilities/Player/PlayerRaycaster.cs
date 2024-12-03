@@ -1,6 +1,6 @@
 using LostInSin.Runtime.Gameplay.Abilities.AbilityRequests;
-using LostInSin.Runtime.Grid;
-using LostInSin.Runtime.Grid.Data;
+using LostInSin.Runtime.Gameplay.Grid;
+using LostInSin.Runtime.Gameplay.Grid.Data;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using VContainer.Unity;

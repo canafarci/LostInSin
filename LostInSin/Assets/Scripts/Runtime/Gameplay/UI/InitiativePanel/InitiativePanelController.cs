@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using LostInSin.Runtime.Gameplay.Characters;
-using LostInSin.Runtime.Gameplay.Turns;
+using LostInSin.Runtime.Gameplay.Signals;
+using LostInSin.Runtime.Gameplay.TurnBasedCombat;
+using LostInSin.Runtime.Infrastructure.Templates;
 using R3;
 using UnityEngine;
 using VContainer;
@@ -9,24 +11,23 @@ using VContainer.Unity;
 
 namespace LostInSin.Runtime.Gameplay.UI.InitiativePanel
 {
-	public class InitiativePanelController : IInitializable, IDisposable
+	public class InitiativePanelController : SignalListener
 	{
 		[Inject] private ITurnModel _turnModel;
 
-		private DisposableBag _disposable;
-
-		public void Initialize()
+		protected override void SubscribeToEvents()
 		{
+			_signalBus.Subscribe<StartTurnBasedCombatSignal>(OnStartTurnBasedCombatSignalHandler);
 		}
 
-		private void OnCharacterTurnOrderChanged(LinkedList<CharacterFacade> characterFacades)
+		private void OnStartTurnBasedCombatSignalHandler(StartTurnBasedCombatSignal signal)
 		{
-			Debug.Log($"reactive {characterFacades.First.Value.characterName}");
+			Debug.Log("Setting Up Initiative Panel");
 		}
 
-		public void Dispose()
+		protected override void UnsubscribeFromEvents()
 		{
-			_disposable.Dispose();
+			_signalBus.Subscribe<StartTurnBasedCombatSignal>(OnStartTurnBasedCombatSignalHandler);
 		}
 	}
 }

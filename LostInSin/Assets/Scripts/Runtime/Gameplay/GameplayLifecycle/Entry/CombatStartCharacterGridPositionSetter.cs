@@ -1,8 +1,8 @@
 using System;
 using LostInSin.Runtime.Gameplay.Characters;
 using LostInSin.Runtime.Gameplay.Data.SceneReferences;
-using LostInSin.Runtime.Grid;
-using LostInSin.Runtime.Grid.Data;
+using LostInSin.Runtime.Gameplay.Grid;
+using LostInSin.Runtime.Gameplay.Grid.Data;
 using VContainer.Unity;
 
 namespace LostInSin.Runtime.Gameplay.GameplayLifecycle.Entry

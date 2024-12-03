@@ -6,8 +6,8 @@ using VContainer;
 using LostInSin.Runtime.Gameplay.Abilities;
 using LostInSin.Runtime.Gameplay.Characters.Visuals.Animations;
 using LostInSin.Runtime.Gameplay.Characters.Visuals.Animations.Enums;
+using LostInSin.Runtime.Gameplay.Grid.Data;
 using LostInSin.Runtime.Gameplay.Signals;
-using LostInSin.Runtime.Grid.Data;
 using LostInSin.Runtime.Infrastructure.Signals;
 using Sirenix.Serialization;
 

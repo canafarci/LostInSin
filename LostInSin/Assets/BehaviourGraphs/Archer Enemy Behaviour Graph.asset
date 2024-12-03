@@ -29,15 +29,15 @@ MonoBehaviour:
   m_Description: 
   m_Nodes:
   - rid: 4798449125738152018
-  - rid: 4798449125738152367
-  - rid: 4798449125738152368
-  - rid: 4798449125738152369
   - rid: 4798449125738152503
   - rid: 4798449125738152847
   - rid: 4798449126359957528
   - rid: 4798449126359957605
   - rid: 4798449126359957608
-  m_VersionTimestamp: 638687733173291221
+  - rid: 4798449149334782008
+  - rid: 4798449149334782015
+  - rid: 4798449149334782021
+  m_VersionTimestamp: 638688598814923361
   m_DebugInfo: {fileID: -861575038864690033}
   AssetID:
     m_Value0: 301162700759755154
@@ -52,13 +52,6 @@ MonoBehaviour:
     RuntimeTypeID:
       m_Value0: 3335272451348827663
       m_Value1: 11549843281177505721
-    Variables: []
-    NamedChildren: []
-  - Name: Conditional Guard
-    Story: 
-    RuntimeTypeID:
-      m_Value0: 10845871997924083670
-      m_Value1: 4041440894818793834
     Variables: []
     NamedChildren: []
   - Name: Try In Order
@@ -97,6 +90,13 @@ MonoBehaviour:
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
       Tooltip: 
     NamedChildren: []
+  - Name: Conditional Guard
+    Story: 
+    RuntimeTypeID:
+      m_Value0: 10845871997924083670
+      m_Value1: 4041440894818793834
+    Variables: []
+    NamedChildren: []
   m_Blackboards: []
   m_CommandBuffer:
     m_Commands: []
@@ -132,181 +132,7 @@ MonoBehaviour:
         m_NodeModel:
           rid: 4798449125738152018
         m_Connections:
-        - rid: 4798449125738152370
-    - rid: 4798449125738152367
-      type: {class: SequenceNodeModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
-      data:
-        Position: {x: 0.299976, y: 157.7}
-        ID:
-          m_Value0: 7908947368233511049
-          m_Value1: 7888832066320881753
-        Parents: []
-        PortModels:
-        - rid: 4798449125738152370
-        - rid: 4798449125738152371
-        Nodes:
-        - rid: 4798449125738152368
-        - rid: 4798449125738152369
-    - rid: 4798449125738152368
-      type: {class: ConditionalGuardNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
-      data:
-        Position: {x: 466.69385, y: 233.2124}
-        ID:
-          m_Value0: 4464648564307776761
-          m_Value1: 16448623213428404219
-        Parents:
-        - rid: 4798449125738152367
-        PortModels:
-        - rid: 4798449125738152372
-        - rid: 4798449125738152373
-        NodeType:
-          m_SerializableType: Unity.Behavior.ConditionalGuardAction, Unity.Behavior,
-            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        NodeTypeID:
-          m_Value0: 10845871997924083670
-          m_Value1: 4041440894818793834
-        m_FieldValues: []
-        <ConditionModels>k__BackingField:
-        - rid: 4798449125738152374
-        <RequiresAllConditionsTrue>k__BackingField: 0
-        <ShouldTruncateNodeUI>k__BackingField: 0
-    - rid: 4798449125738152369
-      type: {class: ConditionalGuardNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
-      data:
-        Position: {x: 488.7682, y: 286.90512}
-        ID:
-          m_Value0: 17488290102717959035
-          m_Value1: 8842020848550827041
-        Parents:
-        - rid: 4798449125738152367
-        PortModels:
-        - rid: 4798449125738152375
-        - rid: 4798449125738152376
-        NodeType:
-          m_SerializableType: Unity.Behavior.ConditionalGuardAction, Unity.Behavior,
-            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        NodeTypeID:
-          m_Value0: 10845871997924083670
-          m_Value1: 4041440894818793834
-        m_FieldValues: []
-        <ConditionModels>k__BackingField:
-        - rid: 4798449125738152377
-        <RequiresAllConditionsTrue>k__BackingField: 0
-        <ShouldTruncateNodeUI>k__BackingField: 0
-    - rid: 4798449125738152370
-      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
-      data:
-        m_Name: InputPort
-        m_PortDataFlowType: 0
-        m_IsFloating: 0
-        m_NodeModel:
-          rid: 4798449125738152367
-        m_Connections:
-        - rid: 4798449125738152019
-    - rid: 4798449125738152371
-      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
-      data:
-        m_Name: OutputPort
-        m_PortDataFlowType: 1
-        m_IsFloating: 0
-        m_NodeModel:
-          rid: 4798449125738152367
-        m_Connections:
-        - rid: 4798449125738152504
-    - rid: 4798449125738152372
-      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
-      data:
-        m_Name: InputPort
-        m_PortDataFlowType: 0
-        m_IsFloating: 0
-        m_NodeModel:
-          rid: 4798449125738152368
-        m_Connections: []
-    - rid: 4798449125738152373
-      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
-      data:
-        m_Name: OutputPort
-        m_PortDataFlowType: 1
-        m_IsFloating: 0
-        m_NodeModel:
-          rid: 4798449125738152368
-        m_Connections: []
-    - rid: 4798449125738152374
-      type: {class: ConditionModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
-      data:
-        ConditionType:
-          m_SerializableType: LostInSin.Runtime.BehaviourTree.Turns.IsAgentsTurnCondition,
-            LostInSin.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        ConditionTypeID:
-          m_Value0: 12981673204127399720
-          m_Value1: 11629941199013243735
-        NodeModel:
-          rid: 4798449125738152368
-        m_FieldValues:
-        - rid: 4798449125738152378
-        OperatorFieldModel:
-          rid: -2
-    - rid: 4798449125738152375
-      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
-      data:
-        m_Name: InputPort
-        m_PortDataFlowType: 0
-        m_IsFloating: 0
-        m_NodeModel:
-          rid: 4798449125738152369
-        m_Connections: []
-    - rid: 4798449125738152376
-      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
-      data:
-        m_Name: OutputPort
-        m_PortDataFlowType: 1
-        m_IsFloating: 0
-        m_NodeModel:
-          rid: 4798449125738152369
-        m_Connections: []
-    - rid: 4798449125738152377
-      type: {class: ConditionModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
-      data:
-        ConditionType:
-          m_SerializableType: LostInSin.Runtime.BehaviourTree.Abilities.AnyAbilityIsNotBeingPlayedCondition,
-            LostInSin.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        ConditionTypeID:
-          m_Value0: 6826820636440946778
-          m_Value1: 3560962009953776102
-        NodeModel:
-          rid: 4798449125738152369
-        m_FieldValues: []
-        OperatorFieldModel:
-          rid: -2
-    - rid: 4798449125738152378
-      type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
-      data:
-        FieldName: Agent
-        Type:
-          m_SerializableType: LostInSin.Runtime.Gameplay.Characters.CharacterFacade,
-            LostInSin.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        LocalValue:
-          rid: 4798449125738152379
-        LinkedVariable:
-          rid: 4798449125738152502
-    - rid: 4798449125738152379
-      type: {class: 'BlackboardVariable`1[[LostInSin.Runtime.Gameplay.Characters.CharacterFacade, LostInSin.Runtime]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 0
-          m_Value1: 0
-        Name: 
-        m_Value: {fileID: 0}
-    - rid: 4798449125738152502
-      type: {class: 'TypedVariableModel`1[[LostInSin.Runtime.Gameplay.Characters.CharacterFacade, LostInSin.Runtime]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
-      data:
-        ID:
-          m_Value0: 5898846766218652182
-          m_Value1: 4365108177924924020
-        Name: Agent Character Facade
-        IsExposed: 1
-        m_IsShared: 0
-        m_Value: {fileID: 0}
+        - rid: 4798449149334782022
     - rid: 4798449125738152503
       type: {class: CompositeNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -334,7 +160,7 @@ MonoBehaviour:
         m_NodeModel:
           rid: 4798449125738152503
         m_Connections:
-        - rid: 4798449125738152371
+        - rid: 4798449149334782023
     - rid: 4798449125738152505
       type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
       data:
@@ -358,7 +184,7 @@ MonoBehaviour:
         - rid: 4798449125738152848
         - rid: 4798449125738152849
         NodeType:
-          m_SerializableType: LostInSin.Runtime.BehaviourTree.Turns.PassTurnAction,
+          m_SerializableType: LostInSin.Runtime.Gameplay.BehaviourTree.Turns.PassTurnAction,
             LostInSin.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         NodeTypeID:
           m_Value0: 7487551470425663707
@@ -394,7 +220,7 @@ MonoBehaviour:
         LocalValue:
           rid: 4798449125738152851
         LinkedVariable:
-          rid: 4798449126359957877
+          rid: 4798449149334782321
     - rid: 4798449125738152851
       type: {class: 'BlackboardVariable`1[[LostInSin.Runtime.Gameplay.Characters.CharacterFacade, LostInSin.Runtime]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -416,8 +242,8 @@ MonoBehaviour:
         - rid: 4798449126359957529
         - rid: 4798449126359957530
         NodeType:
-          m_SerializableType: UseShootArrowAbilityAction, LostInSin.Runtime, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
+          m_SerializableType: LostInSin.Runtime.Gameplay.BehaviourTree.Abilities.UseShootArrowAbilityAction,
+            LostInSin.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         NodeTypeID:
           m_Value0: 13408017117487068699
           m_Value1: 15251293061413184929
@@ -452,7 +278,7 @@ MonoBehaviour:
         LocalValue:
           rid: 4798449126359957534
         LinkedVariable:
-          rid: 4798449126359957877
+          rid: 4798449149334782321
     - rid: 4798449126359957532
       type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -463,7 +289,7 @@ MonoBehaviour:
         LocalValue:
           rid: 4798449126359957535
         LinkedVariable:
-          rid: 4798449126359957878
+          rid: 4798449149334782322
     - rid: 4798449126359957534
       type: {class: 'BlackboardVariable`1[[LostInSin.Runtime.Gameplay.Characters.CharacterFacade, LostInSin.Runtime]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -578,7 +404,7 @@ MonoBehaviour:
       type: {class: ConditionModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
         ConditionType:
-          m_SerializableType: LostInSin.Runtime.BehaviourTree.Abilities.HasEnoughApForAbilityCondition,
+          m_SerializableType: LostInSin.Runtime.Gameplay.BehaviourTree.Abilities.HasEnoughApForAbilityCondition,
             LostInSin.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         ConditionTypeID:
           m_Value0: 9103085606382528531
@@ -628,7 +454,7 @@ MonoBehaviour:
           m_Value1: 0
         Name: 
         m_Value: {fileID: 0}
-    - rid: 4798449126359957877
+    - rid: 4798449149334781952
       type: {class: 'TypedVariableModel`1[[LostInSin.Runtime.Gameplay.Characters.CharacterFacade, LostInSin.Runtime]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
       data:
         ID:
@@ -638,7 +464,181 @@ MonoBehaviour:
         IsExposed: 1
         m_IsShared: 0
         m_Value: {fileID: 0}
-    - rid: 4798449126359957878
+    - rid: 4798449149334782008
+      type: {class: ConditionalGuardNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        Position: {x: -10.5724945, y: 237.07304}
+        ID:
+          m_Value0: 4236321281460139788
+          m_Value1: 6447428119779977838
+        Parents:
+        - rid: 4798449149334782021
+        PortModels:
+        - rid: 4798449149334782009
+        - rid: 4798449149334782010
+        NodeType:
+          m_SerializableType: Unity.Behavior.ConditionalGuardAction, Unity.Behavior,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        NodeTypeID:
+          m_Value0: 10845871997924083670
+          m_Value1: 4041440894818793834
+        m_FieldValues: []
+        <ConditionModels>k__BackingField:
+        - rid: 4798449149334782011
+        <RequiresAllConditionsTrue>k__BackingField: 0
+        <ShouldTruncateNodeUI>k__BackingField: 0
+    - rid: 4798449149334782009
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: InputPort
+        m_PortDataFlowType: 0
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 4798449149334782008
+        m_Connections: []
+    - rid: 4798449149334782010
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: OutputPort
+        m_PortDataFlowType: 1
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 4798449149334782008
+        m_Connections: []
+    - rid: 4798449149334782011
+      type: {class: ConditionModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        ConditionType:
+          m_SerializableType: LostInSin.Runtime.Gameplay.BehaviourTree.Turns.IsAgentsTurnCondition,
+            LostInSin.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        ConditionTypeID:
+          m_Value0: 12981673204127399720
+          m_Value1: 11629941199013243735
+        NodeModel:
+          rid: 4798449149334782008
+        m_FieldValues:
+        - rid: 4798449149334782012
+        OperatorFieldModel:
+          rid: -2
+    - rid: 4798449149334782012
+      type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        FieldName: Agent
+        Type:
+          m_SerializableType: LostInSin.Runtime.Gameplay.Characters.CharacterFacade,
+            LostInSin.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        LocalValue:
+          rid: 4798449149334782013
+        LinkedVariable:
+          rid: 4798449149334781952
+    - rid: 4798449149334782013
+      type: {class: 'BlackboardVariable`1[[LostInSin.Runtime.Gameplay.Characters.CharacterFacade, LostInSin.Runtime]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+        m_Value: {fileID: 0}
+    - rid: 4798449149334782015
+      type: {class: ConditionalGuardNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        Position: {x: -24.972494, y: 245.87303}
+        ID:
+          m_Value0: 16904255318572096214
+          m_Value1: 9850956604414627113
+        Parents:
+        - rid: 4798449149334782021
+        PortModels:
+        - rid: 4798449149334782016
+        - rid: 4798449149334782017
+        NodeType:
+          m_SerializableType: Unity.Behavior.ConditionalGuardAction, Unity.Behavior,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        NodeTypeID:
+          m_Value0: 10845871997924083670
+          m_Value1: 4041440894818793834
+        m_FieldValues: []
+        <ConditionModels>k__BackingField:
+        - rid: 4798449149334782024
+        <RequiresAllConditionsTrue>k__BackingField: 0
+        <ShouldTruncateNodeUI>k__BackingField: 0
+    - rid: 4798449149334782016
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: InputPort
+        m_PortDataFlowType: 0
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 4798449149334782015
+        m_Connections: []
+    - rid: 4798449149334782017
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: OutputPort
+        m_PortDataFlowType: 1
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 4798449149334782015
+        m_Connections: []
+    - rid: 4798449149334782021
+      type: {class: SequenceNodeModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        Position: {x: -0.17249429, y: 157.87299}
+        ID:
+          m_Value0: 6367992428860757481
+          m_Value1: 3873713416653959497
+        Parents: []
+        PortModels:
+        - rid: 4798449149334782022
+        - rid: 4798449149334782023
+        Nodes:
+        - rid: 4798449149334782008
+        - rid: 4798449149334782015
+    - rid: 4798449149334782022
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: InputPort
+        m_PortDataFlowType: 0
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 4798449149334782021
+        m_Connections:
+        - rid: 4798449125738152019
+    - rid: 4798449149334782023
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: OutputPort
+        m_PortDataFlowType: 1
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 4798449149334782021
+        m_Connections:
+        - rid: 4798449125738152504
+    - rid: 4798449149334782024
+      type: {class: ConditionModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        ConditionType:
+          m_SerializableType: LostInSin.Runtime.Gameplay.BehaviourTree.Abilities.AnyAbilityIsNotBeingPlayedCondition,
+            LostInSin.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        ConditionTypeID:
+          m_Value0: 6826820636440946778
+          m_Value1: 3560962009953776102
+        NodeModel:
+          rid: 4798449149334782015
+        m_FieldValues: []
+        OperatorFieldModel:
+          rid: -2
+    - rid: 4798449149334782321
+      type: {class: 'TypedVariableModel`1[[LostInSin.Runtime.Gameplay.Characters.CharacterFacade, LostInSin.Runtime]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 5898846766218652182
+          m_Value1: 4365108177924924020
+        Name: Agent Character Facade
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 4798449149334782322
       type: {class: 'TypedVariableModel`1[[LostInSin.Runtime.Gameplay.Abilities.Ability, LostInSin.Runtime]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
       data:
         ID:
@@ -661,108 +661,108 @@ MonoBehaviour:
   m_Name: Archer Enemy Behaviour Graph
   m_EditorClassIdentifier: 
   Graphs:
-  - rid: 4798449126359957972
+  - rid: 4798449149334782299
   RootGraph:
-    rid: 4798449126359957972
+    rid: 4798449149334782299
   m_DebugInfo: {fileID: -861575038864690033}
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 4798449126359957972
+    - rid: 4798449149334782299
       type: {class: BehaviorGraphModule, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         AuthoringAssetID:
           m_Value0: 301162700759755154
           m_Value1: 8226426857419064026
-        m_DebugInfo: {fileID: 0}
+        m_DebugInfo: {fileID: -861575038864690033}
         Root:
-          rid: 4798449126359957973
+          rid: 4798449149334782300
         BlackboardReference:
-          rid: 4798449126359957974
+          rid: 4798449149334782301
         BlackboardGroupReferences: []
-        m_VersionTimestamp: 638687733173291221
-    - rid: 4798449126359957973
+        m_VersionTimestamp: 638688598814923361
+    - rid: 4798449149334782300
       type: {class: Start, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         ID:
           m_Value0: 4242921879937936506
           m_Value1: 9670049535981081855
         Graph:
-          rid: 4798449126359957972
+          rid: 4798449149334782299
         m_Parent:
           rid: -2
         m_Child:
-          rid: 4798449126359957975
+          rid: 4798449149334782302
         Repeat: 1
-    - rid: 4798449126359957974
+    - rid: 4798449149334782301
       type: {class: BlackboardReference, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         m_Blackboard:
-          rid: 4798449126359957976
+          rid: 4798449149334782303
         m_Source: {fileID: 7704869721688192034}
-    - rid: 4798449126359957975
+    - rid: 4798449149334782302
       type: {class: SequenceComposite, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         ID:
-          m_Value0: 7908947368233511049
-          m_Value1: 7888832066320881753
+          m_Value0: 6367992428860757481
+          m_Value1: 3873713416653959497
         Graph:
-          rid: 4798449126359957972
+          rid: 4798449149334782299
         m_Parent:
-          rid: 4798449126359957973
+          rid: 4798449149334782300
         m_Children:
-        - rid: 4798449126359957977
-        - rid: 4798449126359957978
-        - rid: 4798449126359957979
-    - rid: 4798449126359957976
+        - rid: 4798449149334782304
+        - rid: 4798449149334782305
+        - rid: 4798449149334782306
+    - rid: 4798449149334782303
       type: {class: Blackboard, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         m_Variables:
-        - rid: 4798449126359957980
-        - rid: 4798449126359957981
-        - rid: 4798449126359957982
-    - rid: 4798449126359957977
+        - rid: 4798449149334782307
+        - rid: 4798449149334782308
+        - rid: 4798449149334782309
+    - rid: 4798449149334782304
       type: {class: ConditionalGuardAction, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         ID:
-          m_Value0: 4464648564307776761
-          m_Value1: 16448623213428404219
+          m_Value0: 4236321281460139788
+          m_Value1: 6447428119779977838
         Graph:
-          rid: 4798449126359957972
+          rid: 4798449149334782299
         m_Parent:
-          rid: 4798449126359957975
+          rid: 4798449149334782302
         m_Conditions:
-        - rid: 4798449126359957983
+        - rid: 4798449149334782310
         m_RequiresAllConditions: 0
-    - rid: 4798449126359957978
+    - rid: 4798449149334782305
       type: {class: ConditionalGuardAction, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         ID:
-          m_Value0: 17488290102717959035
-          m_Value1: 8842020848550827041
+          m_Value0: 16904255318572096214
+          m_Value1: 9850956604414627113
         Graph:
-          rid: 4798449126359957972
+          rid: 4798449149334782299
         m_Parent:
-          rid: 4798449126359957975
+          rid: 4798449149334782302
         m_Conditions:
-        - rid: 4798449126359957984
+        - rid: 4798449149334782311
         m_RequiresAllConditions: 0
-    - rid: 4798449126359957979
+    - rid: 4798449149334782306
       type: {class: SelectorComposite, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         ID:
           m_Value0: 14124871433634567270
           m_Value1: 5440601297260171602
         Graph:
-          rid: 4798449126359957972
+          rid: 4798449149334782299
         m_Parent:
-          rid: 4798449126359957975
+          rid: 4798449149334782302
         m_Children:
-        - rid: 4798449126359957985
-        - rid: 4798449126359957986
-    - rid: 4798449126359957980
+        - rid: 4798449149334782312
+        - rid: 4798449149334782313
+    - rid: 4798449149334782307
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -770,7 +770,7 @@ MonoBehaviour:
           m_Value1: 0
         Name: Self
         m_Value: {fileID: 0}
-    - rid: 4798449126359957981
+    - rid: 4798449149334782308
       type: {class: 'SharedBlackboardVariable`1[[LostInSin.Runtime.Gameplay.Abilities.Ability, LostInSin.Runtime]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -779,7 +779,7 @@ MonoBehaviour:
         Name: Shoot Arrow Ability
         m_Value: {fileID: 0}
         m_SharedVariablesRuntimeAsset: {fileID: 7704869721688192034}
-    - rid: 4798449126359957982
+    - rid: 4798449149334782309
       type: {class: 'BlackboardVariable`1[[LostInSin.Runtime.Gameplay.Characters.CharacterFacade, LostInSin.Runtime]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -787,79 +787,79 @@ MonoBehaviour:
           m_Value1: 4365108177924924020
         Name: Agent Character Facade
         m_Value: {fileID: 0}
-    - rid: 4798449126359957983
-      type: {class: IsAgentsTurnCondition, ns: LostInSin.Runtime.BehaviourTree.Turns, asm: LostInSin.Runtime}
+    - rid: 4798449149334782310
+      type: {class: IsAgentsTurnCondition, ns: LostInSin.Runtime.Gameplay.BehaviourTree.Turns, asm: LostInSin.Runtime}
       data:
         Graph:
-          rid: 4798449126359957972
+          rid: 4798449149334782299
         Agent:
-          rid: 4798449126359957982
-    - rid: 4798449126359957984
-      type: {class: AnyAbilityIsNotBeingPlayedCondition, ns: LostInSin.Runtime.BehaviourTree.Abilities, asm: LostInSin.Runtime}
+          rid: 4798449149334782309
+    - rid: 4798449149334782311
+      type: {class: AnyAbilityIsNotBeingPlayedCondition, ns: LostInSin.Runtime.Gameplay.BehaviourTree.Abilities, asm: LostInSin.Runtime}
       data:
         Graph:
-          rid: 4798449126359957972
-    - rid: 4798449126359957985
+          rid: 4798449149334782299
+    - rid: 4798449149334782312
       type: {class: SequenceComposite, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         ID:
           m_Value0: 8983379639107027565
           m_Value1: 5699874295548126861
         Graph:
-          rid: 4798449126359957972
+          rid: 4798449149334782299
         m_Parent:
-          rid: 4798449126359957979
+          rid: 4798449149334782306
         m_Children:
-        - rid: 4798449126359957987
-        - rid: 4798449126359957988
-    - rid: 4798449126359957986
-      type: {class: PassTurnAction, ns: LostInSin.Runtime.BehaviourTree.Turns, asm: LostInSin.Runtime}
+        - rid: 4798449149334782314
+        - rid: 4798449149334782315
+    - rid: 4798449149334782313
+      type: {class: PassTurnAction, ns: LostInSin.Runtime.Gameplay.BehaviourTree.Turns, asm: LostInSin.Runtime}
       data:
         ID:
           m_Value0: 9345812617423190907
           m_Value1: 5691353080136011317
         Graph:
-          rid: 4798449126359957972
+          rid: 4798449149334782299
         m_Parent:
-          rid: 4798449126359957979
+          rid: 4798449149334782306
         Agent:
-          rid: 4798449126359957982
-    - rid: 4798449126359957987
+          rid: 4798449149334782309
+    - rid: 4798449149334782314
       type: {class: ConditionalGuardAction, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         ID:
           m_Value0: 8035533176529693655
           m_Value1: 9694861955238470060
         Graph:
-          rid: 4798449126359957972
+          rid: 4798449149334782299
         m_Parent:
-          rid: 4798449126359957985
+          rid: 4798449149334782312
         m_Conditions:
-        - rid: 4798449126359957989
+        - rid: 4798449149334782316
         m_RequiresAllConditions: 0
-    - rid: 4798449126359957988
-      type: {class: UseShootArrowAbilityAction, ns: , asm: LostInSin.Runtime}
+    - rid: 4798449149334782315
+      type: {class: UseShootArrowAbilityAction, ns: LostInSin.Runtime.Gameplay.BehaviourTree.Abilities, asm: LostInSin.Runtime}
       data:
         ID:
           m_Value0: 12296205691888362179
           m_Value1: 932363205696464335
         Graph:
-          rid: 4798449126359957972
+          rid: 4798449149334782299
         m_Parent:
-          rid: 4798449126359957985
+          rid: 4798449149334782312
         Agent:
-          rid: 4798449126359957982
+          rid: 4798449149334782309
         Ability:
-          rid: 4798449126359957981
-    - rid: 4798449126359957989
-      type: {class: HasEnoughApForAbilityCondition, ns: LostInSin.Runtime.BehaviourTree.Abilities, asm: LostInSin.Runtime}
+          rid: 4798449149334782308
+    - rid: 4798449149334782316
+      type: {class: HasEnoughApForAbilityCondition, ns: LostInSin.Runtime.Gameplay.BehaviourTree.Abilities, asm: LostInSin.Runtime}
       data:
         Graph:
-          rid: 4798449126359957972
+          rid: 4798449149334782299
         Agent:
-          rid: 4798449126359957982
+          rid: 4798449149334782309
         Ability:
-          rid: 4798449126359957981
+          rid: 4798449149334782308
 --- !u!114 &7704869721688192034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -872,22 +872,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c02bb70996b49eba31d0c206e28da24, type: 3}
   m_Name: Archer Enemy Behaviour Graph Blackboard Editor
   m_EditorClassIdentifier: 
-  VersionTimestamp: 638687733175046103
+  VersionTimestamp: 638688598814923361
   AssetID:
     m_Value0: 301162700759755154
     m_Value1: 8226426857419064026
   m_Blackboard:
     m_Variables:
-    - rid: 4798449126359957933
-    - rid: 4798449126359957934
-    - rid: 4798449126359957935
+    - rid: 4798449149334782043
+    - rid: 4798449149334782044
+    - rid: 4798449149334782045
   m_SharedBlackboardVariableGuids:
   - m_Value0: 9526749468218312839
     m_Value1: 17071390763598329497
   references:
     version: 2
     RefIds:
-    - rid: 4798449126359957933
+    - rid: 4798449149334782043
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -895,7 +895,7 @@ MonoBehaviour:
           m_Value1: 0
         Name: Self
         m_Value: {fileID: 0}
-    - rid: 4798449126359957934
+    - rid: 4798449149334782044
       type: {class: 'BlackboardVariable`1[[LostInSin.Runtime.Gameplay.Abilities.Ability, LostInSin.Runtime]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -903,7 +903,7 @@ MonoBehaviour:
           m_Value1: 17071390763598329497
         Name: Shoot Arrow Ability
         m_Value: {fileID: 11400000, guid: 0ac60dcc1259e58419fb618d877ddced, type: 2}
-    - rid: 4798449126359957935
+    - rid: 4798449149334782045
       type: {class: 'BlackboardVariable`1[[LostInSin.Runtime.Gameplay.Characters.CharacterFacade, LostInSin.Runtime]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -930,7 +930,7 @@ MonoBehaviour:
   - rid: 4798449125738152020
   - rid: 4798449125738152021
   - rid: 4798449125738152413
-  m_VersionTimestamp: 638687733175046103
+  m_VersionTimestamp: 638688598814923361
   m_CommandBuffer:
     m_Commands: []
   m_RuntimeBlackboardAsset: {fileID: 7704869721688192034}

@@ -1,5 +1,5 @@
-using LostInSin.Runtime.Grid;
-using LostInSin.Runtime.Grid.Visual;
+using LostInSin.Runtime.Gameplay.Grid;
+using LostInSin.Runtime.Gameplay.Grid.Visual;
 using NUnit.Framework;
 using UnityEngine;
 
@@ -21,15 +21,15 @@ namespace LostInSin.Tests.EditMode.Tests.EditMode
 			{
 				{
 					new(new GridPoint(0, 0, 0), new GridPoint(1, 0, 0), new GridPoint(0, 0, 1), new GridPoint(1, 0, 1),
-						false),
+					    false),
 					new(new GridPoint(1, 0, 0), new GridPoint(2, 0, 0), new GridPoint(1, 0, 1), new GridPoint(2, 0, 1),
-						false)
+					    false)
 				},
 				{
 					new(new GridPoint(0, 0, 1), new GridPoint(1, 0, 1), new GridPoint(0, 0, 2), new GridPoint(1, 0, 2),
-						false),
+					    false),
 					new(new GridPoint(1, 0, 1), new GridPoint(2, 0, 1), new GridPoint(1, 0, 2), new GridPoint(2, 0, 2),
-						false)
+					    false)
 				}
 			};
 		}
@@ -58,7 +58,7 @@ namespace LostInSin.Tests.EditMode.Tests.EditMode
 			var triangleVerticesPerCell = 3;
 
 			Assert.AreEqual(cellCount * trianglesPerCell * triangleVerticesPerCell,
-				mesh.triangles.Length); // 2 triangles per cell, 3 vertices each
+			                mesh.triangles.Length); // 2 triangles per cell, 3 vertices each
 		}
 
 		[Test]

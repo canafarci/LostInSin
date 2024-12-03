@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using LostInSin.Runtime.Gameplay.Characters;
-using LostInSin.Runtime.Grid.Data;
+using LostInSin.Runtime.Gameplay.Grid.Data;
 using LostInSin.Runtime.Infrastructure.MemoryPool;
 using UnityEngine;
 

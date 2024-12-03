@@ -8,17 +8,19 @@ using LostInSin.Runtime.Gameplay.Data.SceneReferences;
 using LostInSin.Runtime.Gameplay.GameplayLifecycle;
 using LostInSin.Runtime.Gameplay.GameplayLifecycle.Entry;
 using LostInSin.Runtime.Gameplay.GameplayLifecycle.GameStates;
+using LostInSin.Runtime.Gameplay.GameplayLifecycle.TurnBasedCombat;
+using LostInSin.Runtime.Gameplay.Grid;
+using LostInSin.Runtime.Gameplay.Grid.DataObjects;
+using LostInSin.Runtime.Gameplay.Grid.Visual;
+using LostInSin.Runtime.Gameplay.Pathfinding;
+using LostInSin.Runtime.Gameplay.Raycast;
 using LostInSin.Runtime.Gameplay.Signals;
-using LostInSin.Runtime.Gameplay.Turns;
+using LostInSin.Runtime.Gameplay.TurnBasedCombat;
 using LostInSin.Runtime.Gameplay.UI.AbilityPanel;
 using LostInSin.Runtime.Gameplay.UI.ActiveTurnCharacterInfoPanel;
 using LostInSin.Runtime.Gameplay.UI.InitiativePanel;
 using LostInSin.Runtime.Gameplay.UI.Turns;
-using LostInSin.Runtime.Grid;
-using LostInSin.Runtime.Grid.DataObjects;
-using LostInSin.Runtime.Grid.Visual;
 using LostInSin.Runtime.Infrastructure.Signals;
-using LostInSin.Runtime.Raycast;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -134,6 +136,7 @@ namespace LostInSin.Runtime.Scopes
 			builder.RegisterEntryPoint<ActiveTurnCharacterInfoPanelController>();
 
 			builder.RegisterEntryPoint<InitiativePanelController>();
+			builder.RegisterEntryPoint<TurnBasedCombatInitializer>();
 		}
 
 		private void RegisterSignals(IContainerBuilder builder)
@@ -147,6 +150,8 @@ namespace LostInSin.Runtime.Scopes
 			builder.DeclareSignal<EndCharacterTurnSignal>();
 			builder.DeclareSignal<AbilityRequestCreatedSignal>();
 			builder.DeclareSignal<AnimationEventSignal>();
+			builder.DeclareSignal<InitializeTurnBasedCombatSignal>();
+			builder.DeclareSignal<StartTurnBasedCombatSignal>();
 		}
 	}
 }

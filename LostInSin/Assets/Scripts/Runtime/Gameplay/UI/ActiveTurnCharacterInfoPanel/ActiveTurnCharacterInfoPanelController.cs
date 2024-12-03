@@ -1,5 +1,5 @@
 using LostInSin.Runtime.Gameplay.Signals;
-using LostInSin.Runtime.Gameplay.Turns;
+using LostInSin.Runtime.Gameplay.TurnBasedCombat;
 using LostInSin.Runtime.Infrastructure.Templates;
 
 namespace LostInSin.Runtime.Gameplay.UI.ActiveTurnCharacterInfoPanel

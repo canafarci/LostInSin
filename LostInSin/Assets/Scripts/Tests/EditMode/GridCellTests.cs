@@ -1,4 +1,4 @@
-using LostInSin.Runtime.Grid.Data;
+using LostInSin.Runtime.Gameplay.Grid.Data;
 using NUnit.Framework;
 using UnityEngine;
 
