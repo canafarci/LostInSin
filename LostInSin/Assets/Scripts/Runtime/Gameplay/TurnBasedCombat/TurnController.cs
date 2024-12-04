@@ -28,11 +28,11 @@ namespace LostInSin.Runtime.Gameplay.TurnBasedCombat
 		{
 			_signalBus.Subscribe<InitializeTurnBasedCombatSignal>(OnInitializeTurnBasedCombatSignalHandler);
 			_signalBus.Subscribe<StartTurnBasedCombatSignal>(OnStartTurnBasedCombatSignalHandler);
-			_signalBus.Subscribe<EndCharacterTurnSignal>(OnEndCharacterTurnSignal);
+			_signalBus.Subscribe<EndCharacterTurnSignal>(OnEndCharacterTurnSignalHandler);
 			_mediator.OnEndTurnButtonClicked += OnEndTurnButtonClickedHandler;
 		}
 
-		private void OnEndCharacterTurnSignal(EndCharacterTurnSignal signal) => AdvanceTurn();
+		private void OnEndCharacterTurnSignalHandler(EndCharacterTurnSignal signal) => AdvanceTurn();
 
 		private void OnEndTurnButtonClickedHandler() => AdvanceTurn();
 
@@ -85,7 +85,7 @@ namespace LostInSin.Runtime.Gameplay.TurnBasedCombat
 		{
 			_signalBus.Unsubscribe<InitializeTurnBasedCombatSignal>(OnInitializeTurnBasedCombatSignalHandler);
 			_signalBus.Unsubscribe<StartTurnBasedCombatSignal>(OnStartTurnBasedCombatSignalHandler);
-			_signalBus.Unsubscribe<EndCharacterTurnSignal>(OnEndCharacterTurnSignal);
+			_signalBus.Unsubscribe<EndCharacterTurnSignal>(OnEndCharacterTurnSignalHandler);
 			_mediator.OnEndTurnButtonClicked -= OnEndTurnButtonClickedHandler;
 		}
 	}

@@ -13,21 +13,50 @@ namespace LostInSin.Runtime.Gameplay.UI.InitiativePanel
 {
 	public class InitiativePanelController : SignalListener
 	{
-		[Inject] private ITurnModel _turnModel;
+		private readonly ITurnModel _turnModel;
+		private readonly InitiativePanelView _initiativePanelView;
+
+		public InitiativePanelController(ITurnModel turnModel, InitiativePanelView initiativePanelView)
+		{
+			_turnModel = turnModel;
+			_initiativePanelView = initiativePanelView;
+		}
 
 		protected override void SubscribeToEvents()
 		{
 			_signalBus.Subscribe<StartTurnBasedCombatSignal>(OnStartTurnBasedCombatSignalHandler);
+			_signalBus.Subscribe<ActiveTurnCharacterChangedSignal>(OnActiveTurnCharacterChangedSignalHandler);
 		}
 
-		private void OnStartTurnBasedCombatSignalHandler(StartTurnBasedCombatSignal signal)
+		private void OnActiveTurnCharacterChangedSignalHandler(ActiveTurnCharacterChangedSignal signal) => UpdatePanelIcons();
+
+		private void OnStartTurnBasedCombatSignalHandler(StartTurnBasedCombatSignal signal) => UpdatePanelIcons();
+
+		private void UpdatePanelIcons()
 		{
-			Debug.Log("Setting Up Initiative Panel");
+			LinkedList<CharacterFacade> turnQueue = _turnModel.characterTurnQueue;
+
+			LinkedListNode<CharacterFacade> characterNode = turnQueue.First;
+
+			foreach (InitiativeIconView view in _initiativePanelView.initiativeIcons)
+			{
+				view.icon.sprite = characterNode.Value.visualReferences.characterPortrait;
+
+				if (characterNode == turnQueue.Last)
+				{
+					characterNode = turnQueue.First;
+				}
+				else
+				{
+					characterNode = characterNode.Next;
+				}
+			}
 		}
 
 		protected override void UnsubscribeFromEvents()
 		{
 			_signalBus.Subscribe<StartTurnBasedCombatSignal>(OnStartTurnBasedCombatSignalHandler);
+			_signalBus.Unsubscribe<ActiveTurnCharacterChangedSignal>(OnActiveTurnCharacterChangedSignalHandler);
 		}
 	}
 }

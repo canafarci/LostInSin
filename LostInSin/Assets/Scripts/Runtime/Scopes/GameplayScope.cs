@@ -136,6 +136,8 @@ namespace LostInSin.Runtime.Scopes
 			builder.RegisterEntryPoint<ActiveTurnCharacterInfoPanelController>();
 
 			builder.RegisterEntryPoint<InitiativePanelController>();
+			builder.RegisterComponentInHierarchy<InitiativePanelView>().AsSelf();
+
 			builder.RegisterEntryPoint<TurnBasedCombatInitializer>();
 		}
 

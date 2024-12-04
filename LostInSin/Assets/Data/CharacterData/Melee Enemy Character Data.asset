@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78589fb9f36149608c0b519e6a2b77c4, type: 3}
   m_Name: Melee Enemy Character Data
   m_EditorClassIdentifier: 
-  CharacterPortrait: {fileID: 0}
+  CharacterPortrait: {fileID: 21300000, guid: 9d75af442c529074e8656cf16d66eb3e, type: 3}
   CharacterName: Melee Enemy
   MaxHealth: 20
   MaxActionPoints: 9
