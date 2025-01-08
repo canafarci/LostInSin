@@ -1,10 +1,10 @@
-using System.Collections.Generic;
-using LostInSin.Runtime.Gameplay.Abilities.Player;
+using LostInSin.Runtime.Gameplay.Abilities.RequestFilling;
 using LostInSin.Runtime.Gameplay.Characters;
 using LostInSin.Runtime.Gameplay.Grid.Data;
 using LostInSin.Runtime.Gameplay.Pathfinding;
 using LostInSin.Runtime.Gameplay.Signals;
 using LostInSin.Runtime.Infrastructure.Templates;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using VContainer.Unity;
@@ -20,8 +20,8 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Visuals
 		private const float UPDATE_INTERVAL = 0.05f;
 		private float _updateTimer = 0f;
 
-		private Color _validColor = new Color(0f, .7f, 0f, .8f);
-		private Color _invalidColor = new Color(.7f, 0f, 0f, .8f);
+		private readonly Color _validColor = new Color(0f, .7f, 0f, .8f);
+		private readonly Color _invalidColor = new Color(.7f, 0f, 0f, .8f);
 		private Color _currentColor;
 
 		public MoveAbilityVisualDisplayer(IGridPathfinder gridPathfinder,
@@ -39,6 +39,12 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Visuals
 		protected override void SubscribeToEvents()
 		{
 			_signalBus.Subscribe<AbilityRequestCreatedSignal>(OnAbilityRequestCreatedSignal);
+			_signalBus.Subscribe<ActiveTurnCharacterChangedSignal>(OnActiveTurnCharacterChangedSignal);
+		}
+
+		private void OnActiveTurnCharacterChangedSignal(ActiveTurnCharacterChangedSignal signal)
+		{
+			ClearLineRenderer();
 		}
 
 		private void OnAbilityRequestCreatedSignal(AbilityRequestCreatedSignal signal)
@@ -134,6 +140,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Visuals
 		protected override void UnsubscribeFromEvents()
 		{
 			_signalBus.Unsubscribe<AbilityRequestCreatedSignal>(OnAbilityRequestCreatedSignal);
+			_signalBus.Unsubscribe<ActiveTurnCharacterChangedSignal>(OnActiveTurnCharacterChangedSignal);
 		}
 	}
 }

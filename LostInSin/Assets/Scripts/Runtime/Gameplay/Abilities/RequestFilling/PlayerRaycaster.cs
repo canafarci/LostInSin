@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using VContainer.Unity;
 
-namespace LostInSin.Runtime.Gameplay.Abilities.Player
+namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling
 {
 	public class PlayerRaycaster : IInitializable
 	{

@@ -39,6 +39,7 @@ MonoBehaviour:
   - rid: 4798449149334782021
   m_VersionTimestamp: 638688598814923361
   m_DebugInfo: {fileID: -861575038864690033}
+  m_RuntimeGraph: {fileID: 0}
   AssetID:
     m_Value0: 301162700759755154
     m_Value1: 8226426857419064026
@@ -98,6 +99,7 @@ MonoBehaviour:
     Variables: []
     NamedChildren: []
   m_Blackboards: []
+  m_MainBlackboardAuthoringAsset: {fileID: 9184943761421618290}
   m_CommandBuffer:
     m_Commands: []
   references:
@@ -220,7 +222,7 @@ MonoBehaviour:
         LocalValue:
           rid: 4798449125738152851
         LinkedVariable:
-          rid: 4798449149334782321
+          rid: 6768827970890498048
     - rid: 4798449125738152851
       type: {class: 'BlackboardVariable`1[[LostInSin.Runtime.Gameplay.Characters.CharacterFacade, LostInSin.Runtime]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -278,7 +280,7 @@ MonoBehaviour:
         LocalValue:
           rid: 4798449126359957534
         LinkedVariable:
-          rid: 4798449149334782321
+          rid: 6768827970890498048
     - rid: 4798449126359957532
       type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -289,7 +291,7 @@ MonoBehaviour:
         LocalValue:
           rid: 4798449126359957535
         LinkedVariable:
-          rid: 4798449149334782322
+          rid: 6768827970890498049
     - rid: 4798449126359957534
       type: {class: 'BlackboardVariable`1[[LostInSin.Runtime.Gameplay.Characters.CharacterFacade, LostInSin.Runtime]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -628,7 +630,7 @@ MonoBehaviour:
         m_FieldValues: []
         OperatorFieldModel:
           rid: -2
-    - rid: 4798449149334782321
+    - rid: 6768827970890498048
       type: {class: 'TypedVariableModel`1[[LostInSin.Runtime.Gameplay.Characters.CharacterFacade, LostInSin.Runtime]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
       data:
         ID:
@@ -638,7 +640,7 @@ MonoBehaviour:
         IsExposed: 1
         m_IsShared: 0
         m_Value: {fileID: 0}
-    - rid: 4798449149334782322
+    - rid: 6768827970890498049
       type: {class: 'TypedVariableModel`1[[LostInSin.Runtime.Gameplay.Abilities.Ability, LostInSin.Runtime]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
       data:
         ID:
@@ -870,7 +872,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c02bb70996b49eba31d0c206e28da24, type: 3}
-  m_Name: Archer Enemy Behaviour Graph Blackboard Editor
+  m_Name: Archer Enemy Behaviour Graph Blackboard
   m_EditorClassIdentifier: 
   VersionTimestamp: 638688598814923361
   AssetID:
@@ -921,7 +923,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2dd922ae02c94c87a66e46a10a7319b9, type: 3}
-  m_Name: Archer Enemy Behaviour Graph Blackboard Editor
+  m_Name: Archer Enemy Behaviour Graph Blackboard
   m_EditorClassIdentifier: 
   AssetID:
     m_Value0: 301162700759755154

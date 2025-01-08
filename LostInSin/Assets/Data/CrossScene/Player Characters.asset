@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerCharacters:
   - {fileID: 11400000, guid: c7d3c59149b393747ac8880fcb7cebb8, type: 2}
+  - {fileID: 11400000, guid: 49709327b82f34647929410ad545547d, type: 2}

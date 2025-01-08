@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using LostInSin.Runtime.Gameplay.Abilities.AbilityPlaying;
 using LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Visuals;
-using LostInSin.Runtime.Gameplay.Abilities.Player;
+using LostInSin.Runtime.Gameplay.Abilities.RequestFilling;
 using LostInSin.Runtime.Gameplay.Characters;
 using LostInSin.Runtime.Gameplay.Data;
 using LostInSin.Runtime.Gameplay.Data.SceneReferences;

@@ -23,7 +23,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c02bb70996b49eba31d0c206e28da24, type: 3}
-  m_Name: Melee Enemy Behaviour Graph Blackboard Editor
+  m_Name: Melee Enemy Behaviour Graph Blackboard
   m_EditorClassIdentifier: 
   VersionTimestamp: 638688599143810962
   AssetID:
@@ -102,6 +102,7 @@ MonoBehaviour:
   - rid: 4798449149334782208
   m_VersionTimestamp: 638688599142045149
   m_DebugInfo: {fileID: -9149104149724947795}
+  m_RuntimeGraph: {fileID: 0}
   AssetID:
     m_Value0: 13018116641849963148
     m_Value1: 10064237319018622489
@@ -178,6 +179,7 @@ MonoBehaviour:
       Tooltip: 
     NamedChildren: []
   m_Blackboards: []
+  m_MainBlackboardAuthoringAsset: {fileID: 5057915426420034585}
   m_CommandBuffer:
     m_Commands: []
   references:
@@ -575,7 +577,7 @@ MonoBehaviour:
         LocalValue:
           rid: 4798449149334782238
         LinkedVariable:
-          rid: 4798449149334782510
+          rid: 6768827970890498050
     - rid: 4798449149334782227
       type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -585,7 +587,7 @@ MonoBehaviour:
         LocalValue:
           rid: 4798449149334782240
         LinkedVariable:
-          rid: 4798449149334782511
+          rid: 6768827970890498051
     - rid: 4798449149334782228
       type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
       data:
@@ -614,7 +616,7 @@ MonoBehaviour:
         LocalValue:
           rid: 4798449149334782242
         LinkedVariable:
-          rid: 4798449149334782510
+          rid: 6768827970890498050
     - rid: 4798449149334782231
       type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -624,7 +626,7 @@ MonoBehaviour:
         LocalValue:
           rid: 4798449149334782243
         LinkedVariable:
-          rid: 4798449149334782512
+          rid: 6768827970890498052
     - rid: 4798449149334782232
       type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
       data:
@@ -653,7 +655,7 @@ MonoBehaviour:
         LocalValue:
           rid: 4798449149334782245
         LinkedVariable:
-          rid: 4798449149334782510
+          rid: 6768827970890498050
     - rid: 4798449149334782235
       type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -778,7 +780,7 @@ MonoBehaviour:
         IsExposed: 1
         m_IsShared: 1
         m_Value: {fileID: 11400000, guid: 7d85560cf15ee5a48ada8733ca4d529d, type: 2}
-    - rid: 4798449149334782510
+    - rid: 6768827970890498050
       type: {class: 'TypedVariableModel`1[[LostInSin.Runtime.Gameplay.Characters.CharacterFacade, LostInSin.Runtime]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
       data:
         ID:
@@ -788,7 +790,7 @@ MonoBehaviour:
         IsExposed: 1
         m_IsShared: 0
         m_Value: {fileID: 0}
-    - rid: 4798449149334782511
+    - rid: 6768827970890498051
       type: {class: 'TypedVariableModel`1[[LostInSin.Runtime.Gameplay.Abilities.Ability, LostInSin.Runtime]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
       data:
         ID:
@@ -798,7 +800,7 @@ MonoBehaviour:
         IsExposed: 0
         m_IsShared: 1
         m_Value: {fileID: 11400000, guid: 7d85560cf15ee5a48ada8733ca4d529d, type: 2}
-    - rid: 4798449149334782512
+    - rid: 6768827970890498052
       type: {class: 'TypedVariableModel`1[[LostInSin.Runtime.Gameplay.Abilities.Ability, LostInSin.Runtime]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
       data:
         ID:
@@ -1055,7 +1057,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2dd922ae02c94c87a66e46a10a7319b9, type: 3}
-  m_Name: Melee Enemy Behaviour Graph Blackboard Editor
+  m_Name: Melee Enemy Behaviour Graph Blackboard
   m_EditorClassIdentifier: 
   AssetID:
     m_Value0: 13018116641849963148
