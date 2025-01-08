@@ -26,6 +26,7 @@ namespace LostInSin.Runtime.Gameplay.GameplayLifecycle.Entry
 				foreach (CharacterData characterData in _playerCharactersSO.PlayerCharacters)
 				{
 					GameObject character = Object.Instantiate(characterData.Prefab);
+					character.transform.position = character.transform.position + Random.insideUnitSphere * 2f;
 					_charactersInSceneModel.playerCharactersInScene.Add(character.GetComponent<CharacterFacade>());
 				}
 			}
