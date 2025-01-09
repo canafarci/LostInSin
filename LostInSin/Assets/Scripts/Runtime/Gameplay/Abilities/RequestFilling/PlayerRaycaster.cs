@@ -4,6 +4,7 @@ using LostInSin.Runtime.Gameplay.Grid.Data;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using VContainer.Unity;
+using RaycastHit = UnityEngine.RaycastHit;
 
 namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling
 {
@@ -11,6 +12,8 @@ namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling
 	{
 		private readonly IGridPositionConverter _gridPositionConverter;
 		private Camera _mainCamera;
+
+		private RaycastHit[] _hits = new RaycastHit[10];
 
 		public PlayerRaycaster(IGridPositionConverter gridPositionConverter)
 		{
@@ -27,8 +30,8 @@ namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling
 		{
 			Ray ray = _mainCamera.ScreenPointToRay(raycastRequest.mousePosition);
 
-			if (Physics.Raycast(ray, out RaycastHit raycastHit, Mathf.Infinity, layerMask) &&
-			    raycastHit.transform.TryGetComponent(out T hitComponent))
+			if (TryRaycast(ray, layerMask, out RaycastHit hit) &&
+			    hit.transform.TryGetComponent(out T hitComponent))
 			{
 				component = hitComponent;
 				return true;
@@ -99,11 +102,33 @@ namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling
 		}
 
 
-		private static bool IsInvalidRaycast(Ray ray, LayerMask mask, out RaycastHit hit)
+		private bool IsInvalidRaycast(Ray ray, LayerMask mask, out RaycastHit hit)
 		{
 			hit = default;
 			return EventSystem.current.IsPointerOverGameObject() ||
-			       !Physics.Raycast(ray, out hit, Mathf.Infinity, mask);
+			       !TryRaycast(ray, mask, out hit);
+		}
+
+		private bool TryRaycast(Ray ray, LayerMask mask, out RaycastHit hit)
+		{
+			hit = default;
+
+			// Perform the raycast and check if there are any hits
+			int hitCount = Physics.RaycastNonAlloc(ray, _hits, Mathf.Infinity, mask, QueryTriggerInteraction.Ignore);
+
+			// Loop through all hits and check if any are on the specified layer mask
+			for (int i = 0; i < hitCount; i++)
+			{
+				if ((mask.value & (1 << _hits[i].collider.gameObject.layer)) != 0)
+				{
+					// Object is in the specified layer mask
+					hit = _hits[i];
+					return true;
+				}
+			}
+
+			// No object in the specified layer mask was hit
+			return false;
 		}
 	}
 }

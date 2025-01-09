@@ -8,12 +8,17 @@ using UnityEngine;
 
 namespace LostInSin.Runtime.Gameplay.Pathfinding
 {
+	public interface IGridPathfinder
+	{
+		bool FindPath(AbilityRequest abilityRequest, out List<GridCell> pathCells);
+		bool FindPath(GridCell startCell, GridCell targetCell, out List<GridCell> pathCells);
+	}
+
 	public class GridPathfinder : IGridPathfinder
 	{
 		private readonly GridModel _gridModel;
 
 		private readonly Dictionary<GridCell, (int row, int column)> _cellPositions = new();
-
 
 		public GridPathfinder(GridModel gridModel)
 		{
@@ -45,7 +50,8 @@ namespace LostInSin.Runtime.Gameplay.Pathfinding
 
 		public bool FindPath(AbilityRequest abilityRequest, out List<GridCell> pathCells)
 		{
-			pathCells = new List<GridCell>();
+			pathCells = new();
+
 			if (abilityRequest.data.TargetGridCell == null) return false;
 			if (abilityRequest.data.PathCells != null) return false; //path has been already set
 

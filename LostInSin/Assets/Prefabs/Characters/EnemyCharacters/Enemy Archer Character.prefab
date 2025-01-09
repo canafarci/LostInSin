@@ -144,7 +144,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 25b6be0e944eff648b1a859684eae153, type: 2}
     - target: {fileID: 7209445461687903701, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -3.625
       objectReference: {fileID: 0}
     - target: {fileID: 7209445461687903701, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
       propertyPath: m_LocalPosition.y
@@ -152,7 +152,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7209445461687903701, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1.452
       objectReference: {fileID: 0}
     - target: {fileID: 7209445461687903701, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
       propertyPath: m_LocalRotation.w
@@ -160,15 +160,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7209445461687903701, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7209445461687903701, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7209445461687903701, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7209445461687903701, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -188,7 +188,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8581914382870010518, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7921794386757203553, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}
@@ -236,6 +236,9 @@ MonoBehaviour:
   m_Graph: {fileID: 4553400752229106214, guid: 92e96176e1f12d04da42322fa4232a72, type: 2}
   m_BlackboardVariableOverridesList:
   - rid: 4798449125738152486
+  - rid: 6768827991727800492
+  m_IsInitialised: 0
+  m_IsStarted: 0
   references:
     version: 2
     RefIds:
@@ -247,6 +250,14 @@ MonoBehaviour:
           m_Value1: 4365108177924924020
         Name: Agent Character Facade
         m_Value: {fileID: 3798718527571218424}
+    - rid: 6768827991727800492
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 7240346779836529104}
 --- !u!4 &8606076331994728083 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7209445461687903701, guid: 3f3392c026f8b4a488968a46a7520cea, type: 3}

@@ -6,7 +6,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution
 {
 	public class AbilityExecutionData : Poolable
 	{
-		public HashSet<StringAsset> AbilityTriggers = new();
+		public readonly HashSet<StringAsset> AbilityTriggers = new();
 
 		public override void OnGetFromPool()
 		{

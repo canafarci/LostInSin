@@ -8,9 +8,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling.RequestHandlers
 	{
 		public override bool AppliesTo(AbilityRequestType requestType)
 		{
-			//Movement + GridPositionRaycasted means "move to grid cell"
-			return requestType.HasFlag(AbilityRequestType.Movement)
-			       && requestType.HasFlag(AbilityRequestType.GridPositionRaycasted);
+			return requestType.HasFlag(AbilityRequestType.GridPositionRaycasted);
 		}
 
 		protected override void ProcessRequest(AbilityRequest abilityRequest, PlayerAbilityRequestFiller context)

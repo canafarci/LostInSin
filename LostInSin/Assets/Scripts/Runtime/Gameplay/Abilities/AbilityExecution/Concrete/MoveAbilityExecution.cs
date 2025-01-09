@@ -25,17 +25,18 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.Concrete
 
 		public override void StartAbility()
 		{
-			executionStage = AbilityExecutionStage.Updating;
-
 			CharacterFacade characterFacade = requestData.User;
 			characterFacade.PlayAnimation(AnimationID.Move);
 			characterFacade.SetCharacterCell(requestData.TargetGridCell);
 
 			UpdatePositionAndDirection(characterFacade);
+
+			executionStage = AbilityExecutionStage.Updating;
 		}
 
 		public override void UpdateAbility()
 		{
+			Debug.Log(requestData.PathCells.Count);
 			Transform userTransform = requestData.User.transform;
 
 			if (Vector3.SqrMagnitude(userTransform.position - _targetPosition) > 0.01f)
@@ -52,14 +53,14 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.Concrete
 			}
 			else
 			{
-				executionStage = AbilityExecutionStage.Complete;
+				executionStage = AbilityExecutionStage.Finishing;
 			}
 		}
 
-		public override void EndAbility()
+		public override void FinishAbility()
 		{
+			executionStage = AbilityExecutionStage.Complete;
 			requestData.User.PlayAnimation(AnimationID.Idle);
-			base.EndAbility();
 		}
 
 		private void UpdatePositionAndDirection(CharacterFacade characterFacade)

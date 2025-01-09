@@ -30,10 +30,11 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution
 		{
 		}
 
+		// Clean up resources (if any)
 		public virtual void EndAbility()
 		{
-			executionStage = AbilityExecutionStage.Complete;
-			Debug.Log("Action Ended");
+			Debug.Log($"{name} completed");
+			PoolManager.ReleasePure(executionData);
 		}
 	}
 }

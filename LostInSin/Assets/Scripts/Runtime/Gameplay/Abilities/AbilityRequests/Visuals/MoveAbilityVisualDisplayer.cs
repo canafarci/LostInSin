@@ -51,8 +51,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Visuals
 		{
 			AbilityRequest abilityRequest = signal.request;
 			if (!abilityRequest.data.User.isPlayerCharacter) return;
-			if (!(abilityRequest.RequestType.HasFlag(AbilityRequestType.GridPathFinding) &&
-			      abilityRequest.RequestType.HasFlag(AbilityRequestType.Movement))) return;
+			if (!abilityRequest.RequestType.HasFlag(AbilityRequestType.GridPathFinding)) return;
 
 			_abilityRequest = abilityRequest;
 		}
@@ -107,7 +106,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Visuals
 
 		private void ChangeColorBasedOnPlayerAP(List<GridCell> path, CharacterFacade characterFacade)
 		{
-			int apCost = _abilityRequest.data.DefaultActionPointCost + path.Count - 1;
+			int apCost = _abilityRequest.data.DefaultActionPointCost + path.Count - 1; //-1 because cell count is one less than point count
 
 			if (apCost > characterFacade.actionPoints && _currentColor != _invalidColor)
 			{

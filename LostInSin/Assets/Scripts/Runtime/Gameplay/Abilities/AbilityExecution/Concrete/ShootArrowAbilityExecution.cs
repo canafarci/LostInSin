@@ -1,10 +1,8 @@
-using Animancer;
-using Cysharp.Threading.Tasks;
 using LostInSin.Runtime.Gameplay.Abilities.Projectiles;
-using LostInSin.Runtime.Gameplay.Characters.Visuals;
 using LostInSin.Runtime.Gameplay.Characters.Visuals.Animations;
 using LostInSin.Runtime.Gameplay.Characters.Visuals.Animations.Enums;
 using LostInSin.Runtime.Infrastructure.MemoryPool;
+using Animancer;
 using UnityEngine;
 
 namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.Concrete
@@ -36,11 +34,11 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.Concrete
 
 			if (executionData.AbilityTriggers.Contains(ShootArrowTrigger))
 			{
-				_arrow.Shoot(target: requestData.TargetCharacter);
+				executionStage = AbilityExecutionStage.Finishing;
 
+				_arrow.Shoot(target: requestData.TargetCharacter);
 				_direction = Quaternion.Euler(0, -90, 0) * _direction;
 				requestData.User.PlayAnimation(AnimationID.Idle, 0.1f);
-				executionStage = AbilityExecutionStage.Finishing;
 			}
 		}
 

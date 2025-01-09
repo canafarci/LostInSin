@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Animancer;
 using LostInSin.Runtime.Gameplay.Characters.Visuals.Animations.Enums;
+using LostInSin.Runtime.Infrastructure.EnumFieldAdder;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -12,5 +13,7 @@ namespace LostInSin.Runtime.Gameplay.Characters.Visuals.Animations.Data
 	{
 		public Dictionary<Avatar, Dictionary<AnimationID, TransitionAssetBase>> CharacterAnimations;
 		public List<StringAsset> AnimationEventStringAssets;
+
+		[ShowInInspector] private EnumFieldAdder<AnimationID> _animationIDAdder = new();
 	}
 }

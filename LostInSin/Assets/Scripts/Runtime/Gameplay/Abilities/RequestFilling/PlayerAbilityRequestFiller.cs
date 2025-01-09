@@ -135,6 +135,12 @@ namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling
 			{
 				_fixedUpdateAbilityRequestTypeChain.Handle(_ability.AbilityRequest, this);
 			}
+
+			// At the end of chain, mark the raycast as processed to disable it for processing again
+			if (RaycastRequest != null)
+			{
+				RaycastRequest.isProcessed = true;
+			}
 		}
 
 		public void Dispose()
