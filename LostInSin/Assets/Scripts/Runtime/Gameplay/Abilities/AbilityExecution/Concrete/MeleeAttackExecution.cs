@@ -18,6 +18,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.Concrete
 		public override void StartAbility()
 		{
 			requestData.PathCells.RemoveAt(requestData.PathCells.Count - 1);
+			requestData.TargetGridCell = requestData.PathCells[^1];
 			base.Initialize(requestData);
 
 			MoveAbilityExecution.Initialize(requestData);
@@ -37,7 +38,6 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.Concrete
 			{
 				if (!_calledPlayAnimation)
 				{
-					Debug.Log("FF");
 					_calledPlayAnimation = true;
 					requestData.User.PlayAnimation(AnimationID.MeleeAttack);
 				}

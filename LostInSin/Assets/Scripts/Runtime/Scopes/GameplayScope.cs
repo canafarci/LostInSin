@@ -53,8 +53,8 @@ namespace LostInSin.Runtime.Scopes
 			builder.Register<PlayerAbilityRequestFiller>(Lifetime.Singleton).AsImplementedInterfaces();
 			builder.Register<AbilityPlayer>(Lifetime.Singleton).AsImplementedInterfaces();
 			builder.Register<PlayerRaycaster>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
-			builder.Register<MoveAbilityVisualDisplayer>(Lifetime.Singleton).AsImplementedInterfaces()
-				.AsSelf();
+			builder.Register<MoveAbilityVisualDisplayer>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
+			builder.Register<MeleeAttackAbilityVisualDisplayer>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
 		}
 
 		private void RegisterAbilityUI(IContainerBuilder builder)
@@ -151,6 +151,7 @@ namespace LostInSin.Runtime.Scopes
 			builder.DeclareSignal<ActiveTurnCharacterChangedSignal>();
 			builder.DeclareSignal<EndCharacterTurnSignal>();
 			builder.DeclareSignal<AbilityRequestCreatedSignal>();
+			builder.DeclareSignal<AbilityRequestCancelledSignal>();
 			builder.DeclareSignal<AnimationEventSignal>();
 			builder.DeclareSignal<InitializeTurnBasedCombatSignal>();
 			builder.DeclareSignal<StartTurnBasedCombatSignal>();

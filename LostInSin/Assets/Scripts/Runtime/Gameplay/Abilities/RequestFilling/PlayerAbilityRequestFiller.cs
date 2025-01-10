@@ -53,11 +53,13 @@ namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling
 			PositionRaycastedHandler positionRaycastedHandler = new();
 			GridPathFindingHandler gridPathFindingHandler = new();
 			GridMovementHandler gridMovementHandler = new();
+			EnemyPositionPathfindingHandler enemyPositionPathfindingHandler = new();
 
 			// Chain them in the desired sequence for each player loop:
 			_updateAbilityRequestTypeChain = selfTargetedHandler;
 			selfTargetedHandler
-				.SetNext(gridPathFindingHandler);
+				.SetNext(gridPathFindingHandler)
+				.SetNext(enemyPositionPathfindingHandler);
 
 			_fixedUpdateAbilityRequestTypeChain = enemyTargetedHandler;
 			enemyTargetedHandler
@@ -95,10 +97,16 @@ namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling
 
 			if (request.state == AbilityRequestState.Cancelled)
 			{
-				// Simply reset the selected ability
-				_ability = null;
+				OnAbilityCancelled();
 				return;
 			}
+		}
+
+		private void OnAbilityCancelled()
+		{
+			_signalBus.Fire(new AbilityRequestCancelledSignal());
+			// Simply reset the selected ability
+			_ability = null;
 		}
 
 		private void OnRequestComplete(AbilityRequest request)
@@ -191,7 +199,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling
 		/// </summary>
 		private void OnActiveTurnCharacterChangedSignal(ActiveTurnCharacterChangedSignal signal)
 		{
-			_ability = null;
+			OnAbilityCancelled();
 		}
 
 		/// <summary>
@@ -199,7 +207,10 @@ namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling
 		/// </summary>
 		private void AbilityClickedHandler(Ability ability)
 		{
-			// For example, if we don't have enough AP to use this ability, do nothing:
+			// Cancel previous ability, if any
+			OnAbilityCancelled();
+
+			// If we don't have enough AP to use this ability, do nothing:
 			if (!CharacterHasEnoughAP(ability.AbilityRequest.DefaultActionPointCost)) return;
 
 			// If the ability player is currently playing an animation, do nothing:

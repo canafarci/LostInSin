@@ -36,7 +36,6 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.Concrete
 
 		public override void UpdateAbility()
 		{
-			Debug.Log(requestData.PathCells.Count);
 			Transform userTransform = requestData.User.transform;
 
 			if (Vector3.SqrMagnitude(userTransform.position - _targetPosition) > 0.01f)

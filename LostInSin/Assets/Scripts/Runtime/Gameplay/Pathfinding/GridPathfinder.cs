@@ -10,7 +10,6 @@ namespace LostInSin.Runtime.Gameplay.Pathfinding
 {
 	public interface IGridPathfinder
 	{
-		bool FindPath(AbilityRequest abilityRequest, out List<GridCell> pathCells);
 		bool FindPath(GridCell startCell, GridCell targetCell, out List<GridCell> pathCells);
 	}
 
@@ -44,20 +43,7 @@ namespace LostInSin.Runtime.Gameplay.Pathfinding
 
 		public bool FindPath(GridCell startCell, GridCell targetCell, out List<GridCell> pathCells)
 		{
-			pathCells = new List<GridCell>();
-			return FindPath(ref pathCells, startCell, targetCell);
-		}
-
-		public bool FindPath(AbilityRequest abilityRequest, out List<GridCell> pathCells)
-		{
 			pathCells = new();
-
-			if (abilityRequest.data.TargetGridCell == null) return false;
-			if (abilityRequest.data.PathCells != null) return false; //path has been already set
-
-			GridCell startCell = abilityRequest.data.User.currentCell;
-			GridCell targetCell = abilityRequest.data.TargetGridCell;
-
 			return FindPath(ref pathCells, startCell, targetCell);
 		}
 
@@ -69,12 +55,12 @@ namespace LostInSin.Runtime.Gameplay.Pathfinding
 			if (!_cellPositions.ContainsKey(startCell) || !_cellPositions.ContainsKey(targetCell))
 				return false; // Start or target cell is invalid
 
-			var openSet = new HashSet<GridCell> { startCell };
-			var closedSet = new HashSet<GridCell>();
+			HashSet<GridCell> openSet = new() { startCell };
+			HashSet<GridCell> closedSet = new();
 
-			var cameFrom = new Dictionary<GridCell, GridCell>();
-			var gScore = new Dictionary<GridCell, float> { [startCell] = 0 };
-			var fScore = new Dictionary<GridCell, float> { [startCell] = HeuristicCostEstimate(startCell, targetCell) };
+			Dictionary<GridCell, GridCell> cameFrom = new();
+			Dictionary<GridCell, float> gScore = new() { [startCell] = 0 };
+			Dictionary<GridCell, float> fScore = new() { [startCell] = HeuristicCostEstimate(startCell, targetCell) };
 
 			while (openSet.Count > 0)
 			{
@@ -90,9 +76,10 @@ namespace LostInSin.Runtime.Gameplay.Pathfinding
 				openSet.Remove(current);
 				closedSet.Add(current);
 
-				foreach (var neighbor in GetNeighbors(current))
+				foreach (GridCell neighbor in GetNeighbors(current))
 				{
-					if (closedSet.Contains(neighbor) || neighbor.isOccupied)
+					if (closedSet.Contains(neighbor) ||
+					    (neighbor != targetCell && neighbor.isOccupied))
 						continue;
 
 					float tentativeGScore = gScore[current] + DistanceBetween(current, neighbor);
@@ -130,10 +117,10 @@ namespace LostInSin.Runtime.Gameplay.Pathfinding
 
 		private IEnumerable<GridCell> GetNeighbors(GridCell cell)
 		{
-			var neighbors = new List<GridCell>();
-			var (row, col) = GetCellPosition(cell);
+			List<GridCell> neighbors = new();
+			(int row, int col) = GetCellPosition(cell);
 
-			var directions = new (int dRow, int dCol)[]
+			(int dRow, int dCol)[] directions = new (int dRow, int dCol)[]
 			{
 				(-1, 0), // Up
 				(1, 0), // Down
@@ -141,7 +128,7 @@ namespace LostInSin.Runtime.Gameplay.Pathfinding
 				(0, 1) // Right
 			};
 
-			foreach (var (dRow, dCol) in directions)
+			foreach ((int dRow, int dCol) in directions)
 			{
 				int newRow = row + dRow;
 				int newCol = col + dCol;
@@ -165,15 +152,15 @@ namespace LostInSin.Runtime.Gameplay.Pathfinding
 
 		private (int row, int column) GetCellPosition(GridCell cell)
 		{
-			if (_cellPositions.TryGetValue(cell, out var position))
+			if (_cellPositions.TryGetValue(cell, out (int row, int column) position))
 				return position;
 
-			throw new Exception("Cell position not found.");
+			throw new("Cell position not found.");
 		}
 
 		private List<GridCell> ReconstructPath(Dictionary<GridCell, GridCell> cameFrom, GridCell current)
 		{
-			var path = new List<GridCell> { current };
+			List<GridCell> path = new() { current };
 			while (cameFrom.TryGetValue(current, out current))
 			{
 				path.Insert(0, current);

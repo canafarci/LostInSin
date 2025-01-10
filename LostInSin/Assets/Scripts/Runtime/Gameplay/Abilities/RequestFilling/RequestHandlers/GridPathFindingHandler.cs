@@ -14,7 +14,12 @@ namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling.RequestHandlers
 
 		protected override void ProcessRequest(AbilityRequest abilityRequest, PlayerAbilityRequestFiller context)
 		{
-			if (context.gridPathfinder.FindPath(abilityRequest, out List<GridCell> pathCells))
+			if (abilityRequest.data.User.currentCell == null) return;
+			if (abilityRequest.data.TargetGridCell == null) return;
+
+			if (context.gridPathfinder.FindPath(abilityRequest.data.User.currentCell,
+			                                    abilityRequest.data.TargetGridCell,
+			                                    out List<GridCell> pathCells))
 			{
 				abilityRequest.data.PathCells = pathCells;
 			}

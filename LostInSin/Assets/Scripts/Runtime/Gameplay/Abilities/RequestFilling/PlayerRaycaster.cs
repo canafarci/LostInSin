@@ -25,6 +25,24 @@ namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling
 			_mainCamera = Camera.main;
 		}
 
+		public bool TryRaycastForComponent<T>(out T component)
+			where T : MonoBehaviour
+		{
+			Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+			LayerMask mask = LayerMask.GetMask("Character");
+
+
+			if (TryRaycast(ray, mask, out RaycastHit hit) &&
+			    hit.transform.TryGetComponent(out T hitComponent))
+			{
+				component = hitComponent;
+				return true;
+			}
+
+			component = null;
+			return false;
+		}
+
 		public bool TryRaycastForComponent<T>(ref RaycastRequest raycastRequest, LayerMask layerMask, out T component)
 			where T : MonoBehaviour
 		{
