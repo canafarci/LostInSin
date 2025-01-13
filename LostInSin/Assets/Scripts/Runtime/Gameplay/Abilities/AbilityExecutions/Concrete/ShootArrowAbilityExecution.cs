@@ -1,11 +1,13 @@
+using Animancer;
+using LostInSin.Runtime.Gameplay.Abilities.AbilityRequests;
 using LostInSin.Runtime.Gameplay.Abilities.Projectiles;
+using LostInSin.Runtime.Gameplay.Characters;
 using LostInSin.Runtime.Gameplay.Characters.Visuals.Animations;
 using LostInSin.Runtime.Gameplay.Characters.Visuals.Animations.Enums;
 using LostInSin.Runtime.Infrastructure.MemoryPool;
-using Animancer;
 using UnityEngine;
 
-namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.Concrete
+namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecutions.Concrete
 {
 	[CreateAssetMenu(fileName = "Shoot Arrow Ability Execution Logic",
 	                 menuName = "LostInSin/Abilities/AbilityExecution/Shoot Arrow Ability")]
@@ -17,9 +19,19 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.Concrete
 		private Vector3 _direction;
 		private Arrow _arrow;
 
+		private CharacterFacade _target;
+
+
+		public override void Initialize(AbilityRequestData data)
+		{
+			base.Initialize(data);
+
+			_target = data.TargetCharacter;
+		}
+
 		public override void StartAbility()
 		{
-			requestData.User.PlayAnimation(AnimationID.DrawArrow);
+			executionData.User.PlayAnimation(AnimationID.DrawArrow);
 
 			GetArrowFromPool();
 
@@ -36,9 +48,9 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.Concrete
 			{
 				executionStage = AbilityExecutionStage.Finishing;
 
-				_arrow.Shoot(target: requestData.TargetCharacter);
+				_arrow.Shoot(target: _target);
 				_direction = Quaternion.Euler(0, -90, 0) * _direction;
-				requestData.User.PlayAnimation(AnimationID.Idle, 0.1f);
+				executionData.User.PlayAnimation(AnimationID.Idle, 0.1f);
 			}
 		}
 
@@ -46,25 +58,25 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.Concrete
 		{
 			SlerpRotationTowardDirection();
 
-			float dot = Quaternion.Dot(requestData.User.transform.rotation, Quaternion.LookRotation(_direction));
+			float dot = Quaternion.Dot(executionData.User.transform.rotation, Quaternion.LookRotation(_direction));
 
 			if (_arrow.ReachedTarget && Mathf.Abs(dot) > 0.9999f) // if dot value is near 1, this means they are identical
 			{
-				requestData.TargetCharacter.TakeDamage(BaseDamage);
+				_target.TakeDamage(BaseDamage);
 				executionStage = AbilityExecutionStage.Complete;
 			}
 		}
 
 		private void SlerpRotationTowardDirection()
 		{
-			requestData.User.transform.rotation = Quaternion.Slerp(requestData.User.transform.rotation,
-			                                                       Quaternion.LookRotation(_direction),
-			                                                       AnimationConstants.rotationSpeed * Time.deltaTime);
+			executionData.User.transform.rotation = Quaternion.Slerp(executionData.User.transform.rotation,
+			                                                         Quaternion.LookRotation(_direction),
+			                                                         AnimationConstants.rotationSpeed * Time.deltaTime);
 		}
 
 		private void SetCharacterDirection()
 		{
-			_direction = (requestData.TargetCharacter.transform.position - requestData.User.transform.position).normalized;
+			_direction = (_target.transform.position - executionData.User.transform.position).normalized;
 			_direction.y = 0;
 			_direction = Quaternion.Euler(0, 90, 0) * _direction;
 		}
@@ -74,8 +86,15 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution.Concrete
 			_arrow = PoolManager.GetMono<Arrow>();
 
 
-			_arrow.transform.SetParent(requestData.User.visualReferences.animationBones[AnimationBoneID.ArrowHand]);
+			_arrow.transform.SetParent(executionData.User.visualReferences.animationBones[AnimationBoneID.ArrowHand]);
 			_arrow.ResetPosition();
+		}
+
+		public override void EndAbility()
+		{
+			_target = null;
+
+			base.EndAbility();
 		}
 	}
 }

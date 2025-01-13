@@ -26,8 +26,8 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     ClassTypeName: LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.AbilityRequestData,
       LostInSin.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    InitialSize: 5
-    DefaultCapacity: 10
+    InitialSize: 20
+    DefaultCapacity: 20
     MaximumSize: 100
     ManagePoolOnSceneChange: 1
     LifetimeSceneID: 3

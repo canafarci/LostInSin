@@ -7,6 +7,7 @@ using LostInSin.Runtime.Gameplay.TurnBasedCombat;
 using LostInSin.Runtime.Gameplay.UI.AbilityPanel;
 using LostInSin.Runtime.Infrastructure.Signals;
 using System;
+using LostInSin.Runtime.Infrastructure.MemoryPool;
 using UnityEngine;
 using VContainer.Unity;
 
@@ -52,19 +53,19 @@ namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling
 			EnemyTargetedHandler enemyTargetedHandler = new();
 			PositionRaycastedHandler positionRaycastedHandler = new();
 			GridPathFindingHandler gridPathFindingHandler = new();
-			GridMovementHandler gridMovementHandler = new();
-			EnemyPositionPathfindingHandler enemyPositionPathfindingHandler = new();
+			GridPositionRaycastedHandler gridPositionRaycastedHandler = new();
+			EnemyTargetedPathfindingHandler enemyTargetedPathfindingHandler = new();
 
 			// Chain them in the desired sequence for each player loop:
 			_updateAbilityRequestTypeChain = selfTargetedHandler;
 			selfTargetedHandler
-				.SetNext(gridPathFindingHandler)
-				.SetNext(enemyPositionPathfindingHandler);
+				.SetNext(enemyTargetedPathfindingHandler)
+				.SetNext(gridPathFindingHandler);
 
 			_fixedUpdateAbilityRequestTypeChain = enemyTargetedHandler;
 			enemyTargetedHandler
 				.SetNext(positionRaycastedHandler)
-				.SetNext(gridMovementHandler);
+				.SetNext(gridPositionRaycastedHandler);
 		}
 
 		#region IInitializable, ITickable, IFixedTickable
@@ -187,6 +188,8 @@ namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling
 			_ability.AbilityExecution.Initialize(request.data);
 			_turnModel.activeCharacter.ReduceActionPoints(cost);
 			_abilityPlayer.AddAbilityForPlaying(ability.AbilityExecution);
+
+			PoolManager.ReleasePure(request.data);
 		}
 
 		#endregion
@@ -213,7 +216,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling
 			// If we don't have enough AP to use this ability, do nothing:
 			if (!CharacterHasEnoughAP(ability.AbilityRequest.DefaultActionPointCost)) return;
 
-			// If the ability player is currently playing an animation, do nothing:
+			// If the ability player is currently executing an ability, do nothing:
 			if (_abilityPlayer.isPlaying) return;
 
 			// Initialize the request

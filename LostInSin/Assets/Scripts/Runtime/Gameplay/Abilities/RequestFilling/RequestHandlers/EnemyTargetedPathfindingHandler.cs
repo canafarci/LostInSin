@@ -2,7 +2,7 @@ using LostInSin.Runtime.Gameplay.Abilities.AbilityRequests;
 
 namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling.RequestHandlers
 {
-	public class EnemyPositionPathfindingHandler : AbilityRequestTypeHandlerBase
+	public class EnemyTargetedPathfindingHandler : AbilityRequestTypeHandlerBase
 	{
 		public override bool AppliesTo(AbilityRequestType requestType)
 		{

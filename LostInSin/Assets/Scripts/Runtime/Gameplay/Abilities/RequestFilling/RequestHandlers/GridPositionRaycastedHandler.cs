@@ -1,10 +1,9 @@
 using LostInSin.Runtime.Gameplay.Abilities.AbilityRequests;
 using LostInSin.Runtime.Gameplay.Grid.Data;
-using UnityEngine;
 
 namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling.RequestHandlers
 {
-	public class GridMovementHandler : AbilityRequestTypeHandlerBase
+	public class GridPositionRaycastedHandler : AbilityRequestTypeHandlerBase
 	{
 		public override bool AppliesTo(AbilityRequestType requestType)
 		{
@@ -16,8 +15,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling.RequestHandlers
 			// Do a raycast for an empty cell, set it as TargetGridCell
 			if (context.RaycastRequest != null && !context.RaycastRequest.isProcessed)
 			{
-				if (context.playerRaycaster.TryRaycastForEmptyGridCell(
-				                                                       abilityRequest,
+				if (context.playerRaycaster.TryRaycastForEmptyGridCell(abilityRequest,
 				                                                       ref context.RaycastRequest,
 				                                                       out GridCell cell))
 				{

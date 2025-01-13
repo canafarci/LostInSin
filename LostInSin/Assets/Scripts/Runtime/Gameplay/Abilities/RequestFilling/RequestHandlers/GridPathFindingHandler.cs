@@ -21,6 +21,13 @@ namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling.RequestHandlers
 			                                    abilityRequest.data.TargetGridCell,
 			                                    out List<GridCell> pathCells))
 			{
+				//remove last cell of the path if the pathfinding logic is enemy targeted
+				if (abilityRequest.RequestType.HasFlag(AbilityRequestType.EnemyTargeted))
+				{
+					pathCells.RemoveAt(pathCells.Count - 1);
+					abilityRequest.data.TargetGridCell = pathCells[^1];
+				}
+
 				abilityRequest.data.PathCells = pathCells;
 			}
 		}

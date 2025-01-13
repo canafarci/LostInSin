@@ -1,4 +1,4 @@
-using LostInSin.Runtime.Gameplay.Abilities.AbilityExecution;
+using LostInSin.Runtime.Gameplay.Abilities.AbilityExecutions;
 using LostInSin.Runtime.Gameplay.Abilities.AbilityPlaying;
 using LostInSin.Runtime.Gameplay.Characters;
 using VContainer;

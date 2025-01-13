@@ -16,8 +16,8 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Concrete
 		{
 			if (data.PathCells != null && data.TargetCharacter != null)
 			{
-				// traversed cell count is point count - 1 and one less for the cell which the target is in
-				data.DynamicActionPointCost = data.PathCells.Count - 2;
+				//remove the cost of the cell the character starts the movement at
+				data.DynamicActionPointCost = data.PathCells.Count - 1;
 				state = AbilityRequestState.Complete;
 			}
 		}

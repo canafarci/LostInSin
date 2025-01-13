@@ -24,4 +24,4 @@ MonoBehaviour:
   AbilityName: Melee Attack
   Icon: {fileID: 21300000, guid: f01ce7fcd8365f0489dc24ec78a45d02, type: 3}
   AbilityRequest: {fileID: 11400000, guid: efd139d6e9a232945897994987fa93bf, type: 2}
-  AbilityExecution: {fileID: 11400000, guid: 2a65524e70822fe40bc60945a6e8cec3, type: 2}
+  AbilityExecution: {fileID: 11400000, guid: e7240e3aa33d5c44f9b1b25417ee9576, type: 2}

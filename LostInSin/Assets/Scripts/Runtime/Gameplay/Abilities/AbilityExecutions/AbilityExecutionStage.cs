@@ -1,4 +1,4 @@
-namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution
+namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecutions
 {
 	public enum AbilityExecutionStage
 	{

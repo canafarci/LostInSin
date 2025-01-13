@@ -44,6 +44,8 @@ namespace LostInSin.Runtime.Gameplay.Characters
 			{
 				_character.currentStats[StatID.Health] = currentHealth;
 			}
+
+			Debug.Log($"{name} hp: {currentHealth}");
 		}
 
 

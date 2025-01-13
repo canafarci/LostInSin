@@ -14,8 +14,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling.RequestHandlers
 		{
 			if (context.RaycastRequest != null && !context.RaycastRequest.isProcessed)
 			{
-				if (context.playerRaycaster.TryRaycastForPosition(
-				                                                  abilityRequest,
+				if (context.playerRaycaster.TryRaycastForPosition(abilityRequest,
 				                                                  ref context.RaycastRequest,
 				                                                  out Vector3 position))
 				{

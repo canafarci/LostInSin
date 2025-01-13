@@ -1,30 +1,31 @@
 using System.Collections.Generic;
-using LostInSin.Runtime.Gameplay.Abilities.AbilityExecution;
+using LostInSin.Runtime.Gameplay.Abilities.AbilityExecutions;
 using LostInSin.Runtime.Gameplay.Signals;
 using LostInSin.Runtime.Infrastructure.Templates;
 using VContainer.Unity;
 
 namespace LostInSin.Runtime.Gameplay.Abilities.AbilityPlaying
 {
+	public interface IAbilityPlayer
+	{
+		void AddAbilityForPlaying(AbilityExecution abilityExecution);
+		bool isPlaying { get; }
+	}
+
 	public class AbilityPlayer : SignalListener, ITickable, IAbilityPlayer
 	{
-		private Stack<AbilityExecution.AbilityExecution> _actionsToPlay = new();
-		private AbilityExecution.AbilityExecution _currentPlayingAbility = null;
+		private AbilityExecution _currentPlayingAbility = null;
 
-		public bool isPlaying => _currentPlayingAbility != null || _actionsToPlay.Count > 0;
+		public bool isPlaying => _currentPlayingAbility != null;
 
-		public void AddAbilityForPlaying(AbilityExecution.AbilityExecution abilityExecution) =>
-			_actionsToPlay.Push(abilityExecution);
+		public void AddAbilityForPlaying(AbilityExecution abilityExecution)
+		{
+			_currentPlayingAbility = abilityExecution;
+			_currentPlayingAbility.StartAbility();
+		}
 
 		public void Tick()
 		{
-			if (ShouldPlayNextAbility())
-			{
-				_currentPlayingAbility = _actionsToPlay.Pop();
-				//start ability is called here
-				_currentPlayingAbility.StartAbility();
-			}
-
 			if (_currentPlayingAbility != null) //ability could be null if there is no abilities to play
 			{
 				if (ShouldUpdateAbility())
@@ -40,32 +41,24 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityPlaying
 				if (ShouldEndAbility())
 				{
 					_currentPlayingAbility.EndAbility();
-					TryPopNextAbility();
+					CheckEndTurn();
 				}
 			}
 		}
-
-		private bool ShouldPlayNextAbility() => _currentPlayingAbility == null && _actionsToPlay.Count > 0;
-
 
 		private bool ShouldUpdateAbility() => _currentPlayingAbility.executionStage == AbilityExecutionStage.Updating;
 		private bool ShouldFinishAbility() => _currentPlayingAbility.executionStage == AbilityExecutionStage.Finishing;
 		private bool ShouldEndAbility() => _currentPlayingAbility.executionStage == AbilityExecutionStage.Complete;
 
-		private void TryPopNextAbility()
+		private void CheckEndTurn()
 		{
-			if (_actionsToPlay.Count > 0)
-				_currentPlayingAbility = _actionsToPlay.Pop();
-			else
-			{
-				CheckUserAPAndAdvanceTurn(_currentPlayingAbility);
-				_currentPlayingAbility = null;
-			}
+			CheckUserAPAndAdvanceTurn(_currentPlayingAbility);
+			_currentPlayingAbility = null;
 		}
 
-		private void CheckUserAPAndAdvanceTurn(AbilityExecution.AbilityExecution currentPlayingAbility)
+		private void CheckUserAPAndAdvanceTurn(AbilityExecution currentPlayingAbility)
 		{
-			if (currentPlayingAbility.requestData.User.actionPoints == 0)
+			if (currentPlayingAbility.executionData.User.actionPoints == 0)
 			{
 				_signalBus.Fire(new EndCharacterTurnSignal());
 			}

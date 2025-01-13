@@ -1,4 +1,4 @@
-using LostInSin.Runtime.Gameplay.Abilities.AbilityExecution;
+using LostInSin.Runtime.Gameplay.Abilities.AbilityExecutions;
 using LostInSin.Runtime.Gameplay.Abilities.AbilityRequests;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -13,6 +13,6 @@ namespace LostInSin.Runtime.Gameplay.Abilities
 		public string AbilityName;
 		public Sprite Icon;
 		public AbilityRequest AbilityRequest;
-		public AbilityExecution.AbilityExecution AbilityExecution;
+		public AbilityExecution AbilityExecution;
 	}
 }

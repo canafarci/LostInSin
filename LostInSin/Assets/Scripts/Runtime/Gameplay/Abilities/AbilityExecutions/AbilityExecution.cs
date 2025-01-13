@@ -3,20 +3,19 @@ using LostInSin.Runtime.Infrastructure.MemoryPool;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecution
+namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecutions
 {
 	public abstract class AbilityExecution : SerializedScriptableObject
 	{
 		public AbilityExecutionStage executionStage { get; protected set; }
 
-		public AbilityRequestData requestData { get; private set; }
 		public AbilityExecutionData executionData { get; private set; }
 
-		public virtual void Initialize(AbilityRequestData requestData)
+		public virtual void Initialize(AbilityRequestData data)
 		{
-			this.requestData = requestData;
 			executionStage = AbilityExecutionStage.Starting;
 			executionData = PoolManager.GetPure<AbilityExecutionData>();
+			executionData.User = data.User;
 		}
 
 		// Logic to execute when the action starts
