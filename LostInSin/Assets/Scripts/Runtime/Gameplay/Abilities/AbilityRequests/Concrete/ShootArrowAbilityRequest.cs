@@ -13,10 +13,16 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Concrete
 
 		public override void UpdateRequest()
 		{
-			if (data.TargetCharacter != null)
+			if (IsRequestDataValid())
 			{
 				state = AbilityRequestState.Complete;
 			}
+		}
+
+		private bool IsRequestDataValid()
+		{
+			return data.TargetCharacter != null &&
+			       data.TargetCharacter.isDead == false;
 		}
 	}
 }

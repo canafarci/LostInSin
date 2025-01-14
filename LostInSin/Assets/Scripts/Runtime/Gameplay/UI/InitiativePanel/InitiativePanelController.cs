@@ -6,6 +6,7 @@ using LostInSin.Runtime.Gameplay.TurnBasedCombat;
 using LostInSin.Runtime.Infrastructure.Templates;
 using R3;
 using UnityEngine;
+using UnityEngine.Assertions;
 using VContainer;
 using VContainer.Unity;
 
@@ -26,17 +27,22 @@ namespace LostInSin.Runtime.Gameplay.UI.InitiativePanel
 		{
 			_signalBus.Subscribe<StartTurnBasedCombatSignal>(OnStartTurnBasedCombatSignalHandler);
 			_signalBus.Subscribe<ActiveTurnCharacterChangedSignal>(OnActiveTurnCharacterChangedSignalHandler);
+			_signalBus.Subscribe<CharacterDiedSignal>(OnCharacterDiedSignalHandler);
 		}
 
 		private void OnActiveTurnCharacterChangedSignalHandler(ActiveTurnCharacterChangedSignal signal) => UpdatePanelIcons();
 
 		private void OnStartTurnBasedCombatSignalHandler(StartTurnBasedCombatSignal signal) => UpdatePanelIcons();
 
+		private void OnCharacterDiedSignalHandler(CharacterDiedSignal signal) => UpdatePanelIcons();
+
 		private void UpdatePanelIcons()
 		{
 			LinkedList<CharacterFacade> turnQueue = _turnModel.characterTurnQueue;
 
 			LinkedListNode<CharacterFacade> characterNode = turnQueue.First;
+
+			Assert.IsNotNull(characterNode, "First character node is null! Check Turn Order linked list!");
 
 			foreach (InitiativeIconView view in _initiativePanelView.initiativeIcons)
 			{
@@ -57,6 +63,7 @@ namespace LostInSin.Runtime.Gameplay.UI.InitiativePanel
 		{
 			_signalBus.Subscribe<StartTurnBasedCombatSignal>(OnStartTurnBasedCombatSignalHandler);
 			_signalBus.Unsubscribe<ActiveTurnCharacterChangedSignal>(OnActiveTurnCharacterChangedSignalHandler);
+			_signalBus.Unsubscribe<CharacterDiedSignal>(OnCharacterDiedSignalHandler);
 		}
 	}
 }

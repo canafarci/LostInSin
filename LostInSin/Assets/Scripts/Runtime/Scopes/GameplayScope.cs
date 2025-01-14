@@ -155,6 +155,7 @@ namespace LostInSin.Runtime.Scopes
 			builder.DeclareSignal<AnimationEventSignal>();
 			builder.DeclareSignal<InitializeTurnBasedCombatSignal>();
 			builder.DeclareSignal<StartTurnBasedCombatSignal>();
+			builder.DeclareSignal<CharacterDiedSignal>();
 		}
 	}
 }

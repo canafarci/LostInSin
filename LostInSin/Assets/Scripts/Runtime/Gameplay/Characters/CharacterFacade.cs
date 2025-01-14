@@ -29,6 +29,7 @@ namespace LostInSin.Runtime.Gameplay.Characters
 		public string characterName => _character.characterName;
 		public GridCell currentCell => _character.currentCell;
 		public CharacterVisualReferences visualReferences => _characterVisualReferences;
+		public bool isDead => _character.currentStats[StatID.Health] <= 0;
 
 		public void TakeDamage(int change)
 		{
@@ -37,8 +38,7 @@ namespace LostInSin.Runtime.Gameplay.Characters
 
 			if (currentHealth <= 0)
 			{
-				_character.currentStats[StatID.Health] = 0;
-				PlayAnimation(AnimationID.Die);
+				OnCharacterDeath();
 			}
 			else
 			{
@@ -46,6 +46,14 @@ namespace LostInSin.Runtime.Gameplay.Characters
 			}
 
 			Debug.Log($"{name} hp: {currentHealth}");
+		}
+
+		private void OnCharacterDeath()
+		{
+			_character.currentStats[StatID.Health] = 0;
+			PlayAnimation(AnimationID.Die);
+			_signalBus.Fire(new CharacterDiedSignal(this));
+			currentCell.SetAsUnoccupied();
 		}
 
 
