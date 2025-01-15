@@ -42,6 +42,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityPlaying
 				{
 					_currentPlayingAbility.EndAbility();
 					CheckEndTurn();
+					FireAbilityExecutionEndedSignal();
 				}
 			}
 		}
@@ -63,6 +64,8 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityPlaying
 				_signalBus.Fire(new EndCharacterTurnSignal());
 			}
 		}
+
+		private void FireAbilityExecutionEndedSignal() => _signalBus.Fire(new AbilityExecutionCompletedSignal());
 
 		protected override void SubscribeToEvents()
 		{

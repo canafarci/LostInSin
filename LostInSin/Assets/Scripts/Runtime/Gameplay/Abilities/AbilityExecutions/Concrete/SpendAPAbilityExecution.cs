@@ -10,9 +10,6 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecutions.Concrete
 		private float _executionTime = 1f;
 		private float _executionTimer;
 
-		private CharacterFacade _user;
-
-
 		public override void Initialize(AbilityRequestData data)
 		{
 			base.Initialize(data);
@@ -21,7 +18,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecutions.Concrete
 
 		public override void StartAbility()
 		{
-			Debug.Log($"USE AP ACTION on user {_user.characterName}");
+			Debug.Log($"USE AP ACTION on user {executionData.User.characterName}");
 			executionStage = AbilityExecutionStage.Updating;
 		}
 
@@ -33,13 +30,6 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecutions.Concrete
 			{
 				executionStage = AbilityExecutionStage.Complete;
 			}
-		}
-
-		public override void EndAbility()
-		{
-			_user = null;
-
-			base.EndAbility();
 		}
 	}
 }

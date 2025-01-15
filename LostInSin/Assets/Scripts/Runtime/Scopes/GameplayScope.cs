@@ -152,6 +152,7 @@ namespace LostInSin.Runtime.Scopes
 			builder.DeclareSignal<EndCharacterTurnSignal>();
 			builder.DeclareSignal<AbilityRequestCreatedSignal>();
 			builder.DeclareSignal<AbilityRequestCancelledSignal>();
+			builder.DeclareSignal<AbilityExecutionCompletedSignal>();
 			builder.DeclareSignal<AnimationEventSignal>();
 			builder.DeclareSignal<InitializeTurnBasedCombatSignal>();
 			builder.DeclareSignal<StartTurnBasedCombatSignal>();

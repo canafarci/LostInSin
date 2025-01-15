@@ -11,10 +11,12 @@ namespace LostInSin.Runtime.Gameplay.UI.AbilityPanel
 		[SerializeField] private int ButtonIndex;
 		[SerializeField] private TextMeshProUGUI AbilityText;
 		[SerializeField] private Image AbilityIcon;
+		[SerializeField] private GameObject SelectedBG;
 
 		public Button abilityButton => AbilityButton;
 		public int buttonIndex => ButtonIndex;
 		public TextMeshProUGUI abilityText => AbilityText;
 		public Image abilityIcon => AbilityIcon;
+		public GameObject selectedBG => SelectedBG;
 	}
 }

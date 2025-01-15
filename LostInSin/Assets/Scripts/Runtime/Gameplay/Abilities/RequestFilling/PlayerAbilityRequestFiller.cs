@@ -9,6 +9,7 @@ using LostInSin.Runtime.Infrastructure.Signals;
 using System;
 using LostInSin.Runtime.Infrastructure.MemoryPool;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using VContainer.Unity;
 
 namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling
@@ -22,6 +23,8 @@ namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling
 
 		// The currently selected Ability:
 		private Ability _ability;
+		private InputAction _cancelAction;
+
 
 		public RaycastRequest RaycastRequest;
 		public PlayerRaycaster playerRaycaster { get; }
@@ -72,6 +75,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling
 
 		public void Initialize()
 		{
+			_cancelAction = InputSystem.actions.FindAction("Cancel");
 			// Subscribe to relevant signals / events
 			_abilityPanelMediator.OnAbilityClicked += AbilityClickedHandler;
 			_signalBus.Subscribe<ActiveTurnCharacterChangedSignal>(OnActiveTurnCharacterChangedSignal);
@@ -81,6 +85,13 @@ namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling
 		{
 			// Early exit if there's no ability selected or if the conditions say "don't tick"
 			if (_ability == null || ShouldNotTick()) return;
+
+			//Cancel ability if the cancel input is registered
+			if (_cancelAction.IsPressed())
+			{
+				OnAbilityCancelled();
+				return;
+			}
 
 			AbilityRequest request = _ability.AbilityRequest;
 
