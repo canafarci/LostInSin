@@ -30,7 +30,7 @@ namespace LostInSin.Runtime.Gameplay.BehaviourTree.Abilities
 			if (!TryFindTargetCharacter(out _targetCharacter))
 				return Status.Failure;
 
-			if (!TryFindBestMoveCell(_targetCharacter, out var closestCell, out var pathCells))
+			if (!TryFindBestMoveCell(_targetCharacter, out GridCell closestCell, out List<GridCell> pathCells))
 				return Status.Failure;
 
 			if (!TryExecuteMove(closestCell, pathCells))
@@ -41,7 +41,7 @@ namespace LostInSin.Runtime.Gameplay.BehaviourTree.Abilities
 
 		private bool TryFindTargetCharacter(out CharacterFacade targetCharacter)
 		{
-			var playerCharacters = BTReferences.instance.charactersInSceneModel.playerCharactersInScene;
+			List<CharacterFacade> playerCharacters = BTReferences.instance.charactersInSceneModel.playerCharactersInScene;
 
 			if (playerCharacters == null)
 			{
@@ -56,11 +56,12 @@ namespace LostInSin.Runtime.Gameplay.BehaviourTree.Abilities
 			return targetCharacter != null;
 		}
 
-		private bool TryFindBestMoveCell(CharacterFacade targetCharacter, out GridCell closestCell,
+		private bool TryFindBestMoveCell(CharacterFacade targetCharacter,
+			out GridCell closestCell,
 			out List<GridCell> pathCells)
 		{
-			var npcCell = Agent.Value.currentCell;
-			var targetCell = targetCharacter.currentCell;
+			GridCell npcCell = Agent.Value.currentCell;
+			GridCell targetCell = targetCharacter.currentCell;
 
 			closestCell = null;
 			pathCells = new List<GridCell>();
@@ -73,14 +74,18 @@ namespace LostInSin.Runtime.Gameplay.BehaviourTree.Abilities
 					if (x == targetCell.x && y == targetCell.y)
 						continue;
 
-					var candidateCell = BTReferences.instance.gridPositionConverter.GetCell(x, y);
+					//character already occupies one of cells neighboring the target
+					if (x == npcCell.x && y == npcCell.y)
+						return false;
+
+					GridCell candidateCell = BTReferences.instance.gridPositionConverter.GetCell(x, y);
 
 					if (candidateCell == null || candidateCell.isOccupied)
 						continue;
 
-					if (BTReferences.instance.gridPathfinder.FindPath(npcCell, candidateCell, out var path))
+					if (BTReferences.instance.gridPathfinder.FindPath(npcCell, candidateCell, out List<GridCell> path))
 					{
-						var pathCost = path.Count - 1;
+						int pathCost = path.Count - 1;
 						if (pathCost < minCost)
 						{
 							minCost = pathCost;
@@ -104,10 +109,8 @@ namespace LostInSin.Runtime.Gameplay.BehaviourTree.Abilities
 			abilityRequestData.User = Agent.Value;
 			abilityRequestData.PathCells = pathCells;
 
-
 			if (!CanAffordAbility(ability))
-				return false;
-
+				UpdatePath(ability, abilityRequestData);
 
 			Agent.Value.ReduceActionPoints(abilityRequestData.totalActionPointCost);
 			ability.AbilityExecution.Initialize(abilityRequestData);
@@ -121,6 +124,19 @@ namespace LostInSin.Runtime.Gameplay.BehaviourTree.Abilities
 		{
 			ability.AbilityRequest.UpdateRequest();
 			return ability.AbilityRequest.data.totalActionPointCost <= Agent.Value.actionPoints;
+		}
+
+		private void UpdatePath(Ability ability, AbilityRequestData abilityRequestData)
+		{
+			int actionPoints = Agent.Value.actionPoints;
+			int actionCost = ability.AbilityRequest.data.totalActionPointCost;
+			int actionPointDelta = Mathf.Abs(actionPoints - actionCost);
+
+			while (actionPointDelta > 0)
+			{
+				actionPointDelta--;
+				abilityRequestData.PathCells.RemoveAt(abilityRequestData.PathCells.Count - 1);
+			}
 		}
 	}
 }
