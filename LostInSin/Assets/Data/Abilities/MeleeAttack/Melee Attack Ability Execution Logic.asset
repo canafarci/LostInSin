@@ -21,6 +21,6 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  MoveAbilityExecution: {fileID: 11400000, guid: 2364dce8e7efe1a4497d28b3add9774f, type: 2}
   MeleeHitTrigger: {fileID: 11400000, guid: f78dafee7fed7c4459ac095ec0d90738, type: 2}
+  TransitionToIdleTrigger: {fileID: 11400000, guid: 524a4bc2fc309194cb0cc7d6de32531e, type: 2}
   BaseDamage: 20

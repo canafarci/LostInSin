@@ -12,9 +12,11 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecutions.Concrete
 	public class MeleeAttackExecution : AbilityExecution
 	{
 		public StringAsset MeleeHitTrigger;
+		public StringAsset TransitionToIdleTrigger;
 		public int BaseDamage;
 
 		private CharacterFacade _target;
+		private bool _calledTakeDamage = false;
 
 		public override void Initialize(AbilityRequestData data)
 		{
@@ -35,11 +37,17 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecutions.Concrete
 		{
 			// Called each frame while in the "Updating" stage
 
-			// Optionally Slerp rotation toward target
 			SlerpRotationTowardDirection();
 
 			// Wait for the melee hit animation event trigger
-			if (executionData.AbilityTriggers.Contains(MeleeHitTrigger))
+			if (!_calledTakeDamage && executionData.AbilityTriggers.Contains(MeleeHitTrigger))
+			{
+				_calledTakeDamage = true;
+				// Apply damage
+				_target.TakeDamage(BaseDamage);
+			}
+
+			if (executionData.AbilityTriggers.Contains(TransitionToIdleTrigger))
 			{
 				executionStage = AbilityExecutionStage.Finishing;
 			}
@@ -47,11 +55,8 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecutions.Concrete
 
 		public override void FinishAbility()
 		{
-			// Apply damage
-			_target.TakeDamage(BaseDamage);
-
 			// Return to idle
-			executionData.User.PlayAnimation(AnimationID.Idle, 0.1f);
+			executionData.User.PlayAnimation(AnimationID.Idle);
 
 			// Mark ourselves as complete
 			executionStage = AbilityExecutionStage.Complete;
@@ -59,6 +64,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecutions.Concrete
 
 		public override void EndAbility()
 		{
+			_calledTakeDamage = false;
 			_target = null;
 
 			base.EndAbility();

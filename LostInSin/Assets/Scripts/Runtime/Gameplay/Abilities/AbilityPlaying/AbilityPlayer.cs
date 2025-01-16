@@ -3,6 +3,7 @@ using LostInSin.Runtime.Gameplay.Abilities.AbilityExecutions;
 using LostInSin.Runtime.Gameplay.Signals;
 using LostInSin.Runtime.Infrastructure.Templates;
 using VContainer.Unity;
+using UnityEngine; // for Time.deltaTime (if not already included)
 
 namespace LostInSin.Runtime.Gameplay.Abilities.AbilityPlaying
 {
@@ -10,40 +11,67 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityPlaying
 	{
 		void AddAbilityForPlaying(AbilityExecution abilityExecution);
 		bool isPlaying { get; }
+		AbilityExecution playingAbility { get; }
 	}
 
 	public class AbilityPlayer : SignalListener, ITickable, IAbilityPlayer
 	{
 		private AbilityExecution _currentPlayingAbility = null;
 
-		public bool isPlaying => _currentPlayingAbility != null;
+		// --- NEW FIELDS ---
+		private float _cooldownTimeRemaining = 0f; // How long until isPlaying becomes false after ability ends
+		private const float COOLDOWN_DURATION = 0.5f; // 0.5 second cooldown
+
+		// Instead of checking _currentPlayingAbility != null, we also factor in the cooldown time
+		public bool isPlaying => _currentPlayingAbility != null || _cooldownTimeRemaining > 0f;
+
+		public AbilityExecution playingAbility => _currentPlayingAbility;
 
 		public void AddAbilityForPlaying(AbilityExecution abilityExecution)
 		{
 			_currentPlayingAbility = abilityExecution;
+			// Reset any cooldown if a new ability starts
+			_cooldownTimeRemaining = 0f;
 			_currentPlayingAbility.StartAbility();
 		}
 
 		public void Tick()
 		{
-			if (_currentPlayingAbility != null) //ability could be null if there is no abilities to play
+			// Decrement cooldown timer if active
+			if (_cooldownTimeRemaining > 0f)
 			{
-				if (ShouldUpdateAbility())
+				_cooldownTimeRemaining -= Time.deltaTime;
+				if (_cooldownTimeRemaining < 0f)
 				{
-					_currentPlayingAbility.UpdateAbility();
+					_cooldownTimeRemaining = 0f;
 				}
+			}
 
-				if (ShouldFinishAbility())
-				{
-					_currentPlayingAbility.FinishAbility();
-				}
+			// If no ability is running, no need to proceed
+			if (_currentPlayingAbility == null)
+			{
+				return;
+			}
 
-				if (ShouldEndAbility())
-				{
-					_currentPlayingAbility.EndAbility();
-					CheckEndTurn();
-					FireAbilityExecutionEndedSignal();
-				}
+			// Normal ability life-cycle checks
+			if (ShouldUpdateAbility())
+			{
+				_currentPlayingAbility.UpdateAbility();
+			}
+
+			if (ShouldFinishAbility())
+			{
+				_currentPlayingAbility.FinishAbility();
+			}
+
+			if (ShouldEndAbility())
+			{
+				_currentPlayingAbility.EndAbility();
+				CheckEndTurn();
+				FireAbilityExecutionEndedSignal();
+
+				// Start the cooldown period now that the ability has ended
+				_cooldownTimeRemaining = COOLDOWN_DURATION;
 			}
 		}
 
@@ -54,6 +82,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityPlaying
 		private void CheckEndTurn()
 		{
 			CheckUserAPAndAdvanceTurn(_currentPlayingAbility);
+			// Clear the current ability now that it has ended
 			_currentPlayingAbility = null;
 		}
 
@@ -65,7 +94,8 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityPlaying
 			}
 		}
 
-		private void FireAbilityExecutionEndedSignal() => _signalBus.Fire(new AbilityExecutionCompletedSignal());
+		private void FireAbilityExecutionEndedSignal()
+			=> _signalBus.Fire(new AbilityExecutionCompletedSignal());
 
 		protected override void SubscribeToEvents()
 		{
@@ -74,7 +104,10 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityPlaying
 
 		private void OnAnimationEventSignalHandler(AnimationEventSignal signal)
 		{
-			_currentPlayingAbility.executionData.AbilityTriggers.Add(signal.stringAsset);
+			if (_currentPlayingAbility != null)
+			{
+				_currentPlayingAbility.executionData.AbilityTriggers.Add(signal.stringAsset);
+			}
 		}
 
 		protected override void UnsubscribeFromEvents()

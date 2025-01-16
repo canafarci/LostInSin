@@ -44,10 +44,6 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecutions
 
 		public override void UpdateAbility()
 		{
-			// If somehow no children exist, we're effectively done
-			if (LeafAbilityExecutions.Count == 0 || executionStage != AbilityExecutionStage.Updating)
-				return;
-
 			AbilityExecution currentChild = LeafAbilityExecutions[_currentIndex];
 
 			if (currentChild.executionStage == AbilityExecutionStage.Updating)

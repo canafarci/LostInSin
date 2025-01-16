@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterPortrait: {fileID: 21300000, guid: c53af5c0ab326de419c997e8536f0b8b, type: 3}
   CharacterName: Archer Enemy
-  MaxHealth: 10
+  MaxHealth: 25
   MaxActionPoints: 8
   Abilities:
   - {fileID: 11400000, guid: 7d85560cf15ee5a48ada8733ca4d529d, type: 2}

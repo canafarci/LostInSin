@@ -25,14 +25,21 @@ MonoBehaviour:
         _Events:
           _NormalizedTimes:
           - 0.4173333
+          - 0.8616208
           - NaN
           _Callbacks:
           - rid: 6768827991727800442
+          - rid: 6768828148999520668
           _Names:
           - {fileID: 11400000, guid: f78dafee7fed7c4459ac095ec0d90738, type: 2}
+          - {fileID: 11400000, guid: 524a4bc2fc309194cb0cc7d6de32531e, type: 2}
         _Clip: {fileID: 1827226128182048838, guid: f4aa8c86e7e0e8143a9638685428ec5c, type: 3}
         _NormalizedStartTime: NaN
     - rid: 6768827991727800442
       type: {class: AnimancerEvent/ParameterObject, ns: Animancer, asm: Kybernetik.Animancer}
       data:
         _Value: {fileID: 11400000, guid: f78dafee7fed7c4459ac095ec0d90738, type: 2}
+    - rid: 6768828148999520668
+      type: {class: AnimancerEvent/ParameterObject, ns: Animancer, asm: Kybernetik.Animancer}
+      data:
+        _Value: {fileID: 11400000, guid: 524a4bc2fc309194cb0cc7d6de32531e, type: 2}

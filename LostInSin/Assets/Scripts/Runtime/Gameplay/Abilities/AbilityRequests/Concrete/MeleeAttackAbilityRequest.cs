@@ -17,7 +17,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Concrete
 			if (IsRequestDataValid())
 			{
 				//remove the cost of the cell the character starts the movement at
-				data.DynamicActionPointCost = data.PathCells.Count - 1;
+				data.DynamicActionPointCost = Mathf.Max(data.PathCells.Count - 1, 0);
 				state = AbilityRequestState.Complete;
 			}
 		}
@@ -25,8 +25,9 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Concrete
 		private bool IsRequestDataValid()
 		{
 			return data.PathCells != null &&
-			       data.TargetCharacter != null
-			       && data.TargetCharacter.isDead == false;
+			       data.TargetCharacter != null &&
+			       data.TargetGridCell != null &&
+			       data.TargetCharacter.isDead == false;
 		}
 	}
 }

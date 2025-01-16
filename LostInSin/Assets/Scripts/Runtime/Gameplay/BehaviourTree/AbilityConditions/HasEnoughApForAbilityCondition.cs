@@ -4,12 +4,12 @@ using LostInSin.Runtime.Gameplay.Characters;
 using Unity.Behavior;
 using UnityEngine;
 
-namespace LostInSin.Runtime.Gameplay.BehaviourTree.Abilities
+namespace LostInSin.Runtime.Gameplay.BehaviourTree.AbilityConditions
 {
 	[Serializable, Unity.Properties.GeneratePropertyBag]
 	[Condition(name: "HasEnoughAPForAbility",
 	           story: "[Agent] Has Enough AP For [Ability]",
-	           category: "TurnConditions",
+	           category: "AbilityConditions",
 	           id: "13e866f820a8547e81a7f27b45613e91")]
 	public partial class HasEnoughApForAbilityCondition : Condition
 	{

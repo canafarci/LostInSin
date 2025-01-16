@@ -147,3 +147,4 @@ MonoBehaviour:
   AnimationEventStringAssets:
   - {fileID: 11400000, guid: 91f2aceaeb7027d4cbb3f592bc952522, type: 2}
   - {fileID: 11400000, guid: f78dafee7fed7c4459ac095ec0d90738, type: 2}
+  - {fileID: 11400000, guid: 524a4bc2fc309194cb0cc7d6de32531e, type: 2}

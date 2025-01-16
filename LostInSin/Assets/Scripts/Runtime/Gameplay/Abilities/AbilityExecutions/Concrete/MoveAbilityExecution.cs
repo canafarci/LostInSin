@@ -46,8 +46,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecutions.Concrete
 			if (Vector3.SqrMagnitude(userTransform.position - _targetPosition) > 0.01f)
 			{
 				userTransform.position += _targetDirection * AnimationConstants.movementSpeed * Time.deltaTime;
-				userTransform.rotation = Quaternion.Slerp(
-				                                          userTransform.rotation,
+				userTransform.rotation = Quaternion.Slerp(userTransform.rotation,
 				                                          Quaternion.LookRotation(_targetDirection),
 				                                          AnimationConstants.rotationSpeed * Time.deltaTime
 				                                         );

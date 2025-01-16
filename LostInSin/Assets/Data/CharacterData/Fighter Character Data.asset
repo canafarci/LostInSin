@@ -15,7 +15,7 @@ MonoBehaviour:
   CharacterPortrait: {fileID: 21300000, guid: c8ecd8f6dcfe2314e9d327bdf3402b90, type: 3}
   CharacterName: Fighter
   MaxHealth: 50
-  MaxActionPoints: 10
+  MaxActionPoints: 25
   Abilities:
   - {fileID: 11400000, guid: 7d85560cf15ee5a48ada8733ca4d529d, type: 2}
   - {fileID: 11400000, guid: 7081e89ad520ec7418d70f53f19cc5b4, type: 2}

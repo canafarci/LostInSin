@@ -23,10 +23,11 @@ namespace LostInSin.Runtime.Gameplay.GameplayLifecycle.Entry
 		{
 			if (signal.newState == GameState.Initializing)
 			{
-				foreach (CharacterData characterData in _playerCharactersSO.PlayerCharacters)
+				for (int i = 0; i < _playerCharactersSO.PlayerCharacters.Count; i++)
 				{
+					CharacterData characterData = _playerCharactersSO.PlayerCharacters[i];
 					GameObject character = Object.Instantiate(characterData.Prefab);
-					character.transform.position = character.transform.position + Random.insideUnitSphere * 2f;
+					character.transform.position += Vector3.left * 2f * i;
 					_charactersInSceneModel.playerCharactersInScene.Add(character.GetComponent<CharacterFacade>());
 				}
 			}

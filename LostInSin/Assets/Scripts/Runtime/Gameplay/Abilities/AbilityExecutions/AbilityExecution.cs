@@ -13,6 +13,8 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecutions
 
 		public virtual void Initialize(AbilityRequestData data)
 		{
+			Debug.Log($"{name} execution started");
+
 			executionStage = AbilityExecutionStage.Starting;
 			executionData = PoolManager.GetPure<AbilityExecutionData>();
 			executionData.User = data.User;
@@ -32,7 +34,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecutions
 		// Clean up resources (if any)
 		public virtual void EndAbility()
 		{
-			Debug.Log($"{name} completed");
+			Debug.Log($"{name} execution completed");
 			PoolManager.ReleasePure(executionData);
 		}
 	}

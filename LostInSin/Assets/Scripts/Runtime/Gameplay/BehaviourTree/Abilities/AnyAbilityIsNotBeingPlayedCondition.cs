@@ -1,6 +1,7 @@
 using System;
 using LostInSin.Runtime.Gameplay.BehaviourTree.Utility;
 using Unity.Behavior;
+using UnityEngine;
 
 namespace LostInSin.Runtime.Gameplay.BehaviourTree.Abilities
 {
