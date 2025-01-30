@@ -19,6 +19,9 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests
 		[ShowIf("@this.RequestType.HasFlag(AbilityRequestType.EnemyTargeted)")]
 		public LayerMask CharacterLayerMask;
 
+		[ShowIf("@this.RequestType.HasFlag(AbilityRequestType.CircularAreaTargeted)")]
+		public float Radius;
+
 		public virtual void Initialize()
 		{
 			state = AbilityRequestState.Initializing;

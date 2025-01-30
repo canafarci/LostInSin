@@ -17,9 +17,9 @@ namespace LostInSin.Runtime.Gameplay.Raycast
 
 		public NativeArray<RaycastHit> PerformRaycasting(GridRaycastData raycastData)
 		{
-			var rowCount = raycastData.GridRowCount + 1;
-			var columnCount = raycastData.GridColumnCount + 1;
-			var gridSize = rowCount * columnCount;
+			int rowCount = raycastData.GridRowCount + 1;
+			int columnCount = raycastData.GridColumnCount + 1;
+			int gridSize = rowCount * columnCount;
 
 			NativeArray<RaycastHit> hitResults = new(gridSize, Allocator.TempJob);
 			NativeArray<RaycastCommand> raycastCommands = new(gridSize, Allocator.TempJob);
@@ -38,26 +38,26 @@ namespace LostInSin.Runtime.Gameplay.Raycast
 			GridRaycastData raycastData,
 			NativeArray<RaycastCommand> commands)
 		{
-			for (var row = 0; row < rowCount; row++)
-				for (var column = 0; column < columnCount; column++)
+			for (int row = 0; row < rowCount; row++)
+				for (int column = 0; column < columnCount; column++)
 				{
-					var index = row + column * rowCount;
+					int index = row + column * rowCount;
 					Vector3 gridRaycastOrigin = CreateGridRaycastOrigin(row, column, raycastData);
 					QueryParameters queryParameters = new(_groundLayerMask, false, QueryTriggerInteraction.Ignore);
-					commands[index] = new RaycastCommand(gridRaycastOrigin, Vector3.down, queryParameters);
+					commands[index] = new(gridRaycastOrigin, Vector3.down, queryParameters);
 				}
 		}
 
 		private Vector3 CreateGridRaycastOrigin(int row, int column, GridRaycastData raycastData)
 		{
-			var cellWidth = raycastData.GridCellWidth;
-			var cellHeight = raycastData.GridCellHeight;
+			float cellWidth = raycastData.GridCellWidth;
+			float cellHeight = raycastData.GridCellHeight;
 
-			var gridRowOffset = raycastData.GridRowOffset;
-			var gridColumnOffset = raycastData.GridColumnOffset;
+			float gridRowOffset = raycastData.GridRowOffset;
+			float gridColumnOffset = raycastData.GridColumnOffset;
 
-			return new Vector3(cellWidth * row - gridRowOffset, RAY_ORIGIN_HEIGHT,
-			                   cellHeight * column - gridColumnOffset);
+			return new(cellWidth * row - gridRowOffset, RAY_ORIGIN_HEIGHT,
+			           cellHeight * column - gridColumnOffset);
 		}
 	}
 }

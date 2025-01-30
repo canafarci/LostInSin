@@ -29,7 +29,7 @@ namespace LostInSin.Runtime.Gameplay.GameplayLifecycle.Entry
 				}
 				else
 				{
-					throw new Exception("Grid position could not be found");
+					throw new("Grid position could not be found");
 				}
 			}
 		}

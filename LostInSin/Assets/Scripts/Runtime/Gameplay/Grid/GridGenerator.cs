@@ -37,7 +37,7 @@ namespace LostInSin.Runtime.Gameplay.Grid
 
 		private GridRaycastData CreateRaycastData()
 		{
-			return new GridRaycastData
+			return new()
 			{
 				GridRowCount = _gridModel.gridRowCount,
 				GridCellWidth = _gridModel.gridCellWidth,

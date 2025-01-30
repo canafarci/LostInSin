@@ -10,7 +10,7 @@ namespace LostInSin.Runtime.Infrastructure.MemoryPool
 	{
 		private readonly int _initialSize;
 		private readonly AppStateID _lifetimeSceneID;
-		private readonly List<T> _initialObjectList = new List<T>();
+		private readonly List<T> _initialObjectList = new();
 
 		protected readonly bool _managePoolOnSceneChange;
 		protected readonly List<T> _pooledObjectsList;
@@ -23,13 +23,13 @@ namespace LostInSin.Runtime.Infrastructure.MemoryPool
 			_lifetimeSceneID = poolParams.LifetimeSceneID;
 			_managePoolOnSceneChange = poolParams.ManagePoolOnSceneChange;
 
-			_pool = new ObjectPool<T>(CreateObject,
-				GetFromPool,
-				ReturnToPool,
-				DestroyObject,
-				true,
-				poolParams.DefaultCapacity,
-				poolParams.MaximumSize);
+			_pool = new(CreateObject,
+			            GetFromPool,
+			            ReturnToPool,
+			            DestroyObject,
+			            true,
+			            poolParams.DefaultCapacity,
+			            poolParams.MaximumSize);
 
 			_pooledObjectsList = GetInternalList();
 

@@ -11,5 +11,6 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests
 		GridPathFinding = 1 << 4,
 		Movement = 1 << 5,
 		EnemyTargeted = 1 << 6,
+		CircularAreaTargeted = 1 << 7
 	}
 }

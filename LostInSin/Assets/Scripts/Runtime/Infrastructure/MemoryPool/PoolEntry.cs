@@ -37,7 +37,7 @@ namespace LostInSin.Runtime.Infrastructure.MemoryPool
 		// Odin dropdown to show available classes
 		private static IEnumerable<ValueDropdownItem<string>> GetClassTypeNames()
 		{
-			var types = AppDomain.CurrentDomain.GetAssemblies()
+			IEnumerable<ValueDropdownItem<string>> types = AppDomain.CurrentDomain.GetAssemblies()
 				.Where(assembly => assembly.GetName().Name == "LostInSin.Runtime")
 				.SelectMany(assembly => assembly.GetTypes())
 				.Where(t => t.IsClass && !t.IsAbstract &&

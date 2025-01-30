@@ -31,7 +31,7 @@ namespace LostInSin.Runtime.Bootstrap
 			if (LoadSceneAfterBootstrap()) return;
 #endif
 
-			var sceneIndex = _applicationSettings.HasMainMenu
+			int sceneIndex = _applicationSettings.HasMainMenu
 				? _applicationSettings.MainMenuSceneIndex
 				: _gameplayPersistentData.levelToLoadIndex;
 
@@ -44,7 +44,7 @@ namespace LostInSin.Runtime.Bootstrap
 			const string sceneToLoadAfterBootstrapKey = "SceneToLoadAfterBootstrap";
 			if (UnityEditor.EditorPrefs.HasKey(sceneToLoadAfterBootstrapKey))
 			{
-				var sceneToLoadPath = UnityEditor.EditorPrefs.GetString(sceneToLoadAfterBootstrapKey);
+				string sceneToLoadPath = UnityEditor.EditorPrefs.GetString(sceneToLoadAfterBootstrapKey);
 				// Clean up the key after use
 				UnityEditor.EditorPrefs.DeleteKey(sceneToLoadAfterBootstrapKey);
 

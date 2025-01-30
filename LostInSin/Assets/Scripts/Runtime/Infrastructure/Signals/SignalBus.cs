@@ -16,7 +16,7 @@ namespace LostInSin.Runtime.Infrastructure.Signals
 			{
 				if (!_subscriptions.ContainsKey(signalType))
 				{
-					_subscriptions[signalType] = new SignalSubscription(signalType);
+					_subscriptions[signalType] = new(signalType);
 				}
 			}
 		}
@@ -26,7 +26,7 @@ namespace LostInSin.Runtime.Infrastructure.Signals
 			Type signalType = typeof(TSignal);
 			if (!_subscriptions.ContainsKey(signalType))
 			{
-				_subscriptions[signalType] = new SignalSubscription(signalType);
+				_subscriptions[signalType] = new(signalType);
 			}
 		}
 
@@ -40,7 +40,7 @@ namespace LostInSin.Runtime.Infrastructure.Signals
 			else
 			{
 				throw new InvalidOperationException(
-					$"Signal '{signalType.Name}' has not been declared. Please declare it during container setup.");
+				                                    $"Signal '{signalType.Name}' has not been declared. Please declare it during container setup.");
 			}
 		}
 
@@ -71,7 +71,7 @@ namespace LostInSin.Runtime.Infrastructure.Signals
 			else
 			{
 				throw new InvalidOperationException(
-					$"Signal '{signalType.Name}' has not been declared. Please declare it during container setup.");
+				                                    $"Signal '{signalType.Name}' has not been declared. Please declare it during container setup.");
 			}
 		}
 

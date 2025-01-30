@@ -29,7 +29,7 @@ namespace LostInSin.Runtime.Gameplay.GameplayLifecycle
 
 		private void OnExitGameplayLevelSignal(ExitGameplayLevelSignal signal)
 		{
-			var targetSceneIndex = GetNextLevelIndex();
+			int targetSceneIndex = GetNextLevelIndex();
 
 			_signalBus.Fire(new LoadSceneSignal(targetSceneIndex));
 		}
@@ -38,7 +38,7 @@ namespace LostInSin.Runtime.Gameplay.GameplayLifecycle
 		{
 			if (_gameStateModel.isGameWon) _gameplayPersistentData.IncreaseTargetSceneIndex();
 
-			var sceneIndex = _applicationSettings.HasMainMenu
+			int sceneIndex = _applicationSettings.HasMainMenu
 				? _applicationSettings.MainMenuSceneIndex
 				: _gameplayPersistentData.levelToLoadIndex;
 			return sceneIndex;

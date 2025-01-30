@@ -11,11 +11,11 @@ namespace LostInSin.Runtime.Gameplay.Grid.Visual
 			List<Vector2> uvs = new(); // List for UVs
 			List<int> triangles = new();
 
-			var width = gridCells.GetLength(0);
-			var height = gridCells.GetLength(1);
+			int width = gridCells.GetLength(0);
+			int height = gridCells.GetLength(1);
 
-			for (var x = 0; x < width; x++)
-				for (var y = 0; y < height; y++)
+			for (int x = 0; x < width; x++)
+				for (int y = 0; y < height; y++)
 					if (!gridCells[x, y].IsInvalid)
 						AddCellToMesh(gridCells[x, y], vertices, uvs, triangles, x, y, width, height);
 
@@ -37,7 +37,7 @@ namespace LostInSin.Runtime.Gameplay.Grid.Visual
 			int gridWidth,
 			int gridHeight)
 		{
-			var vertexIndex = vertices.Count;
+			int vertexIndex = vertices.Count;
 
 			vertices.Add(cellData.TopLeft.ToVector3());
 			vertices.Add(cellData.TopRight.ToVector3());
@@ -45,8 +45,8 @@ namespace LostInSin.Runtime.Gameplay.Grid.Visual
 			vertices.Add(cellData.BottomRight.ToVector3());
 
 			// Calculate UVs based on the cell's position within the grid
-			var uvWidth = 1f / gridWidth;
-			var uvHeight = 1f / gridHeight;
+			float uvWidth = 1f / gridWidth;
+			float uvHeight = 1f / gridHeight;
 			Vector2 uvTopLeft = new(x * uvWidth, y * uvHeight);
 			Vector2 uvTopRight = new((x + 1) * uvWidth, y * uvHeight);
 			Vector2 uvBottomLeft = new(x * uvWidth, (y + 1) * uvHeight);

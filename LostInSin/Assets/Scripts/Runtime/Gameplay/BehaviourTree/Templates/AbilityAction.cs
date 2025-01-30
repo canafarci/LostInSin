@@ -66,7 +66,7 @@ namespace LostInSin.Runtime.Gameplay.BehaviourTree.Templates
 			out List<GridCell> pathCells)
 		{
 			closestCell = null;
-			pathCells = new List<GridCell>();
+			pathCells = new();
 
 			if (AgentIsAtNeighboringCell(agent, targetCharacter))
 				return false;

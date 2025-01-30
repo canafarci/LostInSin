@@ -22,8 +22,8 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Visuals
 		private const float UPDATE_INTERVAL = 0.05f;
 		private float _updateTimer;
 
-		private readonly Color _validColor = new Color(0f, 0.7f, 0f, 0.8f);
-		private readonly Color _invalidColor = new Color(0.7f, 0f, 0f, 0.8f);
+		private readonly Color _validColor = new(0f, 0.7f, 0f, 0.8f);
+		private readonly Color _invalidColor = new(0.7f, 0f, 0f, 0.8f);
 		private Color _currentColor;
 
 		protected AbilityVisualDisplayer(IGridPathfinder gridPathfinder, PlayerRaycaster playerRaycaster)
@@ -35,7 +35,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Visuals
 			_lineRenderer = new GameObject($"{GetType().Name}_LineRenderer").AddComponent<LineRenderer>();
 			_lineRenderer.startWidth = 0.1f;
 			_lineRenderer.endWidth = 0.1f;
-			_lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
+			_lineRenderer.material = new(Shader.Find("Sprites/Default"));
 		}
 
 		protected override void SubscribeToEvents()
@@ -77,7 +77,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Visuals
 		/// </summary>
 		private void OnAbilityRequestCreatedSignal(AbilityRequestCreatedSignal signal)
 		{
-			var request = signal.request;
+			AbilityRequest request = signal.request;
 			if (!IsRequestRelevant(request)) return;
 
 			_abilityRequest = request;
@@ -111,7 +111,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Visuals
 			CharacterFacade character = _abilityRequest.data.User;
 			if (_gridPathfinder.FindPath(character.currentCell, targetCell, out List<GridCell> path))
 			{
-				var positions = new Vector3[path.Count];
+				Vector3[] positions = new Vector3[path.Count];
 				for (int i = 0; i < path.Count; i++)
 				{
 					// Small offset to ensure the line is above ground
@@ -139,7 +139,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Visuals
 
 			// If cost is higher than player's AP, mark in red, otherwise in green
 			bool isInvalid = apCost > characterFacade.actionPoints;
-			var desiredColor = isInvalid ? _invalidColor : _validColor;
+			Color desiredColor = isInvalid ? _invalidColor : _validColor;
 
 			if (_currentColor != desiredColor)
 			{

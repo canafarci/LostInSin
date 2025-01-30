@@ -30,9 +30,9 @@ namespace LostInSin.Runtime.CrossScene.Data
 		public void IncreaseTargetSceneIndex()
 		{
 			int targetSceneIndex;
-			var currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+			int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
 
-			var sceneCount = SceneManager.sceneCountInBuildSettings;
+			int sceneCount = SceneManager.sceneCountInBuildSettings;
 			if (currentSceneIndex + 1 >= sceneCount)
 				targetSceneIndex = _applicationSettings.LevelToLoopAfterAllLevelsFinishedIndex;
 			else

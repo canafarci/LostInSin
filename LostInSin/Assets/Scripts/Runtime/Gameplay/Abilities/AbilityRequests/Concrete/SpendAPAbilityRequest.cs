@@ -14,7 +14,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Concrete
 
 		public override void UpdateRequest()
 		{
-			throw new Exception("This should never happen.");
+			throw new("This should never happen.");
 		}
 	}
 }

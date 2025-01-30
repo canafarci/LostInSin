@@ -7,7 +7,7 @@ namespace LostInSin.Runtime.Infrastructure.Signals
 	public static class ContainerBuilderExtensions
 	{
 		private static SignalBus _signalBus = null;
-		private static List<Type> _applicationScopeSignalTypes = new List<Type>();
+		private static List<Type> _applicationScopeSignalTypes = new();
 
 		public static void DeclareSignal<TSignal>(this IContainerBuilder builder)
 		{
@@ -24,7 +24,7 @@ namespace LostInSin.Runtime.Infrastructure.Signals
 			// Register a build callback to declare the signal when the container is built
 			builder.RegisterBuildCallback(container =>
 			{
-				var signalBus = container.Resolve<SignalBus>();
+				SignalBus signalBus = container.Resolve<SignalBus>();
 				signalBus.DeclareSignal<TSignal>();
 			});
 		}

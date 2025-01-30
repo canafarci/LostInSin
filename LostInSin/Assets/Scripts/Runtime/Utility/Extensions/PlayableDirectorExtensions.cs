@@ -62,7 +62,7 @@ namespace LostInSin.Runtime.Utility.Extensions
 
 		private static IEnumerator ReversePlayback(PlayableDirector timeline)
 		{
-			var timeDelta = (float)timeline.duration;
+			float timeDelta = (float)timeline.duration;
 			while (timeDelta > 0)
 			{
 				timeDelta -= Time.deltaTime / (float)timeline.duration;

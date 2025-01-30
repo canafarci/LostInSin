@@ -19,7 +19,7 @@ namespace LostInSin.Runtime.Gameplay.Grid
 
 		public readonly Vector3 ToVector3()
 		{
-			return new Vector3(posX, posY, posZ);
+			return new(posX, posY, posZ);
 		}
 	}
 }

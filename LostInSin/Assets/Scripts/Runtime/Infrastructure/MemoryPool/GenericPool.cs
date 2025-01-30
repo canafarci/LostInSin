@@ -24,7 +24,7 @@ namespace LostInSin.Runtime.Infrastructure.MemoryPool
 			//needed to stop GC from collecting pure C# classes
 			if (!_managePoolOnSceneChange)
 			{
-				_referenceToStopGCList ??= new List<T>();
+				_referenceToStopGCList ??= new();
 				_referenceToStopGCList.Add(obj);
 			}
 

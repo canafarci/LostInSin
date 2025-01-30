@@ -52,11 +52,11 @@ namespace LostInSin.Runtime.Infrastructure.MemoryPool
 					Type generic = typeof(GenericMonoPool<>);
 					Type poolType = generic.MakeGenericType(monoType);
 
-					PoolParams poolParams = new PoolParams(entry.InitialSize,
-					                                       entry.DefaultCapacity,
-					                                       entry.MaximumSize,
-					                                       entry.ManagePoolOnSceneChange,
-					                                       entry.LifetimeSceneID);
+					PoolParams poolParams = new(entry.InitialSize,
+					                            entry.DefaultCapacity,
+					                            entry.MaximumSize,
+					                            entry.ManagePoolOnSceneChange,
+					                            entry.LifetimeSceneID);
 
 					// Use the constructor that takes a GameObject parameter
 					object pool = Activator.CreateInstance(poolType, entry.Prefab, poolParams);
@@ -71,11 +71,11 @@ namespace LostInSin.Runtime.Infrastructure.MemoryPool
 					Type generic = typeof(GenericPool<>);
 					Type poolType = generic.MakeGenericType(type);
 
-					PoolParams poolParams = new PoolParams(entry.InitialSize,
-					                                       entry.DefaultCapacity,
-					                                       entry.MaximumSize,
-					                                       entry.ManagePoolOnSceneChange,
-					                                       entry.LifetimeSceneID);
+					PoolParams poolParams = new(entry.InitialSize,
+					                            entry.DefaultCapacity,
+					                            entry.MaximumSize,
+					                            entry.ManagePoolOnSceneChange,
+					                            entry.LifetimeSceneID);
 
 					object pool = Activator.CreateInstance(poolType, new object[] { poolParams });
 
@@ -88,7 +88,7 @@ namespace LostInSin.Runtime.Infrastructure.MemoryPool
 		{
 			if (_monoPools.TryGetValue(typeof(T), out object poolObj))
 			{
-				var pool = poolObj as GenericMonoPool<T>;
+				GenericMonoPool<T> pool = poolObj as GenericMonoPool<T>;
 				Assert.IsNotNull(pool, "Pool object is null.");
 
 				return pool.Get();

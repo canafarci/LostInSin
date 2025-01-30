@@ -13,7 +13,7 @@ namespace LostInSin.Runtime.Gameplay.Grid.Data
 		public void SetAsOccupied()
 		{
 			if (isOccupied)
-				throw new System.Exception("Cell is already occupied!");
+				throw new("Cell is already occupied!");
 
 			isOccupied = true;
 		}
@@ -21,7 +21,7 @@ namespace LostInSin.Runtime.Gameplay.Grid.Data
 		public void SetAsUnoccupied()
 		{
 			if (!isOccupied)
-				throw new System.Exception("Cell is already unoccupied!");
+				throw new("Cell is already unoccupied!");
 
 			isOccupied = false;
 		}

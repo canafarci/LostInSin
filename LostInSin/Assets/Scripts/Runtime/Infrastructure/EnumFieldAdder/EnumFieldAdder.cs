@@ -103,7 +103,7 @@ namespace LostInSin.Runtime.Infrastructure.EnumFieldAdder
 			string enumStartMarker = $"public enum {typeof(T).Name}";
 			const string enumEndMarker = "}";
 
-			List<string> existingFields = new List<string>();
+			List<string> existingFields = new();
 			startIdx = -1;
 			endIdx = -1;
 			bool insideEnum = false;
@@ -167,7 +167,7 @@ namespace LostInSin.Runtime.Infrastructure.EnumFieldAdder
 		{
 			// Replace invalid characters and ensure the name is valid for an enum
 			string validName = input.Replace(" ", "_").Replace("-", "_");
-			validName = new string(validName.Where(c => char.IsLetterOrDigit(c) || c == '_').ToArray());
+			validName = new(validName.Where(c => char.IsLetterOrDigit(c) || c == '_').ToArray());
 
 			// Ensure the first character is a letter or underscore
 			if (!char.IsLetter(validName[0]) && validName[0] != '_')

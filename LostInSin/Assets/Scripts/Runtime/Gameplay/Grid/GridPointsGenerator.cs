@@ -34,7 +34,7 @@ namespace LostInSin.Runtime.Gameplay.Grid
 			{
 				RaycastHit hit = HitResults[index];
 				GridPoints[index] = hit.distance > 0
-					? new GridPoint(hit.point.x, hit.point.y, hit.point.z, false)
+					? new(hit.point.x, hit.point.y, hit.point.z, false)
 					: new GridPoint();
 			}
 		}

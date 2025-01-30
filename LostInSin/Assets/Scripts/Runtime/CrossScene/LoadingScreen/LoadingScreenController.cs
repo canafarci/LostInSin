@@ -24,7 +24,7 @@ namespace LostInSin.Runtime.CrossScene.LoadingScreen
 
 		private async void OnLoadingStartedSignal(LoadingStartedSignal signal)
 		{
-			var startTime = Time.realtimeSinceStartup;
+			float startTime = Time.realtimeSinceStartup;
 
 			_view.gameObject.SetActive(true);
 			_view.fillImage.fillAmount = 0f;

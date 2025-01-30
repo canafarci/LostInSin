@@ -20,14 +20,14 @@ namespace LostInSin.Runtime.Gameplay.Grid
 		{
 			using (gridPoints)
 			{
-				var numCellsRow = _gridModel.gridRowCount;
-				var numCellsColumn = _gridModel.gridColumnCount;
+				int numCellsRow = _gridModel.gridRowCount;
+				int numCellsColumn = _gridModel.gridColumnCount;
 
 				GridCellData[,] gridCells = new GridCellData[numCellsRow, numCellsColumn];
 				GridCell[,] gridCellsData = new GridCell[numCellsRow, numCellsColumn];
 
-				for (var x = 0; x < numCellsRow; x++)
-					for (var y = 0; y < numCellsColumn; y++)
+				for (int x = 0; x < numCellsRow; x++)
+					for (int y = 0; y < numCellsColumn; y++)
 						ProcessCell(gridPoints, gridCells, gridCellsData, x, y);
 
 				return (gridCells, gridCellsData);
@@ -40,17 +40,17 @@ namespace LostInSin.Runtime.Gameplay.Grid
 			int x,
 			int y)
 		{
-			var topLeftIndex =
+			int topLeftIndex =
 				x +
 				y *
 				(_gridModel.gridRowCount +
 				 1); // add one to side length value, as grid cells count is  1 less than each side count
-			var topRightIndex = topLeftIndex + 1;
-			var bottomLeftIndex =
+			int topRightIndex = topLeftIndex + 1;
+			int bottomLeftIndex =
 				topLeftIndex +
 				_gridModel.gridRowCount +
 				1; // add one to side length value, as grid cells count is  1 less than each side count
-			var bottomRightIndex = bottomLeftIndex + 1;
+			int bottomRightIndex = bottomLeftIndex + 1;
 
 			if (IsCellValid(gridPoints, topLeftIndex, topRightIndex, bottomLeftIndex, bottomRightIndex))
 			{
@@ -64,7 +64,7 @@ namespace LostInSin.Runtime.Gameplay.Grid
 
 				AdjustCellBasedOnRaycast(ref cellData);
 				gridCells[x, y] = cellData;
-				gridCellsData[x, y] = new GridCell();
+				gridCellsData[x, y] = new();
 			}
 		}
 

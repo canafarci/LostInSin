@@ -143,7 +143,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling
 			// Create a raycast request when left-click is detected
 			if (Input.GetMouseButtonDown(0))
 			{
-				RaycastRequest = new RaycastRequest(Input.mousePosition);
+				RaycastRequest = new(Input.mousePosition);
 			}
 
 			// Run the chain of responsibility to handle all relevant AbilityRequestType flags
