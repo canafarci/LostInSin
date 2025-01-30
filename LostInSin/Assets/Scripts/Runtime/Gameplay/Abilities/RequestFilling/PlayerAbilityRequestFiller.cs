@@ -58,6 +58,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling
 			GridPathFindingHandler gridPathFindingHandler = new();
 			GridPositionRaycastedHandler gridPositionRaycastedHandler = new();
 			EnemyTargetedPathfindingHandler enemyTargetedPathfindingHandler = new();
+			GridPositionRaycastedMovementHandler gridPositionRaycastedMovementHandler = new();
 
 			// Chain them in the desired sequence for each player loop:
 			_updateAbilityRequestTypeChain = selfTargetedHandler;
@@ -68,7 +69,8 @@ namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling
 			_fixedUpdateAbilityRequestTypeChain = enemyTargetedHandler;
 			enemyTargetedHandler
 				.SetNext(positionRaycastedHandler)
-				.SetNext(gridPositionRaycastedHandler);
+				.SetNext(gridPositionRaycastedHandler)
+				.SetNext(gridPositionRaycastedMovementHandler);
 		}
 
 		#region IInitializable, ITickable, IFixedTickable

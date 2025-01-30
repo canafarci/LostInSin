@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 78589fb9f36149608c0b519e6a2b77c4, type: 3}
-  m_Name: Fighter Character Data
+  m_Name: Mage Player Character Data
   m_EditorClassIdentifier: 
-  CharacterPortrait: {fileID: 21300000, guid: c8ecd8f6dcfe2314e9d327bdf3402b90, type: 3}
-  CharacterName: Fighter
-  MaxHealth: 50
-  MaxActionPoints: 25
+  CharacterPortrait: {fileID: 21300000, guid: b8203f22905be8649936b198dd1f2994, type: 3}
+  CharacterName: Mage
+  MaxHealth: 20
+  MaxActionPoints: 10
   Abilities:
   - {fileID: 11400000, guid: 7d85560cf15ee5a48ada8733ca4d529d, type: 2}
   - {fileID: 11400000, guid: 7081e89ad520ec7418d70f53f19cc5b4, type: 2}
   - {fileID: 11400000, guid: 727464beb2dc54c44b119a3ab1fdc164, type: 2}
-  Initiative: 11
+  Initiative: 12
   IsPlayerCharacter: 1
-  Prefab: {fileID: 7240346779836529104, guid: 776181fbbbb250a44a616ecda91d4810, type: 3}
+  Prefab: {fileID: 7240346779836529104, guid: 0498774b81cb8594f85bc9fe999e945a, type: 3}
