@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using CaseStudy.Runtime.Gameplay.Lifecycle.Signals;
 using LostInSin.Runtime.Gameplay.Abilities.AbilityPlaying;
 using LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Visuals;
 using LostInSin.Runtime.Gameplay.Abilities.RequestFilling;
@@ -118,7 +117,7 @@ namespace LostInSin.Runtime.Scopes
 			builder.RegisterEntryPoint<InitiativePanelController>();
 			builder.RegisterComponentInHierarchy<InitiativePanelView>().AsSelf();
 
-			builder.RegisterEntryPoint<TurnBasedCombatInitializer>();
+			builder.RegisterEntryPoint<CombatGridInitializer>();
 		}
 
 		private void RegisterAbilityModule(IContainerBuilder builder)
@@ -165,7 +164,6 @@ namespace LostInSin.Runtime.Scopes
 			builder.DeclareSignal<AbilityRequestCancelledSignal>();
 			builder.DeclareSignal<AbilityExecutionCompletedSignal>();
 			builder.DeclareSignal<AnimationEventSignal>();
-			builder.DeclareSignal<InitializeTurnBasedCombatSignal>();
 			builder.DeclareSignal<StartTurnBasedCombatSignal>();
 			builder.DeclareSignal<CharacterDiedSignal>();
 			builder.DeclareSignal<InitializeModulesSignal>();

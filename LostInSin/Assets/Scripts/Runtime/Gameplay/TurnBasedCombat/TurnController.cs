@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using LostInSin.Runtime.Gameplay.Characters;
 using LostInSin.Runtime.Gameplay.Data.SceneReferences;
+using LostInSin.Runtime.Gameplay.GameplayLifecycle.Enums;
+using LostInSin.Runtime.Gameplay.GameplayLifecycle.Signals;
 using LostInSin.Runtime.Gameplay.Signals;
 using LostInSin.Runtime.Gameplay.UI.Turns;
 using LostInSin.Runtime.Infrastructure.Templates;
@@ -25,7 +27,7 @@ namespace LostInSin.Runtime.Gameplay.TurnBasedCombat
 
 		protected override void SubscribeToEvents()
 		{
-			_signalBus.Subscribe<InitializeTurnBasedCombatSignal>(OnInitializeTurnBasedCombatSignalHandler);
+			_signalBus.Subscribe<InitializeModulesSignal>(OnInitializeModulesSignalHandler);
 			_signalBus.Subscribe<StartTurnBasedCombatSignal>(OnStartTurnBasedCombatSignalHandler);
 			_signalBus.Subscribe<EndCharacterTurnSignal>(OnEndCharacterTurnSignalHandler);
 			_signalBus.Subscribe<CharacterDiedSignal>(OnCharacterDiedSignalHandler);
@@ -41,9 +43,10 @@ namespace LostInSin.Runtime.Gameplay.TurnBasedCombat
 			_turnModel.characterTurnQueue.Remove(signal.character);
 		}
 
-		private void OnInitializeTurnBasedCombatSignalHandler(InitializeTurnBasedCombatSignal signal)
+		private void OnInitializeModulesSignalHandler(InitializeModulesSignal signal)
 		{
 			InitializeTurnOrder();
+			_signalBus.Fire(new ModuleInitializedSignal(InitializableModule.TurnManager));
 		}
 
 		private void OnStartTurnBasedCombatSignalHandler(StartTurnBasedCombatSignal signal)
@@ -88,7 +91,7 @@ namespace LostInSin.Runtime.Gameplay.TurnBasedCombat
 
 		protected override void UnsubscribeFromEvents()
 		{
-			_signalBus.Unsubscribe<InitializeTurnBasedCombatSignal>(OnInitializeTurnBasedCombatSignalHandler);
+			_signalBus.Unsubscribe<InitializeModulesSignal>(OnInitializeModulesSignalHandler);
 			_signalBus.Unsubscribe<StartTurnBasedCombatSignal>(OnStartTurnBasedCombatSignalHandler);
 			_signalBus.Unsubscribe<EndCharacterTurnSignal>(OnEndCharacterTurnSignalHandler);
 			_signalBus.Unsubscribe<CharacterDiedSignal>(OnCharacterDiedSignalHandler);

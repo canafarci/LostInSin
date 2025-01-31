@@ -55,6 +55,7 @@ namespace LostInSin.Runtime.Gameplay.GameplayLifecycle.Entry
 			await _gameplayInitializer.InitializeModules();
 
 			_signalBus.Fire(new ChangeGameStateSignal(GameState.Playing));
+			_signalBus.Fire(new StartTurnBasedCombatSignal());
 		}
 
 

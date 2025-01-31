@@ -1,18 +1,19 @@
 using LostInSin.Runtime.Gameplay.GameplayLifecycle.Entry;
+using LostInSin.Runtime.Gameplay.GameplayLifecycle.Enums;
+using LostInSin.Runtime.Gameplay.GameplayLifecycle.Signals;
 using LostInSin.Runtime.Gameplay.Grid;
 using LostInSin.Runtime.Gameplay.Grid.Visual;
-using LostInSin.Runtime.Gameplay.Signals;
 using LostInSin.Runtime.Infrastructure.Templates;
 
 namespace LostInSin.Runtime.Gameplay.GameplayLifecycle.TurnBasedCombat
 {
-	public class TurnBasedCombatInitializer : SignalListener
+	public class CombatGridInitializer : SignalListener
 	{
 		private readonly GridGenerator _gridGenerator;
 		private readonly GridMeshDisplayService _gridMeshDisplayService;
 		private readonly CombatStartCharacterGridPositionSetter _combatStartCharacterGridPositionSetter;
 
-		public TurnBasedCombatInitializer(GridGenerator gridGenerator,
+		public CombatGridInitializer(GridGenerator gridGenerator,
 			GridMeshDisplayService gridMeshDisplayService,
 			CombatStartCharacterGridPositionSetter combatStartCharacterGridPositionSetter)
 		{
@@ -23,22 +24,22 @@ namespace LostInSin.Runtime.Gameplay.GameplayLifecycle.TurnBasedCombat
 
 		protected override void SubscribeToEvents()
 		{
-			_signalBus.Subscribe<InitializeTurnBasedCombatSignal>(OnInitializeTurnBasedCombatSignalHandler);
+			_signalBus.Subscribe<InitializeModulesSignal>(OnInitializeModulesSignalHandler);
 		}
 
-		private void OnInitializeTurnBasedCombatSignalHandler(InitializeTurnBasedCombatSignal signal)
+		private void OnInitializeModulesSignalHandler(InitializeModulesSignal signal)
 		{
 			_gridGenerator.GenerateGrid();
 			_gridMeshDisplayService.ShowGrid();
 
 			_combatStartCharacterGridPositionSetter.SetPositions();
 
-			_signalBus.Fire(new StartTurnBasedCombatSignal());
+			_signalBus.Fire(new ModuleInitializedSignal(InitializableModule.Grid));
 		}
 
 		protected override void UnsubscribeFromEvents()
 		{
-			_signalBus.Unsubscribe<InitializeTurnBasedCombatSignal>(OnInitializeTurnBasedCombatSignalHandler);
+			_signalBus.Unsubscribe<InitializeModulesSignal>(OnInitializeModulesSignalHandler);
 		}
 	}
 }

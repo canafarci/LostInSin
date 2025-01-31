@@ -8,7 +8,7 @@ namespace LostInSin.Runtime.Gameplay.Signals
 	/// Signal used to Start turn based combat system. <br />
 	/// Listened by  <see cref="TurnController"/>, <see cref="InitiativePanelController"/> <br />
 	/// Results a character taking control and initiative panel being drawn <br />
-	/// Fired by <see cref="TurnBasedCombatInitializer"/>
+	/// Fired by <see cref="CombatGridInitializer"/>
 	/// </summary>
 	public struct StartTurnBasedCombatSignal
 	{
