@@ -20,57 +20,25 @@ namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling
 		private readonly ITurnModel _turnModel;
 		private readonly IAbilityPanelMediator _abilityPanelMediator;
 		private readonly IAbilityPlayer _abilityPlayer;
+		private readonly IPlayerAbilityRequestFillerModel _playerAbilityRequestFillerModel;
 
 		// The currently selected Ability:
 		private Ability _ability;
 		private InputAction _cancelAction;
-
-
 		public RaycastRequest RaycastRequest;
-		public PlayerRaycaster playerRaycaster { get; }
-		public IGridPathfinder gridPathfinder { get; }
-
-		private readonly IAbilityRequestTypeHandler _updateAbilityRequestTypeChain;
-		private readonly IAbilityRequestTypeHandler _fixedUpdateAbilityRequestTypeChain;
 
 		public PlayerAbilityRequestFiller(
 			SignalBus signalBus,
 			ITurnModel turnModel,
 			IAbilityPanelMediator abilityPanelMediator,
 			IAbilityPlayer abilityPlayer,
-			PlayerRaycaster playerRaycaster,
-			IGridPathfinder gridPathfinder)
+			IPlayerAbilityRequestFillerModel playerAbilityRequestFillerModel)
 		{
 			_signalBus = signalBus;
 			_turnModel = turnModel;
 			_abilityPanelMediator = abilityPanelMediator;
 			_abilityPlayer = abilityPlayer;
-			this.playerRaycaster = playerRaycaster;
-			this.gridPathfinder = gridPathfinder;
-
-			// Build chain in a logical order 
-			// Each handler checks if it applies to the request's flags and, if so,
-			// processes that logic. Because AbilityRequestType is [Flags], multiple
-			// handlers might apply within the same request.
-			SelfTargetedHandler selfTargetedHandler = new();
-			EnemyTargetedHandler enemyTargetedHandler = new();
-			PositionRaycastedHandler positionRaycastedHandler = new();
-			GridPathFindingHandler gridPathFindingHandler = new();
-			GridPositionRaycastedHandler gridPositionRaycastedHandler = new();
-			EnemyTargetedPathfindingHandler enemyTargetedPathfindingHandler = new();
-			GridPositionRaycastedMovementHandler gridPositionRaycastedMovementHandler = new();
-
-			// Chain them in the desired sequence for each player loop:
-			_updateAbilityRequestTypeChain = selfTargetedHandler;
-			selfTargetedHandler
-				.SetNext(enemyTargetedPathfindingHandler)
-				.SetNext(gridPathFindingHandler);
-
-			_fixedUpdateAbilityRequestTypeChain = enemyTargetedHandler;
-			enemyTargetedHandler
-				.SetNext(positionRaycastedHandler)
-				.SetNext(gridPositionRaycastedHandler)
-				.SetNext(gridPositionRaycastedMovementHandler);
+			_playerAbilityRequestFillerModel = playerAbilityRequestFillerModel;
 		}
 
 		#region IInitializable, ITickable, IFixedTickable
@@ -147,7 +115,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling
 			}
 
 			// Run the chain of responsibility to handle all relevant AbilityRequestType flags
-			_updateAbilityRequestTypeChain.Handle(request, this);
+			_playerAbilityRequestFillerModel.updateAbilityRequestTypeChain.Handle(request);
 		}
 
 		public void FixedTick()
@@ -155,7 +123,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling
 			// Run the chain of responsibility to handle all relevant AbilityRequestType flags
 			if (_ability?.AbilityRequest != null)
 			{
-				_fixedUpdateAbilityRequestTypeChain.Handle(_ability.AbilityRequest, this);
+				_playerAbilityRequestFillerModel.fixedUpdateAbilityRequestTypeChain.Handle(_ability.AbilityRequest);
 			}
 
 			// At the end of chain, mark the raycast as processed to disable it for processing again

@@ -1,13 +1,16 @@
 using System.Collections.Generic;
+using CaseStudy.Runtime.Gameplay.Lifecycle.Signals;
 using LostInSin.Runtime.Gameplay.Abilities.AbilityPlaying;
 using LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Visuals;
 using LostInSin.Runtime.Gameplay.Abilities.RequestFilling;
+using LostInSin.Runtime.Gameplay.Abilities.RequestFilling.RequestHandlers;
 using LostInSin.Runtime.Gameplay.Characters;
 using LostInSin.Runtime.Gameplay.Data;
 using LostInSin.Runtime.Gameplay.Data.SceneReferences;
 using LostInSin.Runtime.Gameplay.GameplayLifecycle;
 using LostInSin.Runtime.Gameplay.GameplayLifecycle.Entry;
 using LostInSin.Runtime.Gameplay.GameplayLifecycle.GameStates;
+using LostInSin.Runtime.Gameplay.GameplayLifecycle.Signals;
 using LostInSin.Runtime.Gameplay.GameplayLifecycle.TurnBasedCombat;
 using LostInSin.Runtime.Gameplay.Grid;
 using LostInSin.Runtime.Gameplay.Grid.DataObjects;
@@ -46,17 +49,6 @@ namespace LostInSin.Runtime.Scopes
 			RegisterSignals(builder);
 		}
 
-		private void RegisterAbilityModule(IContainerBuilder builder)
-		{
-			RegisterAbilityUI(builder);
-
-			builder.Register<PlayerAbilityRequestFiller>(Lifetime.Singleton).AsImplementedInterfaces();
-			builder.Register<AbilityPlayer>(Lifetime.Singleton).AsImplementedInterfaces();
-			builder.Register<PlayerRaycaster>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
-			builder.Register<MoveAbilityVisualDisplayer>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
-			builder.Register<MeleeAttackAbilityVisualDisplayer>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
-		}
-
 		private void RegisterAbilityUI(IContainerBuilder builder)
 		{
 			builder.Register<AbilityPanelMediator>(Lifetime.Singleton).AsImplementedInterfaces();
@@ -71,46 +63,32 @@ namespace LostInSin.Runtime.Scopes
 
 		private void RegisterGameplayLifecycleManagers(IContainerBuilder builder)
 		{
-			//Entry
 			builder.RegisterEntryPoint<GameplayEntryPoint>();
 			builder.RegisterEntryPoint<PlayerCharactersSpawner>();
 
 			builder.RegisterEntryPoint<GameplayExitPoint>();
 			builder.RegisterEntryPoint<GameStateController>();
 			builder.Register<IGameStateModel, GameStateModel>(Lifetime.Singleton);
+			builder.RegisterEntryPoint<GameplayInitializer>().AsSelf();
 		}
 
 		private void RegisterGridComponents(IContainerBuilder builder)
 		{
-			// Register ScriptableObject instances
 			builder.RegisterInstance(GridGenerationDataSo);
 			builder.RegisterInstance(GridVisualDataSo);
 
-			// Register GridModel and its dependencies
 			builder.Register<GridModel>(Lifetime.Singleton)
 				.WithParameter("data", new GridModel.Data
 				{
 					GridData = GridGenerationDataSo
 				});
 
-			// Register Grid Generators
 			builder.Register<IGridPointsGenerator, GridPointsGenerator>(Lifetime.Singleton);
 			builder.Register<IGridCellGenerator, GridCellGenerator>(Lifetime.Singleton);
-
-			// Register GridRaycaster (assuming you have an implementation)
 			builder.Register<IGridRaycaster, GridRaycaster>(Lifetime.Singleton);
-
-			// Register GridGenerator
 			builder.Register<GridGenerator>(Lifetime.Singleton);
-
-			// Register GridMeshGenerator
 			builder.Register<GridMeshGenerator>(Lifetime.Singleton);
-
-			// Register GridMeshDisplayService
-			builder.Register<GridMeshDisplayService>(Lifetime.Singleton)
-				.WithParameter(GridVisualDataSo);
-
-			// Register GridPositionConverter
+			builder.Register<GridMeshDisplayService>(Lifetime.Singleton).WithParameter(GridVisualDataSo);
 			builder.Register<IGridPositionConverter, GridPositionConverter>(Lifetime.Singleton);
 		}
 
@@ -123,6 +101,8 @@ namespace LostInSin.Runtime.Scopes
 			builder.RegisterEntryPoint<CombatStartCharacterGridPositionSetter>().AsSelf();
 
 			builder.Register<TurnSystemFacade>(Lifetime.Singleton).AsSelf();
+
+			builder.Register<PlayerRaycaster>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
 		}
 
 		private void RegisterTurnModule(IContainerBuilder builder)
@@ -141,6 +121,37 @@ namespace LostInSin.Runtime.Scopes
 			builder.RegisterEntryPoint<TurnBasedCombatInitializer>();
 		}
 
+		private void RegisterAbilityModule(IContainerBuilder builder)
+		{
+			RegisterAbilityUI(builder);
+			RegisterPlayerAbilityFiller(builder);
+
+			builder.Register<AbilityPlayer>(Lifetime.Singleton).AsImplementedInterfaces();
+			builder.Register<MoveAbilityVisualDisplayer>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
+			builder.Register<MeleeAttackAbilityVisualDisplayer>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
+		}
+
+		private void RegisterPlayerAbilityFiller(IContainerBuilder builder)
+		{
+			builder.Register<PlayerAbilityRequestFiller>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
+			builder.RegisterEntryPoint<PlayerAbilityRequestFillerInitializer>().AsSelf();
+			builder.Register<IPlayerAbilityRequestFillerModel, PlayerAbilityRequestFillerModel>(Lifetime.Singleton).AsSelf();
+
+			RegisterRequestFillingChain(builder);
+		}
+
+		private void RegisterRequestFillingChain(IContainerBuilder builder)
+		{
+			builder.Register<CircularAreaTargetedHandler>(Lifetime.Singleton).AsSelf();
+			builder.Register<EnemyTargetedHandler>(Lifetime.Singleton).AsSelf();
+			builder.Register<EnemyTargetedPathfindingHandler>(Lifetime.Singleton).AsSelf();
+			builder.Register<GridPathFindingHandler>(Lifetime.Singleton).AsSelf();
+			builder.Register<GridPositionRaycastedHandler>(Lifetime.Singleton).AsSelf();
+			builder.Register<GridPositionRaycastedMovementHandler>(Lifetime.Singleton).AsSelf();
+			builder.Register<PositionRaycastedHandler>(Lifetime.Singleton).AsSelf();
+			builder.Register<SelfTargetedHandler>(Lifetime.Singleton).AsSelf();
+		}
+
 		private void RegisterSignals(IContainerBuilder builder)
 		{
 			builder.DeclareSignal<GameStateChangedSignal>();
@@ -157,6 +168,8 @@ namespace LostInSin.Runtime.Scopes
 			builder.DeclareSignal<InitializeTurnBasedCombatSignal>();
 			builder.DeclareSignal<StartTurnBasedCombatSignal>();
 			builder.DeclareSignal<CharacterDiedSignal>();
+			builder.DeclareSignal<InitializeModulesSignal>();
+			builder.DeclareSignal<ModuleInitializedSignal>();
 		}
 	}
 }

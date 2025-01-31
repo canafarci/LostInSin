@@ -1,7 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
 using LostInSin.Runtime.CrossScene.LoadingScreen.Signals;
-using LostInSin.Runtime.Gameplay.Enums;
+using LostInSin.Runtime.Gameplay.GameplayLifecycle.Enums;
 using LostInSin.Runtime.Gameplay.Grid;
 using LostInSin.Runtime.Gameplay.Grid.Visual;
 using LostInSin.Runtime.Gameplay.Signals;
@@ -18,13 +18,16 @@ namespace LostInSin.Runtime.Gameplay.GameplayLifecycle.Entry
 	{
 		private readonly SignalBus _signalBus;
 		private readonly ApplicationSettings _applicationSettings;
+		private readonly GameplayInitializer _gameplayInitializer;
 
-		[Inject]
+
 		public GameplayEntryPoint(SignalBus signalBus,
-			ApplicationSettings applicationSettings)
+			ApplicationSettings applicationSettings,
+			GameplayInitializer gameplayInitializer)
 		{
 			_signalBus = signalBus;
 			_applicationSettings = applicationSettings;
+			_gameplayInitializer = gameplayInitializer;
 		}
 
 		public void Initialize()
@@ -49,18 +52,11 @@ namespace LostInSin.Runtime.Gameplay.GameplayLifecycle.Entry
 			_signalBus.Fire(new ChangeAppStateSignal(AppStateID.Gameplay));
 			_signalBus.Fire(new ChangeGameStateSignal(GameState.Initializing));
 
-			InitializeGameplay();
-
-			await UniTask.Delay(TimeSpan.FromSeconds(1f));
+			await _gameplayInitializer.InitializeModules();
 
 			_signalBus.Fire(new ChangeGameStateSignal(GameState.Playing));
-
-			_signalBus.Fire(new InitializeTurnBasedCombatSignal());
 		}
 
-		private void InitializeGameplay()
-		{
-		}
 
 		public void Dispose()
 		{

@@ -17,7 +17,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling.RequestHandlers
 		/// Handle any logic relevant to the given AbilityRequest.
 		/// If your chain should stop processing once handled, you'll return a bool or omit calling Next.
 		/// </summary>
-		public void Handle(AbilityRequest abilityRequest, PlayerAbilityRequestFiller context);
+		public void Handle(AbilityRequest abilityRequest);
 
 		/// <summary>
 		/// Allows chaining the next handler.

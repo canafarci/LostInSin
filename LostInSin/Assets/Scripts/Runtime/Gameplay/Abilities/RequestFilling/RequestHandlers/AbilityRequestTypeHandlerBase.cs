@@ -18,17 +18,17 @@ namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling.RequestHandlers
 			return next;
 		}
 
-		public void Handle(AbilityRequest abilityRequest, PlayerAbilityRequestFiller context)
+		public void Handle(AbilityRequest abilityRequest)
 		{
 			// 1) Check if this handler applies to the request type
 			if (AppliesTo(abilityRequest.RequestType))
 			{
 				// 2) Execute specialized logic
-				ProcessRequest(abilityRequest, context);
+				ProcessRequest(abilityRequest);
 			}
 
 			// 3) Pass the request to the next handler in the chain
-			_nextHandler?.Handle(abilityRequest, context);
+			_nextHandler?.Handle(abilityRequest);
 		}
 
 		public abstract bool AppliesTo(AbilityRequestType requestType);
@@ -36,6 +36,6 @@ namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling.RequestHandlers
 		/// <summary>
 		/// Concrete classes implement their logic here.
 		/// </summary>
-		protected abstract void ProcessRequest(AbilityRequest abilityRequest, PlayerAbilityRequestFiller context);
+		protected abstract void ProcessRequest(AbilityRequest abilityRequest);
 	}
 }

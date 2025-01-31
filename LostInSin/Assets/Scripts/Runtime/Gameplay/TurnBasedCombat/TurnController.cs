@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using LostInSin.Runtime.Gameplay.Characters;
 using LostInSin.Runtime.Gameplay.Data.SceneReferences;
-using LostInSin.Runtime.Gameplay.Enums;
 using LostInSin.Runtime.Gameplay.Signals;
 using LostInSin.Runtime.Gameplay.UI.Turns;
 using LostInSin.Runtime.Infrastructure.Templates;

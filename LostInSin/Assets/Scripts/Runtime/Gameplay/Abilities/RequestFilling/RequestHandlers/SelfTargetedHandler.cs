@@ -10,7 +10,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling.RequestHandlers
 			return requestType.HasFlag(AbilityRequestType.SelfTargeted);
 		}
 
-		protected override void ProcessRequest(AbilityRequest abilityRequest, PlayerAbilityRequestFiller context)
+		protected override void ProcessRequest(AbilityRequest abilityRequest)
 		{
 			// e.g., set the target to the user itself
 			abilityRequest.data.TargetCharacter ??= abilityRequest.data.User;

@@ -1,4 +1,4 @@
-using LostInSin.Runtime.Gameplay.Enums;
+using LostInSin.Runtime.Gameplay.GameplayLifecycle.Enums;
 using LostInSin.Runtime.Gameplay.Signals;
 using LostInSin.Runtime.Infrastructure.Templates;
 using UnityEngine.Assertions;
@@ -30,7 +30,7 @@ namespace LostInSin.Runtime.Gameplay.GameplayLifecycle.GameStates
 		private void OnChangeGameStateSignal(ChangeGameStateSignal signal)
 		{
 			Assert.IsFalse(signal.newState == GameState.GameOver,
-				"Game Over change should be triggered with use of TriggerLevelEndSignal");
+			               "Game Over change should be triggered with use of TriggerLevelEndSignal");
 
 			ChangeGameState(signal.newState);
 		}

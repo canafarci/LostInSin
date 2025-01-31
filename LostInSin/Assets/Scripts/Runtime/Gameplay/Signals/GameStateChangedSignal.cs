@@ -1,4 +1,4 @@
-using LostInSin.Runtime.Gameplay.Enums;
+using LostInSin.Runtime.Gameplay.GameplayLifecycle.Enums;
 
 namespace LostInSin.Runtime.Gameplay.Signals
 {

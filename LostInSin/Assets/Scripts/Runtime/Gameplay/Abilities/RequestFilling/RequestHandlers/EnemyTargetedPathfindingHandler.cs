@@ -10,7 +10,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling.RequestHandlers
 			       requestType.HasFlag(AbilityRequestType.EnemyTargeted);
 		}
 
-		protected override void ProcessRequest(AbilityRequest abilityRequest, PlayerAbilityRequestFiller context)
+		protected override void ProcessRequest(AbilityRequest abilityRequest)
 		{
 			if (abilityRequest.data.TargetCharacter == null) return;
 

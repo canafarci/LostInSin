@@ -3,7 +3,7 @@ using VContainer;
 using LostInSin.Runtime.Gameplay.Characters;
 using LostInSin.Runtime.Gameplay.Data;
 using LostInSin.Runtime.Gameplay.Data.SceneReferences;
-using LostInSin.Runtime.Gameplay.Enums;
+using LostInSin.Runtime.Gameplay.GameplayLifecycle.Enums;
 using LostInSin.Runtime.Gameplay.Signals;
 using LostInSin.Runtime.Infrastructure.Templates;
 

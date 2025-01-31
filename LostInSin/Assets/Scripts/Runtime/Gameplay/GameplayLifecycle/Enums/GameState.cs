@@ -1,4 +1,4 @@
-namespace LostInSin.Runtime.Gameplay.Enums
+namespace LostInSin.Runtime.Gameplay.GameplayLifecycle.Enums
 {
 	public enum GameState : byte
 	{
