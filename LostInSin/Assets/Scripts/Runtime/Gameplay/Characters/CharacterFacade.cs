@@ -56,7 +56,6 @@ namespace LostInSin.Runtime.Gameplay.Characters
 			currentCell.SetAsUnoccupied();
 		}
 
-
 		public void SetCharacterCell(GridCell cell, bool warp = false)
 		{
 			_character.currentCell?.SetAsUnoccupied();
@@ -74,6 +73,13 @@ namespace LostInSin.Runtime.Gameplay.Characters
 		{
 			UnityEngine.Debug.Log($"Is Active {_character.characterName}");
 			_character.currentStats[StatID.ActionPoint] = _character.maxStats[StatID.ActionPoint];
+
+			visualReferences.activeCharacterDecal.SetActive(true);
+		}
+
+		public void SetCharacterAsInactive()
+		{
+			visualReferences.activeCharacterDecal.SetActive(false);
 		}
 
 		public void ReduceActionPoints(int abilityActionPointCost)

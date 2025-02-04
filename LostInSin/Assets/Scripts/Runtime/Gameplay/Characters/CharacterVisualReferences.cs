@@ -10,12 +10,15 @@ namespace LostInSin.Runtime.Gameplay.Characters
 	{
 		[Inject] private CharacterData _characterData;
 
-		public Sprite characterPortrait { get; private set; }
+		[SerializeField] private Transform ProjectileHitPoint;
+		[SerializeField] private GameObject ActiveCharacterDecal;
 
 		private Dictionary<AnimationBoneID, Transform> _animationBones = new();
-		public Transform ProjectileHitPoint;
 
+		public Sprite characterPortrait { get; private set; }
+		public Transform projectileHitPoint => ProjectileHitPoint;
 		public Dictionary<AnimationBoneID, Transform> animationBones => _animationBones;
+		public GameObject activeCharacterDecal => ActiveCharacterDecal;
 
 		private void Awake()
 		{

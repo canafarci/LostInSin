@@ -69,6 +69,7 @@ namespace LostInSin.Runtime.Gameplay.TurnBasedCombat
 
 		private void AdvanceTurn()
 		{
+			_turnModel.activeCharacter.SetCharacterAsInactive();
 			//push character to the end of the linked list
 			LinkedListNode<CharacterFacade> firstNode = _turnModel.characterTurnQueue.First;
 

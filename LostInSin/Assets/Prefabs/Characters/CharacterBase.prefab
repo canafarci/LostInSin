@@ -137,3 +137,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ProjectileHitPoint: {fileID: 0}
+  ActiveCharacterDecal: {fileID: 5922593182891896866}

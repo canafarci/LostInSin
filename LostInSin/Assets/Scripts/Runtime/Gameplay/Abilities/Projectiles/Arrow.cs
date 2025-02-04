@@ -21,12 +21,12 @@ namespace LostInSin.Runtime.Gameplay.Abilities.Projectiles
 
 			_target = target;
 
-			transform.DOMove(target.visualReferences.ProjectileHitPoint.position, 10f)
+			transform.DOMove(target.visualReferences.projectileHitPoint.position, 10f)
 				.SetSpeedBased()
 				.OnComplete(() =>
 				{
 					ReachedTarget = true;
-					transform.parent = _target.visualReferences.ProjectileHitPoint;
+					transform.parent = _target.visualReferences.projectileHitPoint;
 				});
 		}
 
