@@ -126,8 +126,9 @@ namespace LostInSin.Runtime.Scopes
 			RegisterPlayerAbilityFiller(builder);
 
 			builder.Register<AbilityPlayer>(Lifetime.Singleton).AsImplementedInterfaces();
-			builder.Register<MoveAbilityVisualDisplayer>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
-			builder.Register<MeleeAttackAbilityVisualDisplayer>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
+			builder.Register<MoveMovingAbilityVisualDisplayer>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
+			builder.Register<MeleeAttackMovingAbilityVisualDisplayer>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
+			builder.Register<AreaTargetedAbilityVisualDisplayer>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
 		}
 
 		private void RegisterPlayerAbilityFiller(IContainerBuilder builder)

@@ -11,7 +11,7 @@ using VContainer.Unity;
 
 namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Visuals
 {
-	public abstract class AbilityVisualDisplayer : SignalListener, IFixedTickable
+	public abstract class MovingAbilityVisualDisplayer : SignalListener, IFixedTickable
 	{
 		protected AbilityRequest _abilityRequest;
 		protected readonly PlayerRaycaster _playerRaycaster;
@@ -26,7 +26,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Visuals
 		private readonly Color _invalidColor = new(0.7f, 0f, 0f, 0.8f);
 		private Color _currentColor;
 
-		protected AbilityVisualDisplayer(IGridPathfinder gridPathfinder, PlayerRaycaster playerRaycaster)
+		protected MovingAbilityVisualDisplayer(IGridPathfinder gridPathfinder, PlayerRaycaster playerRaycaster)
 		{
 			_gridPathfinder = gridPathfinder;
 			_playerRaycaster = playerRaycaster;

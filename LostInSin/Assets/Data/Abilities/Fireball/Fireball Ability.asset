@@ -23,5 +23,5 @@ MonoBehaviour:
     SerializationNodes: []
   AbilityName: Fireball
   Icon: {fileID: 0}
-  AbilityRequest: {fileID: 0}
+  AbilityRequest: {fileID: 11400000, guid: 0f4c5b4f87ebe5644af634dbe17dc501, type: 2}
   AbilityExecution: {fileID: 0}

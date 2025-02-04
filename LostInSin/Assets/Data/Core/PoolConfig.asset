@@ -49,3 +49,12 @@ MonoBehaviour:
     MaximumSize: 100
     ManagePoolOnSceneChange: 1
     LifetimeSceneID: 3
+  - IsMonoBehaviour: 1
+    Prefab: {fileID: 7699842001490008883, guid: 341721d5471da7e4a8602350a979f4be, type: 3}
+    ClassTypeName: LostInSin.Runtime.Gameplay.Visuals.Decals.CircularAreaTargetedAbilityDecal,
+      LostInSin.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    InitialSize: 1
+    DefaultCapacity: 2
+    MaximumSize: 2
+    ManagePoolOnSceneChange: 1
+    LifetimeSceneID: 3

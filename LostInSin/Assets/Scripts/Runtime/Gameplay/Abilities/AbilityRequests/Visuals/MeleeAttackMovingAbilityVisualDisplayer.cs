@@ -5,9 +5,9 @@ using LostInSin.Runtime.Gameplay.Pathfinding;
 
 namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Visuals
 {
-	public class MeleeAttackAbilityVisualDisplayer : AbilityVisualDisplayer
+	public class MeleeAttackMovingAbilityVisualDisplayer : MovingAbilityVisualDisplayer
 	{
-		public MeleeAttackAbilityVisualDisplayer(IGridPathfinder gridPathfinder, PlayerRaycaster playerRaycaster)
+		public MeleeAttackMovingAbilityVisualDisplayer(IGridPathfinder gridPathfinder, PlayerRaycaster playerRaycaster)
 			: base(gridPathfinder, playerRaycaster)
 		{
 		}
