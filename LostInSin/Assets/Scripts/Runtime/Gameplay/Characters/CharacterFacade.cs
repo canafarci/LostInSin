@@ -4,6 +4,7 @@ using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using VContainer;
 using LostInSin.Runtime.Gameplay.Abilities;
+using LostInSin.Runtime.Gameplay.Characters.Enums;
 using LostInSin.Runtime.Gameplay.Characters.Visuals.Animations;
 using LostInSin.Runtime.Gameplay.Characters.Visuals.Animations.Enums;
 using LostInSin.Runtime.Gameplay.Grid.Data;
@@ -20,7 +21,7 @@ namespace LostInSin.Runtime.Gameplay.Characters
 		[Inject] private CharacterAnimationPlayer _characterAnimationPlayer;
 		[Inject] private CharacterVisualReferences _characterVisualReferences;
 
-		public bool isPlayerCharacter => _character.characterData.IsPlayerCharacter;
+		public TeamID teamID => _character.characterData.TeamID;
 		public List<Ability> abilities => _character.characterData.Abilities;
 
 		public int actionPoints => _character.currentStats[StatID.ActionPoint];
@@ -61,7 +62,7 @@ namespace LostInSin.Runtime.Gameplay.Characters
 			_character.currentCell?.SetAsUnoccupied();
 
 			_character.currentCell = cell;
-			cell.SetAsOccupied();
+			cell.SetAsOccupied(this);
 
 			if (warp)
 			{

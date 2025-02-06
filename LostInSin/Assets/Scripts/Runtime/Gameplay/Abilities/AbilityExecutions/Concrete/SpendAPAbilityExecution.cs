@@ -28,8 +28,13 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecutions.Concrete
 
 			if (_executionTimer >= _executionTime)
 			{
-				executionStage = AbilityExecutionStage.Complete;
+				executionStage = AbilityExecutionStage.Finishing;
 			}
+		}
+
+		public override void FinishAbility()
+		{
+			executionStage = AbilityExecutionStage.Finishing;
 		}
 	}
 }

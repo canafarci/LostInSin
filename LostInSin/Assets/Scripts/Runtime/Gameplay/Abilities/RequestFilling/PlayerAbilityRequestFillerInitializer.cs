@@ -17,6 +17,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling
 		[Inject] private GridPositionRaycastedHandler _gridPositionRaycastedHandler;
 		[Inject] private EnemyTargetedPathfindingHandler _enemyTargetedPathfindingHandler;
 		[Inject] private GridPositionRaycastedMovementHandler _gridPositionRaycastedMovementHandler;
+		[Inject] private CircularAreaTargetedHandler _circularAreaTargetedHandler;
 
 		public PlayerAbilityRequestFillerInitializer(IPlayerAbilityRequestFillerModel model)
 		{
@@ -40,7 +41,8 @@ namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling
 			_model.updateAbilityRequestTypeChain = _selfTargetedHandler;
 			_selfTargetedHandler
 				.SetNext(_enemyTargetedPathfindingHandler)
-				.SetNext(_gridPathFindingHandler);
+				.SetNext(_gridPathFindingHandler)
+				.SetNext(_circularAreaTargetedHandler);
 
 			_model.fixedUpdateAbilityRequestTypeChain = _enemyTargetedHandler;
 			_enemyTargetedHandler

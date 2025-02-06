@@ -21,5 +21,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7081e89ad520ec7418d70f53f19cc5b4, type: 2}
   - {fileID: 11400000, guid: df3ea5bf7723d6e4fb8fb7613931a1d5, type: 2}
   Initiative: 12
-  IsPlayerCharacter: 1
+  TeamID: 1
   Prefab: {fileID: 7240346779836529104, guid: 0498774b81cb8594f85bc9fe999e945a, type: 3}

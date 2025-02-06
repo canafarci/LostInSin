@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using LostInSin.Runtime.Gameplay.Abilities;
+using LostInSin.Runtime.Gameplay.Characters.Enums;
 using UnityEngine;
 
 namespace LostInSin.Runtime.Gameplay.Characters
@@ -15,7 +16,7 @@ namespace LostInSin.Runtime.Gameplay.Characters
 		public int MaxActionPoints;
 		public List<Ability> Abilities;
 		public int Initiative;
-		public bool IsPlayerCharacter;
+		public TeamID TeamID;
 		public GameObject Prefab;
 	}
 }

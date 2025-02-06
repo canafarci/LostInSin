@@ -1,4 +1,5 @@
 using LostInSin.Runtime.Gameplay.Abilities.RequestFilling;
+using LostInSin.Runtime.Gameplay.Characters.Enums;
 using LostInSin.Runtime.Gameplay.Grid.Data;
 using LostInSin.Runtime.Gameplay.Signals;
 using LostInSin.Runtime.Gameplay.Visuals.Decals;
@@ -68,6 +69,8 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Visuals
 
 		private void ClearDecal()
 		{
+			if (_decal == null) return;
+
 			PoolManager.ReleaseMono(_decal);
 			_decal = null;
 		}
@@ -85,7 +88,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Visuals
 		private bool IsRequestRelevant(AbilityRequest request)
 		{
 			// Only consider if user is the player, request uses AreaTargeted 
-			if (!request.data.User.isPlayerCharacter) return false;
+			if (request.data.User.teamID != TeamID.Player) return false;
 			if (!request.RequestType.HasFlag(AbilityRequestType.CircularAreaTargeted)) return false;
 			return true;
 		}

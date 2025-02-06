@@ -1,5 +1,6 @@
 using LostInSin.Runtime.Gameplay.Abilities.AbilityRequests;
 using LostInSin.Runtime.Gameplay.Characters;
+using LostInSin.Runtime.Gameplay.Characters.Enums;
 using UnityEngine;
 using VContainer;
 
@@ -22,7 +23,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling.RequestHandlers
 				if (_raycaster.TryRaycastForComponent(ref _filler.RaycastRequest,
 				                                      abilityRequest.CharacterLayerMask,
 				                                      out CharacterFacade character)
-				    && !character.isPlayerCharacter)
+				    && character.teamID != TeamID.Player)
 				{
 					abilityRequest.data.TargetCharacter = character;
 				}

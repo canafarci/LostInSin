@@ -19,7 +19,8 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Concrete
 
 		private bool IsRequestDataValid()
 		{
-			return data.TargetGridCell != null;
+			return data.TargetGridCell != null &&
+			       data.TargetGridCells != null;
 		}
 	}
 }

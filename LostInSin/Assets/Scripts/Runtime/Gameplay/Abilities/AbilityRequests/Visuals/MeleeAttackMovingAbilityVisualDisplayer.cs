@@ -1,5 +1,6 @@
 using LostInSin.Runtime.Gameplay.Abilities.RequestFilling;
 using LostInSin.Runtime.Gameplay.Characters;
+using LostInSin.Runtime.Gameplay.Characters.Enums;
 using LostInSin.Runtime.Gameplay.Grid.Data;
 using LostInSin.Runtime.Gameplay.Pathfinding;
 
@@ -15,7 +16,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Visuals
 		protected override bool IsRequestRelevant(AbilityRequest request)
 		{
 			// Only consider if user is the player, request uses GridPathFinding and is EnemyTargeted
-			if (!request.data.User.isPlayerCharacter) return false;
+			if (request.data.User.teamID != TeamID.Player) return false;
 			if (!request.RequestType.HasFlag(AbilityRequestType.GridPathFinding)) return false;
 			if (!request.RequestType.HasFlag(AbilityRequestType.EnemyTargeted)) return false;
 			return true;

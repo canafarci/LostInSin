@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4db1d49c133b45eea9bede88d3493536, type: 3}
-  m_Name: Fireball Ability
+  m_Script: {fileID: 11500000, guid: 0f3053aa83a64fa5917f1ef31cfc8450, type: 3}
+  m_Name: Fireball Ability Execution Logic
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,7 +21,4 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  AbilityName: Fireball
-  Icon: {fileID: 21300000, guid: bc0864921c7e0414589ef446c7a3b94b, type: 3}
-  AbilityRequest: {fileID: 11400000, guid: 0f4c5b4f87ebe5644af634dbe17dc501, type: 2}
-  AbilityExecution: {fileID: 11400000, guid: c15415a20edff1d45bafb2751b12fc8e, type: 2}
+  Damage: 100

@@ -7,6 +7,7 @@ using LostInSin.Runtime.Gameplay.TurnBasedCombat;
 using LostInSin.Runtime.Gameplay.UI.AbilityPanel;
 using LostInSin.Runtime.Infrastructure.Signals;
 using System;
+using LostInSin.Runtime.Gameplay.Characters.Enums;
 using LostInSin.Runtime.Infrastructure.MemoryPool;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -150,7 +151,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.RequestFilling
 		{
 			return _ability == null
 			       || _turnModel.activeCharacter == null
-			       || !_turnModel.activeCharacter.isPlayerCharacter;
+			       || _turnModel.activeCharacter.teamID != TeamID.Player;
 		}
 
 		/// <summary>

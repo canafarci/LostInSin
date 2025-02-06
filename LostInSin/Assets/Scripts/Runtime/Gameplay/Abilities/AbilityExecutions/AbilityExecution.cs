@@ -27,9 +27,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecutions
 		public abstract void UpdateAbility();
 
 		// Finalize action (if any)
-		public virtual void FinishAbility()
-		{
-		}
+		public abstract void FinishAbility();
 
 		// Clean up resources (if any)
 		public virtual void EndAbility()
