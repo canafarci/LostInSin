@@ -1,4 +1,5 @@
 using LostInSin.Runtime.Gameplay.Abilities.AbilityRequests;
+using LostInSin.Runtime.Gameplay.Characters.Visuals.Animations;
 using LostInSin.Runtime.Infrastructure.MemoryPool;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -35,5 +36,32 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecutions
 			Debug.Log($"{name} execution completed");
 			PoolManager.ReleasePure(executionData);
 		}
+
+		#region SUBCLASS_SANDBOX_METHODS
+
+		protected void SlerpRotationTowardDirection(Transform target)
+		{
+			if (target == null) return;
+			Vector3 direction = (target.position - executionData.User.transform.position).normalized;
+
+			executionData.User.transform.rotation = Quaternion.Slerp(executionData.User.transform.rotation,
+			                                                         Quaternion.LookRotation(direction),
+			                                                         AnimationConstants.rotationSpeed * Time.deltaTime);
+		}
+
+		protected void SlerpRotationTowardDirection(Vector3 direction)
+		{
+			executionData.User.transform.rotation = Quaternion.Slerp(executionData.User.transform.rotation,
+			                                                         Quaternion.LookRotation(direction),
+			                                                         AnimationConstants.rotationSpeed * Time.deltaTime);
+		}
+
+		protected void SlerpTowardsFacePosition(Vector3 position)
+		{
+			Vector3 direction = (position - executionData.User.transform.position).normalized;
+			SlerpRotationTowardDirection(direction);
+		}
+
+		#endregion
 	}
 }

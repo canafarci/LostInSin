@@ -7,5 +7,6 @@ namespace LostInSin.Runtime.Gameplay.Characters.Visuals.Animations.Enums
 		DrawArrow = 0x02,
 		Die = 0x03,
 		MeleeAttack,
+		MagicCast,
 	}
 }

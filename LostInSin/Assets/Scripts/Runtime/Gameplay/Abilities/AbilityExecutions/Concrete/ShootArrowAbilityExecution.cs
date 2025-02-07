@@ -42,7 +42,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecutions.Concrete
 
 		public override void UpdateAbility()
 		{
-			SlerpRotationTowardDirection();
+			SlerpRotationTowardDirection(_direction);
 
 			if (executionData.AbilityTriggers.Contains(ShootArrowTrigger))
 			{
@@ -56,7 +56,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecutions.Concrete
 
 		public override void FinishAbility()
 		{
-			SlerpRotationTowardDirection();
+			SlerpRotationTowardDirection(_direction);
 
 			float dot = Quaternion.Dot(executionData.User.transform.rotation, Quaternion.LookRotation(_direction));
 
@@ -65,13 +65,6 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecutions.Concrete
 				_target.TakeDamage(BaseDamage);
 				executionStage = AbilityExecutionStage.Complete;
 			}
-		}
-
-		private void SlerpRotationTowardDirection()
-		{
-			executionData.User.transform.rotation = Quaternion.Slerp(executionData.User.transform.rotation,
-			                                                         Quaternion.LookRotation(_direction),
-			                                                         AnimationConstants.rotationSpeed * Time.deltaTime);
 		}
 
 		private void SetCharacterDirection()

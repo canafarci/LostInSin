@@ -37,7 +37,7 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecutions.Concrete
 		{
 			// Called each frame while in the "Updating" stage
 
-			SlerpRotationTowardDirection();
+			SlerpRotationTowardDirection(_target.transform);
 
 			// Wait for the melee hit animation event trigger
 			if (!_calledTakeDamage && executionData.AbilityTriggers.Contains(MeleeHitTrigger))
@@ -68,16 +68,6 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecutions.Concrete
 			_target = null;
 
 			base.EndAbility();
-		}
-
-		private void SlerpRotationTowardDirection()
-		{
-			if (_target == null) return;
-			Vector3 direction = (_target.transform.position - executionData.User.transform.position).normalized;
-
-			executionData.User.transform.rotation = Quaternion.Slerp(executionData.User.transform.rotation,
-			                                                         Quaternion.LookRotation(direction),
-			                                                         AnimationConstants.rotationSpeed * Time.deltaTime);
 		}
 	}
 }

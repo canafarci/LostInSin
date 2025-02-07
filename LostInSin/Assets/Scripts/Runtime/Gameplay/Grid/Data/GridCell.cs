@@ -5,7 +5,7 @@ namespace LostInSin.Runtime.Gameplay.Grid.Data
 {
 	public class GridCell
 	{
-		public bool isOccupied { get; private set; }
+		public bool isOccupied => character != null;
 		public Vector3 centerPosition { get; set; }
 		public CharacterFacade character { get; private set; }
 
@@ -17,7 +17,6 @@ namespace LostInSin.Runtime.Gameplay.Grid.Data
 			if (isOccupied)
 				throw new("Cell is already occupied!");
 
-			isOccupied = true;
 			character = facade;
 		}
 
@@ -26,7 +25,7 @@ namespace LostInSin.Runtime.Gameplay.Grid.Data
 			if (!isOccupied)
 				throw new("Cell is already unoccupied!");
 
-			isOccupied = false;
+			character = null;
 		}
 	}
 }

@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using Animancer;
 using LostInSin.Runtime.Gameplay.Abilities.AbilityRequests;
 using LostInSin.Runtime.Gameplay.Characters;
+using LostInSin.Runtime.Gameplay.Characters.Visuals.Animations.Enums;
 using LostInSin.Runtime.Gameplay.Grid.Data;
 using UnityEngine;
 
@@ -11,21 +13,49 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecutions.Concrete
 	public class FireballAbilityExecution : AbilityExecution
 	{
 		public int Damage;
+		public StringAsset MagicCastTrigger;
+		public StringAsset TransitionToIdleTrigger;
+
 		private List<GridCell> _targets;
+		private Vector3 _targetPosition;
+
+		private bool _calledTakeDamage = false;
+
 
 		public override void Initialize(AbilityRequestData data)
 		{
 			base.Initialize(data);
 
 			_targets = data.TargetGridCells;
+			_targetPosition = data.TargetGridCell.centerPosition;
 		}
 
 		public override void StartAbility()
 		{
+			executionData.User.PlayAnimation(AnimationID.MagicCast);
+
 			executionStage = AbilityExecutionStage.Updating;
 		}
 
 		public override void UpdateAbility()
+		{
+			SlerpTowardsFacePosition(_targetPosition);
+
+			// Wait for the melee hit animation event trigger
+			if (!_calledTakeDamage && executionData.AbilityTriggers.Contains(MagicCastTrigger))
+			{
+				_calledTakeDamage = true;
+				// Apply damage
+				DamageCharactersInArea();
+			}
+
+			if (executionData.AbilityTriggers.Contains(TransitionToIdleTrigger))
+			{
+				executionStage = AbilityExecutionStage.Finishing;
+			}
+		}
+
+		private void DamageCharactersInArea()
 		{
 			List<CharacterFacade> targetCharacters = new();
 
@@ -41,18 +71,21 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecutions.Concrete
 			{
 				character.TakeDamage(Damage);
 			}
-
-			executionStage = AbilityExecutionStage.Finishing;
 		}
 
 		public override void FinishAbility()
 		{
+			// Return to idle
+			executionData.User.PlayAnimation(AnimationID.Idle);
+
 			executionStage = AbilityExecutionStage.Complete;
 		}
 
 		public override void EndAbility()
 		{
+			_calledTakeDamage = false;
 			_targets = null;
+			_targetPosition = default;
 
 			base.EndAbility();
 		}
