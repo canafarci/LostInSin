@@ -58,3 +58,12 @@ MonoBehaviour:
     MaximumSize: 2
     ManagePoolOnSceneChange: 1
     LifetimeSceneID: 3
+  - IsMonoBehaviour: 1
+    Prefab: {fileID: 1414779434264708, guid: c602c5d57e758e54b9ff458bd0c1eba9, type: 3}
+    ClassTypeName: LostInSin.Runtime.Gameplay.Visuals.FX.FireballFX, LostInSin.Runtime,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    InitialSize: 1
+    DefaultCapacity: 2
+    MaximumSize: 2
+    ManagePoolOnSceneChange: 1
+    LifetimeSceneID: 3

@@ -40,6 +40,7 @@ MonoBehaviour:
         _SceneEnvironment: {fileID: 0}
         _Models:
         - {fileID: 7240346779836529104, guid: 9e394aab35da0a3469fd7cdf594ac30b, type: 3}
+        - {fileID: 7240346779836529104, guid: 0498774b81cb8594f85bc9fe999e945a, type: 3}
     - rid: 4514603965523690169
       type: {class: SerializableEventSequenceDrawerSettings, ns: Animancer.Editor, asm: Kybernetik.Animancer.Editor}
       data:

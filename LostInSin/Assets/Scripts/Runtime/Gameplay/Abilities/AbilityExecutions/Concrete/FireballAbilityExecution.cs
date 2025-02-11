@@ -1,9 +1,13 @@
+using System;
 using System.Collections.Generic;
 using Animancer;
+using Cysharp.Threading.Tasks;
 using LostInSin.Runtime.Gameplay.Abilities.AbilityRequests;
 using LostInSin.Runtime.Gameplay.Characters;
 using LostInSin.Runtime.Gameplay.Characters.Visuals.Animations.Enums;
 using LostInSin.Runtime.Gameplay.Grid.Data;
+using LostInSin.Runtime.Gameplay.Visuals.FX;
+using LostInSin.Runtime.Infrastructure.MemoryPool;
 using UnityEngine;
 
 namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecutions.Concrete
@@ -44,9 +48,11 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecutions.Concrete
 			// Wait for the melee hit animation event trigger
 			if (!_calledTakeDamage && executionData.AbilityTriggers.Contains(MagicCastTrigger))
 			{
-				_calledTakeDamage = true;
+				SpawnFireballVisual();
+
 				// Apply damage
-				DamageCharactersInArea();
+				_calledTakeDamage = true;
+				DamageCharactersInArea().Forget();
 			}
 
 			if (executionData.AbilityTriggers.Contains(TransitionToIdleTrigger))
@@ -55,8 +61,17 @@ namespace LostInSin.Runtime.Gameplay.Abilities.AbilityExecutions.Concrete
 			}
 		}
 
-		private void DamageCharactersInArea()
+		private void SpawnFireballVisual()
 		{
+			FireballFX fx = PoolManager.GetMono<FireballFX>();
+			fx.SetPosition(_targetPosition);
+			fx.Play().Forget();
+		}
+
+		private async UniTask DamageCharactersInArea()
+		{
+			await UniTask.Delay(TimeSpan.FromSeconds(0.2f));
+
 			List<CharacterFacade> targetCharacters = new();
 
 			foreach (GridCell cell in _targets)

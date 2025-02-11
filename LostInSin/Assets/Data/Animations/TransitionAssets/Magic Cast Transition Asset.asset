@@ -33,7 +33,7 @@ MonoBehaviour:
           _Names:
           - {fileID: 11400000, guid: 7317ca784a847494fb7c747a438ffe09, type: 2}
           - {fileID: 11400000, guid: 524a4bc2fc309194cb0cc7d6de32531e, type: 2}
-        _Clip: {fileID: -203655887218126122, guid: 32a8abdda4e67f240852040c0942aa51, type: 3}
+        _Clip: {fileID: 7400000, guid: 46e3e4f51b94dcb428b8da5bbce85d63, type: 2}
         _NormalizedStartTime: NaN
     - rid: 4632395491203874894
       type: {class: AnimancerEvent/ParameterObject, ns: Animancer, asm: Kybernetik.Animancer}
