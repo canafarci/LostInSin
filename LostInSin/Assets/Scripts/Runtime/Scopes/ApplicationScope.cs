@@ -5,6 +5,7 @@ using LostInSin.Runtime.CrossScene.Data;
 using LostInSin.Runtime.CrossScene.LoadingScreen;
 using LostInSin.Runtime.CrossScene.LoadingScreen.Signals;
 using LostInSin.Runtime.CrossScene.Signals;
+using LostInSin.Runtime.Gameplay.Cameras.Data;
 using LostInSin.Runtime.Gameplay.Characters.Visuals;
 using LostInSin.Runtime.Gameplay.Characters.Visuals.Animations;
 using LostInSin.Runtime.Gameplay.Characters.Visuals.Animations.Data;
@@ -27,6 +28,7 @@ namespace LostInSin.Runtime.Scopes
 		[SerializeField] private CurrencyConfig CurrencyConfig;
 		[SerializeField] private CharacterAnimationClipsData CharacterAnimationClipsData;
 		[SerializeField] private CharacterAnimationData CharacterAnimationData;
+		[SerializeField] private CameraConfig CameraConfig;
 
 
 		protected override void Configure(IContainerBuilder builder)
@@ -52,6 +54,7 @@ namespace LostInSin.Runtime.Scopes
 			builder.RegisterInstance(CurrencyConfig);
 			builder.RegisterInstance(CharacterAnimationClipsData);
 			builder.RegisterInstance(CharacterAnimationData);
+			builder.RegisterInstance(CameraConfig);
 		}
 
 		private static void RegisterEntryPoints(IContainerBuilder builder)

@@ -3,6 +3,7 @@ using LostInSin.Runtime.Gameplay.Abilities.AbilityPlaying;
 using LostInSin.Runtime.Gameplay.Abilities.AbilityRequests.Visuals;
 using LostInSin.Runtime.Gameplay.Abilities.RequestFilling;
 using LostInSin.Runtime.Gameplay.Abilities.RequestFilling.RequestHandlers;
+using LostInSin.Runtime.Gameplay.Cameras;
 using LostInSin.Runtime.Gameplay.Characters;
 using LostInSin.Runtime.Gameplay.Data;
 using LostInSin.Runtime.Gameplay.Data.SceneReferences;
@@ -45,6 +46,7 @@ namespace LostInSin.Runtime.Scopes
 			RegisterServices(builder);
 			RegisterTurnModule(builder);
 			RegisterAbilityModule(builder);
+			RegisterCameras(builder);
 			RegisterSignals(builder);
 		}
 
@@ -150,6 +152,12 @@ namespace LostInSin.Runtime.Scopes
 			builder.Register<GridPositionRaycastedMovementHandler>(Lifetime.Singleton).AsSelf();
 			builder.Register<PositionRaycastedHandler>(Lifetime.Singleton).AsSelf();
 			builder.Register<SelfTargetedHandler>(Lifetime.Singleton).AsSelf();
+		}
+
+		private void RegisterCameras(IContainerBuilder builder)
+		{
+			builder.RegisterComponentInHierarchy<CameraView>().AsSelf();
+			builder.RegisterEntryPoint<CameraController>();
 		}
 
 		private void RegisterSignals(IContainerBuilder builder)
