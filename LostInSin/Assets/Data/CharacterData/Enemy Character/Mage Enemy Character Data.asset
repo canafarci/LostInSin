@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78589fb9f36149608c0b519e6a2b77c4, type: 3}
+  m_Name: Mage Enemy Character Data
+  m_EditorClassIdentifier: 
+  CharacterPortrait: {fileID: 21300000, guid: 677cca399782dea41aedc1d292ecb67d, type: 3}
+  CharacterName: Mage Enemy
+  MaxHealth: 25
+  MaxActionPoints: 8
+  Abilities:
+  - {fileID: 11400000, guid: 7d85560cf15ee5a48ada8733ca4d529d, type: 2}
+  Initiative: 15
+  TeamID: 0
+  Prefab: {fileID: 7240346779836529104, guid: 1b8f7e44382b7ed4590ca07cc538a1fe, type: 3}

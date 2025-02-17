@@ -21,6 +21,6 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  Damage: 100
+  Damage: 20
   MagicCastTrigger: {fileID: 11400000, guid: 7317ca784a847494fb7c747a438ffe09, type: 2}
   TransitionToIdleTrigger: {fileID: 11400000, guid: 524a4bc2fc309194cb0cc7d6de32531e, type: 2}
