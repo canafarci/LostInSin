@@ -177,6 +177,7 @@ namespace LostInSin.Runtime.Scopes
 			builder.DeclareSignal<CharacterDiedSignal>();
 			builder.DeclareSignal<InitializeModulesSignal>();
 			builder.DeclareSignal<ModuleInitializedSignal>();
+			builder.DeclareSignal<UpdateInitiativePanelSignal>();
 		}
 	}
 }

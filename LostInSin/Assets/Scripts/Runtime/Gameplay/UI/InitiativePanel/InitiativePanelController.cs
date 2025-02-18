@@ -28,6 +28,7 @@ namespace LostInSin.Runtime.Gameplay.UI.InitiativePanel
 			_signalBus.Subscribe<StartTurnBasedCombatSignal>(OnStartTurnBasedCombatSignalHandler);
 			_signalBus.Subscribe<ActiveTurnCharacterChangedSignal>(OnActiveTurnCharacterChangedSignalHandler);
 			_signalBus.Subscribe<CharacterDiedSignal>(OnCharacterDiedSignalHandler);
+			_signalBus.Subscribe<UpdateInitiativePanelSignal>(OnUpdateInitiativePanelSignalHandler);
 		}
 
 		private void OnActiveTurnCharacterChangedSignalHandler(ActiveTurnCharacterChangedSignal signal) => UpdatePanelIcons();
@@ -35,6 +36,8 @@ namespace LostInSin.Runtime.Gameplay.UI.InitiativePanel
 		private void OnStartTurnBasedCombatSignalHandler(StartTurnBasedCombatSignal signal) => UpdatePanelIcons();
 
 		private void OnCharacterDiedSignalHandler(CharacterDiedSignal signal) => UpdatePanelIcons();
+
+		private void OnUpdateInitiativePanelSignalHandler(UpdateInitiativePanelSignal signal) => UpdatePanelIcons();
 
 		private void UpdatePanelIcons()
 		{
@@ -47,6 +50,7 @@ namespace LostInSin.Runtime.Gameplay.UI.InitiativePanel
 			foreach (InitiativeIconView view in _initiativePanelView.initiativeIcons)
 			{
 				view.icon.sprite = characterNode.Value.visualReferences.characterPortrait;
+				view.healthBarFillImage.fillAmount = characterNode.Value.healthPercentage;
 
 				if (characterNode == turnQueue.Last)
 				{
@@ -61,9 +65,10 @@ namespace LostInSin.Runtime.Gameplay.UI.InitiativePanel
 
 		protected override void UnsubscribeFromEvents()
 		{
-			_signalBus.Subscribe<StartTurnBasedCombatSignal>(OnStartTurnBasedCombatSignalHandler);
+			_signalBus.Unsubscribe<StartTurnBasedCombatSignal>(OnStartTurnBasedCombatSignalHandler);
 			_signalBus.Unsubscribe<ActiveTurnCharacterChangedSignal>(OnActiveTurnCharacterChangedSignalHandler);
 			_signalBus.Unsubscribe<CharacterDiedSignal>(OnCharacterDiedSignalHandler);
+			_signalBus.Unsubscribe<UpdateInitiativePanelSignal>(OnUpdateInitiativePanelSignalHandler);
 		}
 	}
 }

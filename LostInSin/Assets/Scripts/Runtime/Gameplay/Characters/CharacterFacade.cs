@@ -31,6 +31,7 @@ namespace LostInSin.Runtime.Gameplay.Characters
 		public GridCell currentCell => _character.currentCell;
 		public CharacterVisualReferences visualReferences => _characterVisualReferences;
 		public bool isDead => _character.currentStats[StatID.Health] <= 0;
+		public float healthPercentage => _character.currentStats[StatID.Health] / (float)_character.maxStats[StatID.Health];
 
 		public void TakeDamage(int change)
 		{
@@ -47,6 +48,8 @@ namespace LostInSin.Runtime.Gameplay.Characters
 			}
 
 			Debug.Log($"{name} hp: {currentHealth}");
+			//Update the initiative panel to display new health values
+			_signalBus.Fire(new UpdateInitiativePanelSignal());
 		}
 
 		private void OnCharacterDeath()
