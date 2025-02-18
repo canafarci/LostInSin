@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using LostInSin.Runtime.Gameplay.Characters.Visuals.Animations;
 using LostInSin.Runtime.Gameplay.Characters.Visuals.Animations.Enums;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using VContainer;
 
 namespace LostInSin.Runtime.Gameplay.Characters
@@ -12,6 +14,8 @@ namespace LostInSin.Runtime.Gameplay.Characters
 
 		[SerializeField] private Transform ProjectileHitPoint;
 		[SerializeField] private GameObject ActiveCharacterDecal;
+		[SerializeField] private TextMeshProUGUI HealthText;
+		[SerializeField] private Image HealthBarFillImage;
 
 		private Dictionary<AnimationBoneID, Transform> _animationBones = new();
 
@@ -19,6 +23,8 @@ namespace LostInSin.Runtime.Gameplay.Characters
 		public Transform projectileHitPoint => ProjectileHitPoint;
 		public Dictionary<AnimationBoneID, Transform> animationBones => _animationBones;
 		public GameObject activeCharacterDecal => ActiveCharacterDecal;
+		public TextMeshProUGUI healthText => HealthText;
+		public Image healthBarFillImage => HealthBarFillImage;
 
 		private void Awake()
 		{
